@@ -20,10 +20,8 @@ export {
   Dialog,
   DialogTrigger,
   DialogContent,
-  DialogHeader,
   DialogTitle,
   DialogDescription,
-  DialogFooter
 } from '@radix-ui/react-dialog'
 export {
   Progress

@@ -67,7 +67,7 @@ async function testAuth() {
     });
 
     const authClient = await auth.getClient();
-    const sheets = google.sheets({ version: 'v4', auth: authClient });
+    return google.sheets({ version: 'v4', auth: authClient as any });
     
     console.log('✅ Authentification réussie');
     

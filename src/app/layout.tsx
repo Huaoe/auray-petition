@@ -13,13 +13,12 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://auray-petition.vercel.app'),
   title: 'Auray Pétition - Régulation des Sonneries de Cloches',
   description: `Signez la pétition citoyenne pour une régulation raisonnée des sonneries de l'Église Saint-Gildas. Un équilibre entre tradition religieuse et tranquillité publique.`,
   keywords: ['Auray', 'pétition', 'cloches', 'sonneries', 'église', 'Saint-Gildas', 'Alréens'],
   authors: [{ name: 'Citoyens Alréens', url: 'mailto:auray.petition@gmail.com' }],
   manifest: '/manifest.json',
-  themeColor: '#003b46',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -85,6 +84,14 @@ export const metadata: Metadata = {
     follow: true,
   },
 }
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: "no",
+  viewportFit: "cover",
+  themeColor: '#003b46',
+};
 
 export default function RootLayout({
   children,
