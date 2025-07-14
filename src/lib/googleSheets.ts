@@ -9,11 +9,14 @@ export interface Signature {
   firstName: string;
   lastName: string;
   email: string;
+  city: string;
   postalCode: string;
   comment?: string;
-  newsletter: boolean;
-  timestamp: string;
+  rgpdConsent: boolean;
+  newsletterConsent: boolean;
+  timestamp?: string;
   ipAddress?: string;
+  userAgent?: string;
 }
 
 // Interface pour les statistiques
@@ -47,25 +50,28 @@ export const addSignature = async (signature: Omit<Signature, 'timestamp'>): Pro
 
     const sheets = await getGoogleSheetsClient();
     
-    // Préparer les données pour Google Sheets
-    const timestamp = new Date().toISOString();
+    // Préparer les données pour Google Sheets - nouvelle structure complète
+    const timestamp = signature.timestamp || new Date().toISOString();
     const values = [
       [
         signature.firstName,
         signature.lastName,
         signature.email,
+        signature.city,
         signature.postalCode,
         signature.comment || '',
-        signature.newsletter ? 'Oui' : 'Non',
+        signature.rgpdConsent ? 'Oui' : 'Non',
+        signature.newsletterConsent ? 'Oui' : 'Non',
         timestamp,
-        signature.ipAddress || ''
+        signature.ipAddress || '',
+        signature.userAgent || ''
       ]
     ];
 
-    // Ajouter la ligne dans la feuille
+    // Ajouter la ligne dans la feuille - mise à jour du range pour inclure tous les champs
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A:H`,
+      range: `${SHEET_NAME}!A:K`, // Étendu pour 11 colonnes
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values,
@@ -99,7 +105,7 @@ export const getPetitionStats = async (): Promise<PetitionStats> => {
     // Récupérer toutes les signatures
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A:H`,
+      range: `${SHEET_NAME}!A:K`,
     });
 
     const rows = response.data.values || [];
@@ -107,7 +113,7 @@ export const getPetitionStats = async (): Promise<PetitionStats> => {
     
     // Calculer les statistiques
     const totalSignatures = signatures.length;
-    const firstSignatureDate = signatures.length > 0 ? new Date(signatures[0][6]) : new Date();
+    const firstSignatureDate = signatures.length > 0 ? new Date(signatures[0][8]) : new Date();
     const daysActive = Math.max(1, Math.ceil((Date.now() - firstSignatureDate.getTime()) / (1000 * 60 * 60 * 24)));
     
     return {
@@ -139,12 +145,12 @@ export const initializeSheet = async (): Promise<{ success: boolean; message?: s
     
     // Créer l'en-tête si la feuille est vide
     const headers = [
-      ['Prénom', 'Nom', 'Email', 'Code Postal', 'Commentaire', 'Newsletter', 'Date/Heure', 'IP']
+      ['Prénom', 'Nom', 'Email', 'Ville', 'Code Postal', 'Commentaire', 'RGPD', 'Newsletter', 'Date/Heure', 'IP', 'User Agent']
     ];
 
     await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A1:H1`,
+      range: `${SHEET_NAME}!A1:K1`,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: headers,

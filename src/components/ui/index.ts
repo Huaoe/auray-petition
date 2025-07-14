@@ -11,11 +11,11 @@ export {
   CardContent 
 } from './card'
 export { Toaster, toast, type Toast } from './toaster'
+export { Textarea } from './textarea'
+export { Alert, AlertTitle, AlertDescription } from './alert'
+export { Checkbox } from './checkbox'
 
-// Re-export common Radix components that are already in the project
-export { 
-  Checkbox 
-} from '@radix-ui/react-checkbox'
+
 export { 
   Dialog,
   DialogTrigger,

@@ -30,20 +30,31 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
-    // Validation des données
-    const { prenom, nom, email, codePostal, commentaire, newsletter, consent } = body;
+    // Validation des données - nouvelle structure
+    const { 
+      firstName, 
+      lastName, 
+      email, 
+      city,
+      postalCode, 
+      comment, 
+      rgpdConsent,
+      newsletterConsent,
+      timestamp,
+      userAgent
+    } = body;
     
     // Vérifications obligatoires
-    if (!prenom?.trim() || !nom?.trim() || !email?.trim() || !codePostal?.trim()) {
+    if (!firstName?.trim() || !lastName?.trim() || !email?.trim() || !city?.trim() || !postalCode?.trim()) {
       return NextResponse.json(
         { error: 'Tous les champs obligatoires doivent être renseignés' },
         { status: 400 }
       );
     }
     
-    if (!consent) {
+    if (!rgpdConsent) {
       return NextResponse.json(
-        { error: 'Le consentement est obligatoire pour signer la pétition' },
+        { error: 'Le consentement RGPD est obligatoire pour signer la pétition' },
         { status: 400 }
       );
     }
@@ -57,7 +68,7 @@ export async function POST(request: NextRequest) {
     }
     
     // Validation code postal français
-    if (!validatePostalCode(codePostal)) {
+    if (!validatePostalCode(postalCode)) {
       return NextResponse.json(
         { error: 'Code postal invalide (format français requis)' },
         { status: 400 }
@@ -71,15 +82,19 @@ export async function POST(request: NextRequest) {
                       request.ip || 
                       'unknown';
     
-    // Préparer la signature
+    // Préparer la signature avec la nouvelle structure
     const signature = {
-      firstName: prenom.trim(),
-      lastName: nom.trim(),
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
       email: email.trim().toLowerCase(),
-      postalCode: codePostal.trim(),
-      comment: commentaire?.trim() || '',
-      newsletter: Boolean(newsletter),
-      ipAddress
+      city: city.trim(),
+      postalCode: postalCode.trim(),
+      comment: comment?.trim() || '',
+      rgpdConsent: Boolean(rgpdConsent),
+      newsletterConsent: Boolean(newsletterConsent),
+      ipAddress,
+      userAgent: userAgent || 'unknown',
+      timestamp: timestamp || new Date().toISOString()
     };
     
     // Ajouter à Google Sheets
@@ -92,11 +107,15 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Réponse de succès
+    // Récupérer les nouvelles statistiques après ajout
+    const updatedStats = await getPetitionStats();
+    
+    // Réponse de succès avec statistiques mises à jour
     return NextResponse.json(
       { 
         success: true, 
         message: 'Signature enregistrée avec succès',
+        statistics: updatedStats,
         timestamp: new Date().toISOString()
       },
       { status: 201 }
