@@ -1,0 +1,72 @@
+{
+  "name": "Pétition Numérique Auray - Régulation Sonneries de Cloches",
+  "short_name": "Pétition Auray",
+  "description": "Signez la pétition citoyenne pour une régulation raisonnée des sonneries de l'Église Saint-Gildas. Pour un équilibre entre tradition religieuse et tranquillité publique.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#003b46",
+  "theme_color": "#003b46",
+  "lang": "fr",
+  "orientation": "portrait-primary",
+  "categories": ["government", "social", "lifestyle"],
+  "scope": "/",
+  "id": "auray-petition-app",
+  "dir": "ltr",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "prefer_related_applications": false,
+  
+  "icons": [
+    {
+      "src": "/icons/icons/manifest-icon-192.maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icons/manifest-icon-512.maskable.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icons/apple-icon-180.png",
+      "sizes": "180x180", 
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+
+  "protocol_handlers": [
+    {
+      "protocol": "mailto",
+      "url": "/?mailto=%s"
+    }
+  ],
+
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://auray-petition.vercel.app/"
+    }
+  ],
+
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+
+  "handle_links": "preferred"
+}

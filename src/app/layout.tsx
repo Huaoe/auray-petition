@@ -17,12 +17,65 @@ export const metadata: Metadata = {
   description: `Signez la pétition citoyenne pour une régulation raisonnée des sonneries de l'Église Saint-Gildas. Un équilibre entre tradition religieuse et tranquillité publique.`,
   keywords: ['Auray', 'pétition', 'cloches', 'sonneries', 'église', 'Saint-Gildas', 'Alréens'],
   authors: [{ name: 'Citoyens Alréens', url: 'mailto:auray.petition@gmail.com' }],
+  manifest: '/manifest.json',
+  themeColor: '#003b46',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Pétition Auray',
+    startupImage: [
+      {
+        url: '/icons/icons/apple-splash-2048-2732.jpg',
+        media: '(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)',
+      },
+      {
+        url: '/icons/icons/apple-splash-1668-2388.jpg', 
+        media: '(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)',
+      },
+      {
+        url: '/icons/icons/apple-splash-1536-2048.jpg',
+        media: '(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)',
+      },
+      {
+        url: '/icons/icons/apple-splash-1284-2778.jpg',
+        media: '(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)',
+      },
+      {
+        url: '/icons/icons/apple-splash-1170-2532.jpg',
+        media: '(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)',
+      },
+    ],
+  },
+  icons: {
+    icon: [
+      { url: '/icons/icons/manifest-icon-192.maskable.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icons/icons/manifest-icon-512.maskable.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/icons/icons/apple-icon-180.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: 'Pétition Auray - Régulation des Sonneries de Cloches',
     description: 'Pour un équilibre entre tradition religieuse et tranquillité publique à Auray',
     type: 'website',
     locale: 'fr_FR',
     emails: ['auray.petition@gmail.com'],
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Pétition Numérique Auray',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pétition Auray - Régulation des Sonneries de Cloches',
+    description: 'Signez pour un équilibre entre tradition et tranquillité publique',
+    images: ['/og-image.png'],
   },
   alternates: {
     canonical: 'https://auray-petition.vercel.app',
@@ -42,6 +95,23 @@ export default function RootLayout({
     <html lang="fr" className={`${inter.variable} ${playfair.variable}`}>
       <body className={inter.className}>
         {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                      console.log('🚀 PWA: Service Worker enregistré avec succès:', registration.scope);
+                    })
+                    .catch((error) => {
+                      console.log('❌ PWA: Échec enregistrement Service Worker:', error);
+                    });
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   )

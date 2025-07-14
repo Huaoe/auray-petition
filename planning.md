@@ -1,8 +1,8 @@
 # 🚀 Planning de Développement - Pétition Numérique Auray
 ## Context Engineering & Agile Development Roadmap
 
-> **Auto-Tracking Enabled** 📊 | Dernière mise à jour: 2025-07-14 19:53  
-> **Statut Global**: `MVP-1 EN COURS` 🚀 | **Progression**: 58% | **Sprint Actuel**: `MVP-1.1`
+> **Auto-Tracking Enabled** 📊 | Dernière mise à jour: 2025-07-14 20:46  
+> **Statut Global**: `MVP-1 EN COURS` 🚀 | **Progression**: 75% | **Sprint Actuel**: `MVP-1.1`
 
 ---
 
@@ -14,25 +14,26 @@
 ╠═══════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                   ║
 ║  📊 PHASE ACTUELLE: MVP-1.1 Core Infrastructure      🎯 OBJECTIF: Site Live      ║
-║  ⚡ SPRINT STATUS:   J+14 │ ████████████████░░░░░░░░ 58%                         ║
+║  ⚡ SPRINT STATUS:   J+14 │ ██████████████████░░░░░░ 75%                         ║
 ║                                                                                   ║
 ║  🔥 PROGRESSION DÉTAILLÉE:                                                        ║
-║  ├─ MVP-1.1 Core:     ████████████████░░░░░░░░ 5/8  ✅ 62%                       ║
+║  ├─ MVP-1.1 Core:     ██████████████████░░░░ 6/8  ✅ 75%                        ║
 ║  ├─ MVP-1.2 Signatures: ░░░░░░░░░░░░░░░░░░░░░░░░ 0/9  🔄 0%   [NEXT]             ║
 ║  ├─ MVP-1.3 Pages:      ░░░░░░░░░░░░░░░░░░░░░░░░ 0/6  ⏳ 0%   [PLANNED]          ║
-║  └─ MVP-1.4 Analytics:  ░░░░░░░░░░░░░░░░░░░░░░░░ 0/4  ⏳ 0%   [PLANNED]          ║
+║  ├─ MVP-1.4 Analytics:  ░░░░░░░░░░░░░░░░░░░░░░░░ 0/4  ⏳ 0%   [PLANNED]          ║
+║  └─ MVP-1.5 PWA Enhancement: ░░░░░░░░░░░░░░░░░░░░░░░░ 0/5  ⏳ 0%   [PLANNED]          ║
 ║                                                                                   ║
-║  � AVANCEMENT GLOBAL VERS LA VISION:            🛠️  TECH HEALTH:               ║
-║  ├─ 🎯 MVP Completed:   █████░░░░░░░░░░░░░░░ 1/4   ├─ 🟢 API Status:    Online    ║
-║  ├─ � Live Version:    ██░░░░░░░░░░░░░░░░░░ 10%   ├─ 🟢 DB Connection: Google ✅  ║
+║  🌟 AVANCEMENT GLOBAL VERS LA VISION:            🛠️  TECH HEALTH:               ║
+║  ├─ 🎯 MVP Completed:   ██████░░░░░░░░░░░░░░░ 1/4   ├─ 🟢 API Status:    Online    ║
+║  ├─ 🚀 Live Version:    ███░░░░░░░░░░░░░░░░░░ 15%   ├─ 🟢 DB Connection: Google ✅  ║
 ║  ├─ 🌍 Impact Scaling:  ░░░░░░░░░░░░░░░░░░░░ 0%    ├─ 🟢 Build Status:  Passing   ║
-║  └─ 💫 Legacy Vision:   ░░░░░░░░░░░░░░░░░░░░ 0%    └─ 🟡 Env Config:    Dev Ready ║
+║  └─ 💫 Legacy Vision:   ░░░░░░░░░░░░░░░░░░░░ 0%    └─ 🟢 Env Config:    Production Ready ║
 ║                                                                                   ║
 ║  🚀 PROCHAINES ÉTAPES (ETA: J+16):                                                ║
-║  └─ ⚡ Vercel Deploy → 🌐 Domain Setup → 📱 PWA Config → 🎯 MVP-1.2              ║
+║  └─ ⚡ Vercel Deploy → 🌐 Domain Setup → 📱 PWA Complete → 🎯 MVP-1.2            ║
 ║                                                                                   ║
 ║  💎 ACHIEVEMENTS UNLOCKED TODAY:                                                  ║
-║  ✨ Shadcn/ui Master Setup  🐛 Bug Slayer Stats  📊 Google Sheets Wizard         ║
+║  ✨ PWA Master Setup  🎯 Manifest Complete  📱 Service Worker Active             ║
 ╚═══════════════════════════════════════════════════════════════════════════════════╝
 
 ### 🚨 **Bloqueurs Critiques**
@@ -88,22 +89,15 @@
 ### **⚡ PHASE MVP-1: Minimum Viable Product**
 > **Durée**: 5-7 jours | **Objectif**: Site fonctionnel avec signature
 
-#### **MVP-1.1: Core Infrastructure** `[5/8]` 🚀 **EN COURS**
+#### **MVP-1.1: Core Infrastructure** `[6/8]` 🚀 **EN COURS**
 - [x] `P0` Next.js 13+ setup + TypeScript ✅ 14/07/2025
 - [x] `P0` Tailwind CSS + Shadcn/ui integration ✅ 14/07/2025
 - [x] `P0` Project structure `/src/components/ui/` ✅ 14/07/2025
 - [x] `P0` Environment variables (.env.local) ✅ 14/07/2025
 - [x] `P1` GitHub repository + Git workflow ✅ 14/07/2025
+- [x] `P3` PWA manifest + service worker ✅ 14/07/2025
 - [ ] `P1` Vercel deployment pipeline
 - [ ] `P2` Domain configuration (si choisi)
-- [ ] `P3` PWA manifest + service worker
-
-**🔥 ACCOMPLISSEMENTS RÉCENTS (14/07/2025)**:
-- ✅ **Shadcn/ui Setup Complet**: Button, Input, Card, Label + configuration optimisée
-- ✅ **Bug Fix Statistiques**: Structure API cohérente, mise à jour temps réel fonctionnelle
-- ✅ **Google Sheets Intégration**: Testée et opérationnelle (4 signatures actives)
-- ✅ **Dev Environment**: Scripts de test et debugging configurés
-- ✅ **Composants UI**: Index d'exports, thème Auray personnalisé
 
 #### **MVP-1.2: Signature System** `[0/9]`
 - [ ] `P0` Google Sheets integration (lib/googleSheets.ts)
@@ -129,6 +123,13 @@
 - [ ] `P1` Vercel Analytics activation
 - [ ] `P2` Conversion tracking (signatures)
 - [ ] `P3` Error monitoring (Sentry optionnel)
+
+#### **MVP-1.5: PWA Enhancement** `[0/5]` 🆕
+- [ ] `P2` Screenshots PWA (desktop + mobile)
+- [ ] `P2` Shortcuts icônes (signer + stats)
+- [ ] `P2` Push notifications setup
+- [ ] `P3` Offline page personnalisée
+- [ ] `P3` Install prompt customization
 
 ---
 
@@ -347,7 +348,7 @@ TOTAL:    29 jours de développement (~6 semaines)
 ---
 
 **📊 Statut Planning**: `MVP-1 EN COURS` | **Prochaine Review**: 15/07/2025  
-**🤖 Auto-Update**: `ENABLED` | **Dernière Sync**: 14/07/2025 19:53  
+**🤖 Auto-Update**: `ENABLED` | **Dernière Sync**: 14/07/2025 20:46  
 
 > 💡 **Tip**: Cochez les tâches au fur et à mesure. Le dashboard se mettra à jour automatiquement !
 
