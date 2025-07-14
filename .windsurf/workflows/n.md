@@ -2,5 +2,7 @@
 description: next dev
 ---
 
-que peut-on faire maintenant ? @planning.md 
-mettre des estimations de temps
+mettre a jour le planning @planning.md et @README.md#L10 
+que peut-on faire maintenant ?
+mettre des estimations de temps et des choix possibles
+

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { SignatureForm } from '@/components/SignatureForm'
+import SignatureForm from '@/components/SignatureForm'
 
 interface Statistics {
   totalSignatures: number
@@ -56,218 +56,177 @@ const HomePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20 to-white">
-        <div className="mx-auto max-w-7xl pb-24 pt-10 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-40">
-          <div className="px-6 lg:px-0 lg:pt-4">
-            <div className="mx-auto max-w-2xl">
-              <div className="max-w-lg">
-                <div className="mt-24 sm:mt-32 lg:mt-16">
-                  <span className="rounded-full bg-indigo-600/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-600/10">
-                    Pétition Citoyenne
-                  </span>
-                </div>
-                <h1 className="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  Pour une Régulation des Sonneries de Cloches à Auray
-                </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Ensemble, trouvons un équilibre respectueux entre tradition religieuse 
-                  et qualité de vie. Votre signature compte pour ouvrir le dialogue.
-                </p>
-                <div className="mt-10 flex items-center gap-x-6">
-                  <a
-                    href="#petition"
-                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    Signer maintenant
-                  </a>
-                  <a href="#contexte" className="text-sm font-semibold leading-6 text-gray-900">
-                    En savoir plus <span aria-hidden="true">→</span>
-                  </a>
-                </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <h1 className="text-xl font-bold text-green-700">Pétition Citoyenne</h1>
+            <nav className="flex space-x-6 text-sm">
+              <a href="#contexte" className="text-gray-600 hover:text-green-700 transition-colors">Contexte</a>
+              <a href="#petition" className="text-gray-600 hover:text-green-700 transition-colors">Signer</a>
+              <a href="#contact" className="text-gray-600 hover:text-green-700 transition-colors">Contact</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Hero Card */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Pour une Régulation des Sonneries de Cloches à Auray
+            </h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Ensemble, trouvons un équilibre respectueux entre tradition religieuse 
+              et qualité de vie. Votre signature compte pour ouvrir le dialogue.
+            </p>
+            
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <div className="bg-green-50 rounded-xl p-4 border border-green-100">
+                <div className="text-3xl font-bold text-green-700">{stats.totalSignatures}</div>
+                <div className="text-sm text-green-600 font-medium">Signatures</div>
+              </div>
+              <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+                <div className="text-3xl font-bold text-blue-700">{stats.daysActive}</div>
+                <div className="text-sm text-blue-600 font-medium">Jours actifs</div>
+              </div>
+              <div className="bg-purple-50 rounded-xl p-4 border border-purple-100">
+                <div className="text-3xl font-bold text-purple-700">{stats.approvalRate}%</div>
+                <div className="text-sm text-purple-600 font-medium">Satisfaction</div>
               </div>
             </div>
+            
+            <button 
+              onClick={() => document.getElementById('petition')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-green-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-green-800 transition-colors"
+            >
+              Signer la Pétition Maintenant
+            </button>
           </div>
-          <div className="mt-20 sm:mt-24 md:mx-auto md:max-w-2xl lg:mx-0 lg:mt-0 lg:w-screen">
-            <div className="absolute inset-y-0 right-1/2 -z-10 -mr-10 w-[200%] skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 md:-mr-20 lg:-mr-36" />
-            <div className="shadow-lg md:rounded-3xl">
-              <div className="bg-indigo-500 [clip-path:inset(0)] md:[clip-path:inset(0_round_theme(borderRadius.3xl))]">
-                <div className="absolute -inset-y-px left-1/2 -z-10 ml-10 w-[200%] skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-inset ring-white md:ml-20 lg:ml-36" />
-                <div className="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
-                  <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
-                    <div className="w-screen overflow-hidden rounded-tl-xl bg-gray-900">
-                      <div className="flex bg-gray-800/40 ring-1 ring-white/5">
-                        <div className="-mb-px flex text-sm font-medium leading-6 text-gray-400">
-                          <div className="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">
-                            petition-auray.fr
-                          </div>
-                        </div>
-                      </div>
-                      <div className="px-6 pb-14 pt-6">
-                        {/* Statistiques en temps réel */}
-                        <div className="grid grid-cols-3 gap-4 mb-6">
-                          <div className="text-center">
-                            <div className="text-2xl font-bold text-white">{stats.totalSignatures}</div>
-                            <div className="text-xs text-gray-400">Signatures</div>
-                          </div>
-                          <div className="text-center">
-                            <div className="text-2xl font-bold text-white">{stats.daysActive}</div>
-                            <div className="text-xs text-gray-400">Jours actifs</div>
-                          </div>
-                          <div className="text-center">
-                            <div className="text-2xl font-bold text-white">{stats.approvalRate}%</div>
-                            <div className="text-xs text-gray-400">Satisfaction</div>
-                          </div>
-                        </div>
-                        <div className="text-sm text-gray-300">
-                          ✅ Pétition en ligne sécurisée<br/>
-                          🔒 Données protégées (RGPD)<br/>
-                          📊 Transparence totale
-                        </div>
-                      </div>
-                    </div>
+        </div>
+
+        {/* Notre Demande Cards */}
+        <div className="mb-8">
+          <h3 className="text-2xl font-bold text-gray-900 text-center mb-6">Notre Demande</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-2xl">🌙</span>
+              </div>
+              <h4 className="font-bold text-gray-900 mb-2">Limitation nocturne</h4>
+              <p className="text-gray-600">(22h-9h)</p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-2xl">🔊</span>
+              </div>
+              <h4 className="font-bold text-gray-900 mb-2">Réduction de l'intensité sonore et la durée des sonneries</h4>
+              <p className="text-gray-600">à 2 minutes</p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-2xl">🤝</span>
+              </div>
+              <h4 className="font-bold text-gray-900 mb-2">Dialogue municipalité/citoyens</h4>
+              <p className="text-gray-600">Concertation et solutions équilibrées</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Petition Form Card */}
+        <div id="petition" className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <div className="text-center mb-8">
+            <h3 className="text-3xl font-bold rounded-full  text-gray-900 mb-4 flex items-center justify-center gap-3">
+              <img 
+                src="/icons/icons/manifest-icon-192.maskable.png" 
+                alt="Icône pétition" 
+                className="w-38 h-38 rounded-full "
+              />
+              Signez la Pétition
+            </h3>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Votre signature sera transmise au conseil municipal d'Auray et aux autorités compétentes. 
+              Ensemble, ouvrons le dialogue pour une solution équilibrée.
+            </p>
+          </div>
+          
+          <div className="grid lg:grid-cols-4 gap-8">
+            {/* Confidentialité Card */}
+            <div className="lg:col-span-1">
+              <div className="bg-green-50 rounded-xl p-6 border border-green-100 h-full">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                    <span className="text-green-600 text-lg">🔒</span>
                   </div>
+                  <h4 className="ml-3 text-lg font-semibold text-gray-900">
+                    Confidentialité
+                  </h4>
                 </div>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Vos données sont protégées (RGPD). Seules les statistiques globales 
+                  sont publiques. Transparence totale sur l'utilisation.
+                </p>
+              </div>
+            </div>
+
+            {/* Formulaire */}
+            <div className="lg:col-span-3">
+              <div className="bg-gray-50 rounded-xl p-6">
+                <SignatureForm onSuccess={handleSignatureSuccess} />
               </div>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Petition Form Section */}
-      <section id="petition" className="py-16 sm:py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-4">
-                🔔 Signez la Pétition
-              </h2>
-              <p className="text-lg leading-8 text-gray-600 max-w-2xl mx-auto">
-                Votre signature sera transmise au conseil municipal d'Auray et aux autorités compétentes. 
-                Ensemble, ouvrons le dialogue pour une solution équilibrée.
-              </p>
-            </div>
-            
-            <div className="grid lg:grid-cols-3 gap-8">
-              {/* Informations sur l'impact */}
-              <div className="lg:col-span-1 space-y-6">
-                <div className="card">
-                  <div className="flex items-center mb-4">
-                    <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
-                      <span className="text-indigo-600 text-sm">📢</span>
-                    </div>
-                    <h3 className="ml-3 text-lg font-medium text-gray-900">
-                      Notre Demande
-                    </h3>
-                  </div>
-                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-600 mt-1">•</span>
-                      Limitation nocturne (22h-7h)
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-600 mt-1">•</span>
-                      Réduction de l'intensité sonore
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-600 mt-1">•</span>
-                      Dialogue municipalité/citoyens
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="card">
-                  <div className="flex items-center mb-4">
-                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                      <span className="text-green-600 text-sm">🔒</span>
-                    </div>
-                    <h3 className="ml-3 text-lg font-medium text-gray-900">
-                      Confidentialité
-                    </h3>
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    Vos données sont protégées (RGPD). Seules les statistiques globales 
-                    sont publiques. Transparence totale sur l'utilisation.
-                  </p>
-                </div>
+        {/* Context & Proposition Cards */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+          {/* Contexte Card */}
+          <div className="bg-white rounded-xl shadow-md p-8">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                <span className="text-2xl">⚠️</span>
               </div>
-
-              {/* Formulaire moderne */}
-              <div className="lg:col-span-2">
-                <div className="card">
-                  <SignatureForm onSuccess={handleSignatureSuccess} />
-                </div>
-              </div>
+              <h3 className="ml-4 text-2xl font-bold text-gray-900">Comprendre le Contexte</h3>
             </div>
+            <p className="text-gray-600 leading-relaxed">
+              Les sonneries quotidiennes de l'Église Saint-Gildas impactent significativement la qualité de vie des résidents, particulièrement ceux vivant à proximité immédiate du centre-ville.
+            </p>
           </div>
-        </div>
-      </section>
-
-      {/* Context Preview */}
-      <section id="contexte" className="py-16 sm:py-24 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Comprendre le Contexte
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-gray-600">
-                Une situation complexe qui nécessite dialogue et équilibre
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-              {/* Problème */}
-              <div className="card">
-                <div className="flex items-center mb-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                      <span className="text-red-600 text-sm">⚠️</span>
-                    </div>
-                  </div>
-                  <h3 className="ml-3 text-lg font-medium text-gray-900">
-                    La Problématique
-                  </h3>
-                </div>
-                <p className="text-gray-600 leading-relaxed">
-                  Les sonneries quotidiennes de l'Église Saint-Gildas impactent 
-                  significativement la qualité de vie des résidents, particulièrement 
-                  ceux vivant à proximité immédiate du centre-ville.
-                </p>
+          
+          {/* Proposition Card */}
+          <div className="bg-green-50 rounded-xl shadow-md p-8 border border-green-100">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <span className="text-2xl">✅</span>
               </div>
-              
-              {/* Solution */}
-              <div className="card">
-                <div className="flex items-center mb-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                      <span className="text-green-600 text-sm">✅</span>
-                    </div>
-                  </div>
-                  <h3 className="ml-3 text-lg font-medium text-gray-900">
-                    Notre Proposition
-                  </h3>
-                </div>
-                <p className="text-gray-600 leading-relaxed">
-                  Établir un dialogue constructif pour définir des créneaux 
-                  horaires respectueux, préservant à la fois la tradition 
-                  religieuse et la tranquillité publique.
-                </p>
-              </div>
+              <h3 className="ml-4 text-2xl font-bold text-gray-900">Notre Proposition</h3>
             </div>
-            
-            <div className="text-center mt-12">
-              <a
-                href="/contexte"
-                className="btn-outline"
-              >
-                En Savoir Plus sur le Contexte
+            <p className="text-gray-600 leading-relaxed mb-6">
+              Établir un dialogue constructif pour définir des créneaux horaires respectueux, préservant à la fois la tradition religieuse et la tranquillité publique.
+            </p>
+            <div className="text-center">
+              <a href="/contexte" className="inline-flex items-center text-green-700 font-semibold hover:text-green-800 transition-colors">
+                En savoir plus
+                <span className="ml-2">→</span>
               </a>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-gray-300" id="contact">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center">
+            <p>2025 Pétition Citoyenne Auray. Mentions légales | Politique de confidentialité</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

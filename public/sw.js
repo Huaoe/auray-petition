@@ -2,8 +2,8 @@ const CACHE_NAME = 'auray-petition-v1.0.0'
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
+  '/icons/icons/manifest-icon-192.maskable.png',
+  '/icons/icons/manifest-icon-512.maskable.png'
 ]
 
 // Installation du Service Worker
@@ -109,8 +109,8 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('push', (event) => {
   const options = {
     body: event.data ? event.data.text() : 'Nouvelle mise à jour de la pétition Auray',
-    icon: '/icons/icon-192x192.png',
-    badge: '/icons/icon-72x72.png',
+    icon: '/icons/icons/manifest-icon-192.maskable.png',
+    badge: '/icons/icons/manifest-icon-72.maskable.png',
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),

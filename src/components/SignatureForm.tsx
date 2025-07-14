@@ -342,3 +342,5 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
     </Card>
   )
 }
+
+export default SignatureForm

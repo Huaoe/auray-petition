@@ -3,34 +3,34 @@
 > **Plateforme digitale révolutionnaire** pour une meilleure cohabitation entre tradition et tranquillité publique
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-13+-black.svg)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-14+-black.svg)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0+-38B2AC.svg)](https://tailwindcss.com/)
 
 ### 🎯 Métriques Temps Réel
 
-**Phase actuelle**: MVP-1.1 Core Infrastructure  
-**Objectif**: Site Live  
-**Sprint**: J+14 — **75%**
+**Phase actuelle**: MVP-1.3 Anti-Spam & Security  
+**Objectif**: reCAPTCHA + Protection  
+**Sprint**: J+14 — **60%** → Production Ready
 
 #### Progression
 
-- **MVP-1.1 Core**:        ██████████████████░░░░░░ 6/8 (75%) ✅
-- **MVP-1.2 Signatures**: ░░░░░░░░░░░░░░░░░░░░░░░░ 0/9 (0%) [NEXT]
-- **MVP-1.3 Pages**:      ░░░░░░░░░░░░░░░░░░░░░░░░ 0/6 (0%) [PLANNED]
-- **MVP-1.4 Analytics**:  ░░░░░░░░░░░░░░░░░░░░░░░░ 0/4 (0%) [PLANNED]
-- **MVP-1.5 PWA**:        ░░░░░░░░░░░░░░░░░░░░░░░░ 0/5 (0%) [PLANNED]
+- **MVP-1.1 Core**:        ████████████████████████ 8/8 (100%) ✅
+- **MVP-1.2 Signatures**: ████████████████████████ 9/9 (100%) ✅ **COMPLETED**
+- **MVP-1.3 Anti-Spam**:  ░░░░░░░░░░░░░░░░░░░░░░░░ 0/3 (0%) [CURRENT]
+- **MVP-2.0 Pages**:      ░░░░░░░░░░░░░░░░░░░░░░░░ 0/6 (0%) [NEXT]
+- **MVP-2.1 Analytics**:  ░░░░░░░░░░░░░░░░░░░░░░░░ 0/4 (0%) [PLANNED]
 
 #### Tech Health
 
-- **API**: 🟢 Online
-- **DB**: 🟢 Google
+- **API**: 🟢 Live & Functional
+- **DB**: 🟢 Google Sheets
 - **Build**: 🟢 Passing
 - **Env**: 🟢 Production Ready
 
-#### Achievements
+#### Latest Achievements
 
-✨ PWA Master Setup 🎯 Manifest Complete 📱 Service Worker Active
+✨ **MVP-1.2 COMPLETED** 🎯 Signature System Live 📱 UX Unified 🚀 Form Validation
 
 ## 🎯 **Vision du Projet**
 
@@ -50,7 +50,7 @@ Transformer une problématique locale en **mouvement culturel national** pour re
 
 ### **📊 Stack Technique**
 ```typescript
-Frontend:     React 18+ / Next.js 13+ / TypeScript 5+
+Frontend:     React 18+ / Next.js 14+ / TypeScript 5+
 Styling:      Tailwind CSS / Shadcn UI / Radix
 Backend:      API Routes / Google Sheets integration
 IA:           OpenAI DALL-E 3 / Stability AI / Midjourney
