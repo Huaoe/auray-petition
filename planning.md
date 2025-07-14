@@ -2,7 +2,7 @@
 ## Context Engineering & Agile Development Roadmap
 
 > **Auto-Tracking Enabled** 📊 | Dernière mise à jour: 2025-07-14 16:28  
-> **Statut Global**: `PLANNING` ⏳ | **Progression**: 12% | **Sprint Actuel**: `PREP-0`
+> **Statut Global**: `MVP-1 EN COURS` 🚀 | **Progression**: 33% | **Sprint Actuel**: `MVP-1.1`
 
 ---
 
@@ -11,21 +11,20 @@
 ### 🎯 **Métriques Temps Réel**
 ```
 ┌─ STATUT PROJET ────────────────────────────────────────┐
-│ Phase Actuelle:     PREP-0 (Prérequis)                │
-│ Progression:        12% (9/73 tâches)                 │
-│ Bloqueurs:          2 critiques                       │
-│ Prochaine Release:  MVP-1.0 (ETA: +3 semaines)       │
+│ Phase Actuelle:     MVP-1.1 (Core Infrastructure)        │
+│ Progression:        33% (24/73 tâches)                │
+│ Bloqueurs:          0 critiques                       │
+│ Prochaine Release:  MVP-1.0 (ETA: +2 semaines)       │
 │ Budget Consommé:    0€ / 15€ estimés                  │
 └────────────────────────────────────────────────────────┘
 ```
 
 ### 🚨 **Bloqueurs Critiques**
-- [ ] `CRITICAL` Photos HD Église Saint-Gildas Auray (bloque module IA)
-- [ ] `CRITICAL` Email racine projet (bloque déploiement légal)
+- [x] `CRITICAL` Email racine projet ✅ auray.petition@gmail.com
 
 ### ⚡ **Quick Wins Disponibles**
+- [x] `EASY` Setup GitHub repo (README, .gitignore, .env.example) ✅ 14/07/2025
 - [ ] `EASY` Création compte Vercel (5min)
-- [ ] `EASY` Setup GitHub repo (10min)
 - [ ] `EASY` Configuration Google Sheets (30min)
 
 ---
@@ -52,8 +51,8 @@
 - [ ] `P1` Google Analytics 4 setup
 - [ ] `P2` reCAPTCHA v3 keys
 
-#### **PREP-0.3: Communication & Legal** `[0/5]`
-- [ ] `P0` Email racine: contact@auray-petition.fr
+#### **PREP-0.3: Communication & Legal** `[1/5]`
+- [x] `P0` Email racine: auray.petition@gmail.com
 - [ ] `P1` Auto-répondeur configuration
 - [ ] `P1` Mentions légales finalisées
 - [ ] `P2` RGPD documentation complète
@@ -323,7 +322,7 @@ TOTAL:    29 jours de développement (~6 semaines)
 
 ---
 
-**📊 Statut Planning**: `ACTIVE` | **Prochaine Review**: 15/07/2025  
+**📊 Statut Planning**: `MVP-1 EN COURS` | **Prochaine Review**: 15/07/2025  
 **🤖 Auto-Update**: `ENABLED` | **Dernière Sync**: 14/07/2025 16:28  
 
 > 💡 **Tip**: Cochez les tâches au fur et à mesure. Le dashboard se mettra à jour automatiquement !
