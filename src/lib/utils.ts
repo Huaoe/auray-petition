@@ -9,13 +9,6 @@ export const cn = (...inputs: ClassValue[]) => {
 }
 
 /**
- * Format number with French locale
- */
-export const formatNumber = (num: number): string => {
-  return new Intl.NumberFormat('fr-FR').format(num)
-}
-
-/**
  * Format date to French format
  */
 export const formatDate = (date: Date | string): string => {
@@ -39,6 +32,13 @@ export const formatDateTime = (date: Date | string): string => {
     hour: '2-digit',
     minute: '2-digit',
   }).format(d)
+}
+
+/**
+ * Format number with French locale
+ */
+export const formatNumber = (num: number): string => {
+  return new Intl.NumberFormat('fr-FR').format(num)
 }
 
 /**

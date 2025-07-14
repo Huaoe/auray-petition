@@ -6,11 +6,20 @@ import { validateEmail, validatePostalCode } from '@/lib/utils';
 export async function GET() {
   try {
     const stats = await getPetitionStats();
-    return NextResponse.json(stats);
+    
+    // Structure cohérente avec le frontend
+    return NextResponse.json({
+      success: true,
+      statistics: stats,
+      timestamp: new Date().toISOString()
+    });
   } catch (error) {
     console.error('Erreur API GET /signatures:', error);
     return NextResponse.json(
-      { error: 'Erreur lors de la récupération des statistiques' },
+      { 
+        success: false,
+        error: 'Erreur lors de la récupération des statistiques' 
+      },
       { status: 500 }
     );
   }

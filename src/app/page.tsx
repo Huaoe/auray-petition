@@ -61,13 +61,24 @@ const HomePage = () => {
 
   const fetchStatistics = async () => {
     try {
+      console.log('🔄 Chargement des statistiques...')
       const response = await fetch('/api/signatures')
+      
       if (response.ok) {
         const data = await response.json()
-        setStats(data.statistics)
+        console.log('📊 Données reçues:', data)
+        
+        if (data.success && data.statistics) {
+          setStats(data.statistics)
+          console.log('✅ Statistiques mises à jour:', data.statistics)
+        } else {
+          console.error('❌ Structure de données incorrecte:', data)
+        }
+      } else {
+        console.error('❌ Erreur HTTP:', response.status, response.statusText)
       }
     } catch (error) {
-      console.error('Erreur lors du chargement des statistiques:', error)
+      console.error('❌ Erreur lors du chargement des statistiques:', error)
     }
   }
 
