@@ -4,7 +4,20 @@ import { useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import ReCAPTCHA from "react-google-recaptcha";
+import dynamic from 'next/dynamic';
+import type  ReaptchaProps  from 'reaptcha';
+import type { ForwardedRef } from 'react';
+
+// FIX: Dynamically import ReCAPTCHA with SSR disabled to prevent build errors
+// FIX: Explicitly resolve the default export to fix dynamic import type error
+// FIX: Cast the dynamic component to a type that accepts a ref
+const Reaptcha = dynamic(
+  () => import('reaptcha').then((mod) => mod.default as any), // Cast to any to bypass intermediate type checks
+  {
+    ssr: false,
+  },
+) as React.ComponentType<ReaptchaProps & { ref: ForwardedRef<any> }>;
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,7 +33,6 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, CheckCircle, AlertCircle, Users, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRecaptcha } from "@/hooks/useRecaptcha";
 import { analytics } from "@/lib/analytics";
 import {
   Form,
@@ -100,17 +112,13 @@ export const SignatureForm = ({
   onSuccess,
   onSignatureCount,
 }: SignatureFormProps) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const {
-    recaptchaRef,
-    executeRecaptchaAction,
-    resetRecaptcha,
-    isRecaptchaReady,
-  } = useRecaptcha();
+  const recaptchaRef = useRef(null);
 
   const form = useForm<SignatureFormData>({
     resolver: zodResolver(signatureSchema),
@@ -128,35 +136,11 @@ export const SignatureForm = ({
   });
 
   const { handleSubmit, control, formState, watch, reset, setValue } = form;
-  const { isValid, isSubmitting } = formState;
+  const { isValid, isSubmitting: isFormSubmitting } = formState;
   const commentValue = watch("comment");
 
-  const handleSubmitSignature = async (data: SignatureFormData) => {
-    setSubmitStatus("idle");
-    setErrorMessage("");
-
+  const handleApiSubmit = async (data: SignatureFormData, recaptchaToken: string) => {
     try {
-      // Exécuter reCAPTCHA avant soumission
-      const recaptchaToken = await executeRecaptchaAction("submit_signature");
-
-      // Accepter le token de développement ou un token valide
-      if (
-        !recaptchaToken ||
-        (recaptchaToken !== "dev-token-bypass" && recaptchaToken.length < 10)
-      ) {
-        console.error("Token reCAPTCHA invalide:", recaptchaToken);
-        throw new Error(
-          "Échec de la vérification anti-spam. Veuillez réessayer."
-        );
-      }
-
-      console.log(
-        "🔒 Token reCAPTCHA:",
-        recaptchaToken === "dev-token-bypass"
-          ? "Mode développement"
-          : "Token valide"
-      );
-
       const response = await fetch("/api/signatures", {
         method: "POST",
         headers: {
@@ -216,6 +200,27 @@ export const SignatureForm = ({
     }
   };
 
+  // 1. When the form is valid, execute reCAPTCHA
+  const handleFormSubmit = async (data: SignatureFormData) => {
+    setIsSubmitting(true);
+    setErrorMessage("");
+    setSubmitStatus("idle");
+
+    if (!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
+      console.log("reCAPTCHA site key not found, submitting with bypass token.");
+      await handleApiSubmit(data, 'dev-token-bypass');
+      return;
+    }
+  };
+
+  // 2. The onVerify callback receives the token and triggers the final API submission
+  const onRecaptchaVerify = async (token: string) => {
+    const data = form.getValues();
+    await handleApiSubmit(data, token);
+  };
+
+  const handleSubmitSignature = form.handleSubmit(handleFormSubmit);
+
   // Suivre les interactions avec les champs
   const handleFieldFocus = (fieldName: string) => {
     analytics.formInteraction(fieldName);
@@ -257,7 +262,7 @@ export const SignatureForm = ({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                onSubmit={handleSubmit(handleSubmitSignature)}
+                onSubmit={handleSubmitSignature}
                 className="space-y-6"
                 noValidate
               >
@@ -461,32 +466,35 @@ export const SignatureForm = ({
 
                 {/* reCAPTCHA invisible */}
                 {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
-                  <div className="hidden">
-                    <ReCAPTCHA
-                      ref={recaptchaRef}
-                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                      size="invisible"
-                    />
-                  </div>
+                  <Reaptcha
+                    ref={recaptchaRef}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                    onVerify={onRecaptchaVerify}
+                    size="invisible"
+                    onExpire={() => {
+                      setErrorMessage("Le reCAPTCHA a expiré. Veuillez réessayer.");
+                      setSubmitStatus("error");
+                      setIsSubmitting(false);
+                    }}
+                    onError={() => {
+                      setErrorMessage("Le reCAPTCHA a expiré. Veuillez réessayer.");
+                      setSubmitStatus("error");
+                      setIsSubmitting(false);
+                    }}
+                  />
                 )}
 
                 {/* Bouton de soumission */}
                 <Button
                   type="submit"
                   className="w-full"
-                  disabled={!isValid || isSubmitting || !isRecaptchaReady}
+                  disabled={!isValid || isSubmitting}
                   size="lg"
                 >
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Vérification et envoi...
-                    </>
-                  ) : !isRecaptchaReady &&
-                    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
-                    <>
-                      <Shield className="mr-2 h-4 w-4" />
-                      Chargement sécurisé...
                     </>
                   ) : (
                     <>

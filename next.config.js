@@ -99,7 +99,7 @@ const nextConfig = {
   compress: true,
   
   // React Strict Mode
-  reactStrictMode: true,
+  reactStrictMode: false,
   
   // SWC Minification
   swcMinify: true,
