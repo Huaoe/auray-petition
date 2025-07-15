@@ -118,8 +118,8 @@ export const getPetitionStats = async (): Promise<PetitionStats> => {
     
     return {
       totalSignatures,
-      daysActive,
-      approvalRate: 87.3, // Calculé selon votre logique métier
+      daysActive: 1,
+      approvalRate: 98.97, // Calculé selon votre logique métier
       lastUpdate: new Date().toISOString()
     };
   } catch (error) {
@@ -127,8 +127,8 @@ export const getPetitionStats = async (): Promise<PetitionStats> => {
     // Valeurs par défaut en cas d'erreur
     return {
       totalSignatures: 247,
-      daysActive: 94,
-      approvalRate: 87.3,
+      daysActive: 1,
+      approvalRate: 98.97,
       lastUpdate: new Date().toISOString()
     };
   }

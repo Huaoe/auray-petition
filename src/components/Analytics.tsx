@@ -4,23 +4,11 @@ import { useEffect } from 'react'
 import Script from 'next/script'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 
-declare global {
-  interface Window {
-    gtag: (command: string, targetId: string, config?: any) => void
-  }
-}
-
 export const Analytics = () => {
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
   useEffect(() => {
     if (GA_MEASUREMENT_ID && typeof window !== 'undefined') {
-      // Initialize Google Analytics
-      window.gtag = window.gtag || function() {
-        (window.gtag as any).q = (window.gtag as any).q || []
-        ;(window.gtag as any).q.push(arguments)
-      }
-      
       window.gtag('js', new Date().toISOString())
       window.gtag('config', GA_MEASUREMENT_ID, {
         page_title: document.title,
