@@ -145,7 +145,7 @@ const HomePage = () => {
               <img 
                 src="/icons/icons/manifest-icon-192.maskable.png" 
                 alt="Icône pétition" 
-                className="w-38 h-38 rounded-full "
+                className="w-32 h-32 rounded-full animate-pulse-glow hover:animate-vibrate transition-all duration-300 cursor-pointer ml-12"
               />
               Signez la Pétition
             </h3>

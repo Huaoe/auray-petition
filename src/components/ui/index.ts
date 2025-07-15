@@ -14,7 +14,7 @@ export { Toaster, toast, type Toast } from './toaster'
 export { Textarea } from './textarea'
 export { Alert, AlertTitle, AlertDescription } from './alert'
 export { Checkbox } from './checkbox'
-
+export { RadioCard } from './radio-card'
 
 export { 
   Dialog,

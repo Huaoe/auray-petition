@@ -8,7 +8,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
+import { RadioCard } from "@/components/ui/radio-card";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
@@ -22,6 +22,14 @@ import { Loader2, CheckCircle, AlertCircle, Users, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRecaptcha } from "@/hooks/useRecaptcha";
 import { analytics } from "@/lib/analytics";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 // Schema de validation Zod
 const signatureSchema = z.object({
@@ -45,7 +53,10 @@ const signatureSchema = z.object({
 
   email: z
     .string()
-    .email("Veuillez saisir une adresse email valide")
+    .email({
+      message: "Veuillez saisir une adresse email valide",
+      // Vous pouvez ajouter des paramètres personnalisés ici si besoin
+    })
     .max(100, "L'adresse email ne peut pas dépasser 100 caractères"),
 
   city: z
@@ -61,14 +72,13 @@ const signatureSchema = z.object({
     .string()
     .max(500, "Le commentaire ne peut pas dépasser 500 caractères")
     .optional()
-    .default(""),
+    .transform((val) => (val === "" ? undefined : val)),
 
   rgpdConsent: z
     .boolean()
-    .refine(
-      (val) => val === true,
-      "Vous devez accepter le traitement de vos données personnelles"
-    ),
+    .refine((val) => val === true, {
+      message: "Le consentement est obligatoire pour signer.",
+    }),
 
   newsletterConsent: z.boolean().optional(),
 });
@@ -90,7 +100,6 @@ export const SignatureForm = ({
   onSuccess,
   onSignatureCount,
 }: SignatureFormProps) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
@@ -103,31 +112,26 @@ export const SignatureForm = ({
     isRecaptchaReady,
   } = useRecaptcha();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-    reset,
-    setValue,
-    watch,
-    trigger,
-    control,
-  } = useForm<SignatureFormData>({
+  const form = useForm<SignatureFormData>({
     resolver: zodResolver(signatureSchema),
     mode: "onChange",
     defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      city: "",
+      postalCode: "",
+      comment: "",
       rgpdConsent: false,
       newsletterConsent: false,
-      comment: "",
     },
   });
 
-  const rgpdConsent = watch("rgpdConsent");
-  const newsletterConsent = watch("newsletterConsent");
-  const comment = watch("comment");
+  const { handleSubmit, control, formState, watch, reset, setValue } = form;
+  const { isValid, isSubmitting } = formState;
+  const commentValue = watch("comment");
 
   const handleSubmitSignature = async (data: SignatureFormData) => {
-    setIsSubmitting(true);
     setSubmitStatus("idle");
     setErrorMessage("");
 
@@ -209,8 +213,6 @@ export const SignatureForm = ({
           ? error.message
           : "Une erreur inattendue s'est produite"
       );
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -249,263 +251,257 @@ export const SignatureForm = ({
               <p className="text-green-600">{successMessage}</p>
             </motion.div>
           ) : (
-            <motion.form
-              key="form"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onSubmit={handleSubmit(handleSubmitSignature)}
-              className="space-y-6"
-            >
-              {/* Informations personnelles */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName">Prénom *</Label>
-                  <Input
-                    id="firstName"
-                    {...register("firstName")}
-                    placeholder="Votre prénom"
-                    className={errors.firstName ? "border-red-500" : ""}
-                    onFocus={() => handleFieldFocus("firstName")}
-                  />
-                  {errors.firstName && (
-                    <p className="text-sm text-red-500">
-                      {errors.firstName.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="lastName">Nom *</Label>
-                  <Input
-                    id="lastName"
-                    {...register("lastName")}
-                    placeholder="Votre nom"
-                    className={errors.lastName ? "border-red-500" : ""}
-                    onFocus={() => handleFieldFocus("lastName")}
-                  />
-                  {errors.lastName && (
-                    <p className="text-sm text-red-500">
-                      {errors.lastName.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email">Adresse email *</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  {...register("email")}
-                  placeholder="votre.email@exemple.com"
-                  className={errors.email ? "border-red-500" : ""}
-                  onFocus={() => handleFieldFocus("email")}
-                />
-                {errors.email && (
-                  <p className="text-sm text-red-500">{errors.email.message}</p>
-                )}
-              </div>
-
-              {/* Localisation */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="md:col-span-2 space-y-2">
-                  <Label htmlFor="city">Ville *</Label>
-                  <Input
-                    id="city"
-                    {...register("city")}
-                    placeholder="Auray, Vannes, Lorient..."
-                    className={errors.city ? "border-red-500" : ""}
-                    onFocus={() => handleFieldFocus("city")}
-                  />
-                  {errors.city && (
-                    <p className="text-sm text-red-500">
-                      {errors.city.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="postalCode">Code postal *</Label>
-                  <Input
-                    id="postalCode"
-                    {...register("postalCode")}
-                    placeholder="56400"
-                    maxLength={5}
-                    className={errors.postalCode ? "border-red-500" : ""}
-                    onFocus={() => handleFieldFocus("postalCode")}
-                  />
-                  {errors.postalCode && (
-                    <p className="text-sm text-red-500">
-                      {errors.postalCode.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              {/* Commentaire */}
-              <div className="space-y-2">
-                <Label htmlFor="comment">Commentaire</Label>
-                <Textarea
-                  id="comment"
-                  {...register("comment")}
-                  placeholder="Partagez votre témoignage ou vos préoccupations (optionnel)..."
-                  rows={3}
-                  maxLength={500}
-                  className={errors.comment ? "border-red-500" : ""}
-                  onFocus={() => handleFieldFocus("comment")}
-                />
-                {errors.comment && (
-                  <p className="text-sm text-red-500">
-                    {errors.comment.message}
-                  </p>
-                )}
-                <div className="text-xs text-gray-500 text-right">
-                  {comment?.length || 0}/500 caractères
-                </div>
-              </div>
-
-              {/* Consentements RGPD */}
-              <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
-                <div className="flex items-start space-x-3">
-                  <Controller
-                    name="rgpdConsent"
-                    control={control}
-                    render={({ field }) => (
-                      <Checkbox
-                        id="rgpdConsent"
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                        className={errors.rgpdConsent ? "border-red-500" : ""}
-                        onFocus={() => handleFieldFocus("rgpdConsent")}
-                      />
-                    )}
-                  />
-                  <div className="space-y-1">
-                    <Label
-                      htmlFor="rgpdConsent"
-                      className="text-sm font-medium"
-                    >
-                      Consentement RGPD *
-                    </Label>
-                    <p className="text-xs text-gray-600">
-                      J'accepte que mes données personnelles soient traitées
-                      dans le cadre de cette pétition conformément à notre{" "}
-                      <a
-                        href="/mentions-legales"
-                        className="text-primary hover:underline"
-                        target="_blank"
-                      >
-                        politique de confidentialité
-                      </a>
-                      . Mes données ne seront jamais vendues ou partagées avec
-                      des tiers.
-                    </p>
-                  </div>
-                </div>
-                {errors.rgpdConsent && (
-                  <p className="text-sm text-red-500 ml-6">
-                    {errors.rgpdConsent.message}
-                  </p>
-                )}
-
-                <div className="flex items-start space-x-3">
-                  <Controller
-                    name="newsletterConsent"
-                    control={control}
-                    render={({ field }) => (
-                      <Checkbox
-                        id="newsletterConsent"
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                        onFocus={() => handleFieldFocus("newsletterConsent")}
-                      />
-                    )}
-                  />
-                  <div className="space-y-1">
-                    <Label
-                      htmlFor="newsletterConsent"
-                      className="text-sm font-medium"
-                    >
-                      Newsletter (optionnel)
-                    </Label>
-                    <p className="text-xs text-gray-600">
-                      Je souhaite recevoir des mises à jour sur l'avancement de
-                      cette pétition.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Messages d'erreur */}
-              {submitStatus === "error" && (
-                <Alert variant="destructive">
-                  <AlertCircle className="h-4 w-4" />
-                  <AlertDescription>{errorMessage}</AlertDescription>
-                </Alert>
-              )}
-
-              {/* Indicateur reCAPTCHA */}
-              <div className="flex items-center justify-center text-sm text-gray-500">
-                <Shield
-                  className={`mr-2 h-4 w-4 ${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? "text-green-500" : "text-yellow-500"}`}
-                />
-                <span>
-                  {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-                    ? "Protection anti-spam activée"
-                    : "Protection anti-spam en développement"}
-                </span>
-              </div>
-
-              {/* reCAPTCHA invisible */}
-              {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
-                <div className="hidden">
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                    size="invisible"
-                  />
-                </div>
-              )}
-
-              {/* Bouton de soumission */}
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={
-                  !isValid ||
-                  isSubmitting ||
-                  (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY &&
-                    !isRecaptchaReady)
-                }
-                size="lg"
+            <Form {...form}>
+              <motion.form
+                key="form"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onSubmit={handleSubmit(handleSubmitSignature)}
+                className="space-y-6"
+                noValidate
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Vérification et envoi...
-                  </>
-                ) : !isRecaptchaReady &&
-                  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
-                  <>
-                    <Shield className="mr-2 h-4 w-4" />
-                    Chargement sécurisé...
-                  </>
-                ) : (
-                  <>
-                    <Users className="mr-2 h-4 w-4" />
-                    Signer la Pétition
-                  </>
-                )}
-              </Button>
+                {/* Informations personnelles */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Prénom *</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Votre prénom"
+                            {...field}
+                            autoComplete="given-name"
+                            onFocus={() => handleFieldFocus("firstName")}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Nom *</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Votre nom"
+                            {...field}
+                            autoComplete="family-name"
+                            onFocus={() => handleFieldFocus("lastName")}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-              <p className="text-xs text-gray-500 text-center">
-                En signant, vous rejoignez le mouvement pour une régulation
-                raisonnée des sonneries de cloches à Auray. Vos données sont
-                protégées et ne seront utilisées que dans le cadre de cette
-                pétition.
-              </p>
-            </motion.form>
+                {/* Email */}
+                <FormField
+                  control={control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Adresse email *</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="votre.email@exemple.com"
+                          {...field}
+                          autoComplete="email"
+                          onFocus={() => handleFieldFocus("email")}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Localisation */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="md:col-span-2">
+                    <FormField
+                      control={control}
+                      name="city"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Ville *</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Auray, Vannes, Lorient..."
+                              {...field}
+                              autoComplete="address-level2"
+                              onFocus={() => handleFieldFocus("city")}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div>
+                    <FormField
+                      control={control}
+                      name="postalCode"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Code postal *</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="56400"
+                              maxLength={5}
+                              {...field}
+                              autoComplete="postal-code"
+                              onFocus={() => handleFieldFocus("postalCode")}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+
+                {/* Commentaire */}
+                <FormField
+                  control={control}
+                  name="comment"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Commentaire</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Partagez votre témoignage ou vos préoccupations (optionnel)..."
+                          rows={3}
+                          maxLength={500}
+                          {...field}
+                          onFocus={() => handleFieldFocus("comment")}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                      <div className="text-xs text-gray-500 text-right">
+                        {commentValue?.length || 0}/500 caractères
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                {/* Checkboxes RGPD et Newsletter */}
+                <div className="flex flex-col gap-4">
+                  <FormField
+                    control={control}
+                    name="rgpdConsent"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <RadioCard
+                            value="rgpdConsent"
+                            checked={field.value || false}
+                            onCheckedChange={(checked) => {
+                              field.onChange(checked);
+                            }}
+                            disabled={isSubmitting}
+                            icon={<Shield className="h-4 w-4" />}
+                            label="Consentement RGPD (obligatoire)"
+                            description="J'accepte que mes données personnelles soient collectées et traitées pour cette pétition."
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={control}
+                    name="newsletterConsent"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <RadioCard
+                            value="newsletterConsent"
+                            checked={field.value || false}
+                            onCheckedChange={(checked) => {
+                              field.onChange(checked);
+                            }}
+                            disabled={isSubmitting}
+                            icon={<Users className="h-4 w-4" />}
+                            label="Newsletter (optionnel)"
+                            description="Je souhaite recevoir des mises à jour sur l'avancement de cette pétition."
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* Messages d'erreur de soumission */}
+                {submitStatus === "error" && (
+                  <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertDescription>{errorMessage}</AlertDescription>
+                  </Alert>
+                )}
+
+                {/* Indicateur reCAPTCHA */}
+                <div className="flex items-center justify-center text-sm text-gray-500">
+                  <Shield
+                    className={`mr-2 h-4 w-4 ${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? "text-green-500" : "text-yellow-500"}`}
+                  />
+                  <span>
+                    {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+                      ? "Protection anti-spam activée"
+                      : "Mode développement"}
+                  </span>
+                </div>
+
+                {/* reCAPTCHA invisible */}
+                {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+                  <div className="hidden">
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                      size="invisible"
+                    />
+                  </div>
+                )}
+
+                {/* Bouton de soumission */}
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={!isValid || isSubmitting || !isRecaptchaReady}
+                  size="lg"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Vérification et envoi...
+                    </>
+                  ) : !isRecaptchaReady &&
+                    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
+                    <>
+                      <Shield className="mr-2 h-4 w-4" />
+                      Chargement sécurisé...
+                    </>
+                  ) : (
+                    <>
+                      <Users className="mr-2 h-4 w-4" />
+                      Signer la Pétition
+                    </>
+                  )}
+                </Button>
+
+                <p className="text-xs text-gray-500 text-center">
+                  En signant, vous rejoignez le mouvement pour une régulation
+                  raisonnée des sonneries de cloches à Auray.
+                </p>
+              </motion.form>
+            </Form>
           )}
         </AnimatePresence>
       </CardContent>
