@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import Reaptcha from 'reaptcha';
 import dynamic from 'next/dynamic';
 import type  ReaptchaProps  from 'reaptcha';
 import type { ForwardedRef } from 'react';
@@ -11,12 +12,12 @@ import type { ForwardedRef } from 'react';
 // FIX: Dynamically import ReCAPTCHA with SSR disabled to prevent build errors
 // FIX: Explicitly resolve the default export to fix dynamic import type error
 // FIX: Cast the dynamic component to a type that accepts a ref
-const Reaptcha = dynamic(
-  () => import('reaptcha').then((mod) => mod.default as any), // Cast to any to bypass intermediate type checks
-  {
-    ssr: false,
-  },
-) as React.ComponentType<ReaptchaProps & { ref: ForwardedRef<any> }>;
+// const Reaptcha = dynamic(
+//   () => import('reaptcha').then((mod) => mod.default as any), // Cast to any to bypass intermediate type checks
+//   {
+//     ssr: false,
+//   },
+// ) as React.ComponentType<ReaptchaProps & { ref: ForwardedRef<any> }>;
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -468,7 +469,8 @@ export const SignatureForm = ({
                 {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
                   <Reaptcha
                     ref={recaptchaRef}
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} // FIX: Corrected prop name to camelCase
                     onVerify={onRecaptchaVerify}
                     size="invisible"
                     onExpire={() => {

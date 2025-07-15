@@ -51,7 +51,7 @@ export const addSignature = async (signature: Omit<Signature, 'timestamp'>): Pro
     const sheets = await getGoogleSheetsClient();
     
     // Préparer les données pour Google Sheets - nouvelle structure complète
-    const timestamp = signature.timestamp || new Date().toISOString();
+    const timestamp = new Date().toISOString(); // FIX: Always generate a new timestamp as it's not provided in the input type.
     const values = [
       [
         signature.firstName,

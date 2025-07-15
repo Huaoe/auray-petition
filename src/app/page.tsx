@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import SignatureForm from '@/components/SignatureForm'
+import { Coffee } from "lucide-react"; // Import the Coffee icon
 
 interface Statistics {
   totalSignatures: number
@@ -171,6 +172,30 @@ const HomePage = () => {
                   Vos données sont protégées (RGPD). Seules les statistiques globales 
                   sont publiques. Transparence totale sur l'utilisation.
                 </p>
+              </div>
+
+              {/* Buy Me a Coffee Card */}
+              <div className="bg-yellow-50 rounded-xl p-6 border border-yellow-100 mt-8">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center">
+                    <Coffee className="text-yellow-600" />
+                  </div>
+                  <h4 className="ml-3 text-lg font-semibold text-gray-900">
+                    Soutenir le projet
+                  </h4>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                  Si cette initiative vous est utile, vous pouvez offrir un café pour aider à couvrir les frais techniques.
+                </p>
+                <a
+                  href="https://buymeacoffee.com/huaoe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors"
+                >
+                  <Coffee className="mr-2 h-4 w-4" />
+                  Offrir un café
+                </a>
               </div>
             </div>
 
