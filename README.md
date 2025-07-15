@@ -9,17 +9,17 @@
 
 ### 🎯 Métriques Temps Réel
 
-**Phase actuelle**: MVP-1.3 Anti-Spam & Security  
-**Objectif**: reCAPTCHA + Protection  
-**Sprint**: J+14 — **60%** → Production Ready
+**Phase actuelle**: MVP-1.3 Design System Fix  
+**Objectif**: UI Polish + Responsive  
+**Sprint**: J+15 — **75%** → Production Ready
 
 #### Progression
 
 - **MVP-1.1 Core**:        ████████████████████████ 8/8 (100%) ✅
 - **MVP-1.2 Signatures**: ████████████████████████ 9/9 (100%) ✅ **COMPLETED**
-- **MVP-1.3 Anti-Spam**:  ░░░░░░░░░░░░░░░░░░░░░░░░ 0/3 (0%) [CURRENT]
-- **MVP-2.0 Pages**:      ░░░░░░░░░░░░░░░░░░░░░░░░ 0/6 (0%) [NEXT]
-- **MVP-2.1 Analytics**:  ░░░░░░░░░░░░░░░░░░░░░░░░ 0/4 (0%) [PLANNED]
+- **MVP-1.3 Design Fix**:  ██████████████████░░░░░░ 3/4 (75%) 🔧 **CURRENT**
+- **MVP-2.0 Anti-Spam**:   ░░░░░░░░░░░░░░░░░░░░░░░░ 0/3 (0%) ⏳ **NEXT**
+- **MVP-2.1 Pages**:       ░░░░░░░░░░░░░░░░░░░░░░░░ 0/6 (0%) ⏳ **PLANNED**
 
 #### Tech Health
 
@@ -195,3 +195,28 @@ MIT License - Projet open source pour l'intérêt général
 - [Vision Utopique](./utopie.md)
 
 *Développé avec ❤️ pour les Alréens et la créativité culturelle française*
+
+### 🚀 Prochaines Étapes (Estimations)
+
+**Immédiatement disponible (30min):**
+- [ ] 🎨 **Polish UI responsive** - Optimiser l'affichage mobile/desktop
+- [ ] 🔒 **reCAPTCHA invisible** - Protection anti-spam
+
+**Court terme (1-2h):**
+- [ ] 📝 **Pages essentielles** - Contexte, mentions légales, 404
+- [ ] 📊 **Analytics** - Google Analytics 4 + tracking
+
+**Moyen terme (3-4h):**
+- [ ] 🌟 **Features avancées** - Partage social, notifications
+- [ ] 🚀 **Optimisations** - Performance, SEO, PWA
+
+#### 💡 Choix Possibles
+
+**Option A: Finalisation Rapide (1h)**
+→ Polish UI + reCAPTCHA → Site production-ready
+
+**Option B: Version Complète (3h)**  
+→ Toutes les pages + Analytics → Plateforme complète
+
+**Option C: MVP Extended (5h)**
+→ Features avancées + Optimisations → Solution premium

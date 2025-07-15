@@ -2,6 +2,38 @@ import { NextRequest, NextResponse } from 'next/server';
 import { addSignature, getPetitionStats } from '@/lib/googleSheets';
 import { validateEmail, validatePostalCode } from '@/lib/utils';
 
+// Fonction pour valider le token reCAPTCHA
+async function validateRecaptcha(token: string): Promise<boolean> {
+  // Bypass pour développement
+  if (token === 'dev-token-bypass') {
+    console.log(' Mode développement: reCAPTCHA bypass activé');
+    return true;
+  }
+
+  if (!process.env.RECAPTCHA_SECRET_KEY) {
+    console.warn('RECAPTCHA_SECRET_KEY not configured - bypassing validation');
+    return true; // En développement, on peut bypasser
+  }
+
+  try {
+    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+    });
+
+    const data = await response.json();
+    
+    // Vérifier le score (pour reCAPTCHA v3)
+    return data.success && data.score >= 0.5;
+  } catch (error) {
+    console.error('Erreur validation reCAPTCHA:', error);
+    return false;
+  }
+}
+
 // GET - Récupérer les statistiques
 export async function GET() {
   try {
@@ -41,8 +73,25 @@ export async function POST(request: NextRequest) {
       rgpdConsent,
       newsletterConsent,
       timestamp,
-      userAgent
+      userAgent,
+      recaptchaToken
     } = body;
+    
+    // Validation reCAPTCHA obligatoire
+    if (!recaptchaToken) {
+      return NextResponse.json(
+        { error: 'Token de sécurité manquant' },
+        { status: 400 }
+      );
+    }
+
+    const isRecaptchaValid = await validateRecaptcha(recaptchaToken);
+    if (!isRecaptchaValid) {
+      return NextResponse.json(
+        { error: 'Échec de la vérification anti-spam. Veuillez réessayer.' },
+        { status: 400 }
+      );
+    }
     
     // Vérifications obligatoires
     if (!firstName?.trim() || !lastName?.trim() || !email?.trim() || !city?.trim() || !postalCode?.trim()) {

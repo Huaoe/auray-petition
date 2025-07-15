@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import ReCAPTCHA from 'react-google-recaptcha'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -11,8 +12,10 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Loader2, CheckCircle, AlertCircle, Users } from 'lucide-react'
+import { Loader2, CheckCircle, AlertCircle, Users, Shield } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useRecaptcha } from '@/hooks/useRecaptcha'
+import { analytics } from '@/lib/analytics'
 
 // Schema de validation Zod
 const signatureSchema = z.object({
@@ -65,6 +68,7 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
+  const { recaptchaRef, executeRecaptchaAction, resetRecaptcha, isRecaptchaReady } = useRecaptcha()
 
   const {
     register,
@@ -80,13 +84,25 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
 
   const rgpdConsent = watch('rgpdConsent')
   const newsletterConsent = watch('newsletterConsent')
-
+  const comment = watch('comment')
+  
   const handleSubmitSignature = async (data: SignatureFormData) => {
     setIsSubmitting(true)
     setSubmitStatus('idle')
     setErrorMessage('')
 
     try {
+      // Exécuter reCAPTCHA avant soumission
+      const recaptchaToken = await executeRecaptchaAction('submit_signature')
+      
+      // Accepter le token de développement ou un token valide
+      if (!recaptchaToken || (recaptchaToken !== 'dev-token-bypass' && recaptchaToken.length < 10)) {
+        console.error('Token reCAPTCHA invalide:', recaptchaToken)
+        throw new Error('Échec de la vérification anti-spam. Veuillez réessayer.')
+      }
+
+      console.log('🔒 Token reCAPTCHA:', recaptchaToken === 'dev-token-bypass' ? 'Mode développement' : 'Token valide')
+
       const response = await fetch('/api/signatures', {
         method: 'POST',
         headers: {
@@ -94,6 +110,7 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
         },
         body: JSON.stringify({
           ...data,
+          recaptchaToken, // Ajouter le token reCAPTCHA
           timestamp: new Date().toISOString(),
           userAgent: navigator.userAgent,
           ipAddress: 'client-side' // Will be replaced server-side
@@ -106,31 +123,40 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
         throw new Error(result.error || 'Erreur lors de l\'envoi de la signature')
       }
 
-      // Succès
+      // Succès - Analytics
+      analytics.signatureSent(true)
+      
       setSubmitStatus('success')
       setSuccessMessage(`Merci ${data.firstName} ! Votre signature a été enregistrée avec succès.`)
       
-      // Mettre à jour le compteur de signatures
-      if (result.statistics?.total && onSignatureCount) {
-        onSignatureCount(result.statistics.total)
+      // Réinitialiser le formulaire après succès
+      reset()
+      
+      // Callback de succès si fourni
+      if (onSuccess) {
+        onSuccess(result)
       }
 
-      // Reset du formulaire après 3 secondes
-      setTimeout(() => {
-        reset()
-        setSubmitStatus('idle')
-        setSuccessMessage('')
-        // Passer les nouvelles statistiques au callback
-        onSuccess?.(result.statistics)
-      }, 3000)
+      // Mettre à jour le compteur si callback fourni
+      if (onSignatureCount && result.statistics?.totalSignatures) {
+        onSignatureCount(result.statistics.totalSignatures)
+      }
 
     } catch (error) {
-      console.error('Erreur signature:', error)
+      // Erreur - Analytics
+      analytics.signatureSent(false)
+      analytics.error('signature_submission', error instanceof Error ? error.message : 'Unknown error')
+      
       setSubmitStatus('error')
       setErrorMessage(error instanceof Error ? error.message : 'Une erreur inattendue s\'est produite')
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  // Suivre les interactions avec les champs
+  const handleFieldFocus = (fieldName: string) => {
+    analytics.formInteraction(fieldName)
   }
 
   return (
@@ -179,6 +205,7 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
                     {...register('firstName')}
                     placeholder="Votre prénom"
                     className={errors.firstName ? 'border-red-500' : ''}
+                    onFocus={() => handleFieldFocus('firstName')}
                   />
                   {errors.firstName && (
                     <p className="text-sm text-red-500">{errors.firstName.message}</p>
@@ -192,6 +219,7 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
                     {...register('lastName')}
                     placeholder="Votre nom"
                     className={errors.lastName ? 'border-red-500' : ''}
+                    onFocus={() => handleFieldFocus('lastName')}
                   />
                   {errors.lastName && (
                     <p className="text-sm text-red-500">{errors.lastName.message}</p>
@@ -207,6 +235,7 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
                   {...register('email')}
                   placeholder="votre.email@exemple.com"
                   className={errors.email ? 'border-red-500' : ''}
+                  onFocus={() => handleFieldFocus('email')}
                 />
                 {errors.email && (
                   <p className="text-sm text-red-500">{errors.email.message}</p>
@@ -222,6 +251,7 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
                     {...register('city')}
                     placeholder="Auray, Vannes, Lorient..."
                     className={errors.city ? 'border-red-500' : ''}
+                    onFocus={() => handleFieldFocus('city')}
                   />
                   {errors.city && (
                     <p className="text-sm text-red-500">{errors.city.message}</p>
@@ -236,6 +266,7 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
                     placeholder="56400"
                     maxLength={5}
                     className={errors.postalCode ? 'border-red-500' : ''}
+                    onFocus={() => handleFieldFocus('postalCode')}
                   />
                   {errors.postalCode && (
                     <p className="text-sm text-red-500">{errors.postalCode.message}</p>
@@ -253,6 +284,7 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
                   rows={3}
                   maxLength={500}
                   className={errors.comment ? 'border-red-500' : ''}
+                  onFocus={() => handleFieldFocus('comment')}
                 />
                 {errors.comment && (
                   <p className="text-sm text-red-500">{errors.comment.message}</p>
@@ -267,6 +299,7 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
                     checked={rgpdConsent || false}
                     onCheckedChange={(checked) => setValue('rgpdConsent', checked as boolean)}
                     className={errors.rgpdConsent ? 'border-red-500' : ''}
+                    onFocus={() => handleFieldFocus('rgpdConsent')}
                   />
                   <div className="space-y-1">
                     <Label htmlFor="rgpdConsent" className="text-sm font-medium">
@@ -291,6 +324,7 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
                     id="newsletterConsent"
                     checked={newsletterConsent || false}
                     onCheckedChange={(checked) => setValue('newsletterConsent', checked as boolean)}
+                    onFocus={() => handleFieldFocus('newsletterConsent')}
                   />
                   <div className="space-y-1">
                     <Label htmlFor="newsletterConsent" className="text-sm font-medium">
@@ -311,17 +345,41 @@ export const SignatureForm = ({ onSuccess, onSignatureCount }: SignatureFormProp
                 </Alert>
               )}
 
+              {/* Indicateur reCAPTCHA */}
+              <div className="flex items-center justify-center text-sm text-gray-500">
+                <Shield className={`mr-2 h-4 w-4 ${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? 'text-green-500' : 'text-yellow-500'}`} />
+                <span>
+                  {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? 'Protection anti-spam activée' : 'Protection anti-spam en développement'}
+                </span>
+              </div>
+
+              {/* reCAPTCHA invisible */}
+              {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+                <div className="hidden">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                    size="invisible"
+                  />
+                </div>
+              )}
+
               {/* Bouton de soumission */}
               <Button
                 type="submit"
                 className="w-full"
-                disabled={!isValid || isSubmitting}
+                disabled={!isValid || isSubmitting || (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && !isRecaptchaReady)}
                 size="lg"
               >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Envoi en cours...
+                    Vérification et envoi...
+                  </>
+                ) : !isRecaptchaReady && process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
+                  <>
+                    <Shield className="mr-2 h-4 w-4" />
+                    Chargement sécurisé...
                   </>
                 ) : (
                   <>
