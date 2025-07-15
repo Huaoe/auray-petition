@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import Link from "next/link";
 import Script from "next/script";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -180,8 +182,30 @@ export default function RootLayout({
         )}
       </head>
       <body className={inter.className}>
-        <div className="relative z-0 bg-background">
-          {children}
+        <div className="relative z-0 flex min-h-screen flex-col bg-background">
+          <Analytics />
+          <main className="flex-grow">{children}</main>
+          <footer className="w-full border-t border-gray-200 bg-gray-50 py-6 dark:border-gray-700 dark:bg-gray-900">
+            <div className="container mx-auto flex flex-col items-center justify-between px-4 text-center md:flex-row">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                2025 Collectif Citoyen Alréen. Tous droits réservés.
+              </p>
+              <nav className="mt-4 flex space-x-6 md:mt-0">
+                <Link 
+                  href="/contexte"
+                  className="text-sm text-gray-600 hover:text-blue-600 hover:underline dark:text-gray-400 dark:hover:text-blue-500"
+                >
+                  Le Contexte
+                </Link>
+                <Link 
+                  href="/mentions-legales"
+                  className="text-sm text-gray-600 hover:text-blue-600 hover:underline dark:text-gray-400 dark:hover:text-blue-500"
+                >
+                  Mentions Légales
+                </Link>
+              </nav>
+            </div>
+          </footer>
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -189,10 +213,10 @@ export default function RootLayout({
                   window.addEventListener('load', () => {
                     navigator.serviceWorker.register('/sw.js')
                       .then((registration) => {
-                        console.log('🚀 PWA: Service Worker enregistré avec succès:', registration.scope);
+                        console.log(' PWA: Service Worker enregistré avec succès:', registration.scope);
                       })
                       .catch((error) => {
-                        console.log('❌ PWA: Échec enregistrement Service Worker:', error);
+                        console.log(' PWA: Échec enregistrement Service Worker:', error);
                       });
                   });
                 }

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { addSignature, getPetitionStats } from '@/lib/googleSheets';
 import { validateEmail, validatePostalCode } from '@/lib/utils';
+import { checkRateLimit } from '@/lib/rate-limiter';
+import { analytics } from '@/lib/analytics';
 
 // Fonction pour valider le token reCAPTCHA
 async function validateRecaptcha(token: string): Promise<boolean> {
@@ -59,6 +61,23 @@ export async function GET() {
 
 // POST - Ajouter une signature
 export async function POST(request: NextRequest) {
+  // Récupérer l'IP du client en premier
+  const forwardedFor = request.headers.get('x-forwarded-for');
+  const ipAddress =
+    forwardedFor?.split(',')[0].trim() ||
+    request.headers.get('x-real-ip')?.trim() ||
+    request.ip ||
+    'unknown';
+
+  // Appliquer la limitation de débit
+  if (ipAddress !== 'unknown') {
+    const { limited, message } = checkRateLimit(ipAddress);
+    if (limited) {
+      analytics.error('rate_limit_exceeded', ipAddress);
+      return NextResponse.json({ error: message }, { status: 429 });
+    }
+  }
+
   try {
     const body = await request.json();
     
@@ -79,6 +98,7 @@ export async function POST(request: NextRequest) {
     
     // Validation reCAPTCHA obligatoire
     if (!recaptchaToken) {
+      analytics.error('recaptcha_missing', 'Token de sécurité manquant');
       return NextResponse.json(
         { error: 'Token de sécurité manquant' },
         { status: 400 }
@@ -87,14 +107,33 @@ export async function POST(request: NextRequest) {
 
     const isRecaptchaValid = await validateRecaptcha(recaptchaToken);
     if (!isRecaptchaValid) {
+      analytics.signatureSent(false);
       return NextResponse.json(
         { error: 'Échec de la vérification anti-spam. Veuillez réessayer.' },
         { status: 400 }
       );
     }
     
+    // Vérifications de longueur et de contenu
+    if (firstName?.trim().length > 50 || lastName?.trim().length > 50 || city?.trim().length > 50) {
+      analytics.error('validation_error', 'Champs > 50 caractères');
+      return NextResponse.json(
+        { error: 'Les champs nom, prénom et ville ne peuvent pas dépasser 50 caractères.' },
+        { status: 400 }
+      );
+    }
+
+    if (comment?.trim().length > 500) {
+      analytics.error('validation_error', 'Commentaire > 500 caractères');
+      return NextResponse.json(
+        { error: 'Le commentaire ne peut pas dépasser 500 caractères.' },
+        { status: 400 }
+      );
+    }
+
     // Vérifications obligatoires
     if (!firstName?.trim() || !lastName?.trim() || !email?.trim() || !city?.trim() || !postalCode?.trim()) {
+      analytics.error('validation_error', 'Champs obligatoires manquants');
       return NextResponse.json(
         { error: 'Tous les champs obligatoires doivent être renseignés' },
         { status: 400 }
@@ -102,6 +141,7 @@ export async function POST(request: NextRequest) {
     }
     
     if (!rgpdConsent) {
+      analytics.error('validation_error', 'Consentement RGPD manquant');
       return NextResponse.json(
         { error: 'Le consentement RGPD est obligatoire pour signer la pétition' },
         { status: 400 }
@@ -110,6 +150,7 @@ export async function POST(request: NextRequest) {
     
     // Validation format email
     if (!validateEmail(email)) {
+      analytics.error('validation_error', 'Format email invalide');
       return NextResponse.json(
         { error: 'Format d\'email invalide' },
         { status: 400 }
@@ -118,18 +159,12 @@ export async function POST(request: NextRequest) {
     
     // Validation code postal français
     if (!validatePostalCode(postalCode)) {
+      analytics.error('validation_error', 'Code postal invalide');
       return NextResponse.json(
         { error: 'Code postal invalide (format français requis)' },
         { status: 400 }
       );
     }
-    
-    // Récupérer l'IP du client
-    const forwardedFor = request.headers.get('x-forwarded-for');
-    const ipAddress = forwardedFor ? forwardedFor.split(',')[0] : 
-                      request.headers.get('x-real-ip') || 
-                      request.ip || 
-                      'unknown';
     
     // Préparer la signature avec la nouvelle structure
     const signature = {
@@ -150,6 +185,7 @@ export async function POST(request: NextRequest) {
     const result = await addSignature(signature);
     
     if (!result.success) {
+      analytics.signatureSent(false);
       return NextResponse.json(
         { error: result.message || 'Erreur lors de l\'enregistrement' },
         { status: 500 }
@@ -159,6 +195,7 @@ export async function POST(request: NextRequest) {
     // Récupérer les nouvelles statistiques après ajout
     const updatedStats = await getPetitionStats();
     
+    analytics.signatureSent(true);
     // Réponse de succès avec statistiques mises à jour
     return NextResponse.json(
       { 
@@ -171,6 +208,8 @@ export async function POST(request: NextRequest) {
     );
     
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown server error';
+    analytics.error('server_error', errorMessage);
     console.error('Erreur API POST /signatures:', error);
     return NextResponse.json(
       { error: 'Erreur serveur lors de l\'enregistrement' },

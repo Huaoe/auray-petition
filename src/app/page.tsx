@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import SignatureForm from "@/components/SignatureForm";
 import { Coffee } from "lucide-react"; // Import the Coffee icon
 import { AnimatedGradient } from "@/components/ui/animated-gradient"; // Import the new component
+import Header from "@/components/Header"; // Import the new Header component
 
 interface Statistics {
   totalSignatures: number;
@@ -67,6 +68,7 @@ const HomePage = () => {
 
   return (
     <>
+      <Header />
       <AnimatedGradient />
       {showConfetti && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -74,37 +76,6 @@ const HomePage = () => {
         </div>
       )}
       <main className="min-h-screen">
-        {/* Header */}
-        <header className="bg-white shadow-sm border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-4">
-              <h1 className="text-xl font-bold text-green-700">
-                Pétition Citoyenne
-              </h1>
-              <nav className="flex space-x-6 text-sm">
-                <a
-                  href="#contexte"
-                  className="text-gray-600 hover:text-green-700 transition-colors"
-                >
-                  Contexte
-                </a>
-                <a
-                  href="#petition"
-                  className="text-gray-600 hover:text-green-700 transition-colors"
-                >
-                  Signer
-                </a>
-                <a
-                  href="#contact"
-                  className="text-gray-600 hover:text-green-700 transition-colors"
-                >
-                  Contact
-                </a>
-              </nav>
-            </div>
-          </div>
-        </header>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Hero Card */}
           <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 text-center">
