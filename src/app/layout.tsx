@@ -180,24 +180,26 @@ export default function RootLayout({
         )}
       </head>
       <body className={inter.className}>
-        {children}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                  navigator.serviceWorker.register('/sw.js')
-                    .then((registration) => {
-                      console.log('🚀 PWA: Service Worker enregistré avec succès:', registration.scope);
-                    })
-                    .catch((error) => {
-                      console.log('❌ PWA: Échec enregistrement Service Worker:', error);
-                    });
-                });
-              }
-            `,
-          }}
-        />
+        <div className="relative z-0 bg-background">
+          {children}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                if ('serviceWorker' in navigator) {
+                  window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js')
+                      .then((registration) => {
+                        console.log('🚀 PWA: Service Worker enregistré avec succès:', registration.scope);
+                      })
+                      .catch((error) => {
+                        console.log('❌ PWA: Échec enregistrement Service Worker:', error);
+                      });
+                  });
+                }
+              `,
+            }}
+          />
+        </div>
       </body>
     </html>
   );
