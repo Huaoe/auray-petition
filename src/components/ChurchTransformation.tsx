@@ -34,6 +34,35 @@ interface GenerationState {
   cost: number | null;
 }
 
+// Liste des images disponibles dans le dossier public/images
+const availableImages = [
+  {
+    path: "/images/Saint-Gildas-Auray-768x576.webp",
+    name: "Saint-Gildas Extérieur",
+    description: "Vue extérieure de l'église Saint-Gildas",
+  },
+  {
+    path: "/images/Saint-Gildas-Auray-interieur-3992021581.jpg",
+    name: "Saint-Gildas Intérieur",
+    description: "Vue intérieure de l'église Saint-Gildas",
+  },
+  {
+    path: "/images/20220922_143843.webp",
+    name: "Vue Détaillée",
+    description: "Vue détaillée de l'architecture",
+  },
+  {
+    path: "/images/fra-auray-4-1882354559.webp",
+    name: "Vue Alternative",
+    description: "Autre perspective de l'église",
+  },
+  {
+    path: "/images/184232-english-inside-church-saint-gildas-in-auray-france.jpg",
+    name: "Intérieur Anglais",
+    description: "Vue intérieure style anglais",
+  },
+];
+
 const ChurchTransformation = () => {
   const { toast } = useToast();
 
@@ -41,10 +70,24 @@ const ChurchTransformation = () => {
     isGenerating: false,
     selectedTransformation: null,
     generatedImage: null,
-    originalImage: "/images/Saint-Gildas-Auray-768x576.webp", // Image existante de l'église
+    originalImage: availableImages[0].path, // Image par défaut
     generationTime: null,
     cost: null,
   });
+
+  // État pour suivre l'image de base sélectionnée
+  const [selectedBaseImage, setSelectedBaseImage] = useState(availableImages[0]);
+
+  // Fonction pour changer l'image de base
+  const handleBaseImageChange = useCallback((image: typeof availableImages[0]) => {
+    setSelectedBaseImage(image);
+    setState((prev) => ({ ...prev, originalImage: image.path }));
+
+    // Réinitialiser l'image générée si elle existe
+    if (state.generatedImage) {
+      handleReset();
+    }
+  }, [state.generatedImage]);
 
   const handleTransform = useCallback(
     async (transformation: TransformationType) => {
@@ -78,6 +121,7 @@ const ChurchTransformation = () => {
             transformationType: transformation.id,
             style: "vivid",
             quality: "hd",
+            baseImage: selectedBaseImage.path.split("/").pop(), // Envoyer juste le nom du fichier
           }),
         });
 
@@ -120,7 +164,7 @@ const ChurchTransformation = () => {
         });
       }
     },
-    [state.isGenerating, toast]
+    [state.isGenerating, toast, selectedBaseImage]
   );
 
   const handleReset = useCallback(() => {
@@ -204,6 +248,42 @@ const ChurchTransformation = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto p-6 space-y-8">
+      {/* Image Selection */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Choisissez une image de base</CardTitle>
+          <CardDescription>
+            Sélectionnez l'image de l'église que vous souhaitez transformer
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {availableImages.map((image) => (
+              <div
+                key={image.path}
+                className={`cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
+                  selectedBaseImage.path === image.path
+                    ? "border-purple-500 shadow-md"
+                    : "border-transparent hover:border-gray-300"
+                }`}
+                onClick={() => handleBaseImageChange(image)}
+              >
+                <div className="aspect-square relative">
+                  <img
+                    src={image.path}
+                    alt={image.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-2 text-center bg-white">
+                  <p className="text-xs font-medium truncate">{image.name}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Header Section */}
       <div className="text-center space-y-4">
         <div className="flex items-center justify-center gap-2 mb-4">
@@ -270,7 +350,7 @@ const ChurchTransformation = () => {
               {/* Image Originale */}
               <div className="space-y-2">
                 <h3 className="font-semibold text-center">
-                  🏛️ Église Actuelle
+                  🏛️ Église Actuelle: {selectedBaseImage.name}
                 </h3>
                 <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg">
                   {state.originalImage ? (

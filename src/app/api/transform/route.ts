@@ -41,10 +41,13 @@ function checkRateLimit(ip: string): boolean {
   return true;
 }
 
-async function getBaseImageAsBuffer(): Promise<Buffer> {
+async function getBaseImageAsBuffer(baseImageName?: string): Promise<Buffer> {
   try {
+    // Utiliser l'image spécifiée ou l'image par défaut
+    const imageName = baseImageName || 'Saint-Gildas-Auray-768x576.webp';
+    
     // Chemin vers l'image de l'église dans public/images
-    const imagePath = path.join(process.cwd(), 'public', 'images', 'Saint-Gildas-Auray-768x576.webp');
+    const imagePath = path.join(process.cwd(), 'public', 'images', imageName);
     
     // Lire l'image comme buffer
     const imageBuffer = await fs.readFile(imagePath);
@@ -122,8 +125,14 @@ export async function POST(request: NextRequest) {
   const startTime = Date.now();
   
   try {
-    // Vérification du rate limiting
-    const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+    // Vérification du rate limiting (Next.js 15 compatible)
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    const ip = 
+      forwardedFor?.split(',')[0].trim() ||
+      request.headers.get('x-real-ip')?.trim() ||
+      request.headers.get('x-client-ip')?.trim() ||
+      'unknown';
+    
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
         { 
@@ -136,7 +145,7 @@ export async function POST(request: NextRequest) {
 
     // Parse du body
     const body = await request.json();
-    const { transformationType, customPrompt } = body;
+    const { transformationType, customPrompt, baseImage } = body;
 
     // Validation des paramètres
     if (!transformationType) {
@@ -158,7 +167,8 @@ export async function POST(request: NextRequest) {
     console.log(`🎨 Starting img2img transformation: ${transformationType}`);
 
     // Générer le nom de fichier pour la vérification cache
-    const fileName = generateFileName(transformationType, customPrompt);
+    // Inclure le nom de l'image de base dans le nom du fichier pour différencier les caches
+    const fileName = generateFileName(transformationType, customPrompt, baseImage);
     
     // Vérifier si l'image existe déjà dans GCS
     const existingImageUrl = await checkImageExists(fileName);
@@ -177,8 +187,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Obtenir l'image de base de l'église
-    const baseImageBuffer = await getBaseImageAsBuffer();
-    console.log(`📸 Base image loaded: ${baseImageBuffer.length} bytes`);
+    const baseImageBuffer = await getBaseImageAsBuffer(baseImage);
+    console.log(`📸 Base image loaded: ${baseImageBuffer.length} bytes${baseImage ? ` (${baseImage})` : ''}`);
 
     // Générer le prompt optimisé
     const prompt = customPrompt || transformationConfig.prompt;

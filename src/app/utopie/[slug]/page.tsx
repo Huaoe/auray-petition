@@ -33,18 +33,15 @@ const iconMap: Record<string, LucideIcon> = {
   Music,
 };
 
-interface PageProps {
-  params: { slug: string };
-}
-
 export async function generateStaticParams() {
   return utopieIdeas.map((idea) => ({
     slug: idea.slug,
   }));
 }
 
-export async function generateMetadata({ params }: PageProps) {
-  const idea = utopieIdeas.find((idea) => idea.slug === params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const idea = utopieIdeas.find((idea) => idea.slug === slug);
   
   if (!idea) {
     return {
@@ -58,8 +55,9 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default function UtopieDetailPage({ params }: PageProps) {
-  const idea = utopieIdeas.find((idea) => idea.slug === params.slug);
+export default async function UtopieDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const idea = utopieIdeas.find((idea) => idea.slug === slug);
 
   if (!idea) {
     notFound();

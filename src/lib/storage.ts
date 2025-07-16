@@ -93,14 +93,20 @@ export async function downloadImageAsBuffer(imageUrl: string): Promise<Buffer> {
 export function generateFileName(
   transformationType: string, 
   customPrompt?: string,
+  baseImage?: string,
   extension: string = 'jpg'
 ): string {
-  const content = `${transformationType}-${customPrompt || ''}`;
+  // Extraire le nom du fichier sans extension si baseImage est fourni
+  const baseImageName = baseImage 
+    ? baseImage.split('.')[0].replace(/[^a-zA-Z0-9]/g, '') 
+    : 'default';
+  
+  const content = `${transformationType}-${baseImageName}-${customPrompt || ''}`;
   const hash = Buffer.from(content).toString('base64')
     .replace(/[^a-zA-Z0-9]/g, '')
     .slice(0, 12);
   
-  return `church-${transformationType}-${hash}.${extension}`;
+  return `church-${transformationType}-${baseImageName}-${hash}.${extension}`;
 }
 
 /**

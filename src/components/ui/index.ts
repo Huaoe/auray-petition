@@ -25,6 +25,3 @@ export {
   DialogTitle,
   DialogDescription,
 } from '@radix-ui/react-dialog'
-export {
-  Progress
-} from '@radix-ui/react-progress'

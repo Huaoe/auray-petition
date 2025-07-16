@@ -61,12 +61,12 @@ export async function GET() {
 
 // POST - Ajouter une signature
 export async function POST(request: NextRequest) {
-  // Récupérer l'IP du client en premier
+  // Get IP address from headers (Next.js 15 compatible)
   const forwardedFor = request.headers.get('x-forwarded-for');
-  const ipAddress =
+  const ipAddress = 
     forwardedFor?.split(',')[0].trim() ||
     request.headers.get('x-real-ip')?.trim() ||
-    request.ip ||
+    request.headers.get('x-client-ip')?.trim() ||
     'unknown';
 
   // Appliquer la limitation de débit
