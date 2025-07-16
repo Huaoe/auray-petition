@@ -244,7 +244,7 @@ const ChurchTransformation = () => {
           method: state.hdPainterMethod,
           resolution: state.selectedInpaintImage.resolution,
           noCache: state.forceNewGeneration,
-          couponCode: state.couponCode,
+          couponCode: state.activeCoupon?.id || state.couponCode,
         }),
       });
 
@@ -267,7 +267,7 @@ const ChurchTransformation = () => {
 
       // Décrémentation du coupon après succès
       if (state.activeCoupon) {
-        const updatedCoupon = useCouponGeneration(state.couponCode);
+        const updatedCoupon = useCouponGeneration(state.activeCoupon.id);
         setState((prev) => ({
           ...prev,
           activeCoupon: updatedCoupon || null,

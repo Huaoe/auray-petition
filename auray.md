@@ -515,3 +515,5 @@ permettre de poster directement sur twitter
 permettre de poster directement sur facebook
 permettre de poster directement sur linkedin
 pouvoir elaborer le mask soit meme
+compteur defilant sur la page de petition
+verification des doublons de mail dans la petition mais pas en localhost
