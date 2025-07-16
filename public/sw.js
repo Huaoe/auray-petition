@@ -55,6 +55,13 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Bypass pour reCAPTCHA - CRITIQUE pour éviter les erreurs CSP
+  if (url.hostname === 'recaptcha.net' || url.hostname === 'www.recaptcha.net' || 
+      url.hostname === 'www.google.com' || url.hostname === 'www.gstatic.com') {
+    // Ne pas intercepter les requêtes reCAPTCHA - laisser le navigateur gérer
+    return;
+  }
+
   // API Routes: Network First (données en temps réel)
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(

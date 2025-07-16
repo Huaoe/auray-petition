@@ -254,10 +254,6 @@ export const SignatureForm = ({
     setErrorMessage("");
     setSubmitStatus("idle");
 
-    if (process.env.NODE_ENV === 'development') {
-      console.log("🔍 reCAPTCHA Site Key:", process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? "Present" : "Missing");
-    }
-
     if (!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
       if (process.env.NODE_ENV === 'development') {
         console.log("reCAPTCHA site key not found, submitting with bypass token.");
@@ -286,6 +282,23 @@ export const SignatureForm = ({
         // Vérifier que le composant reCAPTCHA est correctement initialisé
         if (!recaptcha || typeof recaptcha !== 'object') {
           throw new Error("reCAPTCHA component not properly initialized");
+        }
+        
+        // Vérifications multiples pour s'assurer que reCAPTCHA est prêt
+        const isReady = (
+          recaptcha.state?.rendered === true || 
+          recaptcha._isAvailable === true ||
+          (typeof recaptcha.execute === 'function' && !recaptcha.state?.rendered === false)
+        );
+        
+        if (!isReady) {
+          throw new Error("reCAPTCHA not ready yet. Please wait and try again.");
+        }
+        
+        // Debug info seulement en développement
+        if (process.env.NODE_ENV === 'development') {
+          console.log("🔍 reCAPTCHA Site Key:", process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? "Present" : "Missing");
+          console.log("Using execute() method");
         }
         
         // Try different execution methods for the reaptcha library
