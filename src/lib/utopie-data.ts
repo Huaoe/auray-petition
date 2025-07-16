@@ -51,8 +51,8 @@ export const utopieIdeas: UtopieIdea[] = [
     shortDescription:
       "Centres de soins holistiques et de méditation dans des lieux d'exception architecturale",
     quote: {
-      text: "L'architecture est le jeu savant, correct et magnifique, de formes assemblées dans la lumière.",
-      author: "Le Corbusier",
+      text: "Il est des lieux où souffle l’esprit, où la lumière fait vibrer l’âme et agrandit la vie.",
+      author: "Anna de Noailles",
     },
     inspiringImage: {
       description:

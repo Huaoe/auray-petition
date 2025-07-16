@@ -19,12 +19,13 @@ const nextConfig = {
   // Image Optimization
   images: {
     formats: ['image/webp', 'image/avif'],
-    domains: [
-      'localhost',
-      'auray-petition.vercel.app',
-      'images.unsplash.com',
-      'cdn.openai.com', // DALL-E generated images
-      'image.cdn.stability.ai', // Stable Diffusion
+    remotePatterns: [
+      { protocol: 'https', hostname: 'localhost' },
+      { protocol: 'https', hostname: 'auray-petition.vercel.app' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'cdn.openai.com' }, // DALL-E
+      { protocol: 'https', hostname: 'image.cdn.stability.ai' }, // Stability AI
+      { protocol: 'https', hostname: 'storage.googleapis.com' }, // Google Cloud Storage
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -100,8 +101,6 @@ const nextConfig = {
   // React Strict Mode
   reactStrictMode: false,
   
-  // SWC Minification
-  swcMinify: true,
 }
 
 module.exports = nextConfig

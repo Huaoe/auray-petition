@@ -36,7 +36,7 @@
 - **Guillaume Aubel** (architecte) : respect du patrimoine villageois
 - **Patrice Besse** (agent immobilier) : mémoire commune des églises
 - **Témoignages utilisateurs** : Chapelle Mondésir Nantes
-- **Correction** : Suppression citations Le Corbusier (remplacées par Alvar Aalto, Jane Jacobs)
+- **Correction** : Suppression citations Le Corbusier (remplacées par Alvar Aalto, Jane Jacobs, Anna de Noailles)
 
 #### **Structure Technique**
 - **Interface TypeScript** complète avec métadonnées enrichies

@@ -452,3 +452,49 @@ export const preloadPopularTransformations = async () => {
 ---
 
 **🎯 OBJECTIF ULTIME** : Créer l'expérience web la plus spectaculaire et engageante jamais vue sur un site de pétition, transformant chaque visiteur en ambassadeur enthousiaste du projet !
+
+---
+
+## 🚦 VISION POUR LA SUITE : GAMIFICATION, PARTAGE & NFT
+
+### 1. Système d'accès à la génération IA réservé aux signataires
+
+- **À la signature de la pétition** :
+  - Génération automatique d'un **code unique** (UUID, QR, ou lien sécurisé)
+  - Ce code donne accès à l'interface de génération d'image IA pour l'église d'Auray
+  - 1 image générée par signataire (modulo quotas/config)
+
+### 2. Partage viral et référencement de la pétition
+
+- L'image générée comporte :
+  - Un **watermark** "auray-petition.vercel.app"
+  - Un **QR code** ou lien renvoyant vers la pétition
+  - Un bouton de **partage direct** (Twitter, Instagram, Facebook, WhatsApp)
+- Message pré-rempli :  
+  > "Je viens de signer pour réinventer l'église d'Auray ! non juste demander la réduction des temps de sonneries ;)
+   Découvrez ma vision et votez pour votre préférée sur auray-petition.vercel.app #AurayTransformée"
+
+### 3. Galerie communautaire & concours de créativité
+
+- **Toutes les images générées** sont affichées dans une **galerie publique** (modération a priori)
+  - Filtres : récentes, plus partagées, coups de cœur
+  - Système de **votes** (1 vote/jour/utilisateur, login par email ou captcha)
+- **Classement en temps réel** des visions les plus populaires
+
+### 4. Récompense NFT pour l'image gagnante
+
+- À la fin du concours (période définie, ex : 1 mois post-lancement) :
+  - L'image ayant reçu le plus de votes est **mintée en NFT unique sur Polygon (blockchain écofriendly, faible coût, compatible Opensea)**.
+  - Le créateur reçoit ce NFT à son adresse (wallet ou custodial)
+  - Communication officielle : "Votre vision entre dans l'histoire numérique d'Auray !"
+
+### 5. Impacts attendus
+
+- **Augmentation forte du taux de signature** (accès exclusif à la génération IA)
+- **Effet viral** via partages sociaux référencés
+- **Engagement communautaire** (vote, concours, fierté locale)
+- **Visibilité presse et médias innovants** (NFT, IA, patrimoine)
+
+---
+
+> Cette mécanique transforme chaque signataire en ambassadeur créatif du projet et démultiplie la portée de la pétition grâce à la viralité numérique et à la reconnaissance (NFT) !

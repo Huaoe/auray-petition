@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Sparkles } from 'lucide-react';
 
 const Header = () => {
   return (
@@ -26,6 +27,16 @@ const Header = () => {
               className="text-gray-600 hover:text-green-700 transition-colors"
             >
               Philosophie
+            </Link>
+            <Link
+              href="/transformations"
+              className="relative text-purple-600 hover:text-purple-700 transition-colors font-medium flex items-center"
+            >
+              <Sparkles className="h-4 w-4 mr-1" />
+              Transformations IA
+              <span className="absolute -top-5 -right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                NEW
+              </span>
             </Link>
             <a
               href="#petition"

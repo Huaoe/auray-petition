@@ -1,5 +1,7 @@
 // Export all UI components
 export { Button, type ButtonProps, buttonVariants } from './button'
+export { Badge, type BadgeProps, badgeVariants } from './badge'
+export { AnimatedCounter } from './animated-counter'
 export { Input, type InputProps } from './input'
 export { Label } from './label'
 export { 
