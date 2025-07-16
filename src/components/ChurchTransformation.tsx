@@ -1,12 +1,29 @@
-'use client';
+"use client";
 
-import React, { useState, useCallback } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import React, { useState, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Sparkles, Download, Share2, RotateCcw, Zap } from 'lucide-react';
-import { useToast } from '@/components/ui/toaster';
-import { TRANSFORMATION_TYPES, type TransformationType, type GenerationResponse } from '@/lib/types';
+import {
+  Loader2,
+  Sparkles,
+  Download,
+  Share2,
+  RotateCcw,
+  Zap,
+} from "lucide-react";
+import { useToast } from "@/components/ui/toaster";
+import {
+  TRANSFORMATION_TYPES,
+  type TransformationType,
+  type GenerationResponse,
+} from "@/lib/types";
 
 interface GenerationState {
   isGenerating: boolean;
@@ -24,87 +41,90 @@ const ChurchTransformation = () => {
     isGenerating: false,
     selectedTransformation: null,
     generatedImage: null,
-    originalImage: '/images/Saint-Gildas-Auray-768x576.webp', // Image existante de l'église
+    originalImage: "/images/Saint-Gildas-Auray-768x576.webp", // Image existante de l'église
     generationTime: null,
     cost: null,
   });
 
-  const handleTransform = useCallback(async (transformation: TransformationType) => {
-    if (state.isGenerating) return;
+  const handleTransform = useCallback(
+    async (transformation: TransformationType) => {
+      if (state.isGenerating) return;
 
-    setState(prev => ({
-      ...prev,
-      isGenerating: true,
-      selectedTransformation: transformation,
-      generatedImage: null,
-      generationTime: null,
-      cost: null,
-    }));
+      setState((prev) => ({
+        ...prev,
+        isGenerating: true,
+        selectedTransformation: transformation,
+        generatedImage: null,
+        generationTime: null,
+        cost: null,
+      }));
 
-    const startTime = Date.now();
+      const startTime = Date.now();
 
-    try {
-      toast({
-        title: `🎨 Génération en cours: ${transformation.name}`,
-        description: 'L\'IA crée votre vision personnalisée...',
-        variant: 'info',
-        duration: 3000,
-      });
+      try {
+        toast({
+          title: `🎨 Génération en cours: ${transformation.name}`,
+          description: "L'IA crée votre vision personnalisée...",
+          variant: "info",
+          duration: 3000,
+        });
 
-      const response = await fetch('/api/transform', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          transformationType: transformation.id,
-          style: 'vivid',
-          quality: 'hd',
-        }),
-      });
+        const response = await fetch("/api/transform", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            transformationType: transformation.id,
+            style: "vivid",
+            quality: "hd",
+          }),
+        });
 
-      const data: GenerationResponse = await response.json();
+        const data: GenerationResponse = await response.json();
 
-      if (!data.success) {
-        throw new Error(data.error || 'Failed to generate image');
+        if (!data.success) {
+          throw new Error(data.error || "Failed to generate image");
+        }
+
+        const totalTime = Date.now() - startTime;
+
+        setState((prev) => ({
+          ...prev,
+          isGenerating: false,
+          generatedImage: data.imageUrl ?? "", // <-- always a string!
+          generationTime: totalTime,
+          cost: data.metadata?.cost || 0,
+        }));
+
+        toast({
+          title: `✨ ${transformation.name} créé avec succès !`,
+          description: `Généré en ${(totalTime / 1000).toFixed(1)}s`,
+          variant: "success",
+          duration: 4000,
+        });
+      } catch (error: any) {
+        console.error("Generation failed:", error);
+
+        setState((prev) => ({
+          ...prev,
+          isGenerating: false,
+        }));
+
+        toast({
+          title: "❌ Erreur de génération",
+          description:
+            error.message || "Une erreur est survenue lors de la génération",
+          variant: "error",
+          duration: 5000,
+        });
       }
-
-      const totalTime = Date.now() - startTime;
-
-      setState(prev => ({
-        ...prev,
-        isGenerating: false,
-        generatedImage: data.imageUrl!,
-        generationTime: totalTime,
-        cost: data.metadata?.cost || 0,
-      }));
-
-      toast({
-        title: `✨ ${transformation.name} créé avec succès !`,
-        description: `Généré en ${(totalTime / 1000).toFixed(1)}s`,
-        variant: 'success',
-        duration: 4000,
-      });
-
-    } catch (error: any) {
-      console.error('Generation failed:', error);
-      
-      setState(prev => ({
-        ...prev,
-        isGenerating: false,
-      }));
-
-      toast({
-        title: '❌ Erreur de génération',
-        description: error.message || 'Une erreur est survenue lors de la génération',
-        variant: 'error',
-        duration: 5000,
-      });
-    }
-  }, [state.isGenerating, toast]);
+    },
+    [state.isGenerating, toast]
+  );
 
   const handleReset = useCallback(() => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       selectedTransformation: null,
       generatedImage: null,
@@ -120,23 +140,23 @@ const ChurchTransformation = () => {
       const response = await fetch(state.generatedImage);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       a.download = `eglise-auray-${state.selectedTransformation?.id}.jpg`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
-      
+
       toast({
-        title: '📥 Image téléchargée !',
-        variant: 'success',
+        title: "📥 Image téléchargée !",
+        variant: "success",
         duration: 2000,
       });
     } catch (error) {
       toast({
-        title: '❌ Erreur de téléchargement',
-        variant: 'error',
+        title: "❌ Erreur de téléchargement",
+        variant: "error",
         duration: 2000,
       });
     }
@@ -155,24 +175,28 @@ const ChurchTransformation = () => {
       try {
         await navigator.share(shareData);
         toast({
-          title: '🚀 Partagé avec succès !',
-          variant: 'success',
+          title: "🚀 Partagé avec succès !",
+          variant: "success",
           duration: 2000,
         });
       } catch (error) {
         // Fallback to clipboard
-        navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`);
+        navigator.clipboard.writeText(
+          `${shareData.title}\n${shareData.text}\n${shareData.url}`
+        );
         toast({
-          title: '📋 Lien copié dans le presse-papiers !',
-          variant: 'success',
+          title: "📋 Lien copié dans le presse-papiers !",
+          variant: "success",
           duration: 2000,
         });
       }
     } else {
-      navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`);
+      navigator.clipboard.writeText(
+        `${shareData.title}\n${shareData.text}\n${shareData.url}`
+      );
       toast({
-        title: '📋 Lien copié dans le presse-papiers !',
-        variant: 'success',
+        title: "📋 Lien copié dans le presse-papiers !",
+        variant: "success",
         duration: 2000,
       });
     }
@@ -190,7 +214,8 @@ const ChurchTransformation = () => {
           <Zap className="h-8 w-8 text-yellow-500" />
         </div>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Découvrez 10 visions révolutionnaires de l'église Saint-Gildas d'Auray, générées par l'intelligence artificielle en temps réel
+          Découvrez 10 visions révolutionnaires de l'église Saint-Gildas
+          d'Auray, générées par l'intelligence artificielle en temps réel
         </p>
         <Badge variant="secondary" className="text-sm">
           ⚡ Génération instantanée • 🎨 HD Qualité • 🔄 Illimité
@@ -202,7 +227,9 @@ const ChurchTransformation = () => {
         <Card className="bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200">
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-2">
-              <span className="text-2xl">{state.selectedTransformation?.icon}</span>
+              <span className="text-2xl">
+                {state.selectedTransformation?.icon}
+              </span>
               {state.selectedTransformation?.name}
             </CardTitle>
             <CardDescription>
@@ -210,8 +237,31 @@ const ChurchTransformation = () => {
             </CardDescription>
             {state.generationTime && (
               <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
-                <span>⏱️ Généré en {(state.generationTime / 1000).toFixed(1)}s</span>
-                {state.cost && <span>💰 ${state.cost.toFixed(3)}</span>}
+                <span>
+                  ⏱️ Généré en {(state.generationTime / 1000).toFixed(1)}s
+                </span>
+                {state.cost && <span>💰 {state.cost.toFixed(3)}&nbsp;</span>}
+                <span>
+                  <span className="mx-1">→</span>
+                  <span className="font-semibold">
+                    {state.cost.toFixed(3)}€
+                  </span>
+                </span>
+                <span className="mx-1">🙏</span>
+                <span>
+                  <a
+                    href="https://www.buymeacoffee.com/auraycollectif"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-md shadow transition-colors text-sm ml-4"
+                  >
+                    ☕ Offrez-moi un café
+                  </a>
+                </span>
+                <span className="mx-1">→</span>
+                <span className="mx-1">🦄💓🖖</span>
+                <span className="mx-1">→</span>
+                <span className="mx-1">🏄‍♀️</span>
               </div>
             )}
           </CardHeader>
@@ -219,18 +269,17 @@ const ChurchTransformation = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Image Originale */}
               <div className="space-y-2">
-                <h3 className="font-semibold text-center">🏛️ Église Actuelle</h3>
+                <h3 className="font-semibold text-center">
+                  🏛️ Église Actuelle
+                </h3>
                 <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-                  <img
-                    src={state.originalImage}
-                    alt="Église Saint-Gildas d'Auray - Vue actuelle"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      // Fallback si l'image n'existe pas
-                      const img = e.target as HTMLImageElement;
-                      img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjMuNGY0LWY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzljYTNhZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPsOJZ2xpc2UgZCdBdXJheTwvdGV4dD48L3N2Zz4=';
-                    }}
-                  />
+                  {state.originalImage ? (
+                    <img
+                      src={state.originalImage}
+                      alt="Église Saint-Gildas d'Auray - Vue actuelle"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : null}
                 </div>
               </div>
 
@@ -240,11 +289,13 @@ const ChurchTransformation = () => {
                   ✨ Transformation IA: {state.selectedTransformation?.name}
                 </h3>
                 <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-                  <img
-                    src={state.generatedImage}
-                    alt={`Église transformée en ${state.selectedTransformation?.name}`}
-                    className="w-full h-full object-cover"
-                  />
+                  {state.generatedImage ? (
+                    <img
+                      src={state.generatedImage}
+                      alt={`Église transformée en ${state.selectedTransformation?.name}`}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -271,12 +322,12 @@ const ChurchTransformation = () => {
       {/* Transformation Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {TRANSFORMATION_TYPES.map((transformation) => (
-          <Card 
+          <Card
             key={transformation.id}
             className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 ${
-              state.selectedTransformation?.id === transformation.id 
-                ? 'ring-2 ring-purple-500 bg-purple-50' 
-                : 'hover:bg-gray-50'
+              state.selectedTransformation?.id === transformation.id
+                ? "ring-2 ring-purple-500 bg-purple-50"
+                : "hover:bg-gray-50"
             }`}
             onClick={() => handleTransform(transformation)}
           >
@@ -319,10 +370,12 @@ const ChurchTransformation = () => {
       {/* Info Footer */}
       <div className="text-center text-sm text-gray-500 space-y-2">
         <p>
-          🤖 Propulsé par DALL-E 3 • 🔒 Respectueux du patrimoine • ✨ 100% Gratuit
+          🤖 Propulsé par DALL-E 3 • 🔒 Respectueux du patrimoine • ✨ 100%
+          Gratuit
         </p>
         <p>
-          💡 Chaque transformation respecte l'architecture originale tout en proposant une vision d'avenir
+          💡 Chaque transformation respecte l'architecture originale tout en
+          proposant une vision d'avenir
         </p>
       </div>
     </div>

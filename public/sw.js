@@ -49,6 +49,12 @@ self.addEventListener('fetch', (event) => {
   const { request } = event
   const url = new URL(request.url)
 
+  // Bypass pour les URLs Google Cloud Storage - laisser le navigateur gérer directement
+  if (url.hostname === 'storage.googleapis.com') {
+    // Ne pas intercepter ces requêtes
+    return;
+  }
+
   // API Routes: Network First (données en temps réel)
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(
