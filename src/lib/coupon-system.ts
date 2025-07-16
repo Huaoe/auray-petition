@@ -25,8 +25,20 @@ export interface EnhancedCouponData extends CouponData {
   levelBadge: string;
   levelColor: string;
   signatureData: SignatureEngagementData;
+  scoreBreakdown: {
+    base: number;
+    comment: number;
+    sentiment: number;
+    newsletter: number;
+    socialShares: number;
+    referrals: number;
+  };
+  sentimentAnalysis?: {
+    sentiment: 'positive' | 'neutral' | 'negative';
+    confidence: number;
+    keywords: string[];
+  };
 }
-
 export interface CouponValidationResult {
   valid: boolean;
   coupon?: CouponData | EnhancedCouponData;
