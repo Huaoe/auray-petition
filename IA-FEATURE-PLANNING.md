@@ -31,6 +31,14 @@
 
 ---
 
+## 🚨 **PHASE 1.5 - Fixes Critiques [30min] ⚡ URGENT**
+
+### 🔧 **Étape 1.5.1 - Corrections UX Critiques (30min)**
+- [ ] `P0` Fix bouton génération qui disparaît après reset prompt ⏱️ 20min
+- [ ] `P0` Désactivation coupons en mode développement ⏱️ 10min
+
+---
+
 ## 🚀 **PHASE 2 - Page Dédiée & Optimisations [3h] 🚧 EN COURS**
 
 ### 🔄 **Étape 2.1 - Page Dédiée Complète (90min)**
@@ -52,6 +60,26 @@
 - [ ] Dashboard usage temps réel
 - [ ] Optimisation coûts avec cache stratégique
 - [ ] A/B testing différentes interfaces
+
+---
+
+## 🎆 **PHASE 3 - Intégrations Sociales & Features Avancées [3h] 🆕 NOUVEAU**
+
+### 📱 **Étape 3.1 - Publications Directes Réseaux (2.5h)**
+- [ ] `P1` Publication directe Instagram ⏱️ 45min
+- [ ] `P1` Publication directe Twitter/X ⏱️ 30min
+- [ ] `P1` Publication directe Facebook ⏱️ 35min
+- [ ] `P2` Publication directe LinkedIn ⏱️ 40min
+- [ ] `P1` Partage direct des images générées ⏱️ 30min
+
+### 🎨 **Étape 3.2 - Features Créatives (1.5h)**
+- [ ] `P2` GIF morphing entre image originale et transformée ⏱️ 60min
+- [ ] `P3` Éditeur de masques personnalisés ⏱️ 90min
+
+### 📊 **Étape 3.3 - Engagement Analytics (1h)**
+- [ ] `P1` Compteur défilant signatures en temps réel ⏱️ 30min
+- [ ] `P2` Vérification doublons email (prod uniquement) ⏱️ 25min
+- [ ] `P2` Système de parrainage (+1 coupon/ami) ⏱️ 30min
 
 ---
 

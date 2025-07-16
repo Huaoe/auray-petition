@@ -93,29 +93,57 @@
 
 ---
 
-## 🎯 **PROCHAINES ACTIONS RECOMMANDÉES**
+## 🎯 **NOUVELLES FONCTIONNALITÉS IDENTIFIÉES**
 
-### **Option A: Pages Core (Contenu) - 2h** ⭐ **RECOMMANDÉ**
+### **🎫 PHASE 3.0: Système de Coupons Avancé** `[7 items]` 🆕 **NOUVEAU**
+- [ ] `P0` Désactivation coupons en local (dev mode) ⏱️ 15min
+- [ ] `P1` Système de coupons proportionnels:
+  - [ ] 2 coupons pour signature pétition seule ⏱️ 30min
+  - [ ] 3 coupons pour pétition + newsletter ⏱️ 20min
+  - [ ] 4 coupons pour pétition + newsletter + commentaire ⏱️ 20min
+- [ ] `P2` Analyse de sentiment des commentaires (IA) ⏱️ 45min
+- [ ] `P2` Coupons bonus partage:
+  - [ ] +1 coupon par ami parrainé ⏱️ 30min
+  - [ ] +1 coupon par réseau social partagé ⏱️ 25min
+
+### **🎨 PHASE 3.1: Améliorations IA & UX** `[4 items]` 🆕 **NOUVEAU**
+- [ ] `P0` Fix bouton génération qui disparaît après reset prompt ⏱️ 20min
+- [ ] `P1` Partage direct des images générées ⏱️ 30min
+- [ ] `P2` GIF morphing entre image originale et transformée ⏱️ 60min
+- [ ] `P3` Éditeur de masques personnalisés ⏱️ 90min
+
+### **📱 PHASE 3.2: Intégrations Réseaux Sociaux** `[4 items]` 🆕 **NOUVEAU**
+- [ ] `P1` Publication directe Instagram ⏱️ 45min
+- [ ] `P1` Publication directe Twitter/X ⏱️ 30min
+- [ ] `P1` Publication directe Facebook ⏱️ 35min
+- [ ] `P2` Publication directe LinkedIn ⏱️ 40min
+
+### **📊 PHASE 3.3: Engagement & Analytics** `[2 items]` 🆕 **NOUVEAU**
+- [ ] `P1` Compteur défilant signatures en temps réel ⏱️ 30min
+- [ ] `P2` Vérification doublons email (prod uniquement) ⏱️ 25min
+
+---
+
+## 🚀 **PROCHAINES ACTIONS RECOMMANDÉES**
+
+### **Option A: Fixes Critiques IA (30min)** ⭐ **URGENT**
 ```bash
-# 1. Page contexte détaillée (45min)
-# Histoire, enjeux, solutions proposées
-
-# 2. Pages légales (30min)
-# Mentions légales + RGPD + CGU
-
-# 3. Page 404 personnalisée (15min)
+# 1. Fix bouton génération disparaît (20min)
+# 2. Désactivation coupons en local (10min)
 ```
 
-### **Option B: Analytics (Mesure) - 1h**
+### **Option B: Système Coupons Avancé (2h)** 🎫 **IMPACT ÉLEVÉ**
 ```bash
-# 1. Google Analytics 4 (20min)
-# Tracking signatures, pages vues, conversions
-
-# 2. Vercel Analytics (10min)
-# Performance monitoring
-
-# 3. Dashboard admin (30min)
-# Statistiques avancées pour suivi
+# 1. Coupons proportionnels (70min)
+# 2. Analyse sentiment commentaires (45min)
+# 3. Système de parrainage (35min)
 ```
 
-**Recommandation**: **Option A** pour enrichir le site avec du contenu essentiel 📝
+### **Option C: Intégrations Sociales (2.5h)** 📱 **VIRALITÉ**
+```bash
+# 1. Publications directes réseaux (150min)
+# 2. Partage images optimisé (30min)
+# 3. GIF morphing (60min)
+```
+
+**Recommandation**: **Option A** puis **Option B** pour maximiser l'engagement utilisateur 🎯
