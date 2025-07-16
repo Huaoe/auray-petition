@@ -60,11 +60,16 @@ const HomePage = () => {
   };
 
   // Callback pour mettre à jour les stats après signature
-  const handleSignatureSuccess = () => {
-    setShowConfetti(true);
-    // Recharger les stats si pas fournies
-    fetchStatistics();
-  };
+const handleSignatureSuccess = () => {
+  setShowConfetti(true);
+  // Recharger les stats si pas fournies
+  fetchStatistics();
+  
+  // Hide confetti after 3 seconds to prevent blocking interactions
+  setTimeout(() => {
+    setShowConfetti(false);
+  }, 3000);
+};
 
   return (
     <>

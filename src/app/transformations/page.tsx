@@ -5,8 +5,8 @@ import { ArrowLeft, Share2, Download, Star, Eye, Clock, Users, Sparkles } from '
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge, badgeVariants } from '@/components/ui/badge';
-import ChurchTransformation from '@/components/ChurchTransformation';
 import Header from '@/components/Header';
+import ChurchTransformation from '@/components/ChurchTransformation';
 
 interface TransformationStats {
   totalGenerations: number;
@@ -139,23 +139,10 @@ const TransformationsPage = () => {
         </div>
       </section>
 
-      {/* Studio de Transformation Principal */}
+      {/* Studio de Transformation */}
       <section id="transformation-studio" className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Studio de Transformation IA
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Sélectionnez une transformation et laissez l'intelligence artificielle 
-              créer une vision révolutionnaire de l'église Saint-Gildas d'Auray.
-            </p>
-          </div>
-          
-          {/* Composant principal de transformation */}
-          <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20">
-            <ChurchTransformation />
-          </div>
+          <ChurchTransformation />
         </div>
       </section>
 

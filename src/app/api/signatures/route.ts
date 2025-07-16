@@ -3,6 +3,7 @@ import { addSignature, getPetitionStats } from '@/lib/googleSheets';
 import { validateEmail, validatePostalCode } from '@/lib/utils';
 import { checkRateLimit } from '@/lib/rate-limiter';
 import { analytics } from '@/lib/analytics';
+import { createCoupon } from '@/lib/coupon-system';
 
 // Fonction pour valider le token reCAPTCHA
 async function validateRecaptcha(token: string): Promise<boolean> {
@@ -195,14 +196,20 @@ export async function POST(request: NextRequest) {
     // Récupérer les nouvelles statistiques après ajout
     const updatedStats = await getPetitionStats();
     
+    // GÉNÉRER UN COUPON DE 5 GÉNÉRATIONS IA
+    const aiCoupon = createCoupon(email.trim().toLowerCase());
+    console.log(`Coupon IA généré pour ${email}: ${aiCoupon.id} (${aiCoupon.totalGenerations} générations)`);
+    
     analytics.signatureSent(true);
-    // Réponse de succès avec statistiques mises à jour
+    // Réponse de succès avec statistiques mises à jour + coupon IA
     return NextResponse.json(
       { 
         success: true, 
         message: 'Signature enregistrée avec succès',
         statistics: updatedStats,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        // Nouveau: Retourner l'objet coupon complet
+        aiCoupon: aiCoupon
       },
       { status: 201 }
     );

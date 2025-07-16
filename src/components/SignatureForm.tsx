@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioCard } from "@/components/ui/radio-card";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/toaster";
 import {
   Card,
   CardContent,
@@ -35,6 +36,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, CheckCircle, AlertCircle, Users, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { analytics } from "@/lib/analytics";
+import { storeCoupon, type CouponData } from "@/lib/coupon-system";
+import Link from "next/link";
 import {
   Form,
   FormControl,
@@ -113,12 +116,13 @@ export const SignatureForm = ({
   onSuccess,
   onSignatureCount,
 }: SignatureFormProps) => {
+  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [generatedCoupon, setGeneratedCoupon] = useState<CouponData | null>(null);
   const recaptchaRef = useRef(null);
 
   const form = useForm<SignatureFormData>({
@@ -139,6 +143,15 @@ export const SignatureForm = ({
   const { handleSubmit, control, formState, watch, reset, setValue } = form;
   const { isValid, isSubmitting: isFormSubmitting } = formState;
   const commentValue = watch("comment");
+
+  // Function to reset all states and form
+  const handleResetForm = () => {
+    form.reset();
+    setIsSubmitting(false);
+    setSubmitStatus("idle");
+    setErrorMessage("");
+    setGeneratedCoupon(null);
+  };
 
   const handleApiSubmit = async (data: SignatureFormData, recaptchaToken: string) => {
     try {
@@ -168,9 +181,12 @@ export const SignatureForm = ({
       analytics.signatureSent(true);
 
       setSubmitStatus("success");
-      setSuccessMessage(
-        `Merci ${data.firstName} ! Votre signature a été enregistrée avec succès.`
-      );
+
+      // Stocker le coupon et le préparer pour l'affichage
+      if (result.aiCoupon) {
+        storeCoupon(result.aiCoupon);
+        setGeneratedCoupon(result.aiCoupon);
+      }
 
       // Réinitialiser le formulaire après succès
       reset();
@@ -207,10 +223,47 @@ export const SignatureForm = ({
     setErrorMessage("");
     setSubmitStatus("idle");
 
+    console.log("🔍 reCAPTCHA Site Key:", process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? "Present" : "Missing");
+
     if (!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
       console.log("reCAPTCHA site key not found, submitting with bypass token.");
-      await handleApiSubmit(data, 'dev-token-bypass');
+      try {
+        await handleApiSubmit(data, 'dev-token-bypass');
+      } catch (error) {
+        console.error("Error in dev mode submission:", error);
+      } finally {
+        setIsSubmitting(false);
+      }
       return;
+    }
+
+    // Trigger reCAPTCHA execution
+    try {
+      if (recaptchaRef.current) {
+        console.log("Executing reCAPTCHA...");
+        // Try different execution methods for the reaptcha library
+        const recaptcha = recaptchaRef.current as any;
+        console.log("🔍 reCAPTCHA methods available:", Object.keys(recaptcha));
+        
+        if (typeof recaptcha.execute === 'function') {
+          console.log("Using execute() method");
+          await recaptcha.execute();
+        } else if (typeof recaptcha.executeAsync === 'function') {
+          console.log("Using executeAsync() method");
+          await recaptcha.executeAsync();
+        } else {
+          console.warn("reCAPTCHA execute method not found, available methods:", Object.keys(recaptcha));
+          throw new Error("reCAPTCHA execute method not available");
+        }
+      } else {
+        console.error("reCAPTCHA ref is null");
+        throw new Error("reCAPTCHA not initialized");
+      }
+    } catch (error) {
+      console.error("reCAPTCHA execution error:", error);
+      setErrorMessage("Erreur lors de la vérification anti-spam. Veuillez réessayer.");
+      setSubmitStatus("error");
+      setIsSubmitting(false);
     }
   };
 
@@ -244,17 +297,55 @@ export const SignatureForm = ({
         <AnimatePresence mode="wait">
           {submitStatus === "success" ? (
             <motion.div
-              key="success"
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              className="text-center py-8"
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="text-center p-6"
             >
               <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-green-700 mb-2">
-                Signature Enregistrée !
-              </h3>
-              <p className="text-green-600">{successMessage}</p>
+              <h3 className="text-2xl font-bold mb-2">Merci pour votre soutien !</h3>
+              <p className="text-gray-600 mb-6">
+                Votre signature a été enregistrée avec succès.
+              </p>
+
+              {generatedCoupon && (
+                <div className="mt-4 text-center p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="font-semibold text-blue-800">
+                    🎉 Votre coupon pour {generatedCoupon.totalGenerations} générations IA gratuites :
+                  </p>
+                  <div className="flex items-center justify-center gap-2 my-2">
+                    <code className="text-lg font-bold bg-blue-100 text-blue-900 px-3 py-1 rounded">
+                      {generatedCoupon.id}
+                    </code>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        navigator.clipboard.writeText(generatedCoupon.id);
+                        toast({
+                          title: "Copié !",
+                          description: "Le code du coupon a été copié dans le presse-papiers.",
+                        });
+                      }}
+                    >
+                      Copier
+                    </Button>
+                  </div>
+                  <p className="text-xs text-blue-700">
+                    Utilisez ce code dans le module de transformation IA.
+                  </p>
+                </div>
+              )}
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+                <Button onClick={handleResetForm} variant="outline">
+                  Signer à nouveau
+                </Button>
+                <Link href="/transformations">
+                  <Button>Accéder au module IA</Button>
+                </Link>
+              </div>
+
             </motion.div>
           ) : (
             <Form {...form}>

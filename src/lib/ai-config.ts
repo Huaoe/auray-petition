@@ -1,25 +1,28 @@
 // Configuration IA pour les transformations d'images de l'église
 // Utilise Stability AI pour les transformations img2img
 
-// Configuration Stability AI
+// Configuration Stability AI - Ultra v2beta
 export const STABILITY_CONFIG = {
-  API_URL: 'https://api.stability.ai/v1/generation/stable-diffusion-v1-6/image-to-image',
-  MODEL: 'stable-diffusion-v1-6',
-  
-  // Paramètres de génération
-  GENERATION: {
-    steps: 30,              // Nombre d'étapes de débruitage (qualité)
-    cfg_scale: 7,          // Adherence au prompt (1-35)
-    image_strength: 0.65,   // Force de transformation (0.1-1.0)
-    style_preset: 'photographic', // Style photographique
-    sampler: 'K_DPM_2_ANCESTRAL',
-    width: 1024,
-    height: 1024,
-  },
+  API_URL: "https://api.stability.ai/v2beta/stable-image/generate/ultra",
+  INPAINT_API_URL: "https://api.stability.ai/v2beta/stable-image/edit/inpaint",
+  MODEL: "sd3-large-turbo",
+  ASPECT_RATIO: "1:1",
+  OUTPUT_FORMAT: "png",
+  STYLE_PRESET: "photographic",
+  STEPS: 50,
+  CFG_SCALE: 7.5,
+  SEED: 0,
+  SAMPLES: 1,
+  SAFETY_TOLERANCE: 2,
+  PROMPT_STRENGTH: 0.8,
+  // Inpainting specific parameters
+  INPAINT_OUTPUT_FORMAT: "png",
+  INPAINT_STEPS: 50,
+  INPAINT_CFG_SCALE: 7.5,
   
   // Coûts (en USD)
   PRICING: {
-    per_generation: 0.04,  // $0.04 par génération (vs $0.08 DALL-E)
+    per_generation: 0.04,  // $0.04 par génération
     currency: 'USD'
   }
 } as const;

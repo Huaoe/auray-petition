@@ -498,3 +498,20 @@ export const preloadPopularTransformations = async () => {
 ---
 
 > Cette mécanique transforme chaque signataire en ambassadeur créatif du projet et démultiplie la portée de la pétition grâce à la viralité numérique et à la reconnaissance (NFT) !
+
+
+coupon desactivated in local.
+give coupon in proportion : 2 coupons for petition 
+3 coupons for petition + newsleter
+4 coupons for petition + newsletter + comment
+add a sentiment analysis to the comment to be sure it's positive
+share to friends give 1 coupon per friends
+share to social networks give 1 coupon per social network 
+reinitialisé le prompt ne fonctionne pas bien, le bouton de generation de la transformation disparait
+partage de l'image resultante
+gif de morphing entre les 2 images
+permettre de poster directement sur instagram
+permettre de poster directement sur twitter
+permettre de poster directement sur facebook
+permettre de poster directement sur linkedin
+pouvoir elaborer le mask soit meme
