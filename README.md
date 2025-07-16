@@ -7,7 +7,7 @@
     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px; width: 217px;" >
   </a>
   <br />
-  <sub><i>Vous soutenez l'initiative citoyenne ? Offrez un café ☕️ pour encourager le projet !</i></sub>
+  <sub><i>🔒 Sécurité renforcée | 📈 Compteurs temps réel | 🚀 Production ready</i></sub>
 </div>
 
 

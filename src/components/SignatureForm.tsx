@@ -223,14 +223,20 @@ export const SignatureForm = ({
     setErrorMessage("");
     setSubmitStatus("idle");
 
-    console.log("🔍 reCAPTCHA Site Key:", process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? "Present" : "Missing");
+    if (process.env.NODE_ENV === 'development') {
+      console.log("🔍 reCAPTCHA Site Key:", process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? "Present" : "Missing");
+    }
 
     if (!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
-      console.log("reCAPTCHA site key not found, submitting with bypass token.");
+      if (process.env.NODE_ENV === 'development') {
+        console.log("reCAPTCHA site key not found, submitting with bypass token.");
+      }
       try {
         await handleApiSubmit(data, 'dev-token-bypass');
       } catch (error) {
-        console.error("Error in dev mode submission:", error);
+        if (process.env.NODE_ENV === 'development') {
+          console.error("Error in dev mode submission:", error);
+        }
       } finally {
         setIsSubmitting(false);
       }
@@ -240,27 +246,39 @@ export const SignatureForm = ({
     // Trigger reCAPTCHA execution
     try {
       if (recaptchaRef.current) {
-        console.log("Executing reCAPTCHA...");
-        // Try different execution methods for the reaptcha library
-        const recaptcha = recaptchaRef.current as any;
-        console.log("🔍 reCAPTCHA methods available:", Object.keys(recaptcha));
+        if (process.env.NODE_ENV === 'development') {
+          console.log("Executing reCAPTCHA...");
+        }
         
+        const recaptcha = recaptchaRef.current as any;
+        
+        // Vérifier que le composant reCAPTCHA est correctement initialisé
+        if (!recaptcha || typeof recaptcha !== 'object') {
+          throw new Error("reCAPTCHA component not properly initialized");
+        }
+        
+        // Try different execution methods for the reaptcha library
         if (typeof recaptcha.execute === 'function') {
-          console.log("Using execute() method");
           await recaptcha.execute();
         } else if (typeof recaptcha.executeAsync === 'function') {
-          console.log("Using executeAsync() method");
           await recaptcha.executeAsync();
         } else {
-          console.warn("reCAPTCHA execute method not found, available methods:", Object.keys(recaptcha));
+          // Only log debug info in development
+          if (process.env.NODE_ENV === 'development') {
+            console.warn("reCAPTCHA execute method not found");
+          }
           throw new Error("reCAPTCHA execute method not available");
         }
       } else {
-        console.error("reCAPTCHA ref is null");
+        if (process.env.NODE_ENV === 'development') {
+          console.error("reCAPTCHA ref is null");
+        }
         throw new Error("reCAPTCHA not initialized");
       }
     } catch (error) {
-      console.error("reCAPTCHA execution error:", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("reCAPTCHA execution error:", error);
+      }
       setErrorMessage("Erreur lors de la vérification anti-spam. Veuillez réessayer.");
       setSubmitStatus("error");
       setIsSubmitting(false);

@@ -192,10 +192,11 @@ const ChurchTransformation = () => {
 
   const handleTransform = useCallback(async () => {
     // Détection du mode développement
-    const isDevelopment = process.env.NODE_ENV === 'development' || 
-                         window.location.hostname === 'localhost' ||
-                         window.location.hostname === '127.0.0.1';
-    
+    const isDevelopment =
+      process.env.NODE_ENV === "development" ||
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+
     // Vérification coupon obligatoire (sauf en mode développement)
     if (!isDevelopment && !state.couponValidation?.valid) {
       toast({
@@ -208,7 +209,11 @@ const ChurchTransformation = () => {
     }
 
     // Vérification générations restantes (sauf en mode développement)
-    if (!isDevelopment && state.activeCoupon && state.activeCoupon.generationsRemaining <= 0) {
+    if (
+      !isDevelopment &&
+      state.activeCoupon &&
+      state.activeCoupon.generationsRemaining <= 0
+    ) {
       toast({
         title: "❌ Plus de générations",
         description: "Votre coupon n'a plus de générations disponibles.",
@@ -234,8 +239,8 @@ const ChurchTransformation = () => {
     try {
       // Construction du prompt avec exigence obligatoire
       const mandatoryPeopleRequirement =
-        "MANDATORY REQUIREMENT: The space must be filled with happy, trendy, modern people of diverse ages and backgrounds actively enjoying and using the transformed space. Show people laughing, socializing, working, or engaging with the new environment in a joyful and contemporary way.";
-      const fullPrompt = state.customPrompt + " " + mandatoryPeopleRequirement;
+        "MANDATORY: 140 happy diverse people actively using the space (sitting, working, socializing). Include appropriate furniture. Space must look lived-in with people as the focal point.";
+      const fullPrompt = mandatoryPeopleRequirement + " " + state.customPrompt;
 
       const response = await fetch("/api/inpaint", {
         method: "POST",
@@ -249,7 +254,9 @@ const ChurchTransformation = () => {
           method: state.hdPainterMethod,
           resolution: state.selectedInpaintImage.resolution,
           noCache: state.forceNewGeneration,
-          couponCode: isDevelopment ? 'DEV_MODE' : (state.activeCoupon?.id || state.couponCode),
+          couponCode: isDevelopment
+            ? "DEV_MODE"
+            : state.activeCoupon?.id || state.couponCode,
           isDevelopment,
         }),
       });
@@ -485,8 +492,7 @@ const ChurchTransformation = () => {
       };
 
       // Base prompt with mandatory requirements
-      let prompt = `MANDATORY: 40-80 happy, diverse people actively using the space (sitting, working, socializing). Include appropriate furniture matching the ${transformationNames[transformationType] || "transformed space"}. Space must look lived-in with people as the focal point.
-  
+      let prompt = `
   Transform this church into ${transformationNames[transformationType] || "a transformed space"} that blends modern functionality with historical architecture.
   
   ARCHITECTURE: Preserve stone arches, vaulted ceilings, stained glass, and Gothic proportions while integrating modern elements.
@@ -645,7 +651,7 @@ const ChurchTransformation = () => {
               <div
                 key={index}
                 className={`relative group cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
-                  state.selectedInpaintImage?.path === image.path
+                  state.selectedInpaintImage === image
                     ? "border-blue-500 shadow-lg scale-105"
                     : "border-gray-200 hover:border-gray-300"
                 }`}
@@ -655,7 +661,7 @@ const ChurchTransformation = () => {
                   <img
                     src={
                       state.showMaskPreview &&
-                      state.selectedInpaintImage?.path === image.path
+                      state.selectedInpaintImage === image
                         ? image.maskPath
                         : image.path
                     }
@@ -688,7 +694,7 @@ const ChurchTransformation = () => {
                     </div>
                   </div>
                 </div>
-                {state.selectedInpaintImage?.path === image.path && (
+                {state.selectedInpaintImage === image && (
                   <div className="absolute top-2 right-2">
                     <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
                       <div className="w-2 h-2 bg-white rounded-full"></div>
