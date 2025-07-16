@@ -36,7 +36,16 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, CheckCircle, AlertCircle, Users, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { analytics } from "@/lib/analytics";
-import { storeCoupon, type CouponData } from "@/lib/coupon-system";
+import { 
+  createSmartCoupon, 
+  storeEnhancedCoupon, 
+  calculateEngagementScore,
+  getEngagementLevel,
+  getEngagementLevelDetails,
+  type CouponData, 
+  type EnhancedCouponData,
+  type SignatureEngagementData 
+} from "@/lib/coupon-system";
 import Link from "next/link";
 import {
   Form,
@@ -122,7 +131,7 @@ export const SignatureForm = ({
     "idle" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [generatedCoupon, setGeneratedCoupon] = useState<CouponData | null>(null);
+  const [generatedCoupon, setGeneratedCoupon] = useState<CouponData | EnhancedCouponData | null>(null);
   const recaptchaRef = useRef(null);
 
   const form = useForm<SignatureFormData>({
@@ -182,10 +191,32 @@ export const SignatureForm = ({
 
       setSubmitStatus("success");
 
-      // Stocker le coupon et le préparer pour l'affichage
+      // Créer un coupon intelligent basé sur l'engagement
       if (result.aiCoupon) {
-        storeCoupon(result.aiCoupon);
-        setGeneratedCoupon(result.aiCoupon);
+        // Préparer les données d'engagement
+        const engagementData: SignatureEngagementData = {
+          comment: data.comment,
+          newsletterConsent: data.newsletterConsent,
+          socialShares: 0, // TODO: Intégrer le tracking des partages
+          referrals: 0     // TODO: Intégrer le système de parrainage
+        };
+
+        // Créer le coupon intelligent
+        const smartCoupon = createSmartCoupon(data.email, engagementData);
+        
+        // Stocker le coupon avancé
+        storeEnhancedCoupon(smartCoupon);
+        setGeneratedCoupon(smartCoupon);
+        
+        // Log des détails d'engagement (dev uniquement)
+        if (process.env.NODE_ENV === 'development') {
+          console.log('🎯 Coupon intelligent créé:', {
+            score: smartCoupon.engagementScore,
+            level: smartCoupon.engagementLevel,
+            generations: smartCoupon.totalGenerations,
+            badge: smartCoupon.levelBadge
+          });
+        }
       }
 
       // Réinitialiser le formulaire après succès
@@ -327,7 +358,22 @@ export const SignatureForm = ({
               </p>
 
               {generatedCoupon && (
-                <div className="mt-4 text-center p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="mt-4 text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200 rounded-lg">
+                  {/* Affichage du niveau d'engagement pour les coupons avancés */}
+                  {'engagementLevel' in generatedCoupon && (
+                    <div className="mb-3 flex items-center justify-center gap-2">
+                      <span className="text-2xl">{generatedCoupon.levelBadge}</span>
+                      <div className="text-center">
+                        <p className="font-bold" style={{ color: generatedCoupon.levelColor }}>
+                          {generatedCoupon.levelName}
+                        </p>
+                        <p className="text-xs text-gray-600">
+                          Score d'engagement: {generatedCoupon.engagementScore}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  
                   <p className="font-semibold text-blue-800">
                     🎉 Votre coupon pour {generatedCoupon.totalGenerations} générations IA gratuites :
                   </p>
@@ -349,7 +395,18 @@ export const SignatureForm = ({
                       Copier
                     </Button>
                   </div>
-                  <p className="text-xs text-blue-700">
+                  
+                  {/* Détails d'engagement pour les coupons avancés */}
+                  {'engagementLevel' in generatedCoupon && (
+                    <div className="mt-3 text-xs text-gray-600">
+                      <p>
+                        📝 Commentaire: {generatedCoupon.signatureData.comment ? '✓' : '✗'} |
+                        📧 Newsletter: {generatedCoupon.signatureData.newsletterConsent ? '✓' : '✗'}
+                      </p>
+                    </div>
+                  )}
+                  
+                  <p className="text-xs text-blue-700 mt-2">
                     Utilisez ce code dans le module de transformation IA.
                   </p>
                 </div>

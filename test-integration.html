@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test d'Intégration - Système de Coupons Avancé</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .coupon-display {
+            background: linear-gradient(135deg, #dbeafe 0%, #fce7f3 100%);
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .level-badge {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .level-name {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .coupon-code {
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            font-weight: bold;
+            background: #dbeafe;
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .test-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #2563eb;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .status.success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        .status.error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+        .score-breakdown {
+            text-align: left;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test d'Intégration - Système de Coupons Avancé</h1>
+    
+    <div class="test-section">
+        <h2>📝 Simulateur de Signature</h2>
+        <p>Testez différents niveaux d'engagement pour voir les coupons générés</p>
+        
+        <div>
+            <label>
+                <input type="checkbox" id="newsletter"> Consentement newsletter (+10 points)
+            </label>
+        </div>
+        
+        <div style="margin: 10px 0;">
+            <label for="comment">Commentaire :</label><br>
+            <textarea id="comment" rows="3" cols="50" placeholder="Votre commentaire..."></textarea>
+            <div id="comment-score" style="font-size: 12px; color: #666;"></div>
+        </div>
+        
+        <div>
+            <label for="socialShares">Partages sociaux :</label>
+            <input type="number" id="socialShares" min="0" max="10" value="0" style="width: 60px;">
+            <span style="font-size: 12px; color: #666;">(+20 points chacun)</span>
+        </div>
+        
+        <div>
+            <label for="referrals">Parrainages :</label>
+            <input type="number" id="referrals" min="0" max="10" value="0" style="width: 60px;">
+            <span style="font-size: 12px; color: #666;">(+30 points chacun)</span>
+        </div>
+        
+        <button class="test-button" onclick="generateCoupon()">🎫 Générer Coupon</button>
+        <button class="test-button" onclick="testAllLevels()">🧪 Tester Tous Niveaux</button>
+        <button class="test-button" onclick="clearResults()">🧹 Effacer</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>📊 Résultats des Tests</h2>
+        <div id="results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>💾 Test du Stockage LocalStorage</h2>
+        <button class="test-button" onclick="testLocalStorage()">Tester Stockage</button>
+        <button class="test-button" onclick="showStoredCoupons()">Afficher Coupons Stockés</button>
+        <button class="test-button" onclick="clearStorage()">Vider Stockage</button>
+        <div id="storage-results"></div>
+    </div>
+
+    <script>
+        // Configuration du système de coupons (copié depuis le système réel)
+        const COUPON_CONFIG = {
+            expirationDays: 30,
+            codeLength: 12,
+            
+            engagementLevels: {
+                BASIC: {
+                    name: 'Supporter',
+                    minScore: 0,
+                    maxScore: 49,
+                    generations: 2,
+                    color: '#6B7280',
+                    badge: '🌱'
+                },
+                ENGAGED: {
+                    name: 'Engagé',
+                    minScore: 50,
+                    maxScore: 99,
+                    generations: 3,
+                    color: '#3B82F6',
+                    badge: '⭐'
+                },
+                PASSIONATE: {
+                    name: 'Passionné',
+                    minScore: 100,
+                    maxScore: 199,
+                    generations: 4,
+                    color: '#8B5CF6',
+                    badge: '🔥'
+                },
+                CHAMPION: {
+                    name: 'Champion',
+                    minScore: 200,
+                    maxScore: Infinity,
+                    generations: 5,
+                    color: '#F59E0B',
+                    badge: '👑'
+                }
+            },
+            
+            scoring: {
+                baseSignature: 10,
+                commentLength: {
+                    short: 5,
+                    medium: 15,
+                    long: 25
+                },
+                newsletter: 10,
+                socialShare: 20,
+                referral: 30
+            }
+        };
+
+        function generateCouponCode() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            
+            for (let i = 0; i < COUPON_CONFIG.codeLength; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                result += characters[randomIndex];
+            }
+            
+            return result;
+        }
+
+        function calculateEngagementScore(signatureData) {
+            let score = COUPON_CONFIG.scoring.baseSignature;
+            
+            // Score pour commentaire
+            if (signatureData.comment && signatureData.comment.trim()) {
+                const commentLength = signatureData.comment.trim().length;
+                if (commentLength < 50) {
+                    score += COUPON_CONFIG.scoring.commentLength.short;
+                } else if (commentLength <= 150) {
+                    score += COUPON_CONFIG.scoring.commentLength.medium;
+                } else {
+                    score += COUPON_CONFIG.scoring.commentLength.long;
+                }
+            }
+            
+            // Score pour newsletter
+            if (signatureData.newsletterConsent) {
+                score += COUPON_CONFIG.scoring.newsletter;
+            }
+            
+            // Score pour partages sociaux
+            if (signatureData.socialShares) {
+                score += signatureData.socialShares * COUPON_CONFIG.scoring.socialShare;
+            }
+            
+            // Score pour parrainages
+            if (signatureData.referrals) {
+                score += signatureData.referrals * COUPON_CONFIG.scoring.referral;
+            }
+            
+            return score;
+        }
+
+        function determineEngagementLevel(score) {
+            for (const [level, config] of Object.entries(COUPON_CONFIG.engagementLevels)) {
+                if (score >= config.minScore && score <= config.maxScore) {
+                    return {
+                        level,
+                        name: config.name,
+                        badge: config.badge,
+                        color: config.color,
+                        generations: config.generations
+                    };
+                }
+            }
+            
+            return COUPON_CONFIG.engagementLevels.BASIC;
+        }
+
+        function createSmartCoupon(email, signatureData) {
+            const score = calculateEngagementScore(signatureData);
+            const engagementInfo = determineEngagementLevel(score);
+            
+            const coupon = {
+                id: generateCouponCode(),
+                email,
+                generationsRemaining: engagementInfo.generations,
+                totalGenerations: engagementInfo.generations,
+                createdAt: new Date().toISOString(),
+                expiresAt: new Date(Date.now() + COUPON_CONFIG.expirationDays * 24 * 60 * 60 * 1000).toISOString(),
+                used: false,
+                engagementScore: score,
+                engagementLevel: engagementInfo.level,
+                levelName: engagementInfo.name,
+                levelBadge: engagementInfo.badge,
+                levelColor: engagementInfo.color,
+                signatureData
+            };
+            
+            return coupon;
+        }
+
+        function updateCommentScore() {
+            const comment = document.getElementById('comment').value;
+            const scoreDiv = document.getElementById('comment-score');
+            
+            if (!comment.trim()) {
+                scoreDiv.textContent = 'Pas de commentaire (0 points)';
+                return;
+            }
+            
+            const length = comment.trim().length;
+            let score = 0;
+            let description = '';
+            
+            if (length < 50) {
+                score = 5;
+                description = 'Court';
+            } else if (length <= 150) {
+                score = 15;
+                description = 'Moyen';
+            } else {
+                score = 25;
+                description = 'Long';
+            }
+            
+            scoreDiv.textContent = `${description} (${length} chars) = +${score} points`;
+        }
+
+        function generateCoupon() {
+            const signatureData = {
+                comment: document.getElementById('comment').value,
+                newsletterConsent: document.getElementById('newsletter').checked,
+                socialShares: parseInt(document.getElementById('socialShares').value) || 0,
+                referrals: parseInt(document.getElementById('referrals').value) || 0
+            };
+            
+            const coupon = createSmartCoupon('test@example.com', signatureData);
+            displayCoupon(coupon);
+        }
+
+        function displayCoupon(coupon) {
+            const resultsDiv = document.getElementById('results');
+            
+            const scoreBreakdown = `
+                <div class="score-breakdown">
+                    <h4>📊 Détail du Score (${coupon.engagementScore} points)</h4>
+                    <ul>
+                        <li>Base signature: +10 points</li>
+                        <li>Commentaire: +${getCommentScore(coupon.signatureData.comment)} points</li>
+                        <li>Newsletter: +${coupon.signatureData.newsletterConsent ? 10 : 0} points</li>
+                        <li>Partages sociaux: +${(coupon.signatureData.socialShares || 0) * 20} points</li>
+                        <li>Parrainages: +${(coupon.signatureData.referrals || 0) * 30} points</li>
+                    </ul>
+                </div>
+            `;
+            
+            const couponHtml = `
+                <div class="coupon-display" style="border-color: ${coupon.levelColor};">
+                    <div>
+                        <span class="level-badge">${coupon.levelBadge}</span>
+                        <span class="level-name" style="color: ${coupon.levelColor};">${coupon.levelName}</span>
+                    </div>
+                    <div>Score d'engagement: ${coupon.engagementScore}</div>
+                    <div class="coupon-code" style="color: ${coupon.levelColor};">${coupon.id}</div>
+                    <div>${coupon.totalGenerations} générations IA gratuites</div>
+                    ${scoreBreakdown}
+                </div>
+            `;
+            
+            resultsDiv.innerHTML = couponHtml + resultsDiv.innerHTML;
+        }
+
+        function getCommentScore(comment) {
+            if (!comment || !comment.trim()) return 0;
+            const length = comment.trim().length;
+            if (length < 50) return 5;
+            if (length <= 150) return 15;
+            return 25;
+        }
+
+        function testAllLevels() {
+            const testCases = [
+                {
+                    name: 'BASIC',
+                    data: { comment: '', newsletterConsent: false, socialShares: 0, referrals: 0 }
+                },
+                {
+                    name: 'ENGAGED',
+                    data: { comment: 'Je soutiens cette pétition pour une meilleure qualité de vie.', newsletterConsent: true, socialShares: 0, referrals: 0 }
+                },
+                {
+                    name: 'PASSIONATE',
+                    data: { comment: 'Cette pétition est essentielle pour notre communauté. Les sonneries perturbent notre sommeil et notre qualité de vie. Il faut trouver un équilibre respectueux.', newsletterConsent: true, socialShares: 2, referrals: 0 }
+                },
+                {
+                    name: 'CHAMPION',
+                    data: { comment: 'En tant que résident de longue date, je suis profondément préoccupé par l\'impact des sonneries. Cette pétition représente une opportunité unique de dialogue constructif.', newsletterConsent: true, socialShares: 3, referrals: 2 }
+                }
+            ];
+            
+            testCases.forEach(testCase => {
+                const coupon = createSmartCoupon(`${testCase.name.toLowerCase()}@example.com`, testCase.data);
+                displayCoupon(coupon);
+            });
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        function testLocalStorage() {
+            const testCoupon = createSmartCoupon('storage-test@example.com', {
+                comment: 'Test de stockage',
+                newsletterConsent: true,
+                socialShares: 1,
+                referrals: 0
+            });
+            
+            try {
+                // Simuler le stockage comme dans le vrai système
+                const existingCoupons = JSON.parse(localStorage.getItem('userCoupons') || '[]');
+                existingCoupons.push(testCoupon);
+                localStorage.setItem('userCoupons', JSON.stringify(existingCoupons));
+                
+                document.getElementById('storage-results').innerHTML = `
+                    <div class="status success">
+                        ✅ Coupon stocké avec succès dans localStorage
+                        <br>Code: ${testCoupon.id}
+                        <br>Niveau: ${testCoupon.levelBadge} ${testCoupon.levelName}
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('storage-results').innerHTML = `
+                    <div class="status error">
+                        ❌ Erreur de stockage: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        function showStoredCoupons() {
+            try {
+                const coupons = JSON.parse(localStorage.getItem('userCoupons') || '[]');
+                
+                if (coupons.length === 0) {
+                    document.getElementById('storage-results').innerHTML = `
+                        <div class="status">
+                            ℹ️ Aucun coupon stocké
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '<h4>📦 Coupons Stockés:</h4>';
+                coupons.forEach((coupon, index) => {
+                    html += `
+                        <div style="border: 1px solid #ddd; padding: 10px; margin: 5px 0; border-radius: 4px;">
+                            <strong>${coupon.levelBadge} ${coupon.id}</strong> - ${coupon.levelName}
+                            <br>Score: ${coupon.engagementScore} | Générations: ${coupon.generationsRemaining}/${coupon.totalGenerations}
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('storage-results').innerHTML = html;
+            } catch (error) {
+                document.getElementById('storage-results').innerHTML = `
+                    <div class="status error">
+                        ❌ Erreur de lecture: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        function clearStorage() {
+            localStorage.removeItem('userCoupons');
+            document.getElementById('storage-results').innerHTML = `
+                <div class="status success">
+                    ✅ Stockage vidé
+                </div>
+            `;
+        }
+
+        // Event listeners
+        document.getElementById('comment').addEventListener('input', updateCommentScore);
+        document.getElementById('newsletter').addEventListener('change', updateCommentScore);
+        document.getElementById('socialShares').addEventListener('change', updateCommentScore);
+        document.getElementById('referrals').addEventListener('change', updateCommentScore);
+
+        // Initialisation
+        updateCommentScore();
+    </script>
+</body>
+</html>

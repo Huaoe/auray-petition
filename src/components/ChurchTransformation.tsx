@@ -143,7 +143,6 @@ const ChurchTransformation = () => {
   const handleReset = useCallback(() => {
     setState((prev) => ({
       ...prev,
-      selectedTransformation: null,
       generatedImage: null,
       generationTime: null,
       cost: null,
@@ -395,75 +394,14 @@ const ChurchTransformation = () => {
 
   const handleCustomPromptChange = useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setState((prev) => ({ ...prev, customPrompt: event.target.value }));
+      const value = event.target.value;
+      // Limiter à 1800 caractères
+      if (value.length <= 1800) {
+        setState((prev) => ({ ...prev, customPrompt: value }));
+      }
     },
     []
   );
-
-  const handleTransformationSelect = useCallback(
-    (transformation: TransformationType) => {
-      // Generate the enhanced prompt immediately for preview
-      const baseImageName =
-        selectedBaseImageRef.current.path.split("/").pop() ||
-        "Saint-Gildas-Auray-768x576.webp";
-      const enhancedPrompt = generateEnhancedPrompt(
-        transformation.id,
-        transformation.prompt,
-        baseImageName
-      );
-
-      setState((prev) => ({
-        ...prev,
-        selectedTransformation: transformation,
-        generatedImage: null,
-        generationTime: null,
-        cost: null,
-        customPrompt: enhancedPrompt,
-      }));
-    },
-    []
-  );
-
-  const handleCustomPromptReset = useCallback(() => {
-    if (!state.selectedTransformation) return;
-
-    // Get the base image name for prompt generation
-    const baseImageName =
-      selectedBaseImageRef.current.path.split("/").pop() ||
-      "Saint-Gildas-Auray-768x576.webp";
-
-    // Regenerate the default prompt for the current transformation
-    const defaultPrompt = generateEnhancedPrompt(
-      state.selectedTransformation.id,
-      state.selectedTransformation.prompt,
-      baseImageName
-    );
-
-    // Update the state with the default prompt
-    setState((prev) => ({
-      ...prev,
-      customPrompt: defaultPrompt,
-    }));
-
-    // Show a toast notification
-    toast({
-      title: "Prompt réinitialisé",
-      description: "Le prompt a été réinitialisé à sa valeur par défaut.",
-      variant: "success",
-      duration: 2000,
-    });
-  }, [state.selectedTransformation, toast]);
-
-  const handleForceNewGenerationChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setState((prev) => ({
-        ...prev,
-        forceNewGeneration: event.target.checked,
-      }));
-    },
-    []
-  );
-
   // Function to generate enhanced prompt (moved from API to client-side for preview)
   const generateEnhancedPrompt = useCallback(
     (
@@ -538,6 +476,71 @@ const ChurchTransformation = () => {
     },
     []
   );
+
+  const handleTransformationSelect = useCallback(
+    (transformation: TransformationType) => {
+      // Generate the enhanced prompt immediately for preview
+      const baseImageName =
+        selectedBaseImageRef.current.path.split("/").pop() ||
+        "Saint-Gildas-Auray-768x576.webp";
+      const enhancedPrompt = generateEnhancedPrompt(
+        transformation.id,
+        transformation.prompt,
+        baseImageName
+      );
+
+      setState((prev) => ({
+        ...prev,
+        selectedTransformation: transformation,
+        generatedImage: null,
+        generationTime: null,
+        cost: null,
+        customPrompt: enhancedPrompt,
+      }));
+    },
+    []
+  );
+
+  const handleCustomPromptReset = useCallback(() => {
+    if (!state.selectedTransformation) return;
+
+    // Get the base image name for prompt generation
+    const baseImageName =
+      selectedBaseImageRef.current.path.split("/").pop() ||
+      "Saint-Gildas-Auray-768x576.webp";
+
+    // Regenerate the default prompt for the current transformation
+    const defaultPrompt = generateEnhancedPrompt(
+      state.selectedTransformation.id,
+      state.selectedTransformation.prompt,
+      baseImageName
+    );
+
+    // Update the state with the default prompt
+    setState((prev) => ({
+      ...prev,
+      customPrompt: defaultPrompt,
+    }));
+
+    // Show a toast notification
+    toast({
+      title: "Prompt réinitialisé",
+      description: "Le prompt a été réinitialisé à sa valeur par défaut.",
+      variant: "success",
+      duration: 2000,
+    });
+  }, [state.selectedTransformation, toast, generateEnhancedPrompt]);
+
+  const handleForceNewGenerationChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setState((prev) => ({
+        ...prev,
+        forceNewGeneration: event.target.checked,
+      }));
+    },
+    []
+  );
+
 
   return (
     <div className="w-full max-w-7xl mx-auto p-6 space-y-8">
@@ -855,6 +858,7 @@ const ChurchTransformation = () => {
             placeholder="Sélectionnez d'abord une transformation pour voir le prompt par défaut..."
             className="w-full min-h-[80px] max-h-[320px] p-4 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none overflow-hidden"
             disabled={!state.selectedTransformation}
+            maxLength={1800}
             rows={1}
             style={{
               height: "auto",
@@ -871,18 +875,31 @@ const ChurchTransformation = () => {
               target.style.height = target.scrollHeight + "px";
             }}
           />
+          {/* Compteur de caractères */}
           {state.selectedTransformation && (
-            <div className="flex justify-end mt-2">
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={handleCustomPromptReset}
-                disabled={!state.selectedTransformation}
-              >
-                Réinitialiser le prompt
-              </Button>
+            <div className="flex justify-between items-center mt-2">
+              <span className={`text-xs ${
+                state.customPrompt.length > 1600 
+                  ? 'text-orange-600' 
+                  : state.customPrompt.length > 1700 
+                  ? 'text-red-600' 
+                  : 'text-gray-500'
+              }`}>
+                {state.customPrompt.length}/1800 caractères
+              </span>
+              <div className="flex justify-end">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={handleCustomPromptReset}
+                  disabled={!state.selectedTransformation}
+                >
+                  Réinitialiser le prompt
+                </Button>
+              </div>
             </div>
           )}
+
           {state.selectedTransformation && (
             <div className="mt-4 flex flex-col items-center space-y-3">
               <Button

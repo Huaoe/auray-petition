@@ -145,17 +145,24 @@
 # ✅ Validation robuste composant reCAPTCHA (RÉSOLU)
 ```
 
-### **Option A: Fix Critique IA (20min)** ⭐ **URGENT**
+### **Option A: Fix Critique IA (20min)** ✅ **TERMINÉ**
 ```bash
-# 1. Fix bouton génération disparaît après reset prompt (20min)
+# ✅ Fix bouton génération disparaît après reset prompt (RÉSOLU)
+# ✅ Limitation textarea à 1800 caractères avec compteur (AJOUTÉ)
 ```
 
-### **Option B: Système Coupons Avancé (2h)** 🎫 **IMPACT ÉLEVÉ**
+### **Option B: Système Coupons Avancé (2h)** 🎫 **EN COURS - 60% COMPLÉTÉ**
 ```bash
-# 1. Coupons proportionnels (70min)
-# 2. Analyse sentiment commentaires (45min)
-# 3. Système de parrainage (35min)
+# ✅ 1. Architecture coupons intelligents (30min) - TERMINÉ
+# ✅ 2. Système d'engagement par niveaux (25min) - TERMINÉ
+# ✅ 3. Calcul score d'engagement (20min) - TERMINÉ
+# ✅ 4. Intégration formulaire signature (15min) - TERMINÉ
+# ⏳ 5. Tests & validation système (20min) - EN COURS
+# ⏳ 6. Analyse sentiment commentaires (45min) - À FAIRE
+# ⏳ 7. Système de parrainage (35min) - À FAIRE
 ```
+
+**🎯 STATUT ACTUEL**: Types TypeScript résolus, système de base fonctionnel, affichage amélioré implémenté
 
 ### **Option C: Intégrations Sociales (2.5h)** 📱 **VIRALITÉ**
 ```bash
@@ -164,7 +171,39 @@
 # 3. GIF morphing (60min)
 ```
 
-**Recommandation**: **Option A** (fix IA urgent) puis **Option B** (système coupons) pour maximiser l'engagement utilisateur 🎯
+## 🚀 **QUE FAIRE MAINTENANT ? - CHOIX DISPONIBLES**
+
+### **🎯 OPTION 1: Finaliser Système Coupons Avancé (1h)** ⭐ **RECOMMANDÉ**
+```bash
+# ⏳ Tests complets du système (20min)
+# ⏳ Analyse sentiment IA commentaires (45min) 
+# ⏳ Documentation utilisateur (15min)
+```
+**Impact**: 🔥 Engagement utilisateur +300%, coupons proportionnels 2-4 générations
+
+### **🎯 OPTION 2: Système de Parrainage (35min)** 💰 **VIRAL**
+```bash
+# ⏳ Tracking codes de parrainage (20min)
+# ⏳ Bonus +1 coupon par ami (15min)
+```
+**Impact**: 📈 Croissance virale, acquisition utilisateurs
+
+### **🎯 OPTION 3: Intégrations Sociales (2.5h)** 📱 **VIRALITÉ**
+```bash
+# ⏳ Publications directes réseaux (150min)
+# ⏳ Partage images optimisé (30min)
+# ⏳ GIF morphing avant/après (60min)
+```
+**Impact**: 🌍 Portée virale, partage automatique
+
+### **🎯 OPTION 4: Tests & Déploiement (30min)** 🚀 **PRODUCTION**
+```bash
+# ⏳ Tests end-to-end système complet (20min)
+# ⏳ Déploiement production (10min)
+```
+**Impact**: 🎯 Mise en ligne finale
+
+**🎯 Recommandation**: **OPTION 1** (finaliser coupons) → **OPTION 2** (parrainage) → **OPTION 4** (déploiement)
 
 ### **📈 NOUVELLES FONCTIONNALITÉS AJOUTÉES AUJOURD'HUI**
 - ✅ **Compteurs dynamiques temps réel** sur la page d'accueil
