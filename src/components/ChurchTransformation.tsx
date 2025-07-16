@@ -191,8 +191,13 @@ const ChurchTransformation = () => {
   }, []);
 
   const handleTransform = useCallback(async () => {
-    // Vérification coupon obligatoire
-    if (!state.couponValidation?.valid) {
+    // Détection du mode développement
+    const isDevelopment = process.env.NODE_ENV === 'development' || 
+                         window.location.hostname === 'localhost' ||
+                         window.location.hostname === '127.0.0.1';
+    
+    // Vérification coupon obligatoire (sauf en mode développement)
+    if (!isDevelopment && !state.couponValidation?.valid) {
       toast({
         title: "🎫 Coupon requis",
         description:
@@ -202,8 +207,8 @@ const ChurchTransformation = () => {
       return;
     }
 
-    // Vérification générations restantes
-    if (state.activeCoupon && state.activeCoupon.generationsRemaining <= 0) {
+    // Vérification générations restantes (sauf en mode développement)
+    if (!isDevelopment && state.activeCoupon && state.activeCoupon.generationsRemaining <= 0) {
       toast({
         title: "❌ Plus de générations",
         description: "Votre coupon n'a plus de générations disponibles.",
@@ -239,12 +244,13 @@ const ChurchTransformation = () => {
         },
         body: JSON.stringify({
           baseImage: state.selectedInpaintImage.path,
-          maskImage: state.selectedInpaintImage.maskPath, // Masque correspondant à l'image
+          maskImage: state.selectedInpaintImage.maskPath,
           prompt: fullPrompt,
           method: state.hdPainterMethod,
           resolution: state.selectedInpaintImage.resolution,
           noCache: state.forceNewGeneration,
-          couponCode: state.activeCoupon?.id || state.couponCode,
+          couponCode: isDevelopment ? 'DEV_MODE' : (state.activeCoupon?.id || state.couponCode),
+          isDevelopment,
         }),
       });
 
@@ -265,8 +271,8 @@ const ChurchTransformation = () => {
         isGenerating: false,
       }));
 
-      // Décrémentation du coupon après succès
-      if (state.activeCoupon) {
+      // Décrémentation du coupon après succès (sauf en mode développement)
+      if (!isDevelopment && state.activeCoupon) {
         const updatedCoupon = useCouponGeneration(state.activeCoupon.id);
         setState((prev) => ({
           ...prev,
@@ -957,7 +963,7 @@ const ChurchTransformation = () => {
                 <span className="mx-1">🙏</span>
                 <span>
                   <a
-                    href="https://www.buymeacoffee.com/auraycollectif"
+                    href="https://www.buymeacoffee.com/huaoe"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-md shadow transition-colors text-sm ml-4"

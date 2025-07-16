@@ -48,6 +48,18 @@ const PhilosophiePage = () => {
             Lire notre vision détaillée
           </Link>
         </div>
+<div className="text-center mt-8">
+  <a
+    href="https://www.buymeacoffee.com/huaoe"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center justify-center px-6 py-3 border border-yellow-400 text-base font-medium rounded-md text-yellow-900 bg-yellow-200 hover:bg-yellow-300 transition-colors shadow"
+    aria-label="Écris-moi un poème (soutien via Buy Me a Coffee)"
+  >
+    ✍️ Écris-moi un poème
+  </a>
+</div>
+
       </div>
     </div>
   )

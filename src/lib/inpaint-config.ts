@@ -189,4 +189,5 @@ export interface InpaintRequest {
   guidance?: number;
   steps?: number;
   noCache?: boolean;
+  isDevelopment?: boolean;
 }

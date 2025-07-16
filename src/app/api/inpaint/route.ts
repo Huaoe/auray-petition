@@ -19,6 +19,21 @@ import {
   type InpaintRequest
 } from "@/lib/inpaint-config";
 
+// Interface pour le body de la requête API
+interface InpaintRequestBody {
+  baseImage: string;
+  maskImage?: string;
+  prompt: string;
+  method?: HDPainterMethod;
+  resolution?: string;
+  strength?: number;
+  guidance?: number;
+  steps?: number;
+  noCache?: boolean;
+  couponCode?: string;
+  isDevelopment?: boolean;
+}
+
 // Rate limiting simple (en mémoire)
 const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
 const RATE_LIMIT = {
@@ -168,11 +183,7 @@ async function generateWithStabilityInpainting(
   }
 }
 
-interface InpaintRequestBody extends Omit<InpaintRequest, 'imagePath' | 'maskPath'> {
-  baseImage: string; // Path to base image
-  maskImage?: string; // Optional explicit mask path
-  couponCode: string;
-}
+
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
@@ -201,36 +212,41 @@ export async function POST(request: NextRequest) {
       steps,
       noCache = false,
       couponCode,
+      isDevelopment = false,
     } = body;
 
     console.log(`🎨 HD-Painter Inpainting Request: ${baseImage} with method ${method}`);
 
-    // VALIDATION DU COUPON OBLIGATOIRE
-    if (!couponCode || couponCode.trim().length === 0) {
-      console.log('❌ Coupon code missing');
-      return NextResponse.json(
-        { 
-          error: 'Code de coupon requis',
-          message: 'Vous devez signer la pétition pour obtenir un coupon de génération d\'images'
-        },
-        { status: 400 }
-      );
-    }
+    // VALIDATION DU COUPON OBLIGATOIRE (sauf en mode développement)
+    if (!isDevelopment) {
+      if (!couponCode || couponCode.trim().length === 0) {
+        console.log('❌ Coupon code missing');
+        return NextResponse.json(
+          { 
+            error: 'Code de coupon requis',
+            message: 'Vous devez signer la pétition pour obtenir un coupon de génération d\'images'
+          },
+          { status: 400 }
+        );
+      }
 
-    // Valider le format du coupon (XXXX-XXXX-XXXX)
-    const couponRegex = /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
-    if (!couponRegex.test(couponCode.toUpperCase())) {
-      console.log(`❌ Invalid coupon format: ${couponCode}`);
-      return NextResponse.json(
-        { 
-          error: 'Format de coupon invalide',
-          message: 'Le code de coupon doit avoir le format XXXX-XXXX-XXXX'
-        },
-        { status: 400 }
-      );
-    }
+      // Valider le format du coupon (XXXX-XXXX-XXXX)
+      const couponRegex = /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
+      if (couponCode !== 'DEV_MODE' && !couponRegex.test(couponCode.toUpperCase())) {
+        console.log(`❌ Invalid coupon format: ${couponCode}`);
+        return NextResponse.json(
+          { 
+            error: 'Format de coupon invalide',
+            message: 'Le code de coupon doit avoir le format XXXX-XXXX-XXXX'
+          },
+          { status: 400 }
+        );
+      }
 
-    console.log(`🎫 Coupon format validated: ${couponCode}`);
+      console.log(`🎫 Coupon format validated: ${couponCode}`);
+    } else {
+      console.log('🔧 Development mode: Skipping coupon validation');
+    }
 
     // Trouver la configuration d'inpainting
     const inpaintConfig = INPAINT_IMAGES.find(img => img.path === baseImage);
@@ -271,8 +287,8 @@ export async function POST(request: NextRequest) {
     console.log(`🎭 Mask loaded: ${maskImageBuffer.length} bytes`);
 
     // Redimensionner les images selon la résolution HD-Painter
-    const resizedBaseImage = await resizeImageForInpainting(baseImageBuffer, resolution);
-    const resizedMaskImage = await resizeImageForInpainting(maskImageBuffer, resolution, "mask");
+    const resizedBaseImage = await resizeImageForInpainting(baseImageBuffer, resolution as keyof typeof HD_PAINTER_CONFIG.resolutions);
+    const resizedMaskImage = await resizeImageForInpainting(maskImageBuffer, resolution as keyof typeof HD_PAINTER_CONFIG.resolutions, "mask");
 
     // Vérification et ajout de l'exigence obligatoire "happy people"
     const enhancedPrompt = prompt.toLowerCase().includes("happy") && prompt.toLowerCase().includes("people")
