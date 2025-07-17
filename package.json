@@ -18,6 +18,8 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
     "analyze": "ANALYZE=true next build",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "test:sheets": "node scripts/test-google-sheets.js",
     "debug:env": "node -e \"console.log('ENV Check:', {sheets: !!process.env.GOOGLE_SHEETS_SHEET_ID, openai: !!process.env.OPENAI_API_KEY})\"",
     "generate:favicon": "node scripts/generate-favicon.js"
@@ -58,6 +60,7 @@
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.10.5",
     "@types/react": "^19.0.45",
     "@types/react-dom": "^19.0.18",
@@ -69,10 +72,14 @@
     "dotenv": "^17.2.0",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.2.30",
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^30.0.4",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.9",
     "tailwindcss": "^3.4.0",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "yargs": "^17.5.1"
   },

@@ -44,6 +44,12 @@ const Header = () => {
             >
               Signer
             </a>
+            <Link
+              href="/connected-accounts"
+              className="text-gray-600 hover:text-green-700 transition-colors"
+            >
+              Connected Accounts
+            </Link>
             <a
               href="#contact"
               className="text-gray-600 hover:text-green-700 transition-colors"

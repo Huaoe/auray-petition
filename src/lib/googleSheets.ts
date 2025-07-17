@@ -14,6 +14,7 @@ export interface Signature {
   comment?: string;
   rgpdConsent: boolean;
   newsletterConsent: boolean;
+  referralCode?: string;
   timestamp?: string;
   ipAddress?: string;
   userAgent?: string;
@@ -62,6 +63,7 @@ export const addSignature = async (signature: Omit<Signature, 'timestamp'>): Pro
         signature.comment || '',
         signature.rgpdConsent ? 'Oui' : 'Non',
         signature.newsletterConsent ? 'Oui' : 'Non',
+        signature.referralCode || '',
         timestamp,
         signature.ipAddress || '',
         signature.userAgent || ''
@@ -71,7 +73,7 @@ export const addSignature = async (signature: Omit<Signature, 'timestamp'>): Pro
     // Ajouter la ligne dans la feuille - mise à jour du range pour inclure tous les champs
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A:K`, // Étendu pour 11 colonnes
+      range: `${SHEET_NAME}!A:L`, // Étendu pour 12 colonnes (ajout du code de parrainage)
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values,
@@ -85,6 +87,57 @@ export const addSignature = async (signature: Omit<Signature, 'timestamp'>): Pro
       success: false, 
       message: error instanceof Error ? error.message : 'Erreur inconnue'
     };
+  }
+};
+
+// Vérifier si un email existe déjà (pour éviter les doublons)
+export const checkEmailExists = async (email: string): Promise<{ exists: boolean; existingSignature?: Partial<Signature> }> => {
+  try {
+    if (!SPREADSHEET_ID) {
+      // En mode développement, on peut bypasser la vérification
+      if (process.env.NODE_ENV === 'development') {
+        return { exists: false };
+      }
+      throw new Error('GOOGLE_SHEETS_SHEET_ID non configuré');
+    }
+
+    const sheets = await getGoogleSheetsClient();
+    
+    // Récupérer toutes les signatures pour vérifier les doublons
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SPREADSHEET_ID,
+      range: `${SHEET_NAME}!A:L`,
+    });
+
+    const rows = response.data.values || [];
+    const signatures = rows.slice(1); // Ignorer l'en-tête
+    
+    // Normaliser l'email pour la comparaison
+    const normalizedEmail = email.trim().toLowerCase();
+    
+    // Chercher un email correspondant
+    for (const row of signatures) {
+      const existingEmail = row[2]?.trim().toLowerCase(); // Index 2 pour l'email
+      if (existingEmail === normalizedEmail) {
+        return {
+          exists: true,
+          existingSignature: {
+            firstName: row[0],
+            lastName: row[1],
+            email: row[2],
+            city: row[3],
+            postalCode: row[4],
+            timestamp: row[9] // Index 9 pour timestamp
+          }
+        };
+      }
+    }
+    
+    return { exists: false };
+  } catch (error) {
+    console.error('Erreur lors de la vérification des doublons:', error);
+    // En cas d'erreur, on laisse passer pour ne pas bloquer les signatures
+    return { exists: false };
   }
 };
 
@@ -105,7 +158,7 @@ export const getPetitionStats = async (): Promise<PetitionStats> => {
     // Récupérer toutes les signatures
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A:K`,
+      range: `${SHEET_NAME}!A:L`, // Mis à jour pour 12 colonnes
     });
 
     const rows = response.data.values || [];
@@ -113,7 +166,7 @@ export const getPetitionStats = async (): Promise<PetitionStats> => {
     
     // Calculer les statistiques
     const totalSignatures = signatures.length;
-    const firstSignatureDate = signatures.length > 0 ? new Date(signatures[0][8]) : new Date();
+    const firstSignatureDate = signatures.length > 0 ? new Date(signatures[0][9]) : new Date(); // Index 9 pour timestamp (décalé par referralCode)
     const daysActive = Math.max(1, Math.ceil((Date.now() - firstSignatureDate.getTime()) / (1000 * 60 * 60 * 24)));
     
     return {
@@ -145,12 +198,12 @@ export const initializeSheet = async (): Promise<{ success: boolean; message?: s
     
     // Créer l'en-tête si la feuille est vide
     const headers = [
-      ['Prénom', 'Nom', 'Email', 'Ville', 'Code Postal', 'Commentaire', 'RGPD', 'Newsletter', 'Date/Heure', 'IP', 'User Agent']
+      ['Prénom', 'Nom', 'Email', 'Ville', 'Code Postal', 'Commentaire', 'RGPD', 'Newsletter', 'Code Parrainage', 'Date/Heure', 'IP', 'User Agent']
     ];
 
     await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A1:K1`,
+      range: `${SHEET_NAME}!A1:L1`, // Mis à jour pour 12 colonnes
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: headers,

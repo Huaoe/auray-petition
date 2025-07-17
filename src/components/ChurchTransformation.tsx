@@ -33,6 +33,7 @@ import {
   Layers,
 } from "lucide-react";
 import { useToast } from "@/components/ui/toaster";
+import { SharePostModal } from "@/components/SharePostModal";
 import {
   TRANSFORMATION_TYPES,
   type TransformationType,
@@ -67,6 +68,8 @@ interface GenerationState {
   selectedInpaintImage: InpaintImage | null;
   hdPainterMethod: HDPainterMethod;
   showMaskPreview: boolean;
+  // Social Media Sharing
+  showShareModal: boolean;
 }
 
 const ChurchTransformation = () => {
@@ -88,6 +91,8 @@ const ChurchTransformation = () => {
     selectedInpaintImage: INPAINT_IMAGES[0],
     hdPainterMethod: "painta+rasg", // Méthode par défaut
     showMaskPreview: false,
+    // Social Media Sharing
+    showShareModal: false,
   });
 
   // État pour suivre l'image de base sélectionnée
@@ -541,6 +546,14 @@ const ChurchTransformation = () => {
     []
   );
 
+  // Social Media Sharing handlers
+  const handleOpenShareModal = useCallback(() => {
+    setState((prev) => ({ ...prev, showShareModal: true }));
+  }, []);
+
+  const handleCloseShareModal = useCallback(() => {
+    setState((prev) => ({ ...prev, showShareModal: false }));
+  }, []);
 
   return (
     <div className="w-full max-w-7xl mx-auto p-6 space-y-8">
@@ -1042,9 +1055,9 @@ const ChurchTransformation = () => {
                 <Download className="w-4 h-4 mr-2" />
                 Télécharger
               </Button>
-              <Button onClick={handleShare} variant="outline" size="sm">
+              <Button onClick={handleOpenShareModal} variant="outline" size="sm">
                 <Share2 className="w-4 h-4 mr-2" />
-                Partager
+                Partager sur les réseaux
               </Button>
               <Button onClick={handleReset} variant="outline" size="sm">
                 <RotateCcw className="w-4 h-4 mr-2" />
@@ -1066,6 +1079,16 @@ const ChurchTransformation = () => {
           précision pour des résultats cohérents
         </p>
       </div>
+
+      {/* Social Media Share Modal */}
+      {state.showShareModal && state.generatedImage && state.selectedTransformation && (
+        <SharePostModal
+          isOpen={state.showShareModal}
+          onClose={handleCloseShareModal}
+          imageUrl={state.generatedImage}
+          imageDescription={`Découvrez cette transformation révolutionnaire de l'église Saint-Gildas d'Auray en ${state.selectedTransformation.name} ! ${state.selectedTransformation.description}`}
+        />
+      )}
     </div>
   );
 };

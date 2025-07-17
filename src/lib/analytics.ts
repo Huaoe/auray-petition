@@ -77,4 +77,51 @@ export const analytics = {
   pageLoadTime: (loadTime: number) => {
     trackEvent('page_load_time', 'performance', 'Load Time', loadTime);
   },
+
+  // Événements de parrainage
+  referral: {
+    // Génération de code de parrainage
+    codeGenerated: (email: string) => {
+      trackEvent('referral_code_generated', 'referral', `Code généré pour ${email}`);
+    },
+
+    // Validation de code de parrainage
+    codeValidated: (code: string, referrerEmail: string, success: boolean) => {
+      trackEvent(
+        success ? 'referral_code_valid' : 'referral_code_invalid',
+        'referral',
+        `Code ${code} - Parrain: ${referrerEmail}`
+      );
+    },
+
+    // Utilisation réussie d'un code de parrainage
+    codeUsed: (code: string, referrerEmail: string, newUserEmail: string) => {
+      trackEvent('referral_code_used', 'referral', `${code}: ${referrerEmail} -> ${newUserEmail}`);
+    },
+
+    // Attribution de bonus de parrainage
+    bonusAwarded: (referrerEmail: string, bonusAmount: number) => {
+      trackEvent('referral_bonus_awarded', 'referral', `Bonus ${bonusAmount} pour ${referrerEmail}`);
+    },
+
+    // Partage de code de parrainage
+    codeShared: (platform: string, referrerEmail: string) => {
+      trackEvent('referral_code_shared', 'referral', `Partagé sur ${platform} par ${referrerEmail}`);
+    },
+
+    // Consultation du tableau de bord de parrainage
+    dashboardViewed: (email: string) => {
+      trackEvent('referral_dashboard_viewed', 'referral', `Dashboard consulté par ${email}`);
+    },
+
+    // Consultation du classement
+    leaderboardViewed: () => {
+      trackEvent('referral_leaderboard_viewed', 'referral', 'Classement consulté');
+    },
+
+    // Conversion de parrainage (signature avec code)
+    conversionCompleted: (code: string, referrerEmail: string, conversionValue?: number) => {
+      trackEvent('referral_conversion', 'referral', `Conversion ${code}: ${referrerEmail}`, conversionValue);
+    }
+  }
 };

@@ -36,15 +36,17 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, CheckCircle, AlertCircle, Users, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { analytics } from "@/lib/analytics";
-import { 
-  createSmartCoupon, 
-  storeEnhancedCoupon, 
+import {
+  createSmartCoupon,
+  storeEnhancedCoupon,
   calculateEngagementScore,
   getEngagementLevel,
   getEngagementLevelDetails,
-  type CouponData, 
+  validateReferralCode,
+  recordReferral,
+  type CouponData,
   type EnhancedCouponData,
-  type SignatureEngagementData 
+  type SignatureEngagementData
 } from "@/lib/coupon-system";
 import Link from "next/link";
 import {
@@ -99,6 +101,17 @@ const signatureSchema = z.object({
     .optional()
     .transform((val) => (val === "" ? undefined : val)),
 
+  referralCode: z
+    .string()
+    .optional()
+    .transform((val) => (val === "" ? undefined : val))
+    .refine((val) => {
+      if (!val) return true; // Optional field
+      return /^[A-Z0-9]{6}$/.test(val.toUpperCase());
+    }, {
+      message: "Le code de parrainage doit contenir 6 caractères alphanumériques",
+    }),
+
   rgpdConsent: z
     .boolean()
     .refine((val) => val === true, {
@@ -144,6 +157,7 @@ export const SignatureForm = ({
       city: "",
       postalCode: "",
       comment: "",
+      referralCode: "",
       rgpdConsent: false,
       newsletterConsent: false,
     },
@@ -154,12 +168,41 @@ export const SignatureForm = ({
   const commentValue = watch("comment");
 
   // Function to reset all states and form
+  const [referralValidation, setReferralValidation] = useState<{
+    isValid: boolean;
+    message: string;
+    referrer?: string;
+  } | null>(null);
+
   const handleResetForm = () => {
     form.reset();
     setIsSubmitting(false);
     setSubmitStatus("idle");
     setErrorMessage("");
     setGeneratedCoupon(null);
+    setReferralValidation(null);
+  };
+
+  // Validation du code de parrainage en temps réel
+  const handleReferralCodeChange = async (value: string) => {
+    if (!value || value.length < 6) {
+      setReferralValidation(null);
+      return;
+    }
+
+    const validation = validateReferralCode(value, form.getValues('email'));
+    if (validation.valid) {
+      setReferralValidation({
+        isValid: true,
+        message: `Code valide - Parrain: ${validation.referrer}`,
+        referrer: validation.referrer
+      });
+    } else {
+      setReferralValidation({
+        isValid: false,
+        message: validation.error || 'Code invalide'
+      });
+    }
   };
 
   const handleApiSubmit = async (data: SignatureFormData, recaptchaToken: string) => {
@@ -195,10 +238,17 @@ export const SignatureForm = ({
       if (result.aiCoupon) {
         // Préparer les données d'engagement
         const engagementData: SignatureEngagementData = {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          city: data.city,
+          postalCode: data.postalCode,
           comment: data.comment,
           newsletterConsent: data.newsletterConsent,
+          hasSocialShare: false, // Sera mis à jour si l'utilisateur partage
           socialShares: 0, // TODO: Intégrer le tracking des partages
-          referrals: 0     // TODO: Intégrer le système de parrainage
+          referrals: 0,     // TODO: Intégrer le système de parrainage
+          referralCode: data.referralCode
         };
 
         // Créer le coupon intelligent
@@ -211,10 +261,10 @@ export const SignatureForm = ({
         // Log des détails d'engagement (dev uniquement)
         if (process.env.NODE_ENV === 'development') {
           console.log('🎯 Coupon intelligent créé:', {
-            score: smartCoupon.engagementScore,
-            level: smartCoupon.engagementLevel,
+            score: smartCoupon.engagement.score,
+            level: smartCoupon.level,
             generations: smartCoupon.totalGenerations,
-            badge: smartCoupon.levelBadge
+            referralBonuses: smartCoupon.referralBonuses
           });
         }
       }
@@ -373,15 +423,20 @@ export const SignatureForm = ({
               {generatedCoupon && (
                 <div className="mt-4 text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200 rounded-lg">
                   {/* Affichage du niveau d'engagement pour les coupons avancés */}
-                  {'engagementLevel' in generatedCoupon && (
+                  {'referralBonuses' in generatedCoupon && (
                     <div className="mb-3 flex items-center justify-center gap-2">
-                      <span className="text-2xl">{generatedCoupon.levelBadge}</span>
+                      <span className="text-2xl">
+                        {generatedCoupon.level === 'BASIC' && '🌱'}
+                        {generatedCoupon.level === 'ENGAGED' && '💙'}
+                        {generatedCoupon.level === 'PASSIONATE' && '💜'}
+                        {generatedCoupon.level === 'CHAMPION' && '👑'}
+                      </span>
                       <div className="text-center">
-                        <p className="font-bold" style={{ color: generatedCoupon.levelColor }}>
-                          {generatedCoupon.levelName}
+                        <p className="font-bold text-blue-800">
+                          Niveau {generatedCoupon.level}
                         </p>
                         <p className="text-xs text-gray-600">
-                          Score d'engagement: {generatedCoupon.engagementScore}
+                          Score d'engagement: {generatedCoupon.engagement.score}
                         </p>
                       </div>
                     </div>
@@ -392,13 +447,13 @@ export const SignatureForm = ({
                   </p>
                   <div className="flex items-center justify-center gap-2 my-2">
                     <code className="text-lg font-bold bg-blue-100 text-blue-900 px-3 py-1 rounded">
-                      {generatedCoupon.id}
+                      {generatedCoupon.code}
                     </code>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => {
-                        navigator.clipboard.writeText(generatedCoupon.id);
+                        navigator.clipboard.writeText(generatedCoupon.code);
                         toast({
                           title: "Copié !",
                           description: "Le code du coupon a été copié dans le presse-papiers.",
@@ -410,11 +465,13 @@ export const SignatureForm = ({
                   </div>
                   
                   {/* Détails d'engagement pour les coupons avancés */}
-                  {'engagementLevel' in generatedCoupon && (
+                  {'referralBonuses' in generatedCoupon && (
                     <div className="mt-3 text-xs text-gray-600">
                       <p>
-                        📝 Commentaire: {generatedCoupon.signatureData.comment ? '✓' : '✗'} |
-                        📧 Newsletter: {generatedCoupon.signatureData.newsletterConsent ? '✓' : '✗'}
+                        📝 Commentaire: {generatedCoupon.engagement.details.comment ? '✓' : '✗'} |
+                        📧 Newsletter: {generatedCoupon.engagement.details.newsletter ? '✓' : '✗'} |
+                        🎁 Bonus parrainage: +{generatedCoupon.referralBonuses} |
+                        🌟 Score: {generatedCoupon.engagement.score}
                       </p>
                     </div>
                   )}
@@ -571,6 +628,41 @@ export const SignatureForm = ({
                       <FormMessage />
                       <div className="text-xs text-gray-500 text-right">
                         {commentValue?.length || 0}/500 caractères
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                {/* Code de parrainage */}
+                <FormField
+                  control={control}
+                  name="referralCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Code de parrainage (optionnel)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Entrez un code de parrainage"
+                          maxLength={6}
+                          {...field}
+                          onChange={(e) => {
+                            const value = e.target.value.toUpperCase();
+                            field.onChange(value);
+                            handleReferralCodeChange(value);
+                          }}
+                          onFocus={() => handleFieldFocus("referralCode")}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                      {referralValidation && (
+                        <div className={`text-xs mt-1 ${
+                          referralValidation.isValid ? 'text-green-600' : 'text-red-600'
+                        }`}>
+                          {referralValidation.isValid ? '✓' : '✗'} {referralValidation.message}
+                        </div>
+                      )}
+                      <div className="text-xs text-gray-500 mt-1">
+                        Si quelqu'un vous a partagé un code, saisissez-le ici pour obtenir des bonus
                       </div>
                     </FormItem>
                   )}
