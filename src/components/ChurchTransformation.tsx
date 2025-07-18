@@ -55,6 +55,7 @@ import {
 interface GenerationState {
   isGenerating: boolean;
   selectedTransformation: TransformationType | null;
+  selectedLocation:FamousLocation |null;
   generatedImage: string | null;
   originalImage: string;
   generationTime: number | null;
@@ -72,12 +73,451 @@ interface GenerationState {
   showShareModal: boolean;
 }
 
+// Famous locations data structure organized by transformation types
+interface FamousLocation {
+  id: string;
+  name: string;
+  location: string;
+  description: string;
+  architecturalStyle: string;
+  keyFeatures: string[];
+  promptEnhancement: string;
+}
+
+const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
+  library: [
+    {
+      id: "trinity-college",
+      name: "Trinity College Library",
+      location: "Dublin, Ireland",
+      description:
+        "The Long Room with its barrel-vaulted ceiling and towering oak shelves",
+      architecturalStyle: "Georgian/Classical",
+      keyFeatures: [
+        "Barrel-vaulted ceiling",
+        "Oak galleries",
+        "Classical columns",
+        "Natural lighting",
+      ],
+      promptEnhancement:
+        "with the majestic barrel-vaulted ceiling and towering oak galleries of Trinity College Dublin's Long Room, featuring classical columns and warm natural lighting filtering through tall windows",
+    },
+    {
+      id: "beinecke-library",
+      name: "Beinecke Rare Book Library",
+      location: "Yale University, USA",
+      description:
+        "Modernist cube with translucent marble walls creating ethereal lighting",
+      architecturalStyle: "Modernist",
+      keyFeatures: [
+        "Translucent marble walls",
+        "Floating glass cube",
+        "Ethereal lighting",
+        "Minimalist design",
+      ],
+      promptEnhancement:
+        "inspired by Yale's Beinecke Library with its translucent marble walls creating ethereal, diffused lighting and floating glass display cases in a minimalist modernist design",
+    },
+  ],
+  restaurant: [
+    {
+      id: "le-bernardin",
+      name: "Le Bernardin",
+      location: "New York, USA",
+      description:
+        "Elegant fine dining with sophisticated lighting and luxurious materials",
+      architecturalStyle: "Contemporary Luxury",
+      keyFeatures: [
+        "Sophisticated lighting",
+        "Luxurious materials",
+        "Intimate seating",
+        "Refined atmosphere",
+      ],
+      promptEnhancement:
+        "with the sophisticated elegance of Le Bernardin NYC, featuring refined lighting, luxurious materials, and intimate dining spaces with impeccable attention to detail",
+    },
+    {
+      id: "noma",
+      name: "Noma",
+      location: "Copenhagen, Denmark",
+      description:
+        "Nordic minimalism with natural materials and connection to nature",
+      architecturalStyle: "Nordic Minimalism",
+      keyFeatures: [
+        "Natural materials",
+        "Minimalist design",
+        "Nature connection",
+        "Warm lighting",
+      ],
+      promptEnhancement:
+        "inspired by Copenhagen's Noma with its Nordic minimalist design, natural wood materials, and seamless connection between interior and nature through large windows",
+    },
+  ],
+  coworking: [
+    {
+      id: "wework-london",
+      name: "WeWork London",
+      location: "London, UK",
+      description:
+        "Modern collaborative spaces with flexible layouts and vibrant design",
+      architecturalStyle: "Contemporary Industrial",
+      keyFeatures: [
+        "Flexible layouts",
+        "Vibrant colors",
+        "Industrial elements",
+        "Collaborative zones",
+      ],
+      promptEnhancement:
+        "with the dynamic energy of WeWork London, featuring flexible modular workspaces, vibrant colors, industrial design elements, and diverse collaborative zones",
+    },
+  ],
+  concert_hall: [
+    {
+      id: "philharmonie-paris",
+      name: "Philharmonie de Paris",
+      location: "Paris, France",
+      description:
+        "Modern architectural marvel with flowing metallic exterior and dramatic interior",
+      architecturalStyle: "Contemporary",
+      keyFeatures: [
+        "Flowing metallic forms",
+        "Dramatic interior",
+        "Acoustic excellence",
+        "Modern design",
+      ],
+      promptEnhancement:
+        "with the flowing metallic architecture and dramatic interior spaces of Paris's Philharmonie, featuring contemporary design excellence and world-class acoustics",
+    },
+    {
+      id: "royal-albert-hall",
+      name: "Royal Albert Hall",
+      location: "London, UK",
+      description:
+        "Victorian grandeur with circular amphitheater and ornate details",
+      architecturalStyle: "Victorian",
+      keyFeatures: [
+        "Circular amphitheater",
+        "Ornate details",
+        "Red brick facade",
+        "Historic grandeur",
+      ],
+      promptEnhancement:
+        "inspired by London's Royal Albert Hall with its Victorian grandeur, circular amphitheater design, ornate architectural details, and majestic red brick facade",
+    },
+  ],
+  art_gallery: [
+    {
+      id: "guggenheim-bilbao",
+      name: "Guggenheim Bilbao",
+      location: "Bilbao, Spain",
+      description:
+        "Titanium curves and flowing forms creating dynamic exhibition spaces",
+      architecturalStyle: "Deconstructivist",
+      keyFeatures: [
+        "Titanium curves",
+        "Flowing forms",
+        "Dynamic spaces",
+        "Natural lighting",
+      ],
+      promptEnhancement:
+        "with the flowing titanium curves and dynamic forms of Guggenheim Bilbao, featuring deconstructivist architecture and naturally lit exhibition spaces",
+    },
+    {
+      id: "louvre-abu-dhabi",
+      name: "Louvre Abu Dhabi",
+      location: "Abu Dhabi, UAE",
+      description:
+        "Dome of light creating a 'rain of light' effect, inspired by palm fronds",
+      architecturalStyle: "Contemporary Islamic",
+      keyFeatures: [
+        "Perforated dome",
+        "Rain of light effect",
+        "Water features",
+        "Geometric patterns",
+      ],
+      promptEnhancement:
+        "inspired by the Louvre Abu Dhabi's iconic 'rain of light' dome, featuring intricate geometric patterns, diffused natural light, and a serene, contemplative atmosphere",
+    },
+  ],
+  community_center: [
+    {
+      id: "carnegie-hall-community",
+      name: "Carnegie Hall Community Center",
+      location: "New York, USA",
+      description:
+        "Historic venue transformed into a vibrant community gathering space",
+      architecturalStyle: "Neoclassical Revival",
+      keyFeatures: [
+        "Flexible meeting spaces",
+        "Historic grandeur",
+        "Community stage",
+        "Social gathering areas",
+      ],
+      promptEnhancement:
+        "with the welcoming grandeur of Carnegie Hall's community spaces, featuring flexible meeting areas, historic architectural details, and warm gathering zones that foster community connection",
+    },
+  ],
+  wellness_spa: [
+    {
+      id: "therme-vals",
+      name: "Therme Vals",
+      location: "Vals, Switzerland",
+      description:
+        "Minimalist thermal spa carved into mountainside with stone and water harmony",
+      architecturalStyle: "Contemporary Minimalism",
+      keyFeatures: [
+        "Stone and water integration",
+        "Natural lighting",
+        "Minimalist design",
+        "Thermal pools",
+      ],
+      promptEnhancement:
+        "inspired by Therme Vals with its harmonious integration of stone and water, featuring minimalist design, natural thermal elements, and serene spaces carved from natural materials",
+    },
+  ],
+  innovation_lab: [
+    {
+      id: "mit-media-lab",
+      name: "MIT Media Lab",
+      location: "Cambridge, USA",
+      description:
+        "Cutting-edge research facility with transparent, collaborative spaces",
+      architecturalStyle: "High-Tech Contemporary",
+      keyFeatures: [
+        "Transparent facades",
+        "Collaborative spaces",
+        "High-tech equipment",
+        "Flexible layouts",
+      ],
+      promptEnhancement:
+        "with the innovative transparency of MIT Media Lab, featuring glass-walled research spaces, collaborative zones, cutting-edge technology integration, and flexible experimental environments",
+    },
+  ],
+  market_hall: [
+    {
+      id: "mercado-san-miguel",
+      name: "Mercado de San Miguel",
+      location: "Madrid, Spain",
+      description:
+        "Historic iron and glass market hall with gourmet food stalls",
+      architecturalStyle: "Iron and Glass Architecture",
+      keyFeatures: [
+        "Iron framework",
+        "Glass walls",
+        "Food stalls",
+        "Central circulation",
+      ],
+      promptEnhancement:
+        "inspired by Madrid's Mercado de San Miguel with its elegant iron and glass architecture, featuring artisanal food stalls, central circulation spaces, and historic market atmosphere",
+    },
+  ],
+  gaming_arena: [
+    {
+      id: "esports-stadium-arlington",
+      name: "Esports Stadium Arlington",
+      location: "Arlington, USA",
+      description:
+        "Purpose-built esports venue with stadium seating and broadcast facilities",
+      architecturalStyle: "Modern Sports Architecture",
+      keyFeatures: [
+        "Stadium seating",
+        "LED displays",
+        "Broadcast facilities",
+        "Gaming stations",
+      ],
+      promptEnhancement:
+        "with the high-energy atmosphere of Esports Stadium Arlington, featuring tiered gaming stations, massive LED displays, broadcast-quality lighting, and spectator seating designed for competitive gaming",
+    },
+  ],
+  biophilic_sanctuary: [
+    {
+      id: "singapore-changi-jewel",
+      name: "Changi Airport Jewel",
+      location: "Singapore",
+      description:
+        "Indoor forest with waterfall and nature integration in modern architecture",
+      architecturalStyle: "Biophilic Contemporary",
+      keyFeatures: [
+        "Indoor waterfall",
+        "Living walls",
+        "Natural lighting",
+        "Organic forms",
+      ],
+      promptEnhancement:
+        "inspired by Singapore's Changi Jewel with its spectacular indoor forest, featuring cascading water features, living walls, natural light integration, and seamless nature-architecture fusion",
+    },
+  ],
+  holographic_museum: [
+    {
+      id: "teamlab-borderless",
+      name: "teamLab Borderless",
+      location: "Tokyo, Japan",
+      description:
+        "Digital art museum with immersive projections and interactive spaces",
+      architecturalStyle: "Digital Immersive",
+      keyFeatures: [
+        "Projection mapping",
+        "Interactive displays",
+        "Flowing spaces",
+        "Digital art",
+      ],
+      promptEnhancement:
+        "with the immersive digital artistry of teamLab Borderless Tokyo, featuring flowing projection-mapped spaces, interactive holographic displays, and seamless digital-physical integration",
+    },
+  ],
+  vertical_farm: [
+    {
+      id: "aerofarms-newark",
+      name: "AeroFarms Newark",
+      location: "Newark, USA",
+      description:
+        "World's largest vertical farm with LED growing systems and automation",
+      architecturalStyle: "Industrial Agricultural",
+      keyFeatures: [
+        "Vertical growing towers",
+        "LED grow lights",
+        "Automated systems",
+        "Climate control",
+      ],
+      promptEnhancement:
+        "inspired by AeroFarms Newark with its revolutionary vertical growing systems, featuring multi-story cultivation towers, precision LED lighting, automated harvesting systems, and sustainable agricultural technology",
+    },
+  ],
+  quantum_research: [
+    {
+      id: "cern-facility",
+      name: "CERN Research Facility",
+      location: "Geneva, Switzerland",
+      description:
+        "World-renowned particle physics laboratory with cutting-edge equipment",
+      architecturalStyle: "High-Tech Scientific",
+      keyFeatures: [
+        "Clean room environments",
+        "Scientific equipment",
+        "Precision engineering",
+        "Research facilities",
+      ],
+      promptEnhancement:
+        "with the precision and innovation of CERN's research facilities, featuring ultra-modern clean rooms, cutting-edge scientific equipment, electromagnetic isolation chambers, and world-class research infrastructure",
+    },
+  ],
+  metamorphic_theater: [
+    {
+      id: "guthrie-theater",
+      name: "Guthrie Theater",
+      location: "Minneapolis, USA",
+      description:
+        "Innovative theater with flexible staging and architectural adaptability",
+      architecturalStyle: "Contemporary Theatrical",
+      keyFeatures: [
+        "Flexible staging",
+        "Adaptable seating",
+        "Dynamic lighting",
+        "Modular design",
+      ],
+      promptEnhancement:
+        "inspired by the Guthrie Theater's innovative design with its flexible staging configurations, adaptable seating arrangements, dynamic lighting systems, and modular performance spaces",
+    },
+  ],
+  neural_interface_lab: [
+    {
+      id: "neuralink-facility",
+      name: "Neuralink Research Facility",
+      location: "Fremont, USA",
+      description:
+        "Brain-computer interface research lab with meditation and technology integration",
+      architecturalStyle: "Neuro-Tech Contemporary",
+      keyFeatures: [
+        "Research stations",
+        "Meditation chambers",
+        "Clean environments",
+        "Advanced monitoring",
+      ],
+      promptEnhancement:
+        "with the cutting-edge serenity of Neuralink's research environment, featuring brain-computer interface stations, contemplative meditation chambers, advanced neural monitoring systems, and spaces that bridge technology and consciousness",
+    },
+  ],
+  crystalline_conservatory: [
+    {
+      id: "harpa-reykjavik",
+      name: "Harpa Concert Hall",
+      location: "Reykjavik, Iceland",
+      description:
+        "Crystalline facade concert hall with geometric glass architecture",
+      architecturalStyle: "Crystalline Contemporary",
+      keyFeatures: [
+        "Geometric glass facade",
+        "Prismatic lighting",
+        "Acoustic excellence",
+        "Crystal-inspired design",
+      ],
+      promptEnhancement:
+        "inspired by Reykjavik's Harpa Concert Hall with its stunning crystalline facade, featuring geometric glass patterns, prismatic light effects, superior acoustics, and mineral-inspired architectural elements",
+    },
+  ],
+  atmospheric_processor: [
+    {
+      id: "eden-project",
+      name: "Eden Project",
+      location: "Cornwall, UK",
+      description:
+        "Massive biomes with climate control and atmospheric management systems",
+      architecturalStyle: "Geodesic Environmental",
+      keyFeatures: [
+        "Geodesic domes",
+        "Climate control",
+        "Atmospheric systems",
+        "Environmental technology",
+      ],
+      promptEnhancement:
+        "with the environmental innovation of Cornwall's Eden Project, featuring massive geodesic structures, advanced climate control systems, atmospheric processing technology, and sustainable environmental management",
+    },
+  ],
+  temporal_archive: [
+    {
+      id: "svalbard-seed-vault",
+      name: "Svalbard Global Seed Vault",
+      location: "Svalbard, Norway",
+      description:
+        "Underground preservation facility designed for long-term storage",
+      architecturalStyle: "Preservation Architecture",
+      keyFeatures: [
+        "Underground chambers",
+        "Climate control",
+        "Long-term storage",
+        "Preservation technology",
+      ],
+      promptEnhancement:
+        "inspired by the Svalbard Seed Vault's preservation architecture, featuring underground storage chambers, advanced climate control, quantum storage systems, and technology designed for eternal preservation",
+    },
+  ],
+  symbiotic_habitat: [
+    {
+      id: "bosco-verticale",
+      name: "Bosco Verticale",
+      location: "Milan, Italy",
+      description:
+        "Vertical forest towers with integrated living ecosystems",
+      architecturalStyle: "Living Architecture",
+      keyFeatures: [
+        "Vertical gardens",
+        "Living ecosystems",
+        "Bio-integration",
+        "Sustainable design",
+      ],
+      promptEnhancement:
+        "with the living architecture of Milan's Bosco Verticale, featuring vertical forest integration, symbiotic ecosystems, bio-responsive materials, and spaces where nature and architecture coexist harmoniously",
+    },
+  ],
+};
+
 const ChurchTransformation = () => {
   const { toast } = useToast();
 
   const [state, setState] = useState<GenerationState>({
     isGenerating: false,
     selectedTransformation: null,
+    selectedLocation: null,
     generatedImage: null,
     originalImage: INPAINT_IMAGES[0].path, // Première image par défaut
     generationTime: null,
@@ -167,6 +607,7 @@ const ChurchTransformation = () => {
         originalImage: selectedImage.path,
         hdPainterMethod: selectedImage.hdPainterMethod, // Méthode recommandée
         generatedImage: null, // Reset l'image générée
+        showMaskPreview: false, // Reset mask preview when changing image
       }));
 
       toast({
@@ -417,13 +858,11 @@ const ChurchTransformation = () => {
       // Analyze base image to understand perspective and architectural features
       const isInterior =
         baseImageName.toLowerCase().includes("interieur") ||
-        baseImageName.toLowerCase().includes("inside") ||
-        baseImageName.toLowerCase().includes("english-inside");
+        baseImageName.toLowerCase().includes("inside");
 
-      // Transformation type to readable name
       const transformationNames: Record<string, string> = {
-        library: "high-tech library",
-        restaurant: "gourmet restaurant",
+        library: "modern library",
+        restaurant: "fine dining restaurant",
         coworking: "modern coworking space",
         concert_hall: "concert hall",
         art_gallery: "art gallery",
@@ -432,6 +871,16 @@ const ChurchTransformation = () => {
         innovation_lab: "innovation laboratory",
         market_hall: "market hall",
         gaming_arena: "gaming arena",
+        biophilic_sanctuary: "biophilic sanctuary",
+        holographic_museum: "holographic museum",
+        vertical_farm: "vertical farm",
+        quantum_research: "quantum research facility",
+        metamorphic_theater: "metamorphic theater",
+        neural_interface_lab: "neural interface laboratory",
+        crystalline_conservatory: "crystalline conservatory",
+        atmospheric_processor: "atmospheric processor",
+        temporal_archive: "temporal archive",
+        symbiotic_habitat: "symbiotic habitat",
       };
 
       // Base prompt with mandatory requirements
@@ -445,25 +894,45 @@ const ChurchTransformation = () => {
       // Add transformation-specific design elements
       const designElements: Record<string, string> = {
         library:
-          "Glass-walled study areas, modern bookshelves, reading nooks, and digital resource centers that complement the historical structure.",
+          "Glass-walled study areas with smart glass technology, floating bookshelves suspended by invisible cables, holographic reading interfaces, and AI-powered knowledge discovery pods that seamlessly blend with Gothic arches.",
         restaurant:
-          "Elegant dining areas, ambient lighting, and contemporary decor that creates a sophisticated yet welcoming atmosphere.",
+          "Levitating dining platforms, molecular gastronomy stations, interactive table surfaces with embedded displays, and atmospheric lighting that responds to the flavors being served, all within preserved stone walls.",
         coworking:
-          "Flexible workspaces, meeting pods, and collaborative areas with modern technology integrated into the historical space.",
+          "Modular workspace pods that reconfigure automatically, wireless power transmission zones, holographic collaboration spaces, and biometric-responsive environments that adapt to user productivity patterns.",
         concert_hall:
-          "State-of-the-art stage and seating designed to showcase both performances and the building's architectural beauty.",
+          "Metamorphic acoustic shells that reshape for optimal sound, levitating stage platforms, 360-degree immersive audio systems, and audience seating that moves in harmony with the music's rhythm.",
         art_gallery:
-          "Modern display systems and lighting that highlight both the artwork and the historic architecture.",
+          "Gravity-defying display systems, programmable matter sculptures, neural-responsive lighting that adapts to viewer emotions, and augmented reality layers that reveal hidden artistic dimensions.",
         community_center:
-          "Versatile spaces for various activities, maintaining the building's sense of community and history.",
+          "Shape-shifting multipurpose spaces, community memory walls with interactive historical displays, empathy-enhancing communication pods, and social harmony algorithms that optimize group interactions.",
         wellness_spa:
-          "Tranquil treatment rooms and relaxation areas that respect the spiritual nature of the original space.",
+          "Levitating meditation chambers, chromotherapy pools with programmable water molecules, bio-resonance healing pods, and atmospheric processors that generate personalized healing environments.",
         innovation_lab:
-          "Cutting-edge research facilities and collaborative workspaces that contrast with the historical elements.",
+          "Quantum computing clusters housed in crystal formations, matter manipulation chambers, time-dilated research pods, and consciousness-expansion interfaces integrated within sacred geometry.",
         market_hall:
-          "Vibrant market stalls and gathering spaces that bring new life to the historic structure.",
+          "Floating vendor stalls with gravity-defying product displays, flavor-transmission technology, cultural exchange pods, and community abundance algorithms that ensure equitable resource distribution.",
         gaming_arena:
-          "Modern gaming facilities and spectator areas that respect the building's architectural significance.",
+          "Neural-interface gaming pods, holographic battle arenas, consciousness-merging multiplayer systems, and spectator empathy chambers that allow audiences to experience gameplay emotions.",
+        biophilic_sanctuary:
+          "Living architectural elements that grow and adapt, symbiotic human-plant interfaces, atmospheric oxygen generation systems, and bio-luminescent pathways that respond to natural circadian rhythms.",
+        holographic_museum:
+          "Temporal exhibition chambers displaying past and future simultaneously, consciousness-recording devices for experiential history, quantum artifact preservation fields, and visitor memory integration systems.",
+        vertical_farm:
+          "Multi-dimensional growing matrices defying traditional space constraints, plant-consciousness communication networks, automated nutrient optimization systems, and harvest-to-table teleportation pods.",
+        quantum_research:
+          "Reality manipulation chambers, parallel universe observation decks, quantum entanglement communication arrays, and consciousness-quantum field interface laboratories within sacred stone walls.",
+        metamorphic_theater:
+          "Reality-bending performance spaces, audience-actor consciousness merging systems, temporal narrative loops, and emotional resonance amplification chambers that transform spectators into participants.",
+        neural_interface_lab:
+          "Consciousness expansion chambers, thought-to-reality manifestation pods, collective intelligence networks, and spiritual-technological synthesis laboratories honoring the sacred space's heritage.",
+        crystalline_conservatory:
+          "Resonant crystal formations that generate music from architectural vibrations, harmonic healing chambers, sound-to-light conversion systems, and acoustic levitation performance spaces.",
+        atmospheric_processor:
+          "Planetary-scale air purification systems, weather generation chambers, atmospheric composition laboratories, and climate harmony restoration pods integrated into Gothic structural elements.",
+        temporal_archive:
+          "Time-locked preservation chambers, quantum memory storage crystals, historical consciousness recording systems, and eternal knowledge preservation pods that transcend temporal limitations.",
+        symbiotic_habitat:
+          "Human-nature consciousness merger zones, bio-architectural growth systems, interspecies communication networks, and evolutionary acceleration chambers where beings and environment co-evolve harmoniously.",
       };
 
       prompt +=
@@ -497,6 +966,7 @@ const ChurchTransformation = () => {
       setState((prev) => ({
         ...prev,
         selectedTransformation: transformation,
+        selectedLocation: null, // Reset location when changing transformation
         generatedImage: null,
         generationTime: null,
         cost: null,
@@ -504,6 +974,39 @@ const ChurchTransformation = () => {
       }));
     },
     []
+  );
+
+  const handleLocationSelect = useCallback(
+    (location: FamousLocation) => {
+      if (!state.selectedTransformation) return;
+
+      // Generate enhanced prompt with location inspiration
+      const baseImageName =
+        selectedBaseImageRef.current.path.split("/").pop() ||
+        "Saint-Gildas-Auray-768x576.webp";
+
+      let enhancedPrompt = generateEnhancedPrompt(
+        state.selectedTransformation.id,
+        state.selectedTransformation.prompt,
+        baseImageName
+      );
+
+      // Add location-specific enhancement to the prompt
+      enhancedPrompt += `\n\nINSPIRATION: ${location.promptEnhancement}`;
+
+      setState((prev) => ({
+        ...prev,
+        selectedLocation: location,
+        customPrompt: enhancedPrompt,
+      }));
+
+      toast({
+        title: "🌟 Inspiration ajoutée",
+        description: `${location.name} (${location.location}) intégré au prompt`,
+        variant: "default",
+      });
+    },
+    [state.selectedTransformation, toast, generateEnhancedPrompt]
   );
 
   const handleCustomPromptReset = useCallback(() => {
@@ -676,12 +1179,14 @@ const ChurchTransformation = () => {
                 <div className="aspect-square">
                   <img
                     src={
-                      state.showMaskPreview &&
-                      state.selectedInpaintImage === image
+                      state.showMaskPreview && state.selectedInpaintImage === image
                         ? image.maskPath
                         : image.path
                     }
-                    alt={image.name}
+                    alt={state.showMaskPreview && state.selectedInpaintImage === image
+                      ? `Masque de ${image.name}`
+                      : image.name
+                    }
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -717,6 +1222,13 @@ const ChurchTransformation = () => {
                     </div>
                   </div>
                 )}
+                {state.showMaskPreview && state.selectedInpaintImage === image && (
+                  <div className="absolute top-2 left-2">
+                    <Badge variant="secondary" className="text-xs bg-orange-500 text-white">
+                      Masque
+                    </Badge>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -729,10 +1241,11 @@ const ChurchTransformation = () => {
                 <Label>Méthode HD-Painter</Label>
               </div>
               <Button
-                variant="outline"
+                variant={state.showMaskPreview ? "default" : "outline"}
                 size="sm"
                 onClick={handleToggleMaskPreview}
                 className="flex items-center gap-2"
+                disabled={!state.selectedInpaintImage}
               >
                 <Layers className="w-4 h-4" />
                 {state.showMaskPreview ? "Voir Image" : "Voir Masque"}
@@ -856,6 +1369,87 @@ const ChurchTransformation = () => {
         ))}
       </div>
 
+      {/* Famous Location Selection */}
+      {state.selectedTransformation && FAMOUS_LOCATIONS[state.selectedTransformation.id] && (
+        <Card className="bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <span className="text-2xl">🌟</span>
+              Inspiration architecturale
+            </CardTitle>
+            <CardDescription>
+              Choisissez un lieu célèbre pour inspirer votre transformation de {state.selectedTransformation.name.toLowerCase()}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {FAMOUS_LOCATIONS[state.selectedTransformation.id].map((location) => (
+                <Card
+                  key={location.id}
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+                    state.selectedLocation?.id === location.id
+                      ? "ring-2 ring-amber-500 bg-amber-50"
+                      : "hover:bg-gray-50"
+                  }`}
+                  onClick={() => handleLocationSelect(location)}
+                >
+                  <CardContent className="p-4 space-y-3">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-lg">{location.name}</h3>
+                        <p className="text-sm text-gray-600 mb-2">{location.location}</p>
+                        <p className="text-sm text-gray-700 mb-3">{location.description}</p>
+                      </div>
+                      {state.selectedLocation?.id === location.id && (
+                        <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center ml-2">
+                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <Badge variant="outline" className="text-xs">
+                          {location.architecturalStyle}
+                        </Badge>
+                      </div>
+                      
+                      <div className="flex flex-wrap gap-1">
+                        {location.keyFeatures.map((feature, index) => (
+                          <Badge key={index} variant="secondary" className="text-xs">
+                            {feature}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            
+            {state.selectedLocation && (
+              <div className="mt-4 p-4 bg-amber-100 rounded-lg">
+                <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                  <span>✨</span>
+                  Inspiration sélectionnée: {state.selectedLocation.name}
+                </h4>
+                <p className="text-sm text-amber-800">
+                  Cette inspiration sera intégrée dans votre prompt pour créer une transformation unique inspirée de ce lieu emblématique.
+                </p>
+              </div>
+            )}
+            
+            {!state.selectedLocation && (
+              <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+                <p className="text-sm text-gray-600 text-center">
+                  💡 Sélectionnez une inspiration architecturale pour enrichir votre transformation, ou continuez sans inspiration spécifique.
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
       {/* Custom Prompt */}
       <Card>
         <CardHeader>
@@ -891,13 +1485,15 @@ const ChurchTransformation = () => {
           {/* Compteur de caractères */}
           {state.selectedTransformation && (
             <div className="flex justify-between items-center mt-2">
-              <span className={`text-xs ${
-                state.customPrompt.length > 1600 
-                  ? 'text-orange-600' 
-                  : state.customPrompt.length > 1700 
-                  ? 'text-red-600' 
-                  : 'text-gray-500'
-              }`}>
+              <span
+                className={`text-xs ${
+                  state.customPrompt.length > 1600
+                    ? "text-orange-600"
+                    : state.customPrompt.length > 1700
+                      ? "text-red-600"
+                      : "text-gray-500"
+                }`}
+              >
                 {state.customPrompt.length}/1800 caractères
               </span>
               <div className="flex justify-end">
@@ -1055,7 +1651,11 @@ const ChurchTransformation = () => {
                 <Download className="w-4 h-4 mr-2" />
                 Télécharger
               </Button>
-              <Button onClick={handleOpenShareModal} variant="outline" size="sm">
+              <Button
+                onClick={handleOpenShareModal}
+                variant="outline"
+                size="sm"
+              >
                 <Share2 className="w-4 h-4 mr-2" />
                 Partager sur les réseaux
               </Button>
@@ -1081,14 +1681,16 @@ const ChurchTransformation = () => {
       </div>
 
       {/* Social Media Share Modal */}
-      {state.showShareModal && state.generatedImage && state.selectedTransformation && (
-        <SharePostModal
-          isOpen={state.showShareModal}
-          onClose={handleCloseShareModal}
-          imageUrl={state.generatedImage}
-          imageDescription={`Découvrez cette transformation révolutionnaire de l'église Saint-Gildas d'Auray en ${state.selectedTransformation.name} ! ${state.selectedTransformation.description}`}
-        />
-      )}
+      {state.showShareModal &&
+        state.generatedImage &&
+        state.selectedTransformation && (
+          <SharePostModal
+            isOpen={state.showShareModal}
+            onClose={handleCloseShareModal}
+            imageUrl={state.generatedImage}
+            imageDescription={`Découvrez cette transformation révolutionnaire de l'église Saint-Gildas d'Auray en ${state.selectedTransformation.name} ! ${state.selectedTransformation.description}`}
+          />
+        )}
     </div>
   );
 };

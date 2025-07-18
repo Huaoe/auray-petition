@@ -500,6 +500,8 @@ export const preloadPopularTransformations = async () => {
 > Cette mécanique transforme chaque signataire en ambassadeur créatif du projet et démultiplie la portée de la pétition grâce à la viralité numérique et à la reconnaissance (NFT) !
 
 
+### 6. Ideas
+
 coupon desactivated in local.
 give coupon in proportion : 2 coupons for petition 
 3 coupons for petition + newsleter
@@ -517,3 +519,13 @@ permettre de poster directement sur linkedin
 pouvoir elaborer le mask soit meme
 compteur defilant sur la page de petition
 verification des doublons de mail dans la petition mais pas en localhost
+
+### 7. Prompts
+
+'''
+I'm not very happy with the transformation results on @/src/components/ChurchTransformation.tsx 
+I'd like to have a much more cutting edge modern architectural result.
+add 10 more transformations possibilities and rafine designElements to be a bit more aling with my desire.
+
+Wouldn't it be nice to have a script that generates all prompt images for all initial images? so I would tell you exactly what I like and how I would imagine the result. YHou would then advice me on how to succeed at optaining my goal.
+'''
