@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Image as ImageIcon, Send, CheckCircle, AlertCircle, Loader2, Heart, MessageCircle, Share2 } from "lucide-react";
 import {
   Dialog,
@@ -14,6 +15,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  SOCIAL_MEDIA_PLATFORMS,
+  SocialMediaPlatform,
+  SocialMediaPublishResult,
+  SocialMediaPlatformInfo
+} from "@/lib/types";
 
 interface SharePostModalProps {
   isOpen: boolean;
@@ -34,11 +41,23 @@ interface FeedPost {
 
 export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: SharePostModalProps) {
   const [postText, setPostText] = useState('');
+  const [selectedPlatforms, setSelectedPlatforms] = useState<Set<SocialMediaPlatform>>(new Set(['twitter']));
   const [publishing, setPublishing] = useState(false);
+  const [publishResults, setPublishResults] = useState<SocialMediaPublishResult[]>([]);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [publishedPost, setPublishedPost] = useState<FeedPost | null>(null);
 
   const CHARACTER_LIMIT = 500;
+
+  const handlePlatformToggle = (platform: SocialMediaPlatform) => {
+    const newSelected = new Set(selectedPlatforms);
+    if (newSelected.has(platform)) {
+      newSelected.delete(platform);
+    } else {
+      newSelected.add(platform);
+    }
+    setSelectedPlatforms(newSelected);
+  };
 
   const getCharacterCount = () => {
     const remaining = CHARACTER_LIMIT - postText.length;
@@ -50,18 +69,32 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
   };
 
   const validatePost = () => {
+    if (selectedPlatforms.size === 0) {
+      setMessage({ type: 'error', text: 'Veuillez sélectionner au moins une plateforme' });
+      return false;
+    }
+
     if (!postText.trim()) {
       setMessage({ type: 'error', text: 'Veuillez saisir du texte pour votre publication' });
       return false;
     }
 
-    const { isOverLimit } = getCharacterCount();
-    if (isOverLimit) {
-      setMessage({ 
-        type: 'error', 
-        text: `La publication dépasse la limite de ${CHARACTER_LIMIT} caractères` 
-      });
+    // Check Instagram image requirement
+    if (selectedPlatforms.has('instagram') && !imageUrl) {
+      setMessage({ type: 'error', text: 'Instagram nécessite une image pour publier' });
       return false;
+    }
+
+    // Check character limits for selected platforms
+    for (const platformId of selectedPlatforms) {
+      const platform = SOCIAL_MEDIA_PLATFORMS.find(p => p.id === platformId);
+      if (platform?.maxTextLength && postText.length > platform.maxTextLength) {
+        setMessage({
+          type: 'error',
+          text: `Le texte dépasse la limite de ${platform.maxTextLength} caractères pour ${platform.name}`
+        });
+        return false;
+      }
     }
 
     return true;
@@ -72,37 +105,76 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
 
     setPublishing(true);
     setMessage(null);
+    setPublishResults([]);
 
-    // Simulate API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const results: SocialMediaPublishResult[] = [];
+      
+      // Publish to each selected platform
+      for (const platform of selectedPlatforms) {
+        try {
+          const response = await fetch('/api/social-media/publish', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              platform,
+              text: postText,
+              imageUrl,
+            }),
+          });
 
-      // Create a mock published post
-      const newPost: FeedPost = {
-        id: Date.now().toString(),
-        text: postText,
-        imageUrl,
-        timestamp: new Date(),
-        likes: 0,
-        comments: 0,
-        shares: 0,
-      };
+          const result = await response.json();
+          results.push({
+            platform,
+            success: result.success,
+            postId: result.postId,
+            error: result.error,
+          });
+        } catch (error) {
+          results.push({
+            platform,
+            success: false,
+            error: 'Erreur de connexion',
+          });
+        }
+      }
 
-      setPublishedPost(newPost);
-      setMessage({ 
-        type: 'success', 
-        text: 'Publication partagée avec succès sur votre fil !' 
-      });
+      setPublishResults(results);
 
-      // Auto-close after 2 seconds
-      setTimeout(() => {
-        handleClose();
-      }, 2000);
+      // Check if any publications succeeded
+      const successCount = results.filter(r => r.success).length;
+      const totalCount = results.length;
+
+      if (successCount === totalCount) {
+        setMessage({
+          type: 'success',
+          text: `Publication partagée avec succès sur ${successCount} plateforme${successCount > 1 ? 's' : ''} !`
+        });
+      } else if (successCount > 0) {
+        setMessage({
+          type: 'success',
+          text: `Publication partagée sur ${successCount}/${totalCount} plateformes. Voir les détails ci-dessous.`
+        });
+      } else {
+        setMessage({
+          type: 'error',
+          text: 'Échec de la publication sur toutes les plateformes. Voir les détails ci-dessous.'
+        });
+      }
+
+      // Auto-close after 3 seconds if all succeeded
+      if (successCount === totalCount) {
+        setTimeout(() => {
+          handleClose();
+        }, 3000);
+      }
 
     } catch (error) {
-      setMessage({ 
-        type: 'error', 
-        text: 'Erreur lors de la publication. Veuillez réessayer.' 
+      setMessage({
+        type: 'error',
+        text: 'Erreur lors de la publication. Veuillez réessayer.'
       });
     } finally {
       setPublishing(false);
@@ -111,6 +183,8 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
 
   const handleClose = () => {
     setPostText('');
+    setSelectedPlatforms(new Set(['twitter']));
+    setPublishResults([]);
     setPublishedPost(null);
     setMessage(null);
     onClose();
@@ -132,75 +206,116 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
         </DialogHeader>
 
         <div className="space-y-6">
-          {/* Published Post Preview */}
-          {publishedPost && (
-            <Card className="border-green-200 bg-green-50">
+          {/* Publish Results */}
+          {publishResults.length > 0 && (
+            <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-2 mb-3">
-                  <CheckCircle className="h-5 w-5 text-green-600" />
-                  <span className="text-sm font-medium text-green-800">Publication partagée</span>
+                  <Share2 className="h-5 w-5 text-blue-600" />
+                  <span className="text-sm font-medium">Résultats de publication</span>
                 </div>
                 
-                {/* Mock Feed Post */}
-                <div className="bg-white rounded-lg border p-4">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
-                      U
-                    </div>
-                    <div>
-                      <div className="font-semibold text-sm">Utilisateur</div>
-                      <div className="text-xs text-gray-500">À l'instant</div>
-                    </div>
-                  </div>
-                  
-                  <p className="text-sm mb-3">{publishedPost.text}</p>
-                  
-                  {publishedPost.imageUrl && (
-                    <img 
-                      src={publishedPost.imageUrl} 
-                      alt="Transformation d'église" 
-                      className="w-full rounded-lg border mb-3"
-                    />
-                  )}
-                  
-                  <div className="flex items-center gap-6 text-gray-500 text-sm">
-                    <button className="flex items-center gap-1 hover:text-red-500 transition-colors">
-                      <Heart className="h-4 w-4" />
-                      <span>{publishedPost.likes}</span>
-                    </button>
-                    <button className="flex items-center gap-1 hover:text-blue-500 transition-colors">
-                      <MessageCircle className="h-4 w-4" />
-                      <span>{publishedPost.comments}</span>
-                    </button>
-                    <button className="flex items-center gap-1 hover:text-green-500 transition-colors">
-                      <Share2 className="h-4 w-4" />
-                      <span>{publishedPost.shares}</span>
-                    </button>
-                  </div>
+                <div className="space-y-2">
+                  {publishResults.map((result) => {
+                    const platform = SOCIAL_MEDIA_PLATFORMS.find(p => p.id === result.platform);
+                    return (
+                      <div key={result.platform} className="flex items-center justify-between p-3 rounded-lg border">
+                        <div className="flex items-center gap-3">
+                          <span className="text-lg">{platform?.icon}</span>
+                          <span className="font-medium text-sm">{platform?.name}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {result.success ? (
+                            <>
+                              <CheckCircle className="h-4 w-4 text-green-600" />
+                              <span className="text-sm text-green-600">Publié</span>
+                            </>
+                          ) : (
+                            <>
+                              <AlertCircle className="h-4 w-4 text-red-600" />
+                              <span className="text-sm text-red-600">{result.error}</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
           )}
 
           {/* Image Preview */}
-          {imageUrl && !publishedPost && (
+          {imageUrl && publishResults.length === 0 && (
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3 mb-3">
                   <ImageIcon className="h-5 w-5 text-gray-500" />
                   <span className="text-sm font-medium">Image à partager</span>
                 </div>
-                <img 
-                  src={imageUrl} 
-                  alt="Transformation d'église générée" 
+                <img
+                  src={imageUrl}
+                  alt="Transformation d'église générée"
                   className="w-full max-w-md rounded-lg border"
                 />
               </CardContent>
             </Card>
           )}
 
+          {/* Platform Selection */}
+          {publishResults.length === 0 && (
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <Share2 className="h-5 w-5 text-blue-600" />
+                  <span className="text-sm font-medium">Sélectionner les plateformes</span>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  {SOCIAL_MEDIA_PLATFORMS.map((platform) => (
+                    <div
+                      key={platform.id}
+                      className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+                        selectedPlatforms.has(platform.id)
+                          ? 'border-blue-500 bg-blue-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                      onClick={() => handlePlatformToggle(platform.id)}
+                    >
+                      <Checkbox
+                        checked={selectedPlatforms.has(platform.id)}
+                        onChange={() => handlePlatformToggle(platform.id)}
+                        aria-label={`Sélectionner ${platform.name}`}
+                      />
+                      <div className="flex items-center gap-2 flex-1">
+                        <span className="text-lg">{platform.icon}</span>
+                        <div className="flex-1">
+                          <div className="font-medium text-sm">{platform.name}</div>
+                          {platform.requiresImage && (
+                            <div className="text-xs text-gray-500">Image requise</div>
+                          )}
+                          {platform.maxTextLength && (
+                            <div className="text-xs text-gray-500">
+                              Max {platform.maxTextLength} caractères
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {selectedPlatforms.size > 0 && (
+                  <div className="mt-3 text-xs text-gray-600">
+                    {selectedPlatforms.size} plateforme{selectedPlatforms.size > 1 ? 's' : ''} sélectionnée{selectedPlatforms.size > 1 ? 's' : ''}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
           {/* Post Composition */}
-          {!publishedPost && (
+          {publishResults.length === 0 && (
             <div className="space-y-3">
               <label className="text-sm font-medium">Votre Publication</label>
               <Textarea
@@ -247,22 +362,22 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
           {/* Action Buttons */}
           <div className="flex justify-end gap-3 pt-4 border-t">
             <Button variant="outline" onClick={handleClose} disabled={publishing}>
-              {publishedPost ? 'Fermer' : 'Annuler'}
+              {publishResults.length > 0 ? 'Fermer' : 'Annuler'}
             </Button>
-            {!publishedPost && (
-              <Button 
-                onClick={handlePublish} 
-                disabled={publishing || !postText.trim() || isOverLimit}
+            {publishResults.length === 0 && (
+              <Button
+                onClick={handlePublish}
+                disabled={publishing || !postText.trim() || selectedPlatforms.size === 0}
               >
                 {publishing ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Publication...
+                    Publication en cours...
                   </>
                 ) : (
                   <>
                     <Send className="h-4 w-4 mr-2" />
-                    Publier sur le Fil
+                    Publier sur {selectedPlatforms.size} plateforme{selectedPlatforms.size > 1 ? 's' : ''}
                   </>
                 )}
               </Button>

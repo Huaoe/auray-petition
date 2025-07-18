@@ -164,43 +164,43 @@ Page de référence complète contenant toutes les données statistiques, histor
 ###### **10 Transformations IA de l'Église d'Auray**
 
 **🏃‍♂️ Transformation Sport :**
-- **Prompt IA** : "Transform this Gothic church into a modern climbing gym, keeping the stone architecture, adding colorful climbing walls, safety equipment, LED lighting, people climbing and exercising"
+- **Prompt IA** : "Transform this into a modern climbing gym, keeping the stone architecture, adding colorful climbing walls, safety equipment, LED lighting, people climbing and exercising"
 - **Éléments visuels** : Murs d'escalade colorés sur architecture gothique, éclairage sportif LED, grimpeurs en action
 
 **🎭 Transformation Culturelle :**
-- **Prompt IA** : "Transform this church into a vibrant concert hall, keep the architecture, add stage lighting, sound equipment, audience seating, musicians performing, colorful atmospheric lighting"
+- **Prompt IA** : "Transform this into a vibrant concert hall, keep the architecture, add stage lighting, sound equipment, audience seating, musicians performing, colorful atmospheric lighting"
 - **Éléments visuels** : Scène moderne, éclairage spectacle, public enthousiasmé, instruments de musique
 
 **📚 Transformation Bibliothèque :**
-- **Prompt IA** : "Transform this church into a magnificent library, keep gothic architecture, add bookshelves integrated into walls, reading areas, modern furniture, people reading, warm lighting"
+- **Prompt IA** : "Transform this into a magnificent library, keep gothic architecture, add bookshelves integrated into walls, reading areas, modern furniture, people reading, warm lighting"
 - **Éléments visuels** : Étagères intégrées aux piliers, espaces lecture cosy, visiteurs studieux
 
 **🏠 Transformation Logements :**
-- **Prompt IA** : "Transform this church into modern social housing lofts, keep stone walls, add multiple floors, windows, balconies, green plants, families living happily"
+- **Prompt IA** : "Transform this  into modern social housing lofts, keep stone walls, add multiple floors, windows, balconies, green plants, families living happily"
 - **Éléments visuels** : Niveaux multiples, fenêtres ajoutées, balcons végétalisés, familles heureuses
 
 **🌱 Transformation Ferme Urbaine :**
-- **Prompt IA** : "Transform this church into an urban farm, keep architecture, add vertical gardens, greenhouses, vegetables growing, farmers working, natural sunlight filtering through"
+- **Prompt IA** : "Transform this into an urban farm, keep architecture, add vertical gardens, greenhouses, vegetables growing, farmers working, natural sunlight filtering through"
 - **Éléments visuels** : Jardins verticaux, serres intégrées, légumes luxuriants, agriculteurs urbains
 
 **⚙️ Transformation FabLab :**
-- **Prompt IA** : "Transform this church into a high-tech innovation lab, keep gothic structure, add 3D printers, computer workstations, modern equipment, inventors working"
+- **Prompt IA** : "Transform this into a high-tech innovation lab, keep gothic structure, add 3D printers, computer workstations, modern equipment, inventors working"
 - **Éléments visuels** : Imprimantes 3D, postes informatiques, équipements modernes, inventeurs créatifs
 
 **🍽️ Transformation Restaurant :**
-- **Prompt IA** : "Transform this church into an elegant restaurant, keep stone architecture, add dining tables, kitchen, atmospheric lighting, diners enjoying meals, chef cooking"
+- **Prompt IA** : "Transform this into an elegant restaurant, keep stone architecture, add dining tables, kitchen, atmospheric lighting, diners enjoying meals, chef cooking"
 - **Éléments visuels** : Tables élégantes, cuisine ouverte, éclairage chaleureux, convives ravis
 
 **🏥 Transformation Santé :**
-- **Prompt IA** : "Transform this church into a modern medical center, keep architecture, add medical equipment, examination rooms, waiting areas, doctors and patients, clean medical environment"
+- **Prompt IA** : "Transform this into a modern medical center, keep architecture, add medical equipment, examination rooms, waiting areas, doctors and patients, clean medical environment"
 - **Éléments visuels** : Équipements médicaux, salles d'examen, zones d'attente, personnel soignant
 
 **🎓 Transformation Université :**
-- **Prompt IA** : "Transform this church into a popular university, keep gothic architecture, add lecture halls, student desks, educational equipment, students learning, professor teaching"
+- **Prompt IA** : "Transform this  into a popular university, keep gothic architecture, add lecture halls, student desks, educational equipment, students learning, professor teaching"
 - **Éléments visuels** : Amphithéâtres, bureaux étudiants, équipements éducatifs, cours dynamiques
 
 **🎉 Transformation Événementiel :**
-- **Prompt IA** : "Transform this church into a festive event center, keep architecture, add celebration decorations, dance floor, party lighting, people celebrating, joyful atmosphere"
+- **Prompt IA** : "Transform this into a festive event center, keep architecture, add celebration decorations, dance floor, party lighting, people celebrating, joyful atmosphere"
 - **Éléments visuels** : Décorations festives, piste de danse, éclairage party, célébrations joyeuses
 
 ###### **Fonctionnalités avancées du module**

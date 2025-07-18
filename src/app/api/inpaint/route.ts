@@ -147,6 +147,7 @@ async function generateWithStabilityInpainting(
     
     // Negative prompt si fourni
     if (negativePrompt && negativePrompt.trim()) {
+      console.log(`📝 Using negative prompt: ${negativePrompt}`);
       formData.append("negative_prompt", negativePrompt.trim());
     }
     
@@ -303,7 +304,6 @@ export async function POST(request: NextRequest) {
       ? prompt
       : `${prompt}, happy people`;
 
-    console.log(`📝 Enhanced prompt: ${enhancedPrompt}`);
 
     // Génération avec HD-Painter
     const tempImageUrl = await generateWithStabilityInpainting(

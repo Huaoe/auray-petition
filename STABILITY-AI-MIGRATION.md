@@ -166,7 +166,7 @@ chmod 644 public/images/Saint-Gildas-Auray-768x576.webp
 # Succès de génération
 🎨 Starting img2img transformation: library
 📸 Base image loaded: 45234 bytes
-📝 Prompt: Transform this church interior...
+📝 Prompt: Transform this interior...
 🎨 Image generated successfully
 ☁️ Image uploaded to GCS: library-hash123.png
 

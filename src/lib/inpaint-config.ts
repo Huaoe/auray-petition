@@ -122,9 +122,46 @@ export const INPAINT_IMAGES: InpaintImage[] = [
 // Configuration des prompts négatifs
 export const NEGATIVE_PROMPT_CONFIG = {
   // Prompt négatif par défaut recommandé
-  default: "oversaturated, low contrast, underexposed, overexposed, lowres, low quality, solid background, plain background, asymmetrical buildings, jpeg artifacts, close-up, macro, surreal, multiple views, multiple angles, creepy, scary, blurry, grainy, unreal sky, weird colors, deformed structures",
+  usual: "oversaturated, low contrast, underexposed, overexposed, lowres, low quality, solid background, plain background, asymmetrical buildings, jpeg artifacts, close-up, macro, surreal, multiple views, multiple angles, creepy, scary, blurry, grainy, unreal sky, weird colors, deformed structures",
   
-  // Presets de prompts négatifs par catégorie
+  // MANDATORY BASE PROMPT - Always applied, never visible to user
+  mandatoryBase: "church, cathedral, chapel, basilica, monastery, abbey, temple, shrine, sanctuary, altar, pulpit, pews, nave, transept, apse, bell tower, steeple, spire, gothic architecture, romanesque, flying buttresses, rose window, stained glass windows, church bells, organ pipes, confessional, baptismal font, cross, crucifix, religious symbols, christian symbols, holy water, candles, religious statues, saints, madonna, jesus, christ, religious paintings, religious art, biblical scenes, religious iconography, religious texts, bible, prayer books, religious banners, religious vestments, priest robes, religious ceremonies, altar table, religious altar, church furniture, religious decorations, religious ornaments, holy relics, religious artifacts, church interior, religious interior design, ecclesiastical furniture, church pews, kneelers, religious tapestries, religious murals, religious atmosphere, sacred space, holy place, place of worship, religious gathering, religious service, mass, prayer, religious ritual, religious community, congregation, ecclesiastical, holy, sacred, biblical, christian, catholic",
+  
+  // Toggleable presets that users can control
+  toggleablePresets: {
+    quality: {
+      name: "Quality Issues",
+      prompt: "lowres, low quality, jpeg artifacts, blurry, grainy, pixelated, compressed",
+      description: "Avoid low quality and compression artifacts"
+    },
+    exposure: {
+      name: "Exposure Problems",
+      prompt: "oversaturated, low contrast, underexposed, overexposed, washed out, too dark, too bright",
+      description: "Prevent exposure and lighting issues"
+    },
+    composition: {
+      name: "Composition Issues",
+      prompt: "solid background, plain background, asymmetrical buildings, multiple views, multiple angles, cropped, cut off",
+      description: "Avoid composition and framing problems"
+    },
+    style: {
+      name: "Style Problems",
+      prompt: "surreal, creepy, scary, weird colors, unreal sky, deformed structures, distorted, unrealistic",
+      description: "Prevent surreal and unrealistic elements"
+    },
+    technical: {
+      name: "Technical Artifacts",
+      prompt: "noise, artifacts, compression, watermark, text, logo, signature, frame, border",
+      description: "Remove technical artifacts and watermarks"
+    },
+    architectural: {
+      name: "Architectural Issues",
+      prompt: "asymmetrical buildings, deformed structures, impossible architecture, floating elements, broken perspective",
+      description: "Avoid architectural inconsistencies"
+    }
+  },
+  
+  // Legacy presets for backward compatibility
   presets: {
     quality: "lowres, low quality, jpeg artifacts, blurry, grainy, pixelated, compressed",
     exposure: "oversaturated, low contrast, underexposed, overexposed, washed out, too dark, too bright",
@@ -134,11 +171,11 @@ export const NEGATIVE_PROMPT_CONFIG = {
     architectural: "asymmetrical buildings, deformed structures, impossible architecture, floating elements, broken perspective"
   },
   
-  // Prompts négatifs spécialisés pour l'architecture religieuse
-  church: "modern elements, contemporary style, industrial materials, neon lights, glass facades, steel beams, concrete blocks, urban decay, graffiti, vandalism, inappropriate additions",
+  // Legacy default for backward compatibility
+  default: "church, cathedral, chapel, basilica, monastery, abbey, temple, shrine, sanctuary, altar, pulpit, pews, nave, transept, apse, bell tower, steeple, spire, gothic architecture, romanesque, flying buttresses, rose window, stained glass windows, church bells, organ pipes, confessional, baptismal font, cross, crucifix, religious symbols, christian symbols, holy water, candles, religious statues, saints, madonna, jesus, christ, religious paintings, religious art, biblical scenes, religious iconography, religious texts, bible, prayer books, religious banners, religious vestments, priest robes, religious ceremonies, altar table, religious altar, church furniture, religious decorations, religious ornaments, holy relics, religious artifacts, church interior, religious interior design, ecclesiastical furniture, church pews, kneelers, religious tapestries, religious murals, religious atmosphere, sacred space, holy place, place of worship, religious gathering, religious service, mass, prayer, religious ritual, religious community, congregation, ecclesiastical, holy, sacred, biblical, christian, catholic",
   
-  // Limite de caractères pour les prompts négatifs
-  maxLength: 500,
+  // Limite de caractères pour les prompts négatifs (conservative estimate)
+  maxLength: 2000,
 } as const;
 
 // Configuration HD-Painter
@@ -204,10 +241,34 @@ export const getDefaultNegativePrompt = (): string => {
   return NEGATIVE_PROMPT_CONFIG.default;
 };
 
-export const getChurchSpecificNegativePrompt = (): string => {
+export const getMandatoryBaseNegativePrompt = (): string => {
+  return NEGATIVE_PROMPT_CONFIG.mandatoryBase;
+};
+
+export const getToggleablePreset = (presetKey: keyof typeof NEGATIVE_PROMPT_CONFIG.toggleablePresets): string => {
+  return NEGATIVE_PROMPT_CONFIG.toggleablePresets[presetKey].prompt;
+};
+
+export const combineWithMandatoryBase = (activePresets: string[]): string => {
   return combineNegativePrompts(
-    NEGATIVE_PROMPT_CONFIG.default,
-    NEGATIVE_PROMPT_CONFIG.church
+    NEGATIVE_PROMPT_CONFIG.mandatoryBase,
+    ...activePresets
+  );
+};
+
+export const getChurchSpecificNegativePrompt = (): string => {
+  return NEGATIVE_PROMPT_CONFIG.mandatoryBase;
+};
+
+export const getAntiReligiousNegativePrompt = (): string => {
+  return NEGATIVE_PROMPT_CONFIG.mandatoryBase;
+};
+
+export const getFullAntiReligiousPrompt = (): string => {
+  return combineNegativePrompts(
+    NEGATIVE_PROMPT_CONFIG.mandatoryBase,
+    NEGATIVE_PROMPT_CONFIG.presets.quality,
+    NEGATIVE_PROMPT_CONFIG.presets.style
   );
 };
 

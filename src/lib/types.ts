@@ -22,13 +22,71 @@ export interface GenerationResponse {
 }
 
 // Transformations disponibles (côté client safe)
+// Social Media Platform Types
+export type SocialMediaPlatform = 'twitter' | 'facebook' | 'instagram' | 'linkedin';
+
+export interface SocialMediaPlatformInfo {
+  id: SocialMediaPlatform;
+  name: string;
+  icon: string;
+  color: string;
+  requiresImage?: boolean;
+  maxTextLength?: number;
+}
+
+export interface SocialMediaPublishResult {
+  platform: SocialMediaPlatform;
+  success: boolean;
+  postId?: string;
+  error?: string;
+}
+
+export interface SocialMediaPublishRequest {
+  platforms: SocialMediaPlatform[];
+  text: string;
+  imageUrl?: string;
+}
+
+// Social Media Platform Configurations
+export const SOCIAL_MEDIA_PLATFORMS: SocialMediaPlatformInfo[] = [
+  {
+    id: 'twitter',
+    name: 'Twitter/X',
+    icon: '𝕏',
+    color: 'bg-black text-white',
+    maxTextLength: 280,
+  },
+  {
+    id: 'facebook',
+    name: 'Facebook',
+    icon: '📘',
+    color: 'bg-blue-600 text-white',
+    maxTextLength: 63206,
+  },
+  {
+    id: 'instagram',
+    name: 'Instagram',
+    icon: '📷',
+    color: 'bg-gradient-to-r from-purple-500 to-pink-500 text-white',
+    requiresImage: true,
+    maxTextLength: 2200,
+  },
+  {
+    id: 'linkedin',
+    name: 'LinkedIn',
+    icon: '💼',
+    color: 'bg-blue-700 text-white',
+    maxTextLength: 3000,
+  },
+];
+
 export const TRANSFORMATION_TYPES: TransformationType[] = [
   {
     id: 'library',
     name: 'Bibliothèque Moderne',
     description: 'Une bibliothèque contemporaine avec espaces de lecture et technologie',
     icon: '📚',
-    prompt: 'Transform this church into a modern public library with bookshelves, reading areas, comfortable seating, natural lighting, and digital workstations. Maintain the architectural beauty while creating a welcoming space for learning and community gathering.',
+    prompt: 'Transform this into a modern public library with bookshelves, reading areas, comfortable seating, natural lighting, and digital workstations. Maintain the architectural beauty while creating a welcoming space for learning and community gathering.',
     style: 'modern',
     category: 'culture'
   },
@@ -37,7 +95,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Restaurant Gastronomique',
     description: 'Un restaurant haut de gamme dans un cadre historique exceptionnel',
     icon: '🍽️',
-    prompt: 'Transform this church into an elegant fine dining restaurant with sophisticated table settings, ambient lighting, a professional kitchen area, and wine displays. Preserve the grandeur while creating an intimate dining atmosphere.',
+    prompt: 'Transform this into an elegant fine dining restaurant with sophisticated table settings, ambient lighting, a professional kitchen area, and wine displays. Preserve the grandeur while creating an intimate dining atmosphere.',
     style: 'realistic',
     category: 'business'
   },
@@ -46,7 +104,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Espace de Coworking',
     description: 'Un espace de travail collaboratif moderne et inspirant',
     icon: '💻',
-    prompt: 'Transform this church into a modern coworking space with open work areas, private meeting rooms, comfortable lounge areas, and modern technology infrastructure. Blend historical architecture with contemporary workspace design.',
+    prompt: 'Transform this into a modern coworking space with open work areas, private meeting rooms, comfortable lounge areas, and modern technology infrastructure. Blend historical architecture with contemporary workspace design.',
     style: 'modern',
     category: 'business'
   },
@@ -55,7 +113,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Salle de Concert',
     description: 'Une salle de spectacle acoustiquement parfaite',
     icon: '🎵',
-    prompt: 'Transform this church into a concert hall with professional stage, audience seating, acoustic panels, and performance lighting. Enhance the natural acoustics while maintaining the architectural integrity.',
+    prompt: 'Transform this into a concert hall with professional stage, audience seating, acoustic panels, and performance lighting. Enhance the natural acoustics while maintaining the architectural integrity.',
     style: 'artistic',
     category: 'culture'
   },
@@ -64,7 +122,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Galerie d\'Art',
     description: 'Un espace d\'exposition pour l\'art contemporain et classique',
     icon: '🎨',
-    prompt: 'Transform this church into an art gallery with professional lighting, display walls, sculpture pedestals, and viewing areas. Create a sophisticated space that showcases artwork while respecting the historical architecture.',
+    prompt: 'Transform this into an art gallery with professional lighting, display walls, sculpture pedestals, and viewing areas. Create a sophisticated space that showcases artwork while respecting the historical architecture.',
     style: 'artistic',
     category: 'culture'
   },
@@ -73,7 +131,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Centre Communautaire',
     description: 'Un lieu de rassemblement pour la communauté locale',
     icon: '🏛️',
-    prompt: 'Transform this church into a community center with flexible meeting spaces, activity areas, a small stage, and social gathering zones. Create a welcoming environment for community events and activities.',
+    prompt: 'Transform this into a community center with flexible meeting spaces, activity areas, a small stage, and social gathering zones. Create a welcoming environment for community events and activities.',
     style: 'modern',
     category: 'community'
   },
@@ -82,7 +140,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Centre de Bien-être',
     description: 'Un spa luxueux pour la détente et le ressourcement',
     icon: '🧘',
-    prompt: 'Transform this church into a wellness spa with meditation areas, treatment rooms, relaxation pools, and zen gardens. Create a peaceful, healing environment that promotes tranquility and well-being.',
+    prompt: 'Transform this into a wellness spa with meditation areas, treatment rooms, relaxation pools, and zen gardens. Create a peaceful, healing environment that promotes tranquility and well-being.',
     style: 'modern',
     category: 'community'
   },
@@ -91,7 +149,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Laboratoire d\'Innovation',
     description: 'Un espace high-tech pour la recherche et l\'innovation',
     icon: '🔬',
-    prompt: 'Transform this church into a high-tech innovation laboratory with modern equipment, research stations, collaborative spaces, and digital displays. Blend cutting-edge technology with the historical architecture.',
+    prompt: 'Transform this into a high-tech innovation laboratory with modern equipment, research stations, collaborative spaces, and digital displays. Blend cutting-edge technology with the historical architecture.',
     style: 'modern',
     category: 'innovation'
   },
@@ -100,7 +158,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Marché Couvert',
     description: 'Un marché artisanal et gastronomique local',
     icon: '🛒',
-    prompt: 'Transform this church into a covered market with artisanal food stalls, local produce vendors, seating areas, and a central gathering space. Create a vibrant marketplace that celebrates local culture and cuisine.',
+    prompt: 'Transform this into a covered market with artisanal food stalls, local produce vendors, seating areas, and a central gathering space. Create a vibrant marketplace that celebrates local culture and cuisine.',
     style: 'realistic',
     category: 'community'
   },
@@ -109,7 +167,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Arène Gaming',
     description: 'Un espace gaming et e-sport de nouvelle génération',
     icon: '🎮',
-    prompt: 'Transform this church into a modern gaming arena with high-end gaming stations, tournament seating, streaming equipment, and LED lighting. Create an exciting esports venue while maintaining architectural respect.',
+    prompt: 'Transform this into a modern gaming arena with high-end gaming stations, tournament seating, streaming equipment, and LED lighting. Create an exciting esports venue while maintaining architectural respect.',
     style: 'creative',
     category: 'innovation'
   },
@@ -118,7 +176,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Sanctuaire Biophilique',
     description: 'Un espace de reconnexion avec la nature intégrant végétation et architecture',
     icon: '🌿',
-    prompt: 'Transform this church into a cutting-edge biophilic sanctuary with living walls, suspended gardens, natural water features, and organic architectural elements. Integrate advanced hydroponic systems, climate-controlled micro-ecosystems, and biomimetic design patterns that blur the boundaries between interior and nature.',
+    prompt: 'Transform this into a cutting-edge biophilic sanctuary with living walls, suspended gardens, natural water features, and organic architectural elements. Integrate advanced hydroponic systems, climate-controlled micro-ecosystems, and biomimetic design patterns that blur the boundaries between interior and nature.',
     style: 'modern',
     category: 'innovation'
   },
@@ -127,7 +185,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Musée Holographique',
     description: 'Un musée immersif utilisant la réalité augmentée et les hologrammes',
     icon: '🔮',
-    prompt: 'Transform this church into a futuristic holographic museum with transparent OLED displays, volumetric projection systems, interactive AR installations, and floating holographic exhibits. Feature sleek minimalist design with hidden technology infrastructure and dynamic lighting that responds to visitor presence.',
+    prompt: 'Transform this into a futuristic holographic museum with transparent OLED displays, volumetric projection systems, interactive AR installations, and floating holographic exhibits. Feature sleek minimalist design with hidden technology infrastructure and dynamic lighting that responds to visitor presence.',
     style: 'creative',
     category: 'culture'
   },
@@ -136,7 +194,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Ferme Verticale Urbaine',
     description: 'Une ferme verticale high-tech pour l\'agriculture urbaine durable',
     icon: '🌱',
-    prompt: 'Transform this church into a revolutionary vertical farm with multi-story growing towers, automated hydroponic systems, LED grow lights, robotic harvesting systems, and transparent growing chambers. Integrate sustainable technology with Gothic architecture, featuring glass cultivation pods and climate-controlled growing environments.',
+    prompt: 'Transform this into a revolutionary vertical farm with multi-story growing towers, automated hydroponic systems, LED grow lights, robotic harvesting systems, and transparent growing chambers. Integrate sustainable technology with Gothic architecture, featuring glass cultivation pods and climate-controlled growing environments.',
     style: 'modern',
     category: 'innovation'
   },
@@ -145,7 +203,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Centre de Recherche Quantique',
     description: 'Un laboratoire de recherche quantique avec équipements de pointe',
     icon: '⚛️',
-    prompt: 'Transform this church into a quantum research facility with cryogenic chambers, quantum computers, electromagnetic isolation chambers, and advanced scientific equipment. Feature ultra-modern clean room environments, particle accelerator components, and holographic data visualization systems within the preserved Gothic structure.',
+    prompt: 'Transform this into a quantum research facility with cryogenic chambers, quantum computers, electromagnetic isolation chambers, and advanced scientific equipment. Feature ultra-modern clean room environments, particle accelerator components, and holographic data visualization systems within the preserved Gothic structure.',
     style: 'modern',
     category: 'innovation'
   },
@@ -154,7 +212,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Théâtre Métamorphique',
     description: 'Un théâtre avec scène transformable et architecture adaptative',
     icon: '🎭',
-    prompt: 'Transform this church into a metamorphic theater with shape-shifting stage configurations, moveable architectural elements, dynamic acoustic panels, and programmable lighting systems. Feature retractable seating, modular performance spaces, and kinetic architectural components that can reconfigure for different types of performances.',
+    prompt: 'Transform this into a metamorphic theater with shape-shifting stage configurations, moveable architectural elements, dynamic acoustic panels, and programmable lighting systems. Feature retractable seating, modular performance spaces, and kinetic architectural components that can reconfigure for different types of performances.',
     style: 'creative',
     category: 'culture'
   },
@@ -163,7 +221,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Laboratoire d\'Interface Neuronale',
     description: 'Un centre de recherche sur les interfaces cerveau-machine',
     icon: '🧠',
-    prompt: 'Transform this church into a neural interface research laboratory with brain-computer interface stations, neural mapping equipment, meditation chambers with EEG monitoring, and consciousness research facilities. Integrate cutting-edge neurotechnology with serene, contemplative spaces that honor the spiritual heritage.',
+    prompt: 'Transform this into a neural interface research laboratory with brain-computer interface stations, neural mapping equipment, meditation chambers with EEG monitoring, and consciousness research facilities. Integrate cutting-edge neurotechnology with serene, contemplative spaces that honor the spiritual heritage.',
     style: 'modern',
     category: 'innovation'
   },
@@ -172,7 +230,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Conservatoire Cristallin',
     description: 'Un conservatoire de musique avec acoustique cristalline révolutionnaire',
     icon: '💎',
-    prompt: 'Transform this church into a crystalline conservatory with geometric crystal-inspired architecture, resonant crystal formations for natural acoustics, prismatic light diffusion systems, and mineral-based sound chambers. Feature crystalline performance pods, geode-inspired practice rooms, and harmonic crystal installations.',
+    prompt: 'Transform this into a crystalline conservatory with geometric crystal-inspired architecture, resonant crystal formations for natural acoustics, prismatic light diffusion systems, and mineral-based sound chambers. Feature crystalline performance pods, geode-inspired practice rooms, and harmonic crystal installations.',
     style: 'artistic',
     category: 'culture'
   },
@@ -182,7 +240,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Archive Temporelle',
     description: 'Un centre de préservation numérique avec technologie de stockage quantique',
     icon: '⏳',
-    prompt: 'Transform this church into a temporal archive with quantum storage systems, holographic data preservation chambers, time-locked vaults, and digital eternity installations. Feature crystalline data storage matrices, temporal visualization displays, and preservation pods that maintain digital heritage for millennia.',
+    prompt: 'Transform this into a temporal archive with quantum storage systems, holographic data preservation chambers, time-locked vaults, and digital eternity installations. Feature crystalline data storage matrices, temporal visualization displays, and preservation pods that maintain digital heritage for millennia.',
     style: 'creative',
     category: 'culture'
   },
@@ -191,7 +249,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Habitat Symbiotique',
     description: 'Un écosystème vivant où humains et nature coexistent harmonieusement',
     icon: '🦋',
-    prompt: 'Transform this church into a symbiotic habitat with living architecture, bio-responsive materials, symbiotic organism cultivation, and human-nature integration systems. Feature breathing walls, organic growth chambers, bio-luminescent lighting, and spaces where the boundary between built environment and living ecosystem dissolves completely.',
+    prompt: 'Transform this into a symbiotic habitat with living architecture, bio-responsive materials, symbiotic organism cultivation, and human-nature integration systems. Feature breathing walls, organic growth chambers, bio-luminescent lighting, and spaces where the boundary between built environment and living ecosystem dissolves completely.',
     style: 'modern',
     category: 'innovation'
   },
@@ -200,7 +258,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Centre d\'Escalade',
     description: 'Un centre d\'escalade moderne avec murs d\'escalade et espaces d\'entraînement',
     icon: '🧗',
-    prompt: 'Transform this church into a modern climbing center with artificial climbing walls of various difficulties, bouldering areas, safety equipment storage, and training spaces. Integrate climbing routes that utilize the church\'s height and architectural features while maintaining structural integrity.',
+    prompt: 'Transform this into a modern climbing center with artificial climbing walls of various difficulties, bouldering areas, safety equipment storage, and training spaces. Integrate climbing routes that utilize the church\'s height and architectural features while maintaining structural integrity.',
     style: 'modern',
     category: 'community'
   },
@@ -209,7 +267,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Centre Aquatique',
     description: 'Un complexe aquatique avec piscines et espaces de bien-être aquatique',
     icon: '🏊',
-    prompt: 'Transform this church into an aquatic center with swimming pools, spa facilities, hydrotherapy areas, and relaxation zones. Feature modern pool systems, underwater lighting, and water features that complement the architectural grandeur while creating a serene aquatic environment.',
+    prompt: 'Transform this into an aquatic center with swimming pools, spa facilities, hydrotherapy areas, and relaxation zones. Feature modern pool systems, underwater lighting, and water features that complement the architectural grandeur while creating a serene aquatic environment.',
     style: 'modern',
     category: 'community'
   },
@@ -218,7 +276,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Sauna Hammam Massage',
     description: 'Un centre de bien-être avec sauna, hammam et espaces de massage',
     icon: '🧖',
-    prompt: 'Transform this church into a luxurious sauna and hammam center with traditional steam rooms, dry saunas, massage therapy rooms, and relaxation areas. Feature natural stone finishes, ambient lighting, and therapeutic water features that create a serene wellness sanctuary.',
+    prompt: 'Transform this into a luxurious sauna and hammam center with traditional steam rooms, dry saunas, massage therapy rooms, and relaxation areas. Feature natural stone finishes, ambient lighting, and therapeutic water features that create a serene wellness sanctuary.',
     style: 'modern',
     category: 'community'
   },
@@ -227,7 +285,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Soufflerie Chute Libre',
     description: 'Un centre de chute libre indoor avec soufflerie verticale',
     icon: '🪂',
-    prompt: 'Transform this church into an indoor skydiving facility with a vertical wind tunnel, viewing areas, training spaces, and equipment storage. Integrate the high-tech wind generation system with the church\'s vertical architecture while maintaining safety and excitement.',
+    prompt: 'Transform this into an indoor skydiving facility with a vertical wind tunnel, viewing areas, training spaces, and equipment storage. Integrate the high-tech wind generation system with the church\'s vertical architecture while maintaining safety and excitement.',
     style: 'modern',
     category: 'innovation'
   },
@@ -236,7 +294,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Parc de Trampolines',
     description: 'Un parc de trampolines avec zones de saut et activités aériennes',
     icon: '🤸',
-    prompt: 'Transform this church into a trampoline park with interconnected trampolines, foam pits, dodgeball courts, and aerial activity zones. Utilize the church\'s height for spectacular jumping experiences while ensuring safety with protective padding and modern equipment.',
+    prompt: 'Transform this into a trampoline park with interconnected trampolines, foam pits, dodgeball courts, and aerial activity zones. Utilize the church\'s height for spectacular jumping experiences while ensuring safety with protective padding and modern equipment.',
     style: 'creative',
     category: 'community'
   },
@@ -245,7 +303,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Laser Game',
     description: 'Une arène de laser game avec parcours futuristes et effets spéciaux',
     icon: '🔫',
-    prompt: 'Transform this church into a laser tag arena with multi-level playing fields, futuristic obstacles, LED lighting effects, and fog machines. Create an immersive sci-fi environment with strategic hiding spots and dynamic lighting that enhances the gaming experience.',
+    prompt: 'Transform this into a laser tag arena with multi-level playing fields, futuristic obstacles, LED lighting effects, and fog machines. Create an immersive sci-fi environment with strategic hiding spots and dynamic lighting that enhances the gaming experience.',
     style: 'creative',
     category: 'innovation'
   },
@@ -254,7 +312,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Parc de Jeu',
     description: 'Un parc de jeu indoor avec structures ludiques et espaces familiaux',
     icon: '🎠',
-    prompt: 'Transform this church into an indoor playground with climbing structures, slides, ball pits, and family activity areas. Create a safe, colorful environment with soft play equipment, interactive games, and comfortable seating areas for parents.',
+    prompt: 'Transform this into an indoor playground with climbing structures, slides, ball pits, and family activity areas. Create a safe, colorful environment with soft play equipment, interactive games, and comfortable seating areas for parents.',
     style: 'creative',
     category: 'community'
   },
@@ -263,7 +321,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Tiers Lieu',
     description: 'Un espace hybride combinant travail, culture et vie sociale',
     icon: '🏘️',
-    prompt: 'Transform this church into a third place combining coworking spaces, cultural activities, café areas, and community meeting rooms. Create a flexible, multi-functional environment that serves as a social hub for work, learning, and community engagement.',
+    prompt: 'Transform this into a third place combining coworking spaces, cultural activities, café areas, and community meeting rooms. Create a flexible, multi-functional environment that serves as a social hub for work, learning, and community engagement.',
     style: 'modern',
     category: 'community'
   },
@@ -272,7 +330,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'FabLab',
     description: 'Un laboratoire de fabrication numérique avec imprimantes 3D et outils',
     icon: '🔧',
-    prompt: 'Transform this church into a fabrication laboratory with 3D printers, laser cutters, CNC machines, electronics workbenches, and maker spaces. Combine high-tech digital fabrication tools with traditional craftsmanship areas in an inspiring creative environment.',
+    prompt: 'Transform this into a fabrication laboratory with 3D printers, laser cutters, CNC machines, electronics workbenches, and maker spaces. Combine high-tech digital fabrication tools with traditional craftsmanship areas in an inspiring creative environment.',
     style: 'modern',
     category: 'innovation'
   },
@@ -281,7 +339,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Patinoire',
     description: 'Une patinoire couverte avec espaces de patinage et gradins',
     icon: '⛸️',
-    prompt: 'Transform this church into an indoor ice rink with professional ice surface, spectator seating, changing rooms, and warming areas. Integrate modern refrigeration systems and lighting while preserving the architectural grandeur for a unique skating experience.',
+    prompt: 'Transform this into an indoor ice rink with professional ice surface, spectator seating, changing rooms, and warming areas. Integrate modern refrigeration systems and lighting while preserving the architectural grandeur for a unique skating experience.',
     style: 'modern',
     category: 'community'
   },
@@ -290,7 +348,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     name: 'Cat Cuddling',
     description: 'Un café à chats avec espaces de détente et adoption féline',
     icon: '🐱',
-    prompt: 'Transform this church into a cat café with comfortable seating areas, cat play structures, adoption spaces, and cozy nooks for human-feline interaction. Create a peaceful, hygienic environment with cat-friendly furniture and calming design elements.',
+    prompt: 'Transform this into a cat café with comfortable seating areas, cat play structures, adoption spaces, and cozy nooks for human-feline interaction. Create a peaceful, hygienic environment with cat-friendly furniture and calming design elements.',
     style: 'modern',
     category: 'community'
   }
