@@ -690,10 +690,11 @@ export function createCoupon(engagement: EngagementDetails): CouponData {
   const referralBonuses = countReferralBonuses(engagement.details.email);
   const totalWithBonus = totalGenerations + referralBonuses;
   
-  const code = generateRandomCode(10);
+  const rawCode = generateRandomCode(12); // Generate 12 characters for consistency
+  const formattedCode = formatCouponCode(rawCode); // Format as XXXX-XXXX-XXXX
   const coupon: CouponData = {
-    id: code,
-    code,
+    id: formattedCode,
+    code: formattedCode,
     level,
     generationsLeft: totalWithBonus,
     generationsRemaining: totalWithBonus,
@@ -724,7 +725,15 @@ export function validateCoupon(code: string): ValidationResult {
   }
   
   const coupons = loadCoupons();
-  const coupon = coupons.find(c => c.code === code.toUpperCase());
+  const normalizedCode = code.toUpperCase();
+  
+  // Chercher le coupon avec le code exact ou le code formaté
+  const coupon = coupons.find(c => {
+    const couponCode = c.code.toUpperCase();
+    // Comparer directement ou comparer sans les tirets pour compatibilité
+    return couponCode === normalizedCode ||
+           couponCode.replace(/-/g, '') === normalizedCode.replace(/-/g, '');
+  });
   
   if (!coupon) {
     return { valid: false, error: 'not_found', message: 'Coupon non trouvé' };
@@ -752,7 +761,12 @@ export function useGeneration(code: string): ValidationResult {
   
   // Met à jour le nombre de générations restantes
   const coupons = loadCoupons();
-  const index = coupons.findIndex(c => c.code === code.toUpperCase());
+  const normalizedCode = code.toUpperCase();
+  const index = coupons.findIndex(c => {
+    const couponCode = c.code.toUpperCase();
+    return couponCode === normalizedCode ||
+           couponCode.replace(/-/g, '') === normalizedCode.replace(/-/g, '');
+  });
   
   if (index !== -1 && coupons[index].generationsLeft > 0) {
     coupons[index].generationsLeft--;
@@ -1176,10 +1190,11 @@ export function createSmartCoupon(email: string, engagementData: SignatureEngage
   const referralBonuses = countReferralBonuses(email);
   totalGenerations += referralBonuses;
   
-  const code = generateRandomCode(12); // Format XXXX-XXXX-XXXX
+  const rawCode = generateRandomCode(12); // Generate 12 characters
+  const formattedCode = formatCouponCode(rawCode); // Format as XXXX-XXXX-XXXX
   const coupon: EnhancedCouponData = {
-    id: code,
-    code,
+    id: formattedCode,
+    code: formattedCode,
     level,
     generationsLeft: totalGenerations,
     generationsRemaining: totalGenerations,
@@ -1204,9 +1219,6 @@ export function createSmartCoupon(email: string, engagementData: SignatureEngage
     referralBonuses,
     referralStats: getReferralStats(email)
   };
-  
-  // Formater le code au format XXXX-XXXX-XXXX
-  coupon.code = formatCouponCode(coupon.code);
   
   return coupon;
 }

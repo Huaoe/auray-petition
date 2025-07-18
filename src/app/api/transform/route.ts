@@ -154,14 +154,20 @@ async function generateWithStabilityAI(
       headers: {
         "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`,
         "Accept": "image/*",
+        // Don't set Content-Type for FormData - let the browser set it with boundary
       },
       body: formData,
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("Stability AI API Error:", response.status, errorText);
-      throw new Error(`Stability AI API error: ${response.status}`);
+      console.error("Stability AI API Error:", {
+        status: response.status,
+        statusText: response.statusText,
+        headers: Object.fromEntries(response.headers.entries()),
+        body: errorText
+      });
+      throw new Error(`Stability API error: ${response.status} - ${errorText}`);
     }
 
     // Ultra API returns the image directly as binary data
@@ -234,12 +240,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Valider le format du coupon (XXXX-XXXX-XXXX)
-    const couponRegex = /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
-    if (!couponRegex.test(couponCode.toUpperCase())) {
+    // Valider le format du coupon (XXXX-XXXX-XXXX ou XXXXXXXXXXXX pour compatibilité)
+    const couponRegexWithDashes = /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
+    const couponRegexWithoutDashes = /^[A-Z0-9]{10,12}$/;
+    const normalizedCoupon = couponCode.toUpperCase();
+    
+    if (!couponRegexWithDashes.test(normalizedCoupon) && !couponRegexWithoutDashes.test(normalizedCoupon)) {
       console.log(`❌ Invalid coupon format: ${couponCode}`);
       return NextResponse.json(
-        { 
+        {
           error: 'Format de coupon invalide',
           message: 'Le code de coupon doit avoir le format XXXX-XXXX-XXXX'
         },
