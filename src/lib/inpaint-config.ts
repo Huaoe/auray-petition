@@ -16,33 +16,33 @@ export interface InpaintImage {
 
 // Configuration des images disponibles avec leurs masques d'inpainting
 export const INPAINT_IMAGES: InpaintImage[] = [
-  {
-    path: "/images/46075-this-building-is-classe-au-titre-des-monuments-historiques-de-la-france-it-is-indexed-in-the-base-merimee-a-database-of-architectural-heritage-maintained-by-the-french.jpg",
-    name: "Saint-Gildas Extérieur",
-    description: "Vue extérieure de l'église Saint-Gildas - Façade principale",
-    maskPath: "/images/inpaint/total/inpaint1.jpg",
-    type: "exterior",
-    hdPainterMethod: "painta+rasg", // Meilleure qualité
-    resolution: "hd",
-  },
-  {
-    path: "/images/184232-english-inside-church-saint-gildas-in-auray-france.jpg",
-    name: "Saint-Gildas Intérieur",
-    description: "Vue intérieure de l'église Saint-Gildas - Nef principale",
-    maskPath: "/images/inpaint/total/184232-english-inside-church-saint-gildas-in-auray-franceINPAINT.jpg",
-    type: "interior",
-    hdPainterMethod: "painta+rasg",
-    resolution: "hd",
-  },
-  {
-    path: "/images/20220922_143843.jpg",
-    name: "Vue Détaillée Architecture",
-    description: "Vue détaillée de l'architecture - Éléments décoratifs",
-    maskPath: "/images/inpaint/total/inpaint2.jpg",
-    type: "detail",
-    hdPainterMethod: "rasg", // Pour préserver les détails
-    resolution: "ultra",
-  },
+  // {
+  //   path: "/images/46075-this-building-is-classe-au-titre-des-monuments-historiques-de-la-france-it-is-indexed-in-the-base-merimee-a-database-of-architectural-heritage-maintained-by-the-french.jpg",
+  //   name: "Saint-Gildas Extérieur",
+  //   description: "Vue extérieure de l'église Saint-Gildas - Façade principale",
+  //   maskPath: "/images/inpaint/total/inpaint1.jpg",
+  //   type: "exterior",
+  //   hdPainterMethod: "painta+rasg", // Meilleure qualité
+  //   resolution: "hd",
+  // },
+  // {
+  //   path: "/images/184232-english-inside-church-saint-gildas-in-auray-france.jpg",
+  //   name: "Saint-Gildas Intérieur",
+  //   description: "Vue intérieure de l'église Saint-Gildas - Nef principale",
+  //   maskPath: "/images/inpaint/total/184232-english-inside-church-saint-gildas-in-auray-franceINPAINT.jpg",
+  //   type: "interior",
+  //   hdPainterMethod: "painta+rasg",
+  //   resolution: "hd",
+  // },
+  // {
+  //   path: "/images/20220922_143843.jpg",
+  //   name: "Vue Détaillée Architecture",
+  //   description: "Vue détaillée de l'architecture - Éléments décoratifs",
+  //   maskPath: "/images/inpaint/total/inpaint2.jpg",
+  //   type: "detail",
+  //   hdPainterMethod: "rasg", // Pour préserver les détails
+  //   resolution: "ultra",
+  // },
   {
     path: "/images/fra-auray-4-1882354559.jpg",
     name: "Vue Alternative",
@@ -97,24 +97,25 @@ export const INPAINT_IMAGES: InpaintImage[] = [
     hdPainterMethod: "rasg", // Préservation respectueuse
     resolution: "ultra",
   },
-  {
-    path: "/images/20220922_143843.jpg",
-    name: "Architecture Complète",
-    description: "Vue d'ensemble architecturale - Transformation globale",
-    maskPath: "/images/inpaint/total/inpaint2.jpg",
-    type: "detail",
-    hdPainterMethod: "painta+rasg",
-    resolution: "ultra",
-  },
-  {
-    path: "/images/fra-auray-4-1882354559.jpg",
-    name: "Perspective Latérale",
-    description: "Vue latérale avec jardin - Intégration paysagère",
-    maskPath: "/images/inpaint/total/inpaint3.jpg",
-    type: "alternative",
-    hdPainterMethod: "painta",
-    resolution: "hd",
-  },
+  // {
+  //   path: "/images/20220922_143843.jpg",
+  //   name: "Architecture Complète",
+  //   description: "Vue d'ensemble architecturale - Transformation globale",
+  //   maskPath: "/images/inpaint/total/inpaint2.jpg",
+  //   type: "detail",
+  //   hdPainterMethod: "painta+rasg",
+  //   resolution: "ultra",
+  // },
+  // il faut metre le mask jusqu'en bas
+  // {
+  //   path: "/images/fra-auray-4-1882354559.jpg",
+  //   name: "Perspective Latérale",
+  //   description: "Vue latérale avec jardin - Intégration paysagère",
+  //   maskPath: "/images/inpaint/total/inpaint3.jpg",
+  //   type: "alternative",
+  //   hdPainterMethod: "painta",
+  //   resolution: "hd",
+  // },
 ];
 
 // Configuration HD-Painter

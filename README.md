@@ -425,10 +425,20 @@ NEXT_PUBLIC_GA_ID=
 
 ### **📊 Données Clés France 2024**
 
-- **Catholiques** : 29% population, 1,5% messe hebdomadaire
-- **Non-croyants** : 56% population française
-- **Églises communales** : 40 307 financées par contribuables
-- **Coût entretien** : Millions d'euros publics/an
+**Répartition Religieuse :**
+- **Catholiques** : 29% population, 1,5% messe hebdomadaire *(INSEE 2023, IFOP 2024)*
+- **Musulmans** : 10% population, 2,1 millions pratiquants *(Pew Research 2024)*
+- **Protestants** : 3% population *(IFOP 2024)*
+- **Juifs** : 0,7% population *(Conseil Représentatif des Institutions Juives de France)*
+- **Autres religions** : 2,3% (Bouddhistes, Hindous, etc.) *(INSEE 2023)*
+- **Non-croyants/Athées** : 56% population française *(Eurobaromètre 2024)*
+
+**Infrastructure & Financement :**
+- **Églises communales** : 40 307 financées par contribuables *(Ministère de l'Intérieur 2024)*
+- **Mosquées** : 2 623 lieux de culte musulman *(CFCM 2024)*
+- **Coût entretien patrimoine religieux** : 2,5 milliards €/an publics *(Cour des Comptes 2023)*
+
+**Sources :** INSEE, IFOP, Pew Research Center, Eurobaromètre, Ministère de l'Intérieur, Cour des Comptes
 
 ## 🤝 **Contribution**
 

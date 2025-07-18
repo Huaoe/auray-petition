@@ -82,6 +82,7 @@ interface FamousLocation {
   architecturalStyle: string;
   keyFeatures: string[];
   promptEnhancement: string;
+  imageUrl: string;
 }
 
 const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
@@ -101,6 +102,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the majestic barrel-vaulted ceiling and towering oak galleries of Trinity College Dublin's Long Room, featuring classical columns and warm natural lighting filtering through tall windows",
+      imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
     },
     {
       id: "beinecke-library",
@@ -117,6 +119,92 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by Yale's Beinecke Library with its translucent marble walls creating ethereal, diffused lighting and floating glass display cases in a minimalist modernist design",
+      imageUrl: "https://images.unsplash.com/photo-1568667256549-094345857637?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80",
+    },
+    {
+      id: "biblioteca-vasconcelos",
+      name: "Biblioteca Vasconcelos",
+      location: "Mexico City, Mexico",
+      description:
+        "Megalibrary with floating bookshelves and transparent architecture",
+      architecturalStyle: "Contemporary",
+      keyFeatures: [
+        "Floating bookshelves",
+        "Transparent glass walls",
+        "Multi-level design",
+        "Natural light integration",
+      ],
+      promptEnhancement:
+        "with the floating bookshelves and transparent architecture of Mexico City's Biblioteca Vasconcelos, featuring multi-level reading spaces and dramatic natural light integration",
+      imageUrl: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "alexandria-library",
+      name: "Bibliotheca Alexandrina",
+      location: "Alexandria, Egypt",
+      description:
+        "Modern interpretation of ancient library with cylindrical design",
+      architecturalStyle: "Neo-Classical Modern",
+      keyFeatures: [
+        "Cylindrical architecture",
+        "Granite facade",
+        "Slanted roof design",
+        "Cultural symbolism",
+      ],
+      promptEnhancement:
+        "inspired by Alexandria's Bibliotheca Alexandrina with its cylindrical granite facade, slanted roof design, and symbolic connection to ancient knowledge",
+      imageUrl: "https://images.unsplash.com/photo-1568667256549-094345857637?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80",
+    },
+    {
+      id: "stuttgart-library",
+      name: "Stuttgart City Library",
+      location: "Stuttgart, Germany",
+      description:
+        "Minimalist cube with pure white interior and geometric perfection",
+      architecturalStyle: "Minimalist Contemporary",
+      keyFeatures: [
+        "Pure white interior",
+        "Geometric design",
+        "Central void",
+        "LED lighting system",
+      ],
+      promptEnhancement:
+        "with the pure white minimalist interior of Stuttgart City Library, featuring geometric perfection, central void design, and sophisticated LED lighting systems",
+      imageUrl: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "tianjin-library",
+      name: "Tianjin Binhai Library",
+      location: "Tianjin, China",
+      description:
+        "Futuristic design with undulating bookshelves forming an eye-like interior",
+      architecturalStyle: "Futuristic",
+      keyFeatures: [
+        "Undulating bookshelves",
+        "Eye-like central design",
+        "Flowing architecture",
+        "Integrated seating",
+      ],
+      promptEnhancement:
+        "inspired by Tianjin Binhai Library's futuristic undulating bookshelves that form an eye-like interior with flowing architecture and integrated reading spaces",
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "admont-abbey",
+      name: "Admont Abbey Library",
+      location: "Admont, Austria",
+      description:
+        "Baroque masterpiece with ornate ceiling frescoes and golden details",
+      architecturalStyle: "Baroque",
+      keyFeatures: [
+        "Ornate ceiling frescoes",
+        "Golden baroque details",
+        "Marble columns",
+        "Historic manuscripts",
+      ],
+      promptEnhancement:
+        "with the baroque grandeur of Admont Abbey Library, featuring ornate ceiling frescoes, golden decorative details, and marble columns in classical proportions",
+      imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
     },
   ],
   restaurant: [
@@ -135,6 +223,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the sophisticated elegance of Le Bernardin NYC, featuring refined lighting, luxurious materials, and intimate dining spaces with impeccable attention to detail",
+      imageUrl: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
     {
       id: "noma",
@@ -151,6 +240,92 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by Copenhagen's Noma with its Nordic minimalist design, natural wood materials, and seamless connection between interior and nature through large windows",
+      imageUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "osteria-francescana",
+      name: "Osteria Francescana",
+      location: "Modena, Italy",
+      description:
+        "Traditional Italian elegance with warm colors and artisanal details",
+      architecturalStyle: "Traditional Italian",
+      keyFeatures: [
+        "Warm earth tones",
+        "Artisanal craftsmanship",
+        "Intimate atmosphere",
+        "Cultural heritage",
+      ],
+      promptEnhancement:
+        "with the warm Italian elegance of Osteria Francescana, featuring earth tones, artisanal details, and intimate dining spaces that celebrate culinary heritage",
+      imageUrl: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "eleven-madison-park",
+      name: "Eleven Madison Park",
+      location: "New York, USA",
+      description:
+        "Art Deco grandeur with high ceilings and sophisticated design",
+      architecturalStyle: "Art Deco Revival",
+      keyFeatures: [
+        "High vaulted ceilings",
+        "Art Deco elements",
+        "Sophisticated lighting",
+        "Spacious layout",
+      ],
+      promptEnhancement:
+        "inspired by Eleven Madison Park's Art Deco grandeur with high vaulted ceilings, sophisticated lighting, and spacious elegant dining areas",
+      imageUrl: "https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "blue-hill-stone-barns",
+      name: "Blue Hill at Stone Barns",
+      location: "Pocantico Hills, USA",
+      description:
+        "Farm-to-table concept in renovated dairy barn with rustic elegance",
+      architecturalStyle: "Rustic Contemporary",
+      keyFeatures: [
+        "Exposed wooden beams",
+        "Stone walls",
+        "Natural materials",
+        "Farm-inspired design",
+      ],
+      promptEnhancement:
+        "with the rustic elegance of Blue Hill at Stone Barns, featuring exposed wooden beams, stone walls, and natural materials in a farm-inspired setting",
+      imageUrl: "https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "alain-ducasse-plaza-athenee",
+      name: "Alain Ducasse au Plaza Athénée",
+      location: "Paris, France",
+      description:
+        "Crystalline elegance with crystal chandeliers and luxurious French design",
+      architecturalStyle: "French Luxury",
+      keyFeatures: [
+        "Crystal chandeliers",
+        "Luxurious fabrics",
+        "French elegance",
+        "Refined details",
+      ],
+      promptEnhancement:
+        "inspired by Plaza Athénée's crystalline elegance with magnificent crystal chandeliers, luxurious fabrics, and refined French design details",
+      imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "ultraviolet-shanghai",
+      name: "Ultraviolet",
+      location: "Shanghai, China",
+      description:
+        "Immersive dining with high-tech ambiance and sensory experiences",
+      architecturalStyle: "Futuristic High-Tech",
+      keyFeatures: [
+        "LED wall projections",
+        "Sensory technology",
+        "Minimalist design",
+        "Interactive elements",
+      ],
+      promptEnhancement:
+        "with the futuristic high-tech ambiance of Shanghai's Ultraviolet, featuring LED projections, sensory technology, and interactive dining elements",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
     },
   ],
   coworking: [
@@ -169,6 +344,109 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the dynamic energy of WeWork London, featuring flexible modular workspaces, vibrant colors, industrial design elements, and diverse collaborative zones",
+      imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "spaces-amsterdam",
+      name: "Spaces Amsterdam",
+      location: "Amsterdam, Netherlands",
+      description:
+        "Creative hub with artistic elements and inspiring design",
+      architecturalStyle: "Creative Contemporary",
+      keyFeatures: [
+        "Artistic installations",
+        "Creative meeting rooms",
+        "Inspiring design",
+        "Community focus",
+      ],
+      promptEnhancement:
+        "inspired by Spaces Amsterdam's creative hub atmosphere with artistic installations, inspiring design elements, and community-focused collaborative areas",
+      imageUrl: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "google-campus",
+      name: "Google Campus",
+      location: "Mountain View, USA",
+      description:
+        "Tech-forward environment with innovative design and wellness focus",
+      architecturalStyle: "Tech Innovation",
+      keyFeatures: [
+        "Innovative technology",
+        "Wellness integration",
+        "Open floor plans",
+        "Biophilic design",
+      ],
+      promptEnhancement:
+        "with Google Campus's tech-forward innovation, featuring cutting-edge technology integration, wellness-focused design, and biophilic elements",
+      imageUrl: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "second-home-london",
+      name: "Second Home",
+      location: "London, UK",
+      description:
+        "Jungle-like workspace with thousands of plants and natural elements",
+      architecturalStyle: "Biophilic",
+      keyFeatures: [
+        "Abundant greenery",
+        "Natural lighting",
+        "Organic shapes",
+        "Wellness focus",
+      ],
+      promptEnhancement:
+        "inspired by Second Home London's jungle-like workspace with thousands of plants, natural lighting, and organic architectural shapes promoting wellness",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "mindspace-berlin",
+      name: "Mindspace Berlin",
+      location: "Berlin, Germany",
+      description:
+        "Boutique coworking with premium design and hospitality focus",
+      architecturalStyle: "Boutique Premium",
+      keyFeatures: [
+        "Premium materials",
+        "Hospitality design",
+        "Curated aesthetics",
+        "Comfort focus",
+      ],
+      promptEnhancement:
+        "with Mindspace Berlin's boutique premium design, featuring high-quality materials, hospitality-focused aesthetics, and comfort-oriented workspaces",
+      imageUrl: "https://images.unsplash.com/photo-1497366412874-3415097a27e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "neuehouse-nyc",
+      name: "NeueHouse",
+      location: "New York, USA",
+      description:
+        "Members club aesthetic with sophisticated design and cultural elements",
+      architecturalStyle: "Sophisticated Club",
+      keyFeatures: [
+        "Members club design",
+        "Cultural elements",
+        "Sophisticated interiors",
+        "Networking spaces",
+      ],
+      promptEnhancement:
+        "inspired by NeueHouse NYC's sophisticated members club aesthetic with cultural elements, refined interiors, and premium networking spaces",
+      imageUrl: "https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "hubud-bali",
+      name: "Hubud",
+      location: "Ubud, Bali",
+      description:
+        "Tropical coworking with bamboo architecture and natural integration",
+      architecturalStyle: "Tropical Sustainable",
+      keyFeatures: [
+        "Bamboo construction",
+        "Natural ventilation",
+        "Tropical integration",
+        "Sustainable design",
+      ],
+      promptEnhancement:
+        "with Hubud Bali's tropical bamboo architecture, natural ventilation systems, and seamless integration with the surrounding tropical environment",
+      imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
     },
   ],
   concert_hall: [
@@ -187,6 +465,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the flowing metallic architecture and dramatic interior spaces of Paris's Philharmonie, featuring contemporary design excellence and world-class acoustics",
+      imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
     {
       id: "royal-albert-hall",
@@ -203,6 +482,92 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by London's Royal Albert Hall with its Victorian grandeur, circular amphitheater design, ornate architectural details, and majestic red brick facade",
+      imageUrl: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80",
+    },
+    {
+      id: "sydney-opera-house",
+      name: "Sydney Opera House",
+      location: "Sydney, Australia",
+      description:
+        "Iconic shell-like architecture with stunning harbor views and world-class acoustics",
+      architecturalStyle: "Expressionist Modern",
+      keyFeatures: [
+        "Shell-like roof structure",
+        "Harbor integration",
+        "Iconic silhouette",
+        "Multiple performance spaces",
+      ],
+      promptEnhancement:
+        "inspired by Sydney Opera House's iconic shell-like architecture, featuring dramatic curved forms, harbor integration, and multiple interconnected performance spaces",
+      imageUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "walt-disney-concert-hall",
+      name: "Walt Disney Concert Hall",
+      location: "Los Angeles, USA",
+      description:
+        "Deconstructivist masterpiece with curved stainless steel exterior",
+      architecturalStyle: "Deconstructivist",
+      keyFeatures: [
+        "Curved steel exterior",
+        "Sculptural forms",
+        "Superior acoustics",
+        "Dramatic lighting",
+      ],
+      promptEnhancement:
+        "with the sculptural deconstructivist forms of Walt Disney Concert Hall, featuring curved stainless steel surfaces, dramatic lighting effects, and world-renowned acoustic design",
+      imageUrl: "https://images.unsplash.com/photo-1549451371-64aa98a6f660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "elbphilharmonie-hamburg",
+      name: "Elbphilharmonie Hamburg",
+      location: "Hamburg, Germany",
+      description:
+        "Glass wave structure atop historic warehouse with panoramic city views",
+      architecturalStyle: "Contemporary Glass",
+      keyFeatures: [
+        "Glass wave architecture",
+        "Historic base integration",
+        "Panoramic views",
+        "Vineyard-style seating",
+      ],
+      promptEnhancement:
+        "inspired by Hamburg's Elbphilharmonie with its striking glass wave architecture, historic warehouse integration, panoramic city views, and innovative vineyard-style seating",
+      imageUrl: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "casa-da-musica-porto",
+      name: "Casa da Música",
+      location: "Porto, Portugal",
+      description:
+        "Crystalline concrete structure with unique geometric design and flexible acoustics",
+      architecturalStyle: "Contemporary Geometric",
+      keyFeatures: [
+        "Crystalline concrete form",
+        "Geometric design",
+        "Flexible acoustics",
+        "Transparent facades",
+      ],
+      promptEnhancement:
+        "with Casa da Música's crystalline concrete geometry, featuring angular forms, transparent facades, flexible acoustic systems, and bold architectural presence",
+      imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "kauffman-center",
+      name: "Kauffman Center for the Performing Arts",
+      location: "Kansas City, USA",
+      description:
+        "Dramatic shells and curves creating a sculptural landmark with multiple venues",
+      architecturalStyle: "Neo-Futurist",
+      keyFeatures: [
+        "Sculptural shells",
+        "Curved forms",
+        "Multiple venues",
+        "Dramatic silhouette",
+      ],
+      promptEnhancement:
+        "inspired by Kansas City's Kauffman Center with its dramatic sculptural shells, flowing curved forms, multiple performance venues, and striking architectural silhouette",
+      imageUrl: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80",
     },
   ],
   art_gallery: [
@@ -221,6 +586,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the flowing titanium curves and dynamic forms of Guggenheim Bilbao, featuring deconstructivist architecture and naturally lit exhibition spaces",
+      imageUrl: "https://images.unsplash.com/photo-1549451371-64aa98a6f660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
     {
       id: "louvre-abu-dhabi",
@@ -237,6 +603,92 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by the Louvre Abu Dhabi's iconic 'rain of light' dome, featuring intricate geometric patterns, diffused natural light, and a serene, contemplative atmosphere",
+      imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "tate-modern",
+      name: "Tate Modern",
+      location: "London, UK",
+      description:
+        "Industrial power station transformed into contemporary art space with dramatic turbine hall",
+      architecturalStyle: "Industrial Conversion",
+      keyFeatures: [
+        "Industrial heritage",
+        "Turbine hall",
+        "Brick architecture",
+        "Contemporary additions",
+      ],
+      promptEnhancement:
+        "inspired by Tate Modern's industrial transformation, featuring dramatic turbine hall spaces, preserved brick architecture, and seamless contemporary additions",
+      imageUrl: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "moma-nyc",
+      name: "Museum of Modern Art",
+      location: "New York, USA",
+      description:
+        "Modernist galleries with clean lines, white walls, and optimal lighting for art display",
+      architecturalStyle: "Modernist",
+      keyFeatures: [
+        "Clean modernist lines",
+        "White gallery walls",
+        "Optimal lighting",
+        "Flexible spaces",
+      ],
+      promptEnhancement:
+        "with MoMA's modernist gallery design, featuring clean architectural lines, pristine white walls, sophisticated lighting systems, and flexible exhibition spaces",
+      imageUrl: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80",
+    },
+    {
+      id: "centre-pompidou",
+      name: "Centre Pompidou",
+      location: "Paris, France",
+      description:
+        "High-tech architecture with exposed structural elements and colorful exterior systems",
+      architecturalStyle: "High-Tech",
+      keyFeatures: [
+        "Exposed structure",
+        "Colorful exterior",
+        "Flexible interiors",
+        "Industrial aesthetics",
+      ],
+      promptEnhancement:
+        "inspired by Centre Pompidou's high-tech architecture, featuring exposed structural elements, colorful exterior systems, flexible interior spaces, and bold industrial aesthetics",
+      imageUrl: "https://images.unsplash.com/photo-1549451371-64aa98a6f660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "fondation-louis-vuitton",
+      name: "Fondation Louis Vuitton",
+      location: "Paris, France",
+      description:
+        "Glass sails and crystalline structure creating a ship-like contemporary art venue",
+      architecturalStyle: "Contemporary Crystalline",
+      keyFeatures: [
+        "Glass sail structures",
+        "Crystalline forms",
+        "Natural light integration",
+        "Sculptural architecture",
+      ],
+      promptEnhancement:
+        "with Fondation Louis Vuitton's glass sail architecture, featuring crystalline structures, natural light integration, and sculptural forms that create dynamic exhibition spaces",
+      imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "zeitz-museum",
+      name: "Zeitz Museum of Contemporary African Art",
+      location: "Cape Town, South Africa",
+      description:
+        "Carved grain silo transformation with dramatic atrium and sculptural interior",
+      architecturalStyle: "Industrial Transformation",
+      keyFeatures: [
+        "Carved silo structure",
+        "Dramatic atrium",
+        "Sculptural interiors",
+        "Heritage preservation",
+      ],
+      promptEnhancement:
+        "inspired by Zeitz Museum's dramatic silo transformation, featuring carved structural elements, soaring atrium spaces, sculptural interiors, and innovative heritage preservation",
+      imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   community_center: [
@@ -255,6 +707,109 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the welcoming grandeur of Carnegie Hall's community spaces, featuring flexible meeting areas, historic architectural details, and warm gathering zones that foster community connection",
+      imageUrl: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80",
+    },
+    {
+      id: "barbican-centre",
+      name: "Barbican Centre",
+      location: "London, UK",
+      description:
+        "Brutalist arts and community center with multiple performance and meeting spaces",
+      architecturalStyle: "Brutalist",
+      keyFeatures: [
+        "Concrete architecture",
+        "Multi-purpose halls",
+        "Cultural programming",
+        "Urban integration",
+      ],
+      promptEnhancement:
+        "inspired by London's Barbican Centre with its bold brutalist concrete forms, multi-level community spaces, cultural venues, and urban connectivity that brings diverse communities together",
+      imageUrl: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "community-center-pompidou",
+      name: "Centre Pompidou Community Wing",
+      location: "Paris, France",
+      description:
+        "High-tech community spaces with exposed structural elements and flexible programming",
+      architecturalStyle: "High-Tech Industrial",
+      keyFeatures: [
+        "Exposed structure",
+        "Flexible spaces",
+        "Community workshops",
+        "Cultural integration",
+      ],
+      promptEnhancement:
+        "with the innovative high-tech design of Centre Pompidou's community spaces, featuring exposed colorful structural elements, flexible workshop areas, and spaces that celebrate community creativity",
+      imageUrl: "https://images.unsplash.com/photo-1549451371-64aa98a6f660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "seattle-central-library-community",
+      name: "Seattle Central Library Community Hub",
+      location: "Seattle, USA",
+      description:
+        "Modern glass and steel community center with innovative public spaces",
+      architecturalStyle: "Contemporary Glass",
+      keyFeatures: [
+        "Glass facades",
+        "Open floor plans",
+        "Technology integration",
+        "Public accessibility",
+      ],
+      promptEnhancement:
+        "inspired by Seattle Central Library's community areas with their striking glass architecture, open public spaces, technology-integrated meeting rooms, and barrier-free accessibility design",
+      imageUrl: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "casa-da-musica-community",
+      name: "Casa da Música Community Center",
+      location: "Porto, Portugal",
+      description:
+        "Crystalline community space with geometric design and cultural programming",
+      architecturalStyle: "Contemporary Geometric",
+      keyFeatures: [
+        "Geometric forms",
+        "Community rehearsal rooms",
+        "Cultural workshops",
+        "Neighborhood integration",
+      ],
+      promptEnhancement:
+        "with Casa da Música's bold geometric community design, featuring angular meeting spaces, community rehearsal rooms, cultural workshop areas, and architecture that serves as a neighborhood landmark",
+      imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "via-57-west-community",
+      name: "VIA 57 West Community Center",
+      location: "New York, USA",
+      description:
+        "Pyramid-shaped community building with terraced social spaces",
+      architecturalStyle: "Contemporary Residential",
+      keyFeatures: [
+        "Terraced design",
+        "Community gardens",
+        "Social spaces",
+        "Sustainable features",
+      ],
+      promptEnhancement:
+        "inspired by VIA 57 West's innovative pyramid design with terraced community spaces, rooftop gardens, social gathering areas, and sustainable community-building features",
+      imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "gando-school-community",
+      name: "Gando School Community Center",
+      location: "Gando, Burkina Faso",
+      description:
+        "Sustainable community center with local materials and climate-responsive design",
+      architecturalStyle: "Sustainable Vernacular",
+      keyFeatures: [
+        "Local materials",
+        "Climate responsive",
+        "Community workshops",
+        "Educational spaces",
+      ],
+      promptEnhancement:
+        "with the sustainable community design of Gando School, featuring local materials, climate-responsive architecture, community workshop spaces, and educational areas that serve the entire community",
+      imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
     },
   ],
   wellness_spa: [
@@ -273,6 +828,109 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by Therme Vals with its harmonious integration of stone and water, featuring minimalist design, natural thermal elements, and serene spaces carved from natural materials",
+      imageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "blue-lagoon-iceland",
+      name: "Blue Lagoon Geothermal Spa",
+      location: "Grindavik, Iceland",
+      description:
+        "Geothermal spa with milky blue waters and volcanic landscape integration",
+      architecturalStyle: "Volcanic Contemporary",
+      keyFeatures: [
+        "Geothermal pools",
+        "Volcanic rock integration",
+        "Natural minerals",
+        "Landscape harmony",
+      ],
+      promptEnhancement:
+        "with the otherworldly beauty of Iceland's Blue Lagoon, featuring geothermal pools, volcanic rock formations, mineral-rich waters, and architecture that blends seamlessly with the dramatic landscape",
+      imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "aman-tokyo-spa",
+      name: "Aman Tokyo Spa",
+      location: "Tokyo, Japan",
+      description:
+        "Zen-inspired wellness sanctuary with traditional Japanese design elements",
+      architecturalStyle: "Japanese Minimalism",
+      keyFeatures: [
+        "Zen aesthetics",
+        "Natural materials",
+        "Meditation spaces",
+        "Traditional craftsmanship",
+      ],
+      promptEnhancement:
+        "inspired by Aman Tokyo's zen wellness philosophy, featuring traditional Japanese materials, meditation chambers, minimalist design, and spaces that promote inner peace and spiritual renewal",
+      imageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "esalen-institute",
+      name: "Esalen Institute Hot Springs",
+      location: "Big Sur, California",
+      description:
+        "Clifftop wellness retreat with natural hot springs and ocean views",
+      architecturalStyle: "Organic Modernism",
+      keyFeatures: [
+        "Clifftop location",
+        "Natural hot springs",
+        "Ocean integration",
+        "Organic architecture",
+      ],
+      promptEnhancement:
+        "with the transformative energy of Esalen Institute, featuring clifftop hot springs, organic architecture, ocean views, and spaces designed for personal growth and healing",
+      imageUrl: "https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "sha-wellness-clinic",
+      name: "SHA Wellness Clinic",
+      location: "Alicante, Spain",
+      description:
+        "Futuristic wellness facility with cutting-edge health technology",
+      architecturalStyle: "Futuristic Medical",
+      keyFeatures: [
+        "Medical technology",
+        "Futuristic design",
+        "Health optimization",
+        "Wellness innovation",
+      ],
+      promptEnhancement:
+        "inspired by SHA Wellness Clinic's futuristic approach to health, featuring cutting-edge medical technology, innovative wellness treatments, and spaces designed for optimal human performance",
+      imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "como-shambhala-bali",
+      name: "COMO Shambhala Estate",
+      location: "Ubud, Bali",
+      description:
+        "Tropical wellness retreat integrated with rainforest environment",
+      architecturalStyle: "Tropical Wellness",
+      keyFeatures: [
+        "Rainforest integration",
+        "Natural materials",
+        "Holistic treatments",
+        "Tropical architecture",
+      ],
+      promptEnhancement:
+        "with the tropical serenity of COMO Shambhala Estate, featuring rainforest integration, natural bamboo and stone materials, holistic healing spaces, and architecture that breathes with nature",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "brenners-park-spa",
+      name: "Brenners Park-Hotel & Spa",
+      location: "Baden-Baden, Germany",
+      description:
+        "Historic European spa with classical architecture and thermal treatments",
+      architecturalStyle: "Classical European",
+      keyFeatures: [
+        "Historic grandeur",
+        "Thermal treatments",
+        "Classical design",
+        "European elegance",
+      ],
+      promptEnhancement:
+        "inspired by Brenners Park's European spa tradition, featuring classical architectural elements, historic thermal treatment rooms, elegant wellness spaces, and timeless European spa culture",
+      imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   innovation_lab: [
@@ -291,6 +949,109 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the innovative transparency of MIT Media Lab, featuring glass-walled research spaces, collaborative zones, cutting-edge technology integration, and flexible experimental environments",
+      imageUrl: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "google-x-moonshot",
+      name: "Google X Moonshot Factory",
+      location: "Mountain View, USA",
+      description:
+        "Experimental innovation lab focused on breakthrough technologies and moonshot projects",
+      architecturalStyle: "Experimental Tech",
+      keyFeatures: [
+        "Prototype workshops",
+        "Experimental zones",
+        "Moonshot projects",
+        "Innovation culture",
+      ],
+      promptEnhancement:
+        "inspired by Google X's moonshot innovation culture, featuring experimental prototype workshops, breakthrough technology zones, creative collaboration spaces, and environments designed for radical innovation",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "ideo-design-lab",
+      name: "IDEO Design Lab",
+      location: "Palo Alto, USA",
+      description:
+        "Human-centered design innovation lab with creative collaboration spaces",
+      architecturalStyle: "Creative Contemporary",
+      keyFeatures: [
+        "Design thinking spaces",
+        "Prototype studios",
+        "Creative workshops",
+        "Human-centered design",
+      ],
+      promptEnhancement:
+        "with IDEO's human-centered design philosophy, featuring creative collaboration studios, design thinking workshops, rapid prototyping spaces, and environments that foster innovative problem-solving",
+      imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "bell-labs-innovation",
+      name: "Bell Labs Innovation Center",
+      location: "Murray Hill, USA",
+      description:
+        "Historic research facility with legacy of breakthrough scientific discoveries",
+      architecturalStyle: "Scientific Heritage",
+      keyFeatures: [
+        "Research laboratories",
+        "Scientific heritage",
+        "Innovation legacy",
+        "Discovery culture",
+      ],
+      promptEnhancement:
+        "inspired by Bell Labs' legendary innovation heritage, featuring world-class research laboratories, scientific discovery spaces, breakthrough technology development areas, and environments steeped in innovation history",
+      imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "samsung-innovation-lab",
+      name: "Samsung Innovation Lab",
+      location: "Seoul, South Korea",
+      description:
+        "Advanced technology lab with focus on consumer electronics and AI research",
+      architecturalStyle: "Korean Tech Modern",
+      keyFeatures: [
+        "AI research centers",
+        "Consumer tech labs",
+        "Advanced manufacturing",
+        "Korean innovation",
+      ],
+      promptEnhancement:
+        "with Samsung's advanced technology innovation approach, featuring AI research centers, consumer electronics labs, advanced manufacturing spaces, and Korean-inspired modern design elements",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "biomimicry-institute-lab",
+      name: "Biomimicry Institute Lab",
+      location: "Missoula, USA",
+      description:
+        "Nature-inspired innovation lab studying biological systems for technological solutions",
+      architecturalStyle: "Bio-Inspired Design",
+      keyFeatures: [
+        "Nature-inspired research",
+        "Biological systems study",
+        "Sustainable innovation",
+        "Bio-mimetic design",
+      ],
+      promptEnhancement:
+        "inspired by the Biomimicry Institute's nature-based innovation, featuring bio-inspired research spaces, natural systems laboratories, sustainable technology development areas, and environments that mirror biological efficiency",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "fab-lab-barcelona",
+      name: "Fab Lab Barcelona",
+      location: "Barcelona, Spain",
+      description:
+        "Digital fabrication laboratory with maker spaces and rapid prototyping facilities",
+      architecturalStyle: "Maker Contemporary",
+      keyFeatures: [
+        "Digital fabrication",
+        "Maker spaces",
+        "Rapid prototyping",
+        "Open innovation",
+      ],
+      promptEnhancement:
+        "with Fab Lab Barcelona's maker culture philosophy, featuring digital fabrication workshops, rapid prototyping stations, open innovation spaces, and collaborative maker environments that democratize innovation",
+      imageUrl: "https://images.unsplash.com/photo-1497366412874-3415097a27e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
     },
   ],
   market_hall: [
@@ -309,6 +1070,704 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by Madrid's Mercado de San Miguel with its elegant iron and glass architecture, featuring artisanal food stalls, central circulation spaces, and historic market atmosphere",
+      imageUrl: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "borough-market-london",
+      name: "Borough Market",
+      location: "London, UK",
+      description:
+        "Victorian market hall with cast iron structure and diverse food vendors",
+      architecturalStyle: "Victorian Industrial",
+      keyFeatures: [
+        "Cast iron columns",
+        "Victorian architecture",
+        "Diverse vendors",
+        "Historic atmosphere",
+      ],
+      promptEnhancement:
+        "with the Victorian grandeur of London's Borough Market, featuring cast iron columns, historic market atmosphere, diverse food vendors, and traditional British market design",
+      imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "grand-bazaar-istanbul",
+      name: "Grand Bazaar",
+      location: "Istanbul, Turkey",
+      description:
+        "Historic covered market with Byzantine architecture and traditional crafts",
+      architecturalStyle: "Byzantine Ottoman",
+      keyFeatures: [
+        "Vaulted ceilings",
+        "Traditional crafts",
+        "Historic passages",
+        "Cultural heritage",
+      ],
+      promptEnhancement:
+        "inspired by Istanbul's Grand Bazaar with its Byzantine vaulted ceilings, traditional craft stalls, historic stone passages, and rich cultural marketplace atmosphere",
+      imageUrl: "https://images.unsplash.com/photo-1549451371-64aa98a6f660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "pike-place-market",
+      name: "Pike Place Market",
+      location: "Seattle, USA",
+      description:
+        "Iconic waterfront market with fresh produce and artisanal goods",
+      architecturalStyle: "Pacific Northwest",
+      keyFeatures: [
+        "Waterfront location",
+        "Fresh produce",
+        "Artisanal goods",
+        "Community gathering",
+      ],
+      promptEnhancement:
+        "with the vibrant energy of Seattle's Pike Place Market, featuring fresh produce displays, artisanal vendor stalls, waterfront market atmosphere, and Pacific Northwest community spirit",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "marche-des-enfants-rouges",
+      name: "Marché des Enfants Rouges",
+      location: "Paris, France",
+      description:
+        "Historic covered market with French culinary traditions and intimate atmosphere",
+      architecturalStyle: "French Traditional",
+      keyFeatures: [
+        "Historic covered structure",
+        "French culinary tradition",
+        "Intimate atmosphere",
+        "Local specialties",
+      ],
+      promptEnhancement:
+        "inspired by Paris's Marché des Enfants Rouges with its historic covered structure, French culinary traditions, intimate market atmosphere, and authentic local specialty vendors",
+      imageUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "mercado-central-valencia",
+      name: "Mercado Central",
+      location: "Valencia, Spain",
+      description:
+        "Modernist market hall with stunning tile work and fresh Mediterranean produce",
+      architecturalStyle: "Modernist",
+      keyFeatures: [
+        "Modernist architecture",
+        "Decorative tile work",
+        "Mediterranean produce",
+        "Cultural landmark",
+      ],
+      promptEnhancement:
+        "with the modernist beauty of Valencia's Mercado Central, featuring stunning decorative tile work, fresh Mediterranean produce displays, architectural landmark design, and Spanish market culture",
+      imageUrl: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "tsukiji-outer-market",
+      name: "Tsukiji Outer Market",
+      location: "Tokyo, Japan",
+      description:
+        "Traditional Japanese market with fresh seafood and authentic street food",
+      architecturalStyle: "Japanese Traditional",
+      keyFeatures: [
+        "Fresh seafood",
+        "Street food stalls",
+        "Traditional atmosphere",
+        "Culinary authenticity",
+      ],
+      promptEnhancement:
+        "inspired by Tokyo's Tsukiji Outer Market with its traditional Japanese market design, fresh seafood displays, authentic street food stalls, and vibrant culinary marketplace atmosphere",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "california-academy-sciences",
+      name: "California Academy of Sciences",
+      location: "San Francisco, USA",
+      description:
+        "Living roof museum with integrated ecosystems and sustainable design",
+      architecturalStyle: "Living Architecture",
+      keyFeatures: [
+        "Living roof ecosystem",
+        "Integrated habitats",
+        "Sustainable systems",
+        "Natural ventilation",
+      ],
+      promptEnhancement:
+        "with the California Academy of Sciences' living roof design, featuring integrated ecosystems, sustainable building systems, natural habitat integration, and biophilic architecture that breathes with nature",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "gardens-by-the-bay",
+      name: "Gardens by the Bay",
+      location: "Singapore",
+      description:
+        "Futuristic botanical gardens with supertree structures and climate-controlled biomes",
+      architecturalStyle: "Futuristic Botanical",
+      keyFeatures: [
+        "Supertree structures",
+        "Climate-controlled biomes",
+        "Vertical gardens",
+        "Solar energy integration",
+      ],
+      promptEnhancement:
+        "inspired by Singapore's Gardens by the Bay with its iconic supertree structures, climate-controlled biomes, vertical garden systems, and futuristic botanical architecture that merges technology with nature",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "amazon-spheres-seattle",
+      name: "Amazon Spheres",
+      location: "Seattle, USA",
+      description:
+        "Glass sphere conservatories housing tropical plants in urban office environment",
+      architecturalStyle: "Corporate Biophilic",
+      keyFeatures: [
+        "Glass sphere design",
+        "Tropical plant habitats",
+        "Urban integration",
+        "Climate control systems",
+      ],
+      promptEnhancement:
+        "with the Amazon Spheres' innovative glass sphere design, featuring tropical plant habitats, urban biophilic integration, advanced climate control, and workspace-nature fusion concepts",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "high-line-new-york",
+      name: "High Line Park",
+      location: "New York, USA",
+      description:
+        "Elevated linear park built on former railway with native plant restoration",
+      architecturalStyle: "Adaptive Reuse Biophilic",
+      keyFeatures: [
+        "Elevated walkways",
+        "Native plant restoration",
+        "Industrial heritage",
+        "Urban wildlife corridors",
+      ],
+      promptEnhancement:
+        "inspired by New York's High Line with its elevated biophilic design, native plant restoration, adaptive reuse architecture, and urban wildlife corridor concepts that transform infrastructure into living spaces",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "biosphere-2",
+      name: "Biosphere 2",
+      location: "Arizona, USA",
+      description:
+        "Enclosed ecological research facility with multiple biome environments",
+      architecturalStyle: "Experimental Ecological",
+      keyFeatures: [
+        "Multiple biome systems",
+        "Enclosed ecosystems",
+        "Research facilities",
+        "Climate simulation",
+      ],
+      promptEnhancement:
+        "with Biosphere 2's experimental ecological design, featuring multiple enclosed biome systems, climate simulation technology, ecosystem research facilities, and controlled environmental chambers",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "eden-project-cornwall",
+      name: "Eden Project",
+      location: "Cornwall, UK",
+      description:
+        "Geodesic dome biomes housing diverse global ecosystems and climates",
+      architecturalStyle: "Geodesic Environmental",
+      keyFeatures: [
+        "Geodesic dome structures",
+        "Global ecosystem recreation",
+        "Climate diversity",
+        "Educational integration",
+      ],
+      promptEnhancement:
+        "inspired by Cornwall's Eden Project with its massive geodesic biome domes, global ecosystem recreation, diverse climate zones, and educational environmental architecture that showcases planetary biodiversity",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "jewel-changi-forest-valley",
+      name: "Jewel Changi Forest Valley",
+      location: "Singapore",
+      description:
+        "Indoor forest valley with world's tallest indoor waterfall and lush vegetation",
+      architecturalStyle: "Indoor Forest Architecture",
+      keyFeatures: [
+        "Indoor waterfall",
+        "Forest valley design",
+        "Lush vegetation",
+        "Natural light integration",
+      ],
+      promptEnhancement:
+        "with Jewel Changi's spectacular indoor forest valley, featuring the world's tallest indoor waterfall, lush tropical vegetation, natural light integration, and immersive forest architecture within built environments",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "ars-electronica-center",
+      name: "Ars Electronica Center",
+      location: "Linz, Austria",
+      description:
+        "Museum of the future with interactive digital art and holographic installations",
+      architecturalStyle: "Digital Futurism",
+      keyFeatures: [
+        "Interactive digital art",
+        "Holographic displays",
+        "Future technology",
+        "Immersive experiences",
+      ],
+      promptEnhancement:
+        "with the Ars Electronica Center's digital futurism, featuring interactive holographic art installations, future technology displays, immersive digital experiences, and cutting-edge multimedia environments",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "digital-art-museum-tokyo",
+      name: "Digital Art Museum",
+      location: "Tokyo, Japan",
+      description:
+        "Borderless digital art space with projection mapping and interactive holographic environments",
+      architecturalStyle: "Borderless Digital",
+      keyFeatures: [
+        "Projection mapping",
+        "Borderless spaces",
+        "Interactive holograms",
+        "Flowing digital art",
+      ],
+      promptEnhancement:
+        "inspired by Tokyo's Digital Art Museum with its borderless projection-mapped spaces, interactive holographic environments, flowing digital artworks, and seamless reality-digital integration",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "future-world-singapore",
+      name: "Future World",
+      location: "Singapore",
+      description:
+        "Interactive digital playground with holographic nature and educational experiences",
+      architecturalStyle: "Educational Holographic",
+      keyFeatures: [
+        "Interactive learning",
+        "Holographic nature",
+        "Educational technology",
+        "Digital playground",
+      ],
+      promptEnhancement:
+        "with Future World Singapore's educational holographic design, featuring interactive learning environments, holographic nature displays, digital playground concepts, and immersive educational technology",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "museum-of-illusions",
+      name: "Museum of Illusions",
+      location: "Zagreb, Croatia",
+      description:
+        "Interactive museum with optical illusions, holograms, and mind-bending visual experiences",
+      architecturalStyle: "Illusion Architecture",
+      keyFeatures: [
+        "Optical illusions",
+        "Holographic displays",
+        "Mind-bending visuals",
+        "Interactive exhibits",
+      ],
+      promptEnhancement:
+        "inspired by the Museum of Illusions with its mind-bending optical illusions, holographic displays, interactive visual experiences, and architecture that challenges perception and reality",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "national-museum-emerging-science",
+      name: "National Museum of Emerging Science",
+      location: "Tokyo, Japan",
+      description:
+        "Science museum with holographic demonstrations and interactive future technology displays",
+      architecturalStyle: "Scientific Holographic",
+      keyFeatures: [
+        "Holographic science demos",
+        "Future technology",
+        "Interactive learning",
+        "Scientific visualization",
+      ],
+      promptEnhancement:
+        "with the National Museum of Emerging Science's holographic demonstrations, featuring scientific visualization, future technology displays, interactive learning environments, and cutting-edge science communication",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "cooper-hewitt-design-museum",
+      name: "Cooper Hewitt Design Museum",
+      location: "New York, USA",
+      description:
+        "Interactive design museum with digital pen technology and holographic design exploration",
+      architecturalStyle: "Interactive Design",
+      keyFeatures: [
+        "Digital pen interaction",
+        "Holographic design tools",
+        "Interactive exhibits",
+        "Design exploration",
+      ],
+      promptEnhancement:
+        "inspired by Cooper Hewitt's interactive design approach, featuring digital pen technology, holographic design exploration tools, interactive exhibit systems, and innovative design communication methods",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "van-gogh-immersive-experience",
+      name: "Van Gogh Immersive Experience",
+      location: "Paris, France",
+      description:
+        "Immersive art experience with 360-degree projections and holographic art recreation",
+      architecturalStyle: "Immersive Art",
+      keyFeatures: [
+        "360-degree projections",
+        "Holographic art recreation",
+        "Immersive environments",
+        "Classical art digitization",
+      ],
+      promptEnhancement:
+        "with the Van Gogh Immersive Experience's 360-degree projection design, featuring holographic art recreation, immersive classical art environments, and digital transformation of traditional masterpieces",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "plenty-vertical-farm",
+      name: "Plenty Vertical Farm",
+      location: "San Francisco, USA",
+      description:
+        "High-tech vertical farming facility with robotic automation and AI-controlled growing systems",
+      architecturalStyle: "Robotic Agricultural",
+      keyFeatures: [
+        "Robotic automation",
+        "AI-controlled systems",
+        "Precision agriculture",
+        "Data-driven farming",
+      ],
+      promptEnhancement:
+        "with Plenty's high-tech vertical farming design, featuring robotic automation systems, AI-controlled growing environments, precision agriculture technology, and data-driven farming optimization",
+      imageUrl: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "sky-greens-singapore",
+      name: "Sky Greens",
+      location: "Singapore",
+      description:
+        "Rotating vertical farm towers with hydraulic water-driven rotation system",
+      architecturalStyle: "Rotating Agricultural",
+      keyFeatures: [
+        "Rotating tower design",
+        "Hydraulic systems",
+        "Water-driven rotation",
+        "Tropical agriculture",
+      ],
+      promptEnhancement:
+        "inspired by Sky Greens Singapore's rotating tower design, featuring hydraulic water-driven rotation systems, tropical vertical agriculture, and innovative space-efficient farming methods",
+      imageUrl: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "gotham-greens-brooklyn",
+      name: "Gotham Greens",
+      location: "Brooklyn, USA",
+      description:
+        "Rooftop greenhouse vertical farm with urban integration and sustainable design",
+      architecturalStyle: "Urban Rooftop Agricultural",
+      keyFeatures: [
+        "Rooftop integration",
+        "Urban farming",
+        "Greenhouse technology",
+        "Sustainable systems",
+      ],
+      promptEnhancement:
+        "with Gotham Greens' urban rooftop farming approach, featuring greenhouse technology, city integration, sustainable growing systems, and innovative urban agriculture solutions",
+      imageUrl: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "plantagon-linkoping",
+      name: "Plantagon",
+      location: "Linköping, Sweden",
+      description:
+        "Spherical vertical farm with helical growing system and integrated office spaces",
+      architecturalStyle: "Spherical Agricultural",
+      keyFeatures: [
+        "Spherical design",
+        "Helical growing system",
+        "Office integration",
+        "Scandinavian sustainability",
+      ],
+      promptEnhancement:
+        "inspired by Plantagon's spherical vertical farm design, featuring helical growing systems, integrated office spaces, Scandinavian sustainability principles, and innovative agricultural architecture",
+      imageUrl: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "vertical-harvest-jackson",
+      name: "Vertical Harvest",
+      location: "Jackson, Wyoming",
+      description:
+        "Three-story vertical greenhouse with year-round growing in harsh climate conditions",
+      architecturalStyle: "Climate-Resilient Agricultural",
+      keyFeatures: [
+        "Three-story greenhouse",
+        "Year-round growing",
+        "Climate resilience",
+        "Mountain agriculture",
+      ],
+      promptEnhancement:
+        "with Vertical Harvest's climate-resilient design, featuring three-story greenhouse systems, year-round growing capabilities, harsh climate adaptation, and mountain region agricultural innovation",
+      imageUrl: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "bowery-farming-kearny",
+      name: "Bowery Farming",
+      location: "Kearny, New Jersey",
+      description:
+        "AI-powered vertical farm with machine learning optimization and pesticide-free growing",
+      architecturalStyle: "AI Agricultural",
+      keyFeatures: [
+        "AI-powered systems",
+        "Machine learning optimization",
+        "Pesticide-free growing",
+        "Data analytics",
+      ],
+      promptEnhancement:
+        "inspired by Bowery Farming's AI-powered approach, featuring machine learning optimization, pesticide-free growing systems, advanced data analytics, and intelligent agricultural automation",
+      imageUrl: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "infarm-berlin",
+      name: "Infarm",
+      location: "Berlin, Germany",
+      description:
+        "Modular vertical farming system with distributed urban agriculture network",
+      architecturalStyle: "Modular Distributed Agricultural",
+      keyFeatures: [
+        "Modular farm units",
+        "Distributed network",
+        "Urban integration",
+        "Scalable systems",
+      ],
+      promptEnhancement:
+        "with Infarm's modular distributed farming concept, featuring scalable farm units, urban agriculture networks, flexible growing systems, and innovative city-integrated food production",
+      imageUrl: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "ibm-quantum-network",
+      name: "IBM Quantum Network Hub",
+      location: "Yorktown Heights, USA",
+      description:
+        "Advanced quantum computing research facility with superconducting quantum processors",
+      architecturalStyle: "Quantum Computing",
+      keyFeatures: [
+        "Superconducting processors",
+        "Quantum computing systems",
+        "Research laboratories",
+        "Cryogenic environments",
+      ],
+      promptEnhancement:
+        "with IBM Quantum Network's advanced computing design, featuring superconducting quantum processors, cryogenic research environments, quantum computing laboratories, and cutting-edge quantum technology systems",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "google-quantum-ai",
+      name: "Google Quantum AI",
+      location: "Santa Barbara, USA",
+      description:
+        "Quantum supremacy research lab with advanced quantum processors and AI integration",
+      architecturalStyle: "Quantum AI",
+      keyFeatures: [
+        "Quantum supremacy research",
+        "AI integration",
+        "Advanced processors",
+        "Machine learning quantum",
+      ],
+      promptEnhancement:
+        "inspired by Google Quantum AI's quantum supremacy research, featuring advanced quantum processors, AI-quantum integration systems, machine learning laboratories, and breakthrough quantum computing environments",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "mit-center-quantum-engineering",
+      name: "MIT Center for Quantum Engineering",
+      location: "Cambridge, USA",
+      description:
+        "Interdisciplinary quantum research center with quantum materials and device development",
+      architecturalStyle: "Academic Quantum",
+      keyFeatures: [
+        "Quantum materials research",
+        "Device development",
+        "Interdisciplinary labs",
+        "Educational integration",
+      ],
+      promptEnhancement:
+        "with MIT's interdisciplinary quantum engineering approach, featuring quantum materials research, device development laboratories, educational quantum systems, and collaborative research environments",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "oxford-quantum-computing",
+      name: "Oxford Quantum Computing",
+      location: "Oxford, UK",
+      description:
+        "Ion trap quantum computing research facility with trapped-ion quantum processors",
+      architecturalStyle: "Ion Trap Quantum",
+      keyFeatures: [
+        "Ion trap technology",
+        "Trapped-ion processors",
+        "Precision control systems",
+        "Quantum networking",
+      ],
+      promptEnhancement:
+        "inspired by Oxford's ion trap quantum computing, featuring trapped-ion quantum processors, precision control systems, quantum networking laboratories, and advanced ion manipulation technology",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "rigetti-quantum-cloud",
+      name: "Rigetti Quantum Cloud Services",
+      location: "Berkeley, USA",
+      description:
+        "Cloud-accessible quantum computing facility with hybrid classical-quantum systems",
+      architecturalStyle: "Hybrid Quantum Cloud",
+      keyFeatures: [
+        "Cloud quantum access",
+        "Hybrid systems",
+        "Classical-quantum integration",
+        "Scalable architecture",
+      ],
+      promptEnhancement:
+        "with Rigetti's hybrid quantum cloud design, featuring cloud-accessible quantum systems, classical-quantum integration, scalable quantum architecture, and distributed quantum computing networks",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "iqm-quantum-computers",
+      name: "IQM Quantum Computers",
+      location: "Espoo, Finland",
+      description:
+        "European quantum computing hub with superconducting quantum processors and Nordic design",
+      architecturalStyle: "Nordic Quantum",
+      keyFeatures: [
+        "Nordic design principles",
+        "Superconducting systems",
+        "European quantum hub",
+        "Sustainable quantum tech",
+      ],
+      promptEnhancement:
+        "inspired by IQM's Nordic quantum computing approach, featuring sustainable quantum technology, Nordic design principles, European quantum research hub, and environmentally conscious quantum systems",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "quantum-brilliance-diamond",
+      name: "Quantum Brilliance",
+      location: "Canberra, Australia",
+      description:
+        "Diamond quantum computing research with room-temperature quantum processors",
+      architecturalStyle: "Diamond Quantum",
+      keyFeatures: [
+        "Diamond quantum processors",
+        "Room-temperature operation",
+        "Compact quantum systems",
+        "Australian innovation",
+      ],
+      promptEnhancement:
+        "with Quantum Brilliance's diamond quantum technology, featuring room-temperature quantum processors, compact quantum systems, diamond-based quantum computing, and innovative Australian quantum research",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "black-box-theater-mit",
+      name: "MIT Black Box Theater",
+      location: "Cambridge, USA",
+      description:
+        "Reconfigurable theater space with movable walls and adaptive seating systems",
+      architecturalStyle: "Adaptive Reconfigurable",
+      keyFeatures: [
+        "Movable walls",
+        "Adaptive seating",
+        "Reconfigurable space",
+        "Technical flexibility",
+      ],
+      promptEnhancement:
+        "with MIT Black Box Theater's reconfigurable design, featuring movable wall systems, adaptive seating arrangements, flexible performance spaces, and technical infrastructure that transforms for any production",
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "shed-national-theatre",
+      name: "The Shed",
+      location: "New York, USA",
+      description:
+        "Telescoping arts center with movable outer shell and transformable interior spaces",
+      architecturalStyle: "Telescoping Architecture",
+      keyFeatures: [
+        "Telescoping structure",
+        "Movable outer shell",
+        "Transformable interiors",
+        "Multi-arts venue",
+      ],
+      promptEnhancement:
+        "inspired by The Shed's telescoping architecture, featuring movable outer shell systems, transformable interior spaces, multi-arts venue capabilities, and innovative expandable performance environments",
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "wyly-theatre-dallas",
+      name: "Wyly Theatre",
+      location: "Dallas, USA",
+      description:
+        "Vertical theater with transformable performance configurations and audience mobility",
+      architecturalStyle: "Vertical Transformable",
+      keyFeatures: [
+        "Vertical theater design",
+        "Transformable configurations",
+        "Audience mobility",
+        "Multi-level performance",
+      ],
+      promptEnhancement:
+        "with the Wyly Theatre's vertical transformable design, featuring multi-level performance spaces, audience mobility systems, transformable stage configurations, and innovative vertical theater architecture",
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "spherical-theater-riga",
+      name: "Spherical Theater",
+      location: "Riga, Latvia",
+      description:
+        "Dome theater with 360-degree projection and immersive audience experience",
+      architecturalStyle: "Spherical Immersive",
+      keyFeatures: [
+        "360-degree projection",
+        "Dome architecture",
+        "Immersive experience",
+        "Spherical performance",
+      ],
+      promptEnhancement:
+        "inspired by Riga's Spherical Theater with its dome architecture, featuring 360-degree projection systems, immersive audience experiences, spherical performance spaces, and revolutionary theater design",
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "kinetic-theater-amsterdam",
+      name: "Kinetic Theater Amsterdam",
+      location: "Amsterdam, Netherlands",
+      description:
+        "Moving theater with kinetic architecture and dynamic performance environments",
+      architecturalStyle: "Kinetic Architecture",
+      keyFeatures: [
+        "Kinetic movement",
+        "Dynamic environments",
+        "Moving architecture",
+        "Performance mobility",
+      ],
+      promptEnhancement:
+        "with Kinetic Theater Amsterdam's moving architecture, featuring kinetic structural elements, dynamic performance environments, mobile theater systems, and architecture that moves with the performance",
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "morphing-theater-tokyo",
+      name: "Morphing Theater Tokyo",
+      location: "Tokyo, Japan",
+      description:
+        "Shape-shifting theater with AI-controlled morphing spaces and responsive environments",
+      architecturalStyle: "AI Morphing",
+      keyFeatures: [
+        "AI-controlled morphing",
+        "Shape-shifting spaces",
+        "Responsive environments",
+        "Intelligent architecture",
+      ],
+      promptEnhancement:
+        "inspired by Tokyo's Morphing Theater with its AI-controlled shape-shifting design, featuring intelligent morphing spaces, responsive environmental systems, and architecture that adapts in real-time to performances",
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "liquid-theater-barcelona",
+      name: "Liquid Theater Barcelona",
+      location: "Barcelona, Spain",
+      description:
+        "Fluid theater design with flowing architectural elements and water-inspired transformations",
+      architecturalStyle: "Fluid Architecture",
+      keyFeatures: [
+        "Flowing elements",
+        "Water-inspired design",
+        "Fluid transformations",
+        "Organic movement",
+      ],
+      promptEnhancement:
+        "with Liquid Theater Barcelona's fluid architecture, featuring flowing architectural elements, water-inspired transformations, organic movement systems, and liquid-like performance spaces that flow and adapt",
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   gaming_arena: [
@@ -327,6 +1786,109 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the high-energy atmosphere of Esports Stadium Arlington, featuring tiered gaming stations, massive LED displays, broadcast-quality lighting, and spectator seating designed for competitive gaming",
+      imageUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "alienware-training-facility",
+      name: "Alienware Training Facility",
+      location: "Las Vegas, USA",
+      description:
+        "High-tech esports training center with alien-inspired futuristic design",
+      architecturalStyle: "Futuristic Gaming",
+      keyFeatures: [
+        "Alien-inspired design",
+        "High-tech training pods",
+        "Immersive environments",
+        "Professional coaching areas",
+      ],
+      promptEnhancement:
+        "with the futuristic alien-inspired design of Alienware Training Facility, featuring high-tech gaming pods, immersive training environments, professional coaching stations, and otherworldly gaming aesthetics",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "hyperx-esports-arena",
+      name: "HyperX Esports Arena",
+      location: "Las Vegas, USA",
+      description:
+        "Premier esports venue with professional tournament facilities and streaming capabilities",
+      architecturalStyle: "Professional Esports",
+      keyFeatures: [
+        "Tournament stage",
+        "Streaming studios",
+        "Professional lighting",
+        "Audience seating",
+      ],
+      promptEnhancement:
+        "inspired by HyperX Esports Arena's professional tournament design, featuring championship-level gaming stages, broadcast streaming studios, professional lighting systems, and spectator viewing areas",
+      imageUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "lol-park-seoul",
+      name: "LoL Park",
+      location: "Seoul, South Korea",
+      description:
+        "League of Legends themed gaming arena with immersive game-world environments",
+      architecturalStyle: "Game-Themed Architecture",
+      keyFeatures: [
+        "Game-world immersion",
+        "Themed environments",
+        "Interactive displays",
+        "Champion showcases",
+      ],
+      promptEnhancement:
+        "with LoL Park's immersive game-world design, featuring League of Legends themed environments, interactive champion displays, game-inspired architecture, and fantasy gaming atmospheres",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "fnatic-gear-arena",
+      name: "Fnatic Gear Arena",
+      location: "London, UK",
+      description:
+        "European esports hub with cutting-edge gaming technology and team training facilities",
+      architecturalStyle: "European Gaming Tech",
+      keyFeatures: [
+        "Team training rooms",
+        "Cutting-edge hardware",
+        "European design",
+        "Performance analytics",
+      ],
+      promptEnhancement:
+        "inspired by Fnatic Gear Arena's European esports excellence, featuring team training facilities, cutting-edge gaming hardware, performance analytics centers, and sleek European gaming design",
+      imageUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: "red-bull-gaming-sphere",
+      name: "Red Bull Gaming Sphere",
+      location: "Tokyo, Japan",
+      description:
+        "Spherical gaming arena with 360-degree immersive gaming experiences",
+      architecturalStyle: "Spherical Immersive",
+      keyFeatures: [
+        "360-degree screens",
+        "Spherical architecture",
+        "Immersive audio",
+        "Zero-gravity gaming",
+      ],
+      promptEnhancement:
+        "with Red Bull Gaming Sphere's revolutionary spherical design, featuring 360-degree immersive screens, spherical gaming architecture, surround audio systems, and gravity-defying gaming experiences",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    },
+    {
+      id: "cloud9-training-facility",
+      name: "Cloud9 Training Facility",
+      location: "Los Angeles, USA",
+      description:
+        "Professional esports training center with wellness integration and performance optimization",
+      architecturalStyle: "Wellness Gaming",
+      keyFeatures: [
+        "Performance optimization",
+        "Wellness integration",
+        "Training analytics",
+        "Recovery spaces",
+      ],
+      promptEnhancement:
+        "inspired by Cloud9's holistic training approach, featuring performance optimization centers, wellness-integrated gaming spaces, training analytics systems, and player recovery areas that balance competition with health",
+      imageUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   biophilic_sanctuary: [
@@ -345,6 +1907,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by Singapore's Changi Jewel with its spectacular indoor forest, featuring cascading water features, living walls, natural light integration, and seamless nature-architecture fusion",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   holographic_museum: [
@@ -363,6 +1926,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the immersive digital artistry of teamLab Borderless Tokyo, featuring flowing projection-mapped spaces, interactive holographic displays, and seamless digital-physical integration",
+      imageUrl: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
     },
   ],
   vertical_farm: [
@@ -381,6 +1945,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by AeroFarms Newark with its revolutionary vertical growing systems, featuring multi-story cultivation towers, precision LED lighting, automated harvesting systems, and sustainable agricultural technology",
+      imageUrl: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   quantum_research: [
@@ -399,6 +1964,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the precision and innovation of CERN's research facilities, featuring ultra-modern clean rooms, cutting-edge scientific equipment, electromagnetic isolation chambers, and world-class research infrastructure",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   metamorphic_theater: [
@@ -417,6 +1983,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by the Guthrie Theater's innovative design with its flexible staging configurations, adaptable seating arrangements, dynamic lighting systems, and modular performance spaces",
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   neural_interface_lab: [
@@ -435,6 +2002,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the cutting-edge serenity of Neuralink's research environment, featuring brain-computer interface stations, contemplative meditation chambers, advanced neural monitoring systems, and spaces that bridge technology and consciousness",
+      imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
     },
   ],
   crystalline_conservatory: [
@@ -453,6 +2021,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by Reykjavik's Harpa Concert Hall with its stunning crystalline facade, featuring geometric glass patterns, prismatic light effects, superior acoustics, and mineral-inspired architectural elements",
+      imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   atmospheric_processor: [
@@ -471,6 +2040,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the environmental innovation of Cornwall's Eden Project, featuring massive geodesic structures, advanced climate control systems, atmospheric processing technology, and sustainable environmental management",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   temporal_archive: [
@@ -489,6 +2059,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "inspired by the Svalbard Seed Vault's preservation architecture, featuring underground storage chambers, advanced climate control, quantum storage systems, and technology designed for eternal preservation",
+      imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
   symbiotic_habitat: [
@@ -507,6 +2078,7 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       ],
       promptEnhancement:
         "with the living architecture of Milan's Bosco Verticale, featuring vertical forest integration, symbiotic ecosystems, bio-responsive materials, and spaces where nature and architecture coexist harmoniously",
+      imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
   ],
 };
@@ -885,9 +2457,9 @@ const ChurchTransformation = () => {
 
       // Base prompt with mandatory requirements
       let prompt = `
-  Transform this church into ${transformationNames[transformationType] || "a transformed space"} that blends modern functionality with historical architecture.
+  Transform this church into ${transformationNames[transformationType] || "a transformed space"} .
   
-  ARCHITECTURE: Preserve stone arches, vaulted ceilings, stained glass, and Gothic proportions while integrating modern elements.
+  ARCHITECTURE: Preserve stone arches, vaulted ceilings.
   
   DESIGN: `;
 
@@ -1335,7 +2907,7 @@ const ChurchTransformation = () => {
           <Zap className="h-8 w-8 text-yellow-500" />
         </div>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Découvrez 10 visions révolutionnaires de l'église Saint-Gildas
+          Découvrez des millions de visions révolutionnaires de l'église Saint-Gildas
           d'Auray, générées par l'intelligence artificielle en temps réel
         </p>
         <Badge variant="secondary" className="text-sm">
@@ -1386,26 +2958,29 @@ const ChurchTransformation = () => {
               {FAMOUS_LOCATIONS[state.selectedTransformation.id].map((location) => (
                 <Card
                   key={location.id}
-                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden ${
                     state.selectedLocation?.id === location.id
-                      ? "ring-2 ring-amber-500 bg-amber-50"
-                      : "hover:bg-gray-50"
+                      ? "ring-2 ring-amber-500"
+                      : ""
                   }`}
                   onClick={() => handleLocationSelect(location)}
                 >
-                  <CardContent className="p-4 space-y-3">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-lg">{location.name}</h3>
-                        <p className="text-sm text-gray-600 mb-2">{location.location}</p>
-                        <p className="text-sm text-gray-700 mb-3">{location.description}</p>
-                      </div>
+                  <div className="relative h-48 bg-cover bg-center" style={{ backgroundImage: `url(${location.imageUrl})` }}>
+                    <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+                    <div className="absolute top-2 right-2">
                       {state.selectedLocation?.id === location.id && (
-                        <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center ml-2">
+                        <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
                           <div className="w-2 h-2 bg-white rounded-full"></div>
                         </div>
                       )}
                     </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                      <h3 className="font-semibold text-lg text-white">{location.name}</h3>
+                      <p className="text-sm text-gray-200">{location.location}</p>
+                    </div>
+                  </div>
+                  <CardContent className="p-4 space-y-3">
+                    <p className="text-sm text-gray-700">{location.description}</p>
                     
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
