@@ -176,15 +176,7 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     style: 'artistic',
     category: 'culture'
   },
-  {
-    id: 'atmospheric_processor',
-    name: 'Processeur Atmosphérique',
-    description: 'Une installation de purification d\'air et de régénération atmosphérique',
-    icon: '🌪️',
-    prompt: 'Transform this church into an atmospheric processing facility with massive air purification systems, atmospheric regeneration chambers, wind tunnel testing areas, and climate simulation environments. Feature towering filtration columns, atmospheric monitoring stations, and weather generation systems integrated into the Gothic architecture.',
-    style: 'modern',
-    category: 'innovation'
-  },
+
   {
     id: 'temporal_archive',
     name: 'Archive Temporelle',
@@ -202,5 +194,104 @@ export const TRANSFORMATION_TYPES: TransformationType[] = [
     prompt: 'Transform this church into a symbiotic habitat with living architecture, bio-responsive materials, symbiotic organism cultivation, and human-nature integration systems. Feature breathing walls, organic growth chambers, bio-luminescent lighting, and spaces where the boundary between built environment and living ecosystem dissolves completely.',
     style: 'modern',
     category: 'innovation'
+  },
+  {
+    id: 'climbing',
+    name: 'Centre d\'Escalade',
+    description: 'Un centre d\'escalade moderne avec murs d\'escalade et espaces d\'entraînement',
+    icon: '🧗',
+    prompt: 'Transform this church into a modern climbing center with artificial climbing walls of various difficulties, bouldering areas, safety equipment storage, and training spaces. Integrate climbing routes that utilize the church\'s height and architectural features while maintaining structural integrity.',
+    style: 'modern',
+    category: 'community'
+  },
+  {
+    id: 'swimming_pool',
+    name: 'Centre Aquatique',
+    description: 'Un complexe aquatique avec piscines et espaces de bien-être aquatique',
+    icon: '🏊',
+    prompt: 'Transform this church into an aquatic center with swimming pools, spa facilities, hydrotherapy areas, and relaxation zones. Feature modern pool systems, underwater lighting, and water features that complement the architectural grandeur while creating a serene aquatic environment.',
+    style: 'modern',
+    category: 'community'
+  },
+  {
+    id: 'sauna_hammam',
+    name: 'Sauna Hammam Massage',
+    description: 'Un centre de bien-être avec sauna, hammam et espaces de massage',
+    icon: '🧖',
+    prompt: 'Transform this church into a luxurious sauna and hammam center with traditional steam rooms, dry saunas, massage therapy rooms, and relaxation areas. Feature natural stone finishes, ambient lighting, and therapeutic water features that create a serene wellness sanctuary.',
+    style: 'modern',
+    category: 'community'
+  },
+  {
+    id: 'indoor_skydiving',
+    name: 'Soufflerie Chute Libre',
+    description: 'Un centre de chute libre indoor avec soufflerie verticale',
+    icon: '🪂',
+    prompt: 'Transform this church into an indoor skydiving facility with a vertical wind tunnel, viewing areas, training spaces, and equipment storage. Integrate the high-tech wind generation system with the church\'s vertical architecture while maintaining safety and excitement.',
+    style: 'modern',
+    category: 'innovation'
+  },
+  {
+    id: 'trampoline_park',
+    name: 'Parc de Trampolines',
+    description: 'Un parc de trampolines avec zones de saut et activités aériennes',
+    icon: '🤸',
+    prompt: 'Transform this church into a trampoline park with interconnected trampolines, foam pits, dodgeball courts, and aerial activity zones. Utilize the church\'s height for spectacular jumping experiences while ensuring safety with protective padding and modern equipment.',
+    style: 'creative',
+    category: 'community'
+  },
+  {
+    id: 'laser_game',
+    name: 'Laser Game',
+    description: 'Une arène de laser game avec parcours futuristes et effets spéciaux',
+    icon: '🔫',
+    prompt: 'Transform this church into a laser tag arena with multi-level playing fields, futuristic obstacles, LED lighting effects, and fog machines. Create an immersive sci-fi environment with strategic hiding spots and dynamic lighting that enhances the gaming experience.',
+    style: 'creative',
+    category: 'innovation'
+  },
+  {
+    id: 'playground',
+    name: 'Parc de Jeu',
+    description: 'Un parc de jeu indoor avec structures ludiques et espaces familiaux',
+    icon: '🎠',
+    prompt: 'Transform this church into an indoor playground with climbing structures, slides, ball pits, and family activity areas. Create a safe, colorful environment with soft play equipment, interactive games, and comfortable seating areas for parents.',
+    style: 'creative',
+    category: 'community'
+  },
+  {
+    id: 'third_place',
+    name: 'Tiers Lieu',
+    description: 'Un espace hybride combinant travail, culture et vie sociale',
+    icon: '🏘️',
+    prompt: 'Transform this church into a third place combining coworking spaces, cultural activities, café areas, and community meeting rooms. Create a flexible, multi-functional environment that serves as a social hub for work, learning, and community engagement.',
+    style: 'modern',
+    category: 'community'
+  },
+  {
+    id: 'fablab',
+    name: 'FabLab',
+    description: 'Un laboratoire de fabrication numérique avec imprimantes 3D et outils',
+    icon: '🔧',
+    prompt: 'Transform this church into a fabrication laboratory with 3D printers, laser cutters, CNC machines, electronics workbenches, and maker spaces. Combine high-tech digital fabrication tools with traditional craftsmanship areas in an inspiring creative environment.',
+    style: 'modern',
+    category: 'innovation'
+  },
+  {
+    id: 'ice_rink',
+    name: 'Patinoire',
+    description: 'Une patinoire couverte avec espaces de patinage et gradins',
+    icon: '⛸️',
+    prompt: 'Transform this church into an indoor ice rink with professional ice surface, spectator seating, changing rooms, and warming areas. Integrate modern refrigeration systems and lighting while preserving the architectural grandeur for a unique skating experience.',
+    style: 'modern',
+    category: 'community'
+  },
+  {
+    id: 'cat_cuddling',
+    name: 'Cat Cuddling',
+    description: 'Un café à chats avec espaces de détente et adoption féline',
+    icon: '🐱',
+    prompt: 'Transform this church into a cat café with comfortable seating areas, cat play structures, adoption spaces, and cozy nooks for human-feline interaction. Create a peaceful, hygienic environment with cat-friendly furniture and calming design elements.',
+    style: 'modern',
+    category: 'community'
   }
 ];

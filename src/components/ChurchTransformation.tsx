@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -43,6 +44,11 @@ import {
   INPAINT_IMAGES,
   type InpaintImage,
   type HDPainterMethod,
+  NEGATIVE_PROMPT_CONFIG,
+  combineNegativePrompts,
+  getNegativePromptPreset,
+  getDefaultNegativePrompt,
+  getChurchSpecificNegativePrompt,
 } from "@/lib/inpaint-config";
 import {
   validateAndUseCoupon,
@@ -71,6 +77,9 @@ interface GenerationState {
   showMaskPreview: boolean;
   // Social Media Sharing
   showShareModal: boolean;
+  // Negative Prompts
+  negativePrompt: string;
+  showNegativePromptPresets: boolean;
 }
 
 // Famous locations data structure organized by transformation types
@@ -2558,6 +2567,809 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       imageUrl: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop'
     },
   ],
+
+  climbing: [
+    {
+      id: 'climbing-1',
+      name: 'Brooklyn Boulders',
+      location: 'Brooklyn, New York, USA',
+      description: 'Innovative climbing gym in converted warehouse with community focus',
+      architecturalStyle: 'Industrial Conversion',
+      keyFeatures: ['Exposed brick walls', 'High ceilings', 'Modular climbing walls', 'Community spaces'],
+      promptEnhancement: 'Industrial warehouse aesthetic with exposed brick, steel beams, and modular climbing wall systems',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'climbing-2',
+      name: 'Klättercentret Stockholm',
+      location: 'Stockholm, Sweden',
+      description: 'Scandinavian climbing center with natural wood and minimalist design',
+      architecturalStyle: 'Scandinavian Modern',
+      keyFeatures: ['Natural wood finishes', 'Floor-to-ceiling windows', 'Minimalist design', 'Integrated café'],
+      promptEnhancement: 'Scandinavian minimalism with natural wood, clean lines, and abundant natural light',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'climbing-3',
+      name: 'Basecamp Climbing',
+      location: 'Sheffield, England',
+      description: 'Purpose-built climbing center with varied terrain and training facilities',
+      architecturalStyle: 'Contemporary Sports Architecture',
+      keyFeatures: ['Multi-angle climbing walls', 'Training areas', 'Viewing galleries', 'Equipment shop'],
+      promptEnhancement: 'Modern sports facility with varied climbing surfaces, professional training areas, and spectator spaces',
+      imageUrl: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'climbing-4',
+      name: 'Vertical Art Climbing Gym',
+      location: 'Tokyo, Japan',
+      description: 'Urban climbing facility with artistic wall designs and compact layout',
+      architecturalStyle: 'Japanese Contemporary',
+      keyFeatures: ['Artistic climbing holds', 'Compact vertical design', 'LED lighting systems', 'Zen relaxation areas'],
+      promptEnhancement: 'Japanese design principles with artistic climbing walls, efficient space usage, and calming elements',
+      imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'climbing-5',
+      name: 'Boulderwelt Munich',
+      location: 'Munich, Germany',
+      description: 'Large-scale bouldering facility with diverse climbing challenges',
+      architecturalStyle: 'German Industrial Modern',
+      keyFeatures: ['Massive bouldering areas', 'Color-coded routes', 'Social lounges', 'Training equipment'],
+      promptEnhancement: 'German engineering precision with systematic route organization, robust construction, and social spaces',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'climbing-6',
+      name: 'The Climbing Hangar',
+      location: 'Liverpool, England',
+      description: 'Converted aircraft hangar transformed into massive climbing space',
+      architecturalStyle: 'Aviation Heritage Conversion',
+      keyFeatures: ['Soaring ceiling heights', 'Aircraft hangar structure', 'Multiple climbing zones', 'Heritage preservation'],
+      promptEnhancement: 'Aviation hangar conversion with dramatic height, industrial heritage, and expansive climbing areas',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'climbing-7',
+      name: 'Sender One Climbing',
+      location: 'Los Angeles, California, USA',
+      description: 'Modern climbing gym with outdoor-inspired design and community focus',
+      architecturalStyle: 'California Contemporary',
+      keyFeatures: ['Natural rock textures', 'Outdoor-inspired design', 'Fitness integration', 'Community events space'],
+      promptEnhancement: 'California outdoor climbing aesthetic with natural textures, fitness integration, and community-centered design',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop'
+    }
+  ],
+
+  swimming_pool: [
+    {
+      id: 'pool-1',
+      name: 'Therme Vals',
+      location: 'Vals, Switzerland',
+      description: 'Iconic thermal baths built into mountainside with minimalist stone architecture',
+      architecturalStyle: 'Minimalist Stone Architecture',
+      keyFeatures: ['Natural stone construction', 'Thermal pools', 'Mountain integration', 'Atmospheric lighting'],
+      promptEnhancement: 'Peter Zumthor-inspired minimalist stone architecture with thermal pools and dramatic lighting',
+      imageUrl: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'pool-2',
+      name: 'Aquatics Centre London',
+      location: 'London, England',
+      description: 'Olympic aquatics center with flowing wave-like roof design',
+      architecturalStyle: 'Contemporary Olympic Architecture',
+      keyFeatures: ['Wave-inspired roof', 'Olympic-standard pools', 'Spectator seating', 'Natural lighting'],
+      promptEnhancement: 'Zaha Hadid-inspired flowing architecture with wave-like forms and Olympic-quality facilities',
+      imageUrl: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'pool-3',
+      name: 'Blue Lagoon Geothermal Spa',
+      location: 'Grindavík, Iceland',
+      description: 'Geothermal spa with milky blue waters and volcanic landscape integration',
+      architecturalStyle: 'Icelandic Geothermal Design',
+      keyFeatures: ['Geothermal pools', 'Volcanic rock integration', 'Milky blue waters', 'Spa treatments'],
+      promptEnhancement: 'Icelandic geothermal design with volcanic rock, mineral-rich waters, and Nordic spa elements',
+      imageUrl: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'pool-4',
+      name: 'Piscine Molitor',
+      location: 'Paris, France',
+      description: 'Art Deco swimming complex restored to original 1929 grandeur',
+      architecturalStyle: 'Art Deco Revival',
+      keyFeatures: ['Art Deco styling', 'Historic restoration', 'Indoor/outdoor pools', 'Luxury amenities'],
+      promptEnhancement: 'Art Deco elegance with geometric patterns, luxury finishes, and historic Parisian glamour',
+      imageUrl: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'pool-5',
+      name: 'Marina Bay Sands SkyPark',
+      location: 'Singapore',
+      description: 'Infinity pool on 57th floor with panoramic city views',
+      architecturalStyle: 'Contemporary High-Rise',
+      keyFeatures: ['Infinity edge design', 'Panoramic city views', 'Sky-high location', 'Luxury resort integration'],
+      promptEnhancement: 'High-altitude infinity pool design with panoramic views and luxury resort aesthetics',
+      imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'pool-6',
+      name: 'Amangiri Resort Pool',
+      location: 'Utah, USA',
+      description: 'Desert resort pool carved into red rock landscape',
+      architecturalStyle: 'Desert Minimalism',
+      keyFeatures: ['Red rock integration', 'Desert landscape harmony', 'Minimalist design', 'Natural materials'],
+      promptEnhancement: 'Desert minimalism with red rock integration, natural materials, and landscape harmony',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'pool-7',
+      name: 'Széchenyi Thermal Baths',
+      location: 'Budapest, Hungary',
+      description: 'Historic thermal baths with Neo-Baroque architecture and healing waters',
+      architecturalStyle: 'Neo-Baroque Thermal Architecture',
+      keyFeatures: ['Neo-Baroque styling', 'Historic thermal pools', 'Ornate decorations', 'Healing mineral waters'],
+      promptEnhancement: 'Neo-Baroque grandeur with ornate thermal pools, historic architecture, and healing spa traditions',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    }
+  ],
+
+  sauna_hammam: [
+    {
+      id: 'sauna-1',
+      name: 'Therme Vals',
+      location: 'Vals, Switzerland',
+      description: 'Iconic thermal spa with minimalist stone architecture and natural hot springs',
+      architecturalStyle: 'Minimalist Stone',
+      keyFeatures: ['Natural stone construction', 'Thermal pools', 'Atmospheric lighting', 'Mountain integration'],
+      promptEnhancement: 'minimalist stone architecture, thermal pools, atmospheric lighting, natural materials',
+      imageUrl: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'sauna-2',
+      name: 'Allas Sea Pool',
+      location: 'Helsinki, Finland',
+      description: 'Urban spa complex with saunas, pools, and Baltic Sea views',
+      architecturalStyle: 'Nordic Contemporary',
+      keyFeatures: ['Sea integration', 'Modern saunas', 'Urban design', 'Nordic aesthetics'],
+      promptEnhancement: 'Nordic spa design, sea integration, modern saunas, urban wellness',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'sauna-3',
+      name: 'Löyly Sauna',
+      location: 'Helsinki, Finland',
+      description: 'Sculptural wooden sauna with dramatic angular architecture',
+      architecturalStyle: 'Contemporary Wood Architecture',
+      keyFeatures: ['Angular wood design', 'Sculptural form', 'Waterfront location', 'Modern Finnish sauna'],
+      promptEnhancement: 'angular wooden architecture, sculptural sauna design, waterfront integration',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'sauna-4',
+      name: 'Hammam Al Andalus',
+      location: 'Granada, Spain',
+      description: 'Traditional Arab baths with Moorish architecture and thermal treatments',
+      architecturalStyle: 'Moorish Revival',
+      keyFeatures: ['Moorish arches', 'Traditional hammam', 'Thermal pools', 'Islamic geometry'],
+      promptEnhancement: 'Moorish architecture, traditional hammam design, Islamic geometric patterns',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'sauna-5',
+      name: 'Spa Nordique',
+      location: 'Quebec, Canada',
+      description: 'Forest spa with outdoor thermal pools and Nordic relaxation traditions',
+      architecturalStyle: 'Nordic Forest Design',
+      keyFeatures: ['Forest integration', 'Outdoor thermal pools', 'Nordic traditions', 'Natural materials'],
+      promptEnhancement: 'forest spa design, outdoor thermal pools, Nordic wellness traditions',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'sauna-6',
+      name: 'Friedrichsbad',
+      location: 'Baden-Baden, Germany',
+      description: 'Historic Roman-Irish bath house with ornate 19th-century architecture',
+      architecturalStyle: 'Neo-Renaissance',
+      keyFeatures: ['Historic architecture', 'Roman-Irish baths', 'Ornate interiors', 'Thermal treatments'],
+      promptEnhancement: 'Neo-Renaissance architecture, historic bath house, ornate thermal spa design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'sauna-7',
+      name: 'Gellért Thermal Baths',
+      location: 'Budapest, Hungary',
+      description: 'Art Nouveau thermal baths with stunning mosaics and thermal pools',
+      architecturalStyle: 'Art Nouveau',
+      keyFeatures: ['Art Nouveau design', 'Mosaic decorations', 'Thermal pools', 'Historic grandeur'],
+      promptEnhancement: 'Art Nouveau architecture, mosaic decorations, historic thermal bath design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    }
+  ],
+
+  indoor_skydiving: [
+    {
+      id: 'skydiving-1',
+      name: 'iFLY Indoor Skydiving',
+      location: 'Multiple Locations',
+      description: 'Leading indoor skydiving facility with vertical wind tunnel technology',
+      architecturalStyle: 'Industrial Modern',
+      keyFeatures: ['Vertical wind tunnel', 'Glass observation areas', 'Modern industrial design', 'Safety systems'],
+      promptEnhancement: 'vertical wind tunnel architecture, glass observation areas, industrial modern design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'skydiving-2',
+      name: 'Windoor Real Fly',
+      location: 'Empuriabrava, Spain',
+      description: 'Advanced wind tunnel facility with cutting-edge aerodynamic design',
+      architecturalStyle: 'Aerodynamic Contemporary',
+      keyFeatures: ['Advanced wind tunnel', 'Aerodynamic architecture', 'Training facilities', 'Spectator areas'],
+      promptEnhancement: 'aerodynamic architecture, advanced wind tunnel design, contemporary sports facility',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'skydiving-3',
+      name: 'Flystation',
+      location: 'St. Petersburg, Russia',
+      description: 'High-tech indoor skydiving center with innovative tunnel design',
+      architecturalStyle: 'High-Tech Modern',
+      keyFeatures: ['High-tech systems', 'Innovative tunnel design', 'Modern facilities', 'Training programs'],
+      promptEnhancement: 'high-tech architecture, innovative wind tunnel, modern sports facility design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'skydiving-4',
+      name: 'Vegas Indoor Skydiving',
+      location: 'Las Vegas, USA',
+      description: 'Entertainment-focused skydiving facility with spectacular design',
+      architecturalStyle: 'Entertainment Architecture',
+      keyFeatures: ['Entertainment design', 'Spectacular interiors', 'Tourist attraction', 'Show elements'],
+      promptEnhancement: 'entertainment architecture, spectacular indoor design, tourist attraction facility',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'skydiving-5',
+      name: 'Bodyflight Bedford',
+      location: 'Bedford, UK',
+      description: 'Professional wind tunnel facility with training-focused architecture',
+      architecturalStyle: 'Professional Sports',
+      keyFeatures: ['Professional training', 'Wind tunnel technology', 'Sports architecture', 'Safety features'],
+      promptEnhancement: 'professional sports architecture, wind tunnel facility, training center design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'skydiving-6',
+      name: 'Hurricane Factory',
+      location: 'Prague, Czech Republic',
+      description: 'European wind tunnel facility with modern Czech design',
+      architecturalStyle: 'Czech Contemporary',
+      keyFeatures: ['Czech design', 'Modern architecture', 'Wind tunnel technology', 'European standards'],
+      promptEnhancement: 'Czech contemporary architecture, modern wind tunnel facility, European design',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'skydiving-7',
+      name: 'SkyVenture Montreal',
+      location: 'Montreal, Canada',
+      description: 'Canadian indoor skydiving facility with winter-adapted design',
+      architecturalStyle: 'Canadian Modern',
+      keyFeatures: ['Winter-adapted design', 'Canadian architecture', 'Indoor climate control', 'Modern facilities'],
+      promptEnhancement: 'Canadian modern architecture, winter-adapted design, indoor sports facility',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    }
+  ],
+
+  trampoline_park: [
+    {
+      id: 'trampoline-1',
+      name: 'Sky Zone',
+      location: 'Multiple Locations',
+      description: 'Leading trampoline park chain with innovative court designs',
+      architecturalStyle: 'Modern Recreation',
+      keyFeatures: ['Wall-to-wall trampolines', 'Foam pits', 'Dodgeball courts', 'Safety padding'],
+      promptEnhancement: 'modern recreation architecture, wall-to-wall trampolines, foam pit areas',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'trampoline-2',
+      name: 'Flip Out',
+      location: 'UK/Australia',
+      description: 'International trampoline park with diverse activity zones',
+      architecturalStyle: 'Activity Zone Design',
+      keyFeatures: ['Multiple activity zones', 'Ninja courses', 'Basketball hoops', 'Party areas'],
+      promptEnhancement: 'activity zone architecture, diverse trampoline areas, ninja course design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'trampoline-3',
+      name: 'Jump Street',
+      location: 'Multiple Locations',
+      description: 'Family-focused trampoline park with comprehensive safety design',
+      architecturalStyle: 'Family Recreation',
+      keyFeatures: ['Family zones', 'Toddler areas', 'Safety systems', 'Spectator seating'],
+      promptEnhancement: 'family recreation architecture, safety-focused design, toddler play areas',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'trampoline-4',
+      name: 'Bounce Inc',
+      location: 'Australia',
+      description: 'Australian trampoline park with unique architectural features',
+      architecturalStyle: 'Australian Contemporary',
+      keyFeatures: ['Unique layouts', 'Australian design', 'Multi-level trampolines', 'Cafe integration'],
+      promptEnhancement: 'Australian contemporary design, multi-level trampoline architecture',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'trampoline-5',
+      name: 'Altitude Trampoline Park',
+      location: 'Multiple Locations',
+      description: 'High-ceiling trampoline facility with vertical emphasis',
+      architecturalStyle: 'Vertical Recreation',
+      keyFeatures: ['High ceilings', 'Vertical emphasis', 'Professional trampolines', 'Competition areas'],
+      promptEnhancement: 'vertical recreation architecture, high ceiling design, professional trampoline facility',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'trampoline-6',
+      name: 'Rockin Jump',
+      location: 'USA',
+      description: 'American trampoline park with rock-themed design elements',
+      architecturalStyle: 'Themed Recreation',
+      keyFeatures: ['Rock theme', 'Themed design', 'Music integration', 'Entertainment focus'],
+      promptEnhancement: 'themed recreation architecture, rock-inspired design, entertainment facility',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'trampoline-7',
+      name: 'Jump Giants',
+      location: 'Europe',
+      description: 'European trampoline park with modern Scandinavian design',
+      architecturalStyle: 'Scandinavian Modern',
+      keyFeatures: ['Scandinavian design', 'Clean aesthetics', 'Natural lighting', 'Minimalist approach'],
+      promptEnhancement: 'Scandinavian modern architecture, clean trampoline park design, natural lighting',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    }
+  ],
+
+  laser_game: [
+    {
+      id: 'laser-1',
+      name: 'Laser Quest',
+      location: 'Multiple Locations',
+      description: 'Pioneer laser tag facility with futuristic arena design',
+      architecturalStyle: 'Futuristic Gaming',
+      keyFeatures: ['Multi-level arenas', 'Fog effects', 'Neon lighting', 'Themed environments'],
+      promptEnhancement: 'futuristic gaming architecture, multi-level laser tag arenas, neon lighting effects',
+      imageUrl: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'laser-2',
+      name: 'Laser Tag Planet',
+      location: 'Europe',
+      description: 'European laser tag center with space-themed immersive environments',
+      architecturalStyle: 'Space Theme Architecture',
+      keyFeatures: ['Space station design', 'Immersive sound', 'Interactive obstacles', 'Team strategy zones'],
+      promptEnhancement: 'space-themed architecture, immersive laser tag environments, interactive gaming obstacles',
+      imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'laser-3',
+      name: 'Zone Laser Tag',
+      location: 'USA',
+      description: 'American laser tag facility with military-inspired tactical environments',
+      architecturalStyle: 'Military Tactical',
+      keyFeatures: ['Tactical environments', 'Military theming', 'Strategic cover points', 'Mission-based gameplay'],
+      promptEnhancement: 'military tactical architecture, strategic laser tag environments, mission-based gaming design',
+      imageUrl: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'laser-4',
+      name: 'Laser Storm',
+      location: 'Australia',
+      description: 'Australian laser tag arena with cyberpunk aesthetic and high-tech features',
+      architecturalStyle: 'Cyberpunk Gaming',
+      keyFeatures: ['Cyberpunk design', 'High-tech equipment', 'Digital scoreboards', 'Virtual reality integration'],
+      promptEnhancement: 'cyberpunk gaming architecture, high-tech laser tag design, virtual reality integration',
+      imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'laser-5',
+      name: 'Laser Maxx',
+      location: 'Germany',
+      description: 'German laser tag facility with precision engineering and modular arena design',
+      architecturalStyle: 'German Engineering',
+      keyFeatures: ['Precision engineering', 'Modular arenas', 'Advanced sensors', 'Tournament facilities'],
+      promptEnhancement: 'German engineering precision, modular laser tag arenas, advanced gaming technology',
+      imageUrl: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'laser-6',
+      name: 'Laser Game Evolution',
+      location: 'France',
+      description: 'French laser tag center with evolving arena configurations and themed scenarios',
+      architecturalStyle: 'Adaptive Gaming',
+      keyFeatures: ['Evolving configurations', 'Themed scenarios', 'Adaptive lighting', 'Story-driven gameplay'],
+      promptEnhancement: 'adaptive gaming architecture, evolving laser tag configurations, story-driven environments',
+      imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'laser-7',
+      name: 'Laser Strike',
+      location: 'Canada',
+      description: 'Canadian laser tag facility with winter-themed environments and team-building focus',
+      architecturalStyle: 'Winter Theme Gaming',
+      keyFeatures: ['Winter theming', 'Team-building focus', 'Cold-weather design', 'Group activities'],
+      promptEnhancement: 'winter-themed gaming architecture, team-building laser tag design, cold-weather gaming facility',
+      imageUrl: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&h=600&fit=crop'
+    }
+  ],
+
+  playground: [
+    {
+      id: 'playground-1',
+      name: 'Maggie Daley Play Garden',
+      location: 'Chicago, USA',
+      description: 'Award-winning urban playground with innovative play structures and natural elements',
+      architecturalStyle: 'Contemporary Play Design',
+      keyFeatures: ['Innovative play structures', 'Natural integration', 'Age-specific zones', 'Accessible design'],
+      promptEnhancement: 'contemporary playground architecture, innovative play structures, natural integration design',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'playground-2',
+      name: 'Gulliver Park',
+      location: 'Valencia, Spain',
+      description: 'Giant Gulliver-themed playground where children can climb on a massive figure',
+      architecturalStyle: 'Thematic Adventure',
+      keyFeatures: ['Giant figure climbing', 'Story-based design', 'Multi-level play', 'Imaginative theming'],
+      promptEnhancement: 'thematic adventure playground, giant figure climbing structures, story-based play design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'playground-3',
+      name: 'Blaxland Riverside Park',
+      location: 'Sydney, Australia',
+      description: 'Nature-integrated playground with water play and adventure climbing structures',
+      architecturalStyle: 'Natural Adventure',
+      keyFeatures: ['Water play features', 'Natural materials', 'Adventure climbing', 'Riverside setting'],
+      promptEnhancement: 'natural adventure playground, water play integration, riverside playground design',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'playground-4',
+      name: 'Schulberg Playground',
+      location: 'Berlin, Germany',
+      description: 'Adventure playground with challenging climbing structures and creative play elements',
+      architecturalStyle: 'Adventure Challenge',
+      keyFeatures: ['Challenging structures', 'Creative play elements', 'Risk-appropriate design', 'Community integration'],
+      promptEnhancement: 'adventure challenge playground, creative climbing structures, risk-appropriate play design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'playground-5',
+      name: 'Takino Suzuran Hillside Park',
+      location: 'Hokkaido, Japan',
+      description: 'Massive hillside playground with rainbow slides and panoramic mountain views',
+      architecturalStyle: 'Landscape Integration',
+      keyFeatures: ['Rainbow slides', 'Hillside integration', 'Mountain views', 'Large-scale design'],
+      promptEnhancement: 'landscape-integrated playground, rainbow slide structures, hillside playground design',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'playground-6',
+      name: 'Diana Memorial Playground',
+      location: 'London, UK',
+      description: 'Pirate ship-themed playground with sensory play areas and inclusive design',
+      architecturalStyle: 'Inclusive Themed Design',
+      keyFeatures: ['Pirate ship theme', 'Sensory play areas', 'Inclusive accessibility', 'Memorial significance'],
+      promptEnhancement: 'inclusive themed playground, pirate ship play structures, sensory play integration',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'playground-7',
+      name: 'Parc de la Villette',
+      location: 'Paris, France',
+      description: 'Urban playground with modern sculptural play elements and educational features',
+      architecturalStyle: 'Sculptural Modern',
+      keyFeatures: ['Sculptural elements', 'Educational features', 'Urban integration', 'Artistic design'],
+      promptEnhancement: 'sculptural modern playground, artistic play elements, educational playground design',
+      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop'
+    }
+  ],
+
+  third_place: [
+    {
+      id: 'third_place-1',
+      name: 'The High Line',
+      location: 'New York, USA',
+      description: 'Elevated linear park that serves as a community gathering space above the city',
+      architecturalStyle: 'Adaptive Reuse Urban',
+      keyFeatures: ['Elevated walkways', 'Community gathering', 'Urban integration', 'Adaptive reuse'],
+      promptEnhancement: 'elevated community space, adaptive urban reuse, linear gathering architecture',
+      imageUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'third_place-2',
+      name: 'Superkilen Park',
+      location: 'Copenhagen, Denmark',
+      description: 'Multicultural community park celebrating diversity with global design elements',
+      architecturalStyle: 'Multicultural Community',
+      keyFeatures: ['Cultural diversity', 'Community participation', 'Global elements', 'Social integration'],
+      promptEnhancement: 'multicultural community space, diverse cultural integration, participatory design',
+      imageUrl: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'third_place-3',
+      name: 'Bryant Park',
+      location: 'New York, USA',
+      description: 'Urban oasis providing flexible community programming and social interaction',
+      architecturalStyle: 'Urban Oasis',
+      keyFeatures: ['Flexible programming', 'Social interaction', 'Urban respite', 'Community events'],
+      promptEnhancement: 'urban oasis design, flexible community programming, social interaction spaces',
+      imageUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'third_place-4',
+      name: 'Granby Four Streets',
+      location: 'Liverpool, UK',
+      description: 'Community-led regeneration project creating social enterprise and gathering spaces',
+      architecturalStyle: 'Community Regeneration',
+      keyFeatures: ['Community-led design', 'Social enterprise', 'Regeneration', 'Local ownership'],
+      promptEnhancement: 'community regeneration architecture, social enterprise spaces, local ownership design',
+      imageUrl: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'third_place-5',
+      name: 'Medellín Urban Acupuncture',
+      location: 'Medellín, Colombia',
+      description: 'Strategic urban interventions creating community focal points and social cohesion',
+      architecturalStyle: 'Urban Acupuncture',
+      keyFeatures: ['Strategic interventions', 'Community focal points', 'Social cohesion', 'Urban transformation'],
+      promptEnhancement: 'urban acupuncture design, strategic community interventions, social cohesion architecture',
+      imageUrl: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'third_place-6',
+      name: 'Cheonggyecheon',
+      location: 'Seoul, South Korea',
+      description: 'Restored urban stream creating linear community space and environmental restoration',
+      architecturalStyle: 'Environmental Restoration',
+      keyFeatures: ['Stream restoration', 'Linear community space', 'Environmental healing', 'Urban cooling'],
+      promptEnhancement: 'environmental restoration design, linear community space, urban stream integration',
+      imageUrl: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'third_place-7',
+      name: 'Gando Library Extension',
+      location: 'Burkina Faso',
+      description: 'Community-centered library extension fostering education and social gathering',
+      architecturalStyle: 'Community-Centered Education',
+      keyFeatures: ['Educational focus', 'Community gathering', 'Local materials', 'Social learning'],
+      promptEnhancement: 'community-centered education, social learning spaces, local material integration',
+      imageUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&h=600&fit=crop'
+    }
+  ],
+
+  fablab: [
+    {
+      id: 'fablab-1',
+      name: 'MIT Fab Lab',
+      location: 'Cambridge, USA',
+      description: 'Original fabrication laboratory with digital fabrication tools and maker education',
+      architecturalStyle: 'Academic Maker Space',
+      keyFeatures: ['Digital fabrication tools', '3D printers', 'Laser cutters', 'Educational workshops'],
+      promptEnhancement: 'academic maker space design, digital fabrication tools, educational workshop areas',
+      imageUrl: 'https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'fablab-2',
+      name: 'Fab Lab Barcelona',
+      location: 'Barcelona, Spain',
+      description: 'Urban fabrication lab focusing on digital manufacturing and open innovation',
+      architecturalStyle: 'Urban Innovation Hub',
+      keyFeatures: ['Digital manufacturing', 'Open innovation', 'Community workshops', 'Prototype development'],
+      promptEnhancement: 'urban innovation hub, digital manufacturing spaces, community maker workshops',
+      imageUrl: 'https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'fablab-3',
+      name: 'Fab Lab Amsterdam',
+      location: 'Amsterdam, Netherlands',
+      description: 'Creative fabrication space with sustainable making and circular design focus',
+      architecturalStyle: 'Sustainable Maker Space',
+      keyFeatures: ['Sustainable making', 'Circular design', 'Eco-friendly materials', 'Green technology'],
+      promptEnhancement: 'sustainable maker space, circular design principles, eco-friendly fabrication',
+      imageUrl: 'https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'fablab-4',
+      name: 'Fab Lab Tokyo',
+      location: 'Tokyo, Japan',
+      description: 'High-tech fabrication laboratory with robotics and advanced manufacturing',
+      architecturalStyle: 'High-Tech Manufacturing',
+      keyFeatures: ['Robotics integration', 'Advanced manufacturing', 'Precision tools', 'Tech innovation'],
+      promptEnhancement: 'high-tech manufacturing lab, robotics integration, precision fabrication tools',
+      imageUrl: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'fablab-5',
+      name: 'Fab Lab Berlin',
+      location: 'Berlin, Germany',
+      description: 'Industrial-style fabrication space with focus on hardware development and prototyping',
+      architecturalStyle: 'Industrial Maker Space',
+      keyFeatures: ['Hardware development', 'Rapid prototyping', 'Industrial tools', 'Startup incubation'],
+      promptEnhancement: 'industrial maker space, hardware development labs, rapid prototyping facilities',
+      imageUrl: 'https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'fablab-6',
+      name: 'Fab Lab São Paulo',
+      location: 'São Paulo, Brazil',
+      description: 'Community-focused fabrication lab promoting social innovation and local manufacturing',
+      architecturalStyle: 'Community Innovation',
+      keyFeatures: ['Social innovation', 'Local manufacturing', 'Community empowerment', 'Skills training'],
+      promptEnhancement: 'community innovation space, social fabrication, local manufacturing empowerment',
+      imageUrl: 'https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'fablab-7',
+      name: 'Fab Lab Mumbai',
+      location: 'Mumbai, India',
+      description: 'Affordable fabrication space democratizing access to digital manufacturing tools',
+      architecturalStyle: 'Accessible Making',
+      keyFeatures: ['Affordable access', 'Digital manufacturing', 'Skills democratization', 'Local solutions'],
+      promptEnhancement: 'accessible making space, democratized fabrication, affordable digital manufacturing',
+      imageUrl: 'https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=800&h=600&fit=crop'
+    }
+  ],
+
+  ice_rink: [
+    {
+      id: 'ice_rink-1',
+      name: 'Rockefeller Center Ice Rink',
+      location: 'New York, USA',
+      description: 'Iconic outdoor ice rink in the heart of Manhattan with Art Deco surroundings',
+      architecturalStyle: 'Art Deco Urban',
+      keyFeatures: ['Outdoor skating', 'Art Deco architecture', 'Urban integration', 'Seasonal operation'],
+      promptEnhancement: 'Art Deco ice rink design, urban outdoor skating, Manhattan architectural integration',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'ice_rink-2',
+      name: 'Medeu Ice Rink',
+      location: 'Almaty, Kazakhstan',
+      description: 'High-altitude outdoor ice rink surrounded by mountains, famous for speed skating records',
+      architecturalStyle: 'Mountain Alpine',
+      keyFeatures: ['High-altitude location', 'Mountain views', 'Speed skating track', 'Natural setting'],
+      promptEnhancement: 'mountain alpine ice rink, high-altitude skating, natural mountain integration',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'ice_rink-3',
+      name: 'Rideau Canal Skateway',
+      location: 'Ottawa, Canada',
+      description: 'World\'s largest naturally frozen ice rink on historic canal waterway',
+      architecturalStyle: 'Historic Waterway',
+      keyFeatures: ['Natural ice formation', 'Historic canal', 'Linear skating path', 'Winter festival'],
+      promptEnhancement: 'historic canal ice rink, natural ice formation, linear waterway skating',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'ice_rink-4',
+      name: 'Bolshoi Ice Dome',
+      location: 'Sochi, Russia',
+      description: 'Olympic ice hockey arena with modern Russian architecture and advanced ice technology',
+      architecturalStyle: 'Modern Olympic',
+      keyFeatures: ['Olympic standards', 'Advanced ice technology', 'Modern architecture', 'Multi-purpose venue'],
+      promptEnhancement: 'modern Olympic ice arena, advanced ice technology, Russian architectural design',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'ice_rink-5',
+      name: 'Skating Club of Boston',
+      location: 'Boston, USA',
+      description: 'Historic figure skating club with traditional New England architecture',
+      architecturalStyle: 'New England Traditional',
+      keyFeatures: ['Historic club design', 'Figure skating focus', 'Traditional architecture', 'Elite training'],
+      promptEnhancement: 'New England traditional ice rink, historic figure skating club architecture',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'ice_rink-6',
+      name: 'Iceberg Skating Palace',
+      location: 'Sochi, Russia',
+      description: 'Iceberg-inspired Olympic figure skating venue with flowing architectural forms',
+      architecturalStyle: 'Iceberg Contemporary',
+      keyFeatures: ['Iceberg-inspired design', 'Flowing forms', 'Olympic venue', 'Contemporary architecture'],
+      promptEnhancement: 'iceberg-inspired architecture, flowing contemporary ice venue design',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'ice_rink-7',
+      name: 'Scandinavium Arena',
+      location: 'Gothenburg, Sweden',
+      description: 'Scandinavian ice hockey arena with minimalist Nordic design and sustainable features',
+      architecturalStyle: 'Nordic Minimalist',
+      keyFeatures: ['Nordic design', 'Sustainable features', 'Minimalist architecture', 'Multi-sport venue'],
+      promptEnhancement: 'Nordic minimalist ice arena, sustainable Scandinavian design, clean architectural lines',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    }
+  ],
+
+  cat_cuddling: [
+    {
+      id: 'cat_cuddling-1',
+      name: 'Cat Café Calico',
+      location: 'Tokyo, Japan',
+      description: 'Original cat café concept with traditional Japanese design and rescue cat adoption',
+      architecturalStyle: 'Japanese Traditional',
+      keyFeatures: ['Traditional Japanese design', 'Rescue cat adoption', 'Zen atmosphere', 'Tea ceremony integration'],
+      promptEnhancement: 'Japanese traditional cat café, zen atmosphere, rescue cat sanctuary design',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'cat_cuddling-2',
+      name: 'Lady Dinah\'s Cat Emporium',
+      location: 'London, UK',
+      description: 'Victorian-themed cat café with vintage décor and afternoon tea service',
+      architecturalStyle: 'Victorian Vintage',
+      keyFeatures: ['Victorian décor', 'Afternoon tea service', 'Vintage furniture', 'Cat rescue partnership'],
+      promptEnhancement: 'Victorian vintage cat café, afternoon tea atmosphere, vintage cat sanctuary',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'cat_cuddling-3',
+      name: 'Meow Parlour',
+      location: 'New York, USA',
+      description: 'Modern cat café with minimalist design and focus on cat welfare and adoption',
+      architecturalStyle: 'Modern Minimalist',
+      keyFeatures: ['Minimalist design', 'Cat welfare focus', 'Adoption center', 'Modern amenities'],
+      promptEnhancement: 'modern minimalist cat café, cat welfare sanctuary, clean adoption center design',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'cat_cuddling-4',
+      name: 'Le Café des Chats',
+      location: 'Paris, France',
+      description: 'Parisian cat café with French bistro atmosphere and gourmet cat-themed menu',
+      architecturalStyle: 'French Bistro',
+      keyFeatures: ['French bistro design', 'Gourmet menu', 'Parisian atmosphere', 'Cat socialization'],
+      promptEnhancement: 'French bistro cat café, Parisian atmosphere, gourmet cat sanctuary design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'cat_cuddling-5',
+      name: 'Katzentempel',
+      location: 'Berlin, Germany',
+      description: 'Vegan cat café combining plant-based dining with cat rescue and wellness',
+      architecturalStyle: 'Eco-Friendly Modern',
+      keyFeatures: ['Vegan dining', 'Eco-friendly design', 'Cat rescue focus', 'Wellness integration'],
+      promptEnhancement: 'eco-friendly vegan cat café, sustainable cat sanctuary, wellness-focused design',
+      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'cat_cuddling-6',
+      name: 'Purr Cat Café Club',
+      location: 'Bangkok, Thailand',
+      description: 'Tropical cat café with Thai design elements and focus on street cat rehabilitation',
+      architecturalStyle: 'Tropical Thai',
+      keyFeatures: ['Thai design elements', 'Tropical atmosphere', 'Street cat rehabilitation', 'Cultural integration'],
+      promptEnhancement: 'tropical Thai cat café, street cat rehabilitation center, cultural sanctuary design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'cat_cuddling-7',
+      name: 'Café Neko',
+      location: 'Melbourne, Australia',
+      description: 'Australian cat café with outdoor garden spaces and focus on senior cat care',
+      architecturalStyle: 'Australian Garden',
+      keyFeatures: ['Outdoor garden spaces', 'Senior cat care', 'Australian design', 'Natural integration'],
+      promptEnhancement: 'Australian garden cat café, senior cat care sanctuary, natural outdoor integration',
+      imageUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop'
+    }
+  ]
 };
 
 const ChurchTransformation = () => {
@@ -2582,6 +3394,9 @@ const ChurchTransformation = () => {
     showMaskPreview: false,
     // Social Media Sharing
     showShareModal: false,
+    // Negative Prompts
+    negativePrompt: getDefaultNegativePrompt(),
+    showNegativePromptPresets: false,
   });
 
   // État pour suivre l'image de base sélectionnée
@@ -2745,6 +3560,7 @@ const ChurchTransformation = () => {
           baseImage: state.selectedInpaintImage.path,
           maskImage: state.selectedInpaintImage.maskPath,
           prompt: fullPrompt,
+          negativePrompt: state.negativePrompt,
           method: state.hdPainterMethod,
           resolution: state.selectedInpaintImage.resolution,
           noCache: state.forceNewGeneration,
@@ -2897,6 +3713,70 @@ const ChurchTransformation = () => {
     },
     []
   );
+
+  // Negative Prompt handlers
+  const handleNegativePromptChange = useCallback(
+    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      const value = event.target.value;
+      // Limiter à 500 caractères comme défini dans NEGATIVE_PROMPT_CONFIG.maxLength
+      if (value.length <= 500) {
+        setState((prev) => ({ ...prev, negativePrompt: value }));
+      }
+    },
+    []
+  );
+
+  const handleNegativePromptPresetSelect = useCallback(
+    (presetKey: "quality" | "exposure" | "composition" | "style" | "technical" | "architectural") => {
+      const preset = getNegativePromptPreset(presetKey);
+      if (preset) {
+        setState((prev) => ({
+          ...prev,
+          negativePrompt: preset,
+          showNegativePromptPresets: false
+        }));
+        toast({
+          title: "🎯 Preset appliqué",
+          description: `Negative prompt "${presetKey}" sélectionné`,
+          variant: "default",
+        });
+      }
+    },
+    [toast]
+  );
+
+  const handleToggleNegativePromptPresets = useCallback(() => {
+    setState((prev) => ({
+      ...prev,
+      showNegativePromptPresets: !prev.showNegativePromptPresets
+    }));
+  }, []);
+
+  const handleResetNegativePrompt = useCallback(() => {
+    setState((prev) => ({
+      ...prev,
+      negativePrompt: getDefaultNegativePrompt()
+    }));
+    toast({
+      title: "🔄 Negative prompt réinitialisé",
+      description: "Le negative prompt a été réinitialisé à sa valeur par défaut",
+      variant: "default",
+    });
+  }, [toast]);
+
+  const handleCombineNegativePrompts = useCallback(() => {
+    const churchSpecific = getChurchSpecificNegativePrompt();
+    const combined = combineNegativePrompts(state.negativePrompt, churchSpecific);
+    setState((prev) => ({
+      ...prev,
+      negativePrompt: combined
+    }));
+    toast({
+      title: "🏛️ Prompts combinés",
+      description: "Negative prompts spécifiques aux églises ajoutés",
+      variant: "default",
+    });
+  }, [state.negativePrompt, toast]);
   // Function to generate enhanced prompt (moved from API to client-side for preview)
   const generateEnhancedPrompt = useCallback(
     (
@@ -3597,6 +4477,136 @@ const ChurchTransformation = () => {
               </div>
             </div>
           )}
+        </CardContent>
+      </Card>
+
+      {/* Negative Prompt Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Negative Prompt (optionnel)</CardTitle>
+          <CardDescription>
+            Spécifiez les éléments à éviter dans l'image générée pour améliorer la qualité.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="negative-prompt" className="text-sm font-medium">
+              Éléments à éviter
+            </Label>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground">
+                {state.negativePrompt.length}/500
+              </span>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleToggleNegativePromptPresets}
+                className="h-6 px-2 text-xs"
+              >
+                Presets
+              </Button>
+            </div>
+          </div>
+          
+          <Textarea
+            id="negative-prompt"
+            placeholder="Éléments à éviter dans l'image générée..."
+            value={state.negativePrompt}
+            onChange={handleNegativePromptChange}
+            className="min-h-[80px] resize-none"
+            maxLength={500}
+          />
+
+          {/* Preset Buttons */}
+          {state.showNegativePromptPresets && (
+            <div className="space-y-3 p-4 bg-muted/50 rounded-lg border">
+              <div className="flex items-center justify-between">
+                <h4 className="text-sm font-medium">Presets Negative Prompts</h4>
+                <div className="flex gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={handleResetNegativePrompt}
+                    className="h-7 px-2 text-xs"
+                  >
+                    Reset
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={handleCombineNegativePrompts}
+                    className="h-7 px-2 text-xs"
+                  >
+                    + Église
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-2">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => handleNegativePromptPresetSelect("quality")}
+                  className="h-8 text-xs justify-start"
+                >
+                  🎯 Qualité
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => handleNegativePromptPresetSelect("exposure")}
+                  className="h-8 text-xs justify-start"
+                >
+                  💡 Exposition
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => handleNegativePromptPresetSelect("composition")}
+                  className="h-8 text-xs justify-start"
+                >
+                  📐 Composition
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => handleNegativePromptPresetSelect("style")}
+                  className="h-8 text-xs justify-start"
+                >
+                  🎨 Style
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => handleNegativePromptPresetSelect("technical")}
+                  className="h-8 text-xs justify-start"
+                >
+                  ⚙️ Technique
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => handleNegativePromptPresetSelect("architectural")}
+                  className="h-8 text-xs justify-start"
+                >
+                  🏛️ Architecture
+                </Button>
+              </div>
+            </div>
+          )}
+
+          <p className="text-xs text-muted-foreground">
+            Le negative prompt aide à éviter les éléments indésirables dans l'image générée.
+          </p>
         </CardContent>
       </Card>
 

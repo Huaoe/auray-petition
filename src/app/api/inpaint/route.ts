@@ -24,6 +24,7 @@ interface InpaintRequestBody {
   baseImage: string;
   maskImage?: string;
   prompt: string;
+  negativePrompt?: string;
   method?: HDPainterMethod;
   resolution?: string;
   strength?: number;
@@ -123,7 +124,8 @@ async function generateWithStabilityInpainting(
   baseImageBuffer: Buffer,
   maskImageBuffer: Buffer,
   prompt: string,
-  method: HDPainterMethod
+  method: HDPainterMethod,
+  negativePrompt?: string
 ): Promise<string> {
   try {
     console.log(`🎨 Generating with HD-Painter method: ${method}`);
@@ -142,6 +144,11 @@ async function generateWithStabilityInpainting(
     // Prompt avec méthode HD-Painter
     const hdPainterPrompt = `[HD-Painter:${method}] ${prompt}`;
     formData.append("prompt", hdPainterPrompt);
+    
+    // Negative prompt si fourni
+    if (negativePrompt && negativePrompt.trim()) {
+      formData.append("negative_prompt", negativePrompt.trim());
+    }
     
     // Paramètres officiels pour /edit/inpaint
     formData.append("output_format", STABILITY_CONFIG.INPAINT_OUTPUT_FORMAT);
@@ -205,6 +212,7 @@ export async function POST(request: NextRequest) {
       baseImage,
       maskImage,
       prompt,
+      negativePrompt,
       method = HD_PAINTER_CONFIG.defaults.method,
       resolution = HD_PAINTER_CONFIG.defaults.resolution,
       strength,
@@ -261,7 +269,7 @@ export async function POST(request: NextRequest) {
     const finalMaskPath = maskImage || inpaintConfig.maskPath;
     
     // Générer la clé de cache pour l'inpainting
-    const cacheKey = generateInpaintCacheKey(baseImage, finalMaskPath, prompt, method);
+    const cacheKey = generateInpaintCacheKey(baseImage, finalMaskPath, prompt, method, negativePrompt);
 
     // Vérifier le cache sauf si noCache est activé
     if (!noCache) {
@@ -302,7 +310,8 @@ export async function POST(request: NextRequest) {
       resizedBaseImage,
       resizedMaskImage,
       enhancedPrompt,
-      method
+      method,
+      negativePrompt
     );
 
     console.log(`🎨 HD-Painter image generated successfully with method: ${method}`);

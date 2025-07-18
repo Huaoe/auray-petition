@@ -113,29 +113,11 @@ const TRANSFORMATION_TYPES = [
     category: 'innovation'
   },
   {
-    id: 'holographic_museum',
-    name: 'Musée Holographique',
-    description: 'Un musée immersif utilisant la réalité augmentée et les hologrammes',
-    icon: '🔮',
-    prompt: 'Transform this church into a futuristic holographic museum with transparent OLED displays, volumetric projection systems, interactive AR installations, and floating holographic exhibits. Feature sleek minimalist design with hidden technology infrastructure and dynamic lighting that responds to visitor presence.',
-    style: 'creative',
-    category: 'culture'
-  },
-  {
     id: 'vertical_farm',
     name: 'Ferme Verticale Urbaine',
     description: 'Une ferme verticale high-tech pour l\'agriculture urbaine durable',
     icon: '🌱',
     prompt: 'Transform this church into a revolutionary vertical farm with multi-story growing towers, automated hydroponic systems, LED grow lights, robotic harvesting systems, and transparent growing chambers. Integrate sustainable technology with Gothic architecture, featuring glass cultivation pods and climate-controlled growing environments.',
-    style: 'modern',
-    category: 'innovation'
-  },
-  {
-    id: 'quantum_research',
-    name: 'Centre de Recherche Quantique',
-    description: 'Un laboratoire de recherche quantique avec équipements de pointe',
-    icon: '⚛️',
-    prompt: 'Transform this church into a quantum research facility with cryogenic chambers, quantum computers, electromagnetic isolation chambers, and advanced scientific equipment. Feature ultra-modern clean room environments, particle accelerator components, and holographic data visualization systems within the preserved Gothic structure.',
     style: 'modern',
     category: 'innovation'
   },
@@ -156,33 +138,6 @@ const TRANSFORMATION_TYPES = [
     prompt: 'Transform this church into a neural interface research laboratory with brain-computer interface stations, neural mapping equipment, meditation chambers with EEG monitoring, and consciousness research facilities. Integrate cutting-edge neurotechnology with serene, contemplative spaces that honor the spiritual heritage.',
     style: 'modern',
     category: 'innovation'
-  },
-  {
-    id: 'crystalline_conservatory',
-    name: 'Conservatoire Cristallin',
-    description: 'Un conservatoire de musique avec acoustique cristalline révolutionnaire',
-    icon: '💎',
-    prompt: 'Transform this church into a crystalline conservatory with geometric crystal-inspired architecture, resonant crystal formations for natural acoustics, prismatic light diffusion systems, and mineral-based sound chambers. Feature crystalline performance pods, geode-inspired practice rooms, and harmonic crystal installations.',
-    style: 'artistic',
-    category: 'culture'
-  },
-  {
-    id: 'atmospheric_processor',
-    name: 'Processeur Atmosphérique',
-    description: 'Une installation de purification d\'air et de régénération atmosphérique',
-    icon: '🌪️',
-    prompt: 'Transform this church into an atmospheric processing facility with massive air purification systems, atmospheric regeneration chambers, wind tunnel testing areas, and climate simulation environments. Feature towering filtration columns, atmospheric monitoring stations, and weather generation systems integrated into the Gothic architecture.',
-    style: 'modern',
-    category: 'innovation'
-  },
-  {
-    id: 'temporal_archive',
-    name: 'Archive Temporelle',
-    description: 'Un centre de préservation numérique avec technologie de stockage quantique',
-    icon: '⏳',
-    prompt: 'Transform this church into a temporal archive with quantum storage systems, holographic data preservation chambers, time-locked vaults, and digital eternity installations. Feature crystalline data storage matrices, temporal visualization displays, and preservation pods that maintain digital heritage for millennia.',
-    style: 'creative',
-    category: 'culture'
   },
   {
     id: 'symbiotic_habitat',

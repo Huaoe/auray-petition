@@ -119,6 +119,28 @@ export const INPAINT_IMAGES: InpaintImage[] = [
   // },
 ];
 
+// Configuration des prompts négatifs
+export const NEGATIVE_PROMPT_CONFIG = {
+  // Prompt négatif par défaut recommandé
+  default: "oversaturated, low contrast, underexposed, overexposed, lowres, low quality, solid background, plain background, asymmetrical buildings, jpeg artifacts, close-up, macro, surreal, multiple views, multiple angles, creepy, scary, blurry, grainy, unreal sky, weird colors, deformed structures",
+  
+  // Presets de prompts négatifs par catégorie
+  presets: {
+    quality: "lowres, low quality, jpeg artifacts, blurry, grainy, pixelated, compressed",
+    exposure: "oversaturated, low contrast, underexposed, overexposed, washed out, too dark, too bright",
+    composition: "solid background, plain background, asymmetrical buildings, multiple views, multiple angles, cropped, cut off",
+    style: "surreal, creepy, scary, weird colors, unreal sky, deformed structures, distorted, unrealistic",
+    technical: "noise, artifacts, compression, watermark, text, logo, signature, frame, border",
+    architectural: "asymmetrical buildings, deformed structures, impossible architecture, floating elements, broken perspective"
+  },
+  
+  // Prompts négatifs spécialisés pour l'architecture religieuse
+  church: "modern elements, contemporary style, industrial materials, neon lights, glass facades, steel beams, concrete blocks, urban decay, graffiti, vandalism, inappropriate additions",
+  
+  // Limite de caractères pour les prompts négatifs
+  maxLength: 500,
+} as const;
+
 // Configuration HD-Painter
 export const HD_PAINTER_CONFIG = {
   // Méthodes disponibles
@@ -132,7 +154,7 @@ export const HD_PAINTER_CONFIG = {
   // Modèles supportés
   models: {
     ds8_inp: "DreamShaper 8 Inpainting",
-    sd2_inp: "Stable Diffusion 2.0 Inpainting", 
+    sd2_inp: "Stable Diffusion 2.0 Inpainting",
     sd15_inp: "Stable Diffusion 1.5 Inpainting",
   },
   
@@ -151,6 +173,7 @@ export const HD_PAINTER_CONFIG = {
     strength: 0.8, // Force de transformation
     guidance: 7.5, // Guidance scale
     steps: 50, // Nombre d'étapes
+    negativePrompt: NEGATIVE_PROMPT_CONFIG.default, // Prompt négatif par défaut
   },
 } as const;
 
@@ -165,13 +188,37 @@ export function getInpaintImagesByType(type: InpaintImage['type']): InpaintImage
   return INPAINT_IMAGES.filter(img => img.type === type);
 }
 
+// Utilitaires pour les prompts négatifs
+export const combineNegativePrompts = (...prompts: (string | undefined)[]): string => {
+  return prompts
+    .filter(Boolean)
+    .join(', ')
+    .substring(0, NEGATIVE_PROMPT_CONFIG.maxLength);
+};
+
+export const getNegativePromptPreset = (presetName: keyof typeof NEGATIVE_PROMPT_CONFIG.presets): string => {
+  return NEGATIVE_PROMPT_CONFIG.presets[presetName];
+};
+
+export const getDefaultNegativePrompt = (): string => {
+  return NEGATIVE_PROMPT_CONFIG.default;
+};
+
+export const getChurchSpecificNegativePrompt = (): string => {
+  return combineNegativePrompts(
+    NEGATIVE_PROMPT_CONFIG.default,
+    NEGATIVE_PROMPT_CONFIG.church
+  );
+};
+
 export function generateInpaintCacheKey(
-  imagePath: string, 
-  maskPath: string, 
-  prompt: string, 
-  method: string = HD_PAINTER_CONFIG.defaults.method
+  imagePath: string,
+  maskPath: string,
+  prompt: string,
+  method: string = HD_PAINTER_CONFIG.defaults.method,
+  negativePrompt?: string
 ): string {
-  const content = `${imagePath}|${maskPath}|${prompt}|${method}`;
+  const content = `${imagePath}|${maskPath}|${prompt}|${negativePrompt || ''}|${method}`;
   return crypto.createHash('sha256').update(content).digest('hex').substring(0, 12);
 }
 
@@ -184,6 +231,7 @@ export interface InpaintRequest {
   imagePath: string;
   maskPath: string;
   prompt: string;
+  negativePrompt?: string;
   method?: HDPainterMethod;
   model?: HDPainterModel;
   resolution?: HDPainterResolution;
