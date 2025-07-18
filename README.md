@@ -475,7 +475,7 @@ MIT License - Projet open source pour l'intérêt général
 
 **🔗 Liens Utiles**
 
-- [Website Live](https://auray-petition.vercel.app) _(à venir)_
+- [Website Live](https://auray-petition.vercel.app)
 - [Documentation Complète](./website.md)
 - [Planning Auto-Tracking](./planning.md)
 - [Vision Utopique](./utopie.md)

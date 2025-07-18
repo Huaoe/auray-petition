@@ -2004,6 +2004,244 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "with the cutting-edge serenity of Neuralink's research environment, featuring brain-computer interface stations, contemplative meditation chambers, advanced neural monitoring systems, and spaces that bridge technology and consciousness",
       imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
     },
+    {
+      id: "facebook-reality-labs",
+      name: "Meta Reality Labs",
+      location: "Menlo Park, USA",
+      description:
+        "Brain-computer interface research for virtual and augmented reality applications",
+      architecturalStyle: "VR/AR Neural Tech",
+      keyFeatures: [
+        "VR/AR neural interfaces",
+        "Haptic feedback systems",
+        "Immersive research labs",
+        "Reality synthesis chambers",
+      ],
+      promptEnhancement:
+        "inspired by Meta Reality Labs' VR/AR neural interface research, featuring immersive reality synthesis chambers, haptic feedback systems, virtual-physical bridge technologies, and spaces where digital and neural realities converge",
+      imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "kernel-neural-interfaces",
+      name: "Kernel Neural Interfaces",
+      location: "Los Angeles, USA",
+      description:
+        "Advanced neural recording and stimulation technology for cognitive enhancement",
+      architecturalStyle: "Cognitive Enhancement",
+      keyFeatures: [
+        "Neural recording systems",
+        "Cognitive enhancement tech",
+        "Brain stimulation chambers",
+        "Memory augmentation labs",
+      ],
+      promptEnhancement:
+        "with Kernel's cognitive enhancement approach, featuring neural recording laboratories, memory augmentation chambers, brain stimulation systems, and spaces designed for human cognitive expansion and enhancement",
+      imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "synchron-neural-lab",
+      name: "Synchron Neural Laboratory",
+      location: "Brooklyn, USA",
+      description:
+        "Minimally invasive brain-computer interface technology for medical applications",
+      architecturalStyle: "Medical Neural Tech",
+      keyFeatures: [
+        "Minimally invasive interfaces",
+        "Medical applications",
+        "Neural rehabilitation",
+        "Therapeutic systems",
+      ],
+      promptEnhancement:
+        "inspired by Synchron's medical neural interface approach, featuring minimally invasive brain-computer systems, neural rehabilitation chambers, therapeutic interface technology, and healing-focused neural laboratories",
+      imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "paradromics-neural-lab",
+      name: "Paradromics Neural Data Lab",
+      location: "Austin, USA",
+      description:
+        "High-bandwidth neural interface technology for data transmission and communication",
+      architecturalStyle: "High-Bandwidth Neural",
+      keyFeatures: [
+        "High-bandwidth interfaces",
+        "Neural data transmission",
+        "Communication systems",
+        "Data processing centers",
+      ],
+      promptEnhancement:
+        "with Paradromics' high-bandwidth neural data approach, featuring neural communication systems, high-speed data transmission interfaces, brain-to-brain communication labs, and advanced neural data processing centers",
+      imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "blackrock-neurotech",
+      name: "Blackrock Neurotech",
+      location: "Salt Lake City, USA",
+      description:
+        "Neural interface systems for paralysis recovery and motor function restoration",
+      architecturalStyle: "Rehabilitation Neural Tech",
+      keyFeatures: [
+        "Motor function restoration",
+        "Paralysis recovery systems",
+        "Neural prosthetics",
+        "Rehabilitation technology",
+      ],
+      promptEnhancement:
+        "inspired by Blackrock Neurotech's rehabilitation focus, featuring motor function restoration laboratories, neural prosthetic systems, paralysis recovery chambers, and spaces dedicated to restoring human movement and independence",
+      imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "ctrl-labs-neural",
+      name: "CTRL-labs Neural Interface",
+      location: "New York, USA",
+      description:
+        "Neural control interfaces for seamless human-computer interaction and digital control",
+      architecturalStyle: "Digital Control Neural",
+      keyFeatures: [
+        "Human-computer interaction",
+        "Digital control systems",
+        "Seamless interfaces",
+        "Gesture recognition tech",
+      ],
+      promptEnhancement:
+        "with CTRL-labs' seamless human-computer interaction design, featuring digital control interfaces, gesture recognition systems, neural command centers, and spaces where thought becomes digital action",
+      imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "mindmaze-neural-lab",
+      name: "MindMaze Neural Laboratory",
+      location: "Lausanne, Switzerland",
+      description:
+        "Digital neurotherapeutics and brain-computer interfaces for neurological recovery",
+      architecturalStyle: "Neurotherapeutic Tech",
+      keyFeatures: [
+        "Digital neurotherapeutics",
+        "Neurological recovery",
+        "Brain training systems",
+        "Therapeutic interfaces",
+      ],
+      promptEnhancement:
+        "inspired by MindMaze's neurotherapeutic approach, featuring digital brain training systems, neurological recovery chambers, therapeutic neural interfaces, and spaces designed for cognitive rehabilitation and neural healing",
+      imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    },
+    {
+      id: "crystal-bridges-museum",
+      name: "Crystal Bridges Museum",
+      location: "Bentonville, USA",
+      description:
+        "Glass and steel architecture integrated with natural landscape and crystal formations",
+      architecturalStyle: "Glass Integration",
+      keyFeatures: [
+        "Glass and steel structure",
+        "Natural landscape integration",
+        "Crystal formation displays",
+        "Light refraction systems",
+      ],
+      promptEnhancement:
+        "inspired by Crystal Bridges Museum's glass integration, featuring crystal formation displays, light refraction systems, glass and steel architecture, and spaces where crystalline structures merge with natural landscapes",
+      imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80",
+    },
+    {
+      id: "swarovski-crystal-worlds",
+      name: "Swarovski Crystal Worlds",
+      location: "Wattens, Austria",
+      description:
+        "Underground crystal chambers with multimedia installations and crystalline art",
+      architecturalStyle: "Crystal Art Installation",
+      keyFeatures: [
+        "Underground crystal chambers",
+        "Multimedia installations",
+        "Crystalline art displays",
+        "Immersive crystal experiences",
+      ],
+      promptEnhancement:
+        "with Swarovski Crystal Worlds' immersive approach, featuring underground crystal chambers, multimedia crystalline installations, immersive crystal experiences, and spaces where art and crystal formations create magical environments",
+      imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80",
+    },
+    {
+      id: "crystal-cave-mexico",
+      name: "Cave of Crystals",
+      location: "Naica, Mexico",
+      description:
+        "Natural crystal cave with massive selenite formations and geological wonders",
+      architecturalStyle: "Natural Crystal Formation",
+      keyFeatures: [
+        "Massive selenite crystals",
+        "Natural cave formations",
+        "Geological wonders",
+        "Crystal growth chambers",
+      ],
+      promptEnhancement:
+        "inspired by Naica's Cave of Crystals, featuring massive selenite formations, natural crystal growth chambers, geological wonder displays, and spaces that celebrate the raw power of natural crystal formation",
+      imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80",
+    },
+    {
+      id: "crystal-palace-london",
+      name: "Crystal Palace Recreation",
+      location: "London, UK",
+      description:
+        "Victorian-era glass and iron architecture recreated with modern crystalline elements",
+      architecturalStyle: "Victorian Crystal",
+      keyFeatures: [
+        "Glass and iron structure",
+        "Victorian architecture",
+        "Modern crystalline elements",
+        "Historical crystal design",
+      ],
+      promptEnhancement:
+        "with Crystal Palace's Victorian grandeur, featuring glass and iron architecture, historical crystal design elements, Victorian-era crystalline structures, and spaces that blend historical elegance with modern crystal technology",
+      imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80",
+    },
+    {
+      id: "crystal-cathedral-california",
+      name: "Crystal Cathedral",
+      location: "Garden Grove, USA",
+      description:
+        "Glass cathedral architecture with crystalline light effects and spiritual crystal spaces",
+      architecturalStyle: "Sacred Crystal",
+      keyFeatures: [
+        "Glass cathedral design",
+        "Crystalline light effects",
+        "Spiritual crystal spaces",
+        "Sacred geometry",
+      ],
+      promptEnhancement:
+        "inspired by Crystal Cathedral's sacred design, featuring glass cathedral architecture, crystalline light effects, spiritual crystal spaces, and sacred geometry that creates transcendent crystalline environments",
+      imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80",
+    },
+    {
+      id: "crystal-grotto-portugal",
+      name: "Crystal Grotto",
+      location: "Sintra, Portugal",
+      description:
+        "Artificial crystal grotto with romantic architecture and crystalline water features",
+      architecturalStyle: "Romantic Crystal",
+      keyFeatures: [
+        "Artificial crystal grotto",
+        "Romantic architecture",
+        "Crystalline water features",
+        "Mystical crystal chambers",
+      ],
+      promptEnhancement:
+        "with Crystal Grotto's romantic mystique, featuring artificial crystal formations, romantic crystalline architecture, mystical crystal chambers, and water features that create enchanting crystalline environments",
+      imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80",
+    },
+    {
+      id: "crystal-lab-tokyo",
+      name: "Tokyo Crystal Laboratory",
+      location: "Tokyo, Japan",
+      description:
+        "High-tech crystal research facility with synthetic crystal growth and futuristic design",
+      architecturalStyle: "Futuristic Crystal Tech",
+      keyFeatures: [
+        "Synthetic crystal growth",
+        "High-tech research facility",
+        "Futuristic design",
+        "Crystal technology labs",
+      ],
+      promptEnhancement:
+        "inspired by Tokyo's crystal technology research, featuring synthetic crystal growth systems, high-tech crystalline laboratories, futuristic crystal design, and spaces where science and crystal formation create cutting-edge environments",
+      imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80",
+    },
   ],
   crystalline_conservatory: [
     {
@@ -2042,6 +2280,125 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "with the environmental innovation of Cornwall's Eden Project, featuring massive geodesic structures, advanced climate control systems, atmospheric processing technology, and sustainable environmental management",
       imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
+    {
+      id: "eden-project-biomes",
+      name: "Eden Project Biomes",
+      location: "Cornwall, UK",
+      description:
+        "Geodesic dome structures creating controlled atmospheric environments for diverse ecosystems",
+      architecturalStyle: "Geodesic Atmospheric",
+      keyFeatures: [
+        "Geodesic dome structures",
+        "Controlled atmospheric environments",
+        "Diverse ecosystem support",
+        "Climate regulation systems",
+      ],
+      promptEnhancement:
+        "inspired by Eden Project's geodesic biomes, featuring controlled atmospheric environments, climate regulation systems, geodesic dome structures, and spaces that create diverse atmospheric conditions for different ecosystems",
+      imageUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    },
+    {
+      id: "mars-desert-research",
+      name: "Mars Desert Research Station",
+      location: "Utah, USA",
+      description:
+        "Atmospheric simulation facility for Mars-like environmental conditions and research",
+      architecturalStyle: "Mars Simulation",
+      keyFeatures: [
+        "Mars atmospheric simulation",
+        "Environmental condition control",
+        "Research facility design",
+        "Isolation chamber systems",
+      ],
+      promptEnhancement:
+        "with Mars Desert Research Station's simulation approach, featuring Mars atmospheric conditions, environmental control systems, isolation chambers, and spaces designed for extreme atmospheric research and simulation",
+      imageUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    },
+    {
+      id: "biosphere-2-arizona",
+      name: "Biosphere 2",
+      location: "Arizona, USA",
+      description:
+        "Closed ecological system with complete atmospheric control and multiple biome simulation",
+      architecturalStyle: "Closed Ecosystem",
+      keyFeatures: [
+        "Closed ecological system",
+        "Complete atmospheric control",
+        "Multiple biome simulation",
+        "Self-sustaining environment",
+      ],
+      promptEnhancement:
+        "inspired by Biosphere 2's closed ecosystem design, featuring complete atmospheric control, multiple biome simulation, self-sustaining environmental systems, and spaces that create entirely controlled atmospheric worlds",
+      imageUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    },
+    {
+      id: "atmospheric-research-hawaii",
+      name: "Mauna Loa Observatory",
+      location: "Hawaii, USA",
+      description:
+        "High-altitude atmospheric monitoring facility with advanced air processing and analysis systems",
+      architecturalStyle: "High-Altitude Monitoring",
+      keyFeatures: [
+        "High-altitude location",
+        "Atmospheric monitoring",
+        "Air processing systems",
+        "Analysis laboratories",
+      ],
+      promptEnhancement:
+        "with Mauna Loa Observatory's monitoring approach, featuring high-altitude atmospheric processing, air analysis systems, monitoring laboratories, and spaces designed for advanced atmospheric research and data collection",
+      imageUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    },
+    {
+      id: "climeworks-iceland",
+      name: "Climeworks Direct Air Capture",
+      location: "Iceland",
+      description:
+        "Industrial atmospheric carbon capture facility with advanced air processing technology",
+      architecturalStyle: "Carbon Capture Industrial",
+      keyFeatures: [
+        "Direct air capture technology",
+        "Carbon processing systems",
+        "Industrial atmospheric processing",
+        "Renewable energy integration",
+      ],
+      promptEnhancement:
+        "inspired by Climeworks' carbon capture technology, featuring direct air capture systems, industrial atmospheric processing, carbon sequestration facilities, and spaces that actively clean and process atmospheric gases",
+      imageUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    },
+    {
+      id: "atmospheric-river-lab",
+      name: "Atmospheric River Research Lab",
+      location: "California, USA",
+      description:
+        "Weather modification and atmospheric river processing facility for climate research",
+      architecturalStyle: "Weather Modification",
+      keyFeatures: [
+        "Weather modification systems",
+        "Atmospheric river processing",
+        "Climate research facilities",
+        "Storm simulation chambers",
+      ],
+      promptEnhancement:
+        "with Atmospheric River Lab's weather modification approach, featuring storm simulation systems, atmospheric river processing, weather control technologies, and spaces designed for large-scale atmospheric manipulation",
+      imageUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    },
+    {
+      id: "stratospheric-platform",
+      name: "Stratospheric Processing Platform",
+      location: "International Airspace",
+      description:
+        "High-altitude atmospheric processing platform for stratospheric intervention and research",
+      architecturalStyle: "Stratospheric Platform",
+      keyFeatures: [
+        "High-altitude platform",
+        "Stratospheric processing",
+        "Atmospheric intervention",
+        "Research capabilities",
+      ],
+      promptEnhancement:
+        "inspired by stratospheric processing platforms, featuring high-altitude atmospheric intervention, stratospheric processing systems, aerial research platforms, and spaces that operate at the edge of the atmosphere",
+      imageUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    },
   ],
   temporal_archive: [
     {
@@ -2061,6 +2418,66 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "inspired by the Svalbard Seed Vault's preservation architecture, featuring underground storage chambers, advanced climate control, quantum storage systems, and technology designed for eternal preservation",
       imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     },
+    {
+      id: 'temporal_archive_2',
+      name: 'Library of Alexandria (Bibliotheca Alexandrina)',
+      location: 'Alexandria, Egypt',
+      description: 'Modern reconstruction of the ancient library, preserving knowledge across millennia',
+      architecturalStyle: 'Contemporary Egyptian Revival',
+      keyFeatures: ['Circular disc design', 'Granite facade', 'Slanted roof', 'Mediterranean integration'],
+      promptEnhancement: 'circular library architecture, granite stone facade, slanted geometric roof, Mediterranean coastal setting, knowledge preservation, ancient-modern fusion',
+      imageUrl: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'temporal_archive_3',
+      name: 'Vatican Secret Archives',
+      location: 'Vatican City',
+      description: 'Historic papal archives containing centuries of ecclesiastical documents',
+      architecturalStyle: 'Renaissance Ecclesiastical',
+      keyFeatures: ['Vaulted ceilings', 'Stone corridors', 'Climate-controlled storage', 'Security systems'],
+      promptEnhancement: 'renaissance stone architecture, vaulted archive corridors, ecclesiastical design, secure document storage, papal historical preservation, religious architectural elements',
+      imageUrl: 'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'temporal_archive_4',
+      name: 'Iron Mountain Underground Storage',
+      location: 'Pennsylvania, USA',
+      description: 'Converted limestone mine serving as secure data and document storage facility',
+      architecturalStyle: 'Industrial Underground',
+      keyFeatures: ['Natural limestone caves', 'Climate stability', 'Security infrastructure', 'Data center integration'],
+      promptEnhancement: 'underground limestone caves, industrial storage architecture, natural rock formations, secure data preservation, converted mine facility, subterranean design',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'temporal_archive_5',
+      name: 'Bodleian Library Weston Building',
+      location: 'Oxford, England',
+      description: 'Modern underground extension preserving millions of historical documents',
+      architecturalStyle: 'Contemporary Underground',
+      keyFeatures: ['Underground construction', 'Natural lighting systems', 'Climate control', 'Automated retrieval'],
+      promptEnhancement: 'underground library extension, contemporary preservation architecture, natural lighting integration, automated storage systems, oxford collegiate setting, subterranean design',
+      imageUrl: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'temporal_archive_6',
+      name: 'Cheyenne Mountain Complex',
+      location: 'Colorado, USA',
+      description: 'Military bunker complex designed for long-term operational continuity',
+      architecturalStyle: 'Military Brutalism',
+      keyFeatures: ['Reinforced concrete', 'Blast-resistant design', 'Underground chambers', 'Self-contained systems'],
+      promptEnhancement: 'military bunker architecture, reinforced concrete brutalism, blast-resistant design, underground command center, mountain integration, fortress-like structure',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'temporal_archive_7',
+      name: 'Arctic World Archive',
+      location: 'Svalbard, Norway',
+      description: 'Digital preservation facility storing cultural heritage in decommissioned coal mine',
+      architecturalStyle: 'Adaptive Industrial',
+      keyFeatures: ['Converted mine shafts', 'Permafrost storage', 'Digital preservation', 'Industrial heritage'],
+      promptEnhancement: 'converted coal mine architecture, industrial heritage preservation, permafrost storage conditions, digital archive facility, arctic industrial design, adaptive reuse',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    }
   ],
   symbiotic_habitat: [
     {
@@ -2079,6 +2496,66 @@ const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
       promptEnhancement:
         "with the living architecture of Milan's Bosco Verticale, featuring vertical forest integration, symbiotic ecosystems, bio-responsive materials, and spaces where nature and architecture coexist harmoniously",
       imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    },
+    {
+      id: 'symbiotic_2',
+      name: 'California Academy of Sciences',
+      location: 'San Francisco, USA',
+      description: 'Living roof museum that houses multiple ecosystems under one sustainable canopy',
+      architecturalStyle: 'Bio-Integrated Museum',
+      keyFeatures: ['Living roof ecosystem', 'Natural ventilation', 'Rainwater collection', 'Integrated habitats'],
+      promptEnhancement: 'living roof, ecosystem integration, sustainable museum design, natural ventilation, biodiversity showcase',
+      imageUrl: 'https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'symbiotic_3',
+      name: 'Gando School Library',
+      location: 'Burkina Faso',
+      description: 'Clay brick architecture that creates natural cooling and integrates with local ecosystem',
+      architecturalStyle: 'Vernacular Sustainable',
+      keyFeatures: ['Natural cooling systems', 'Local materials', 'Passive ventilation', 'Community integration'],
+      promptEnhancement: 'clay brick construction, natural cooling, passive design, community architecture, local materials',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'symbiotic_4',
+      name: 'Kampung Admiralty',
+      location: 'Singapore',
+      description: 'Vertical kampong that integrates housing, healthcare, and sky gardens in symbiotic design',
+      architecturalStyle: 'Tropical Vertical Village',
+      keyFeatures: ['Sky gardens', 'Mixed-use integration', 'Natural ventilation', 'Community spaces'],
+      promptEnhancement: 'sky gardens, vertical village, tropical architecture, mixed-use design, community integration',
+      imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'symbiotic_5',
+      name: 'Hammarby Sjöstad',
+      location: 'Stockholm, Sweden',
+      description: 'Eco-district that creates closed-loop systems between buildings and natural processes',
+      architecturalStyle: 'Eco-District Planning',
+      keyFeatures: ['Closed-loop systems', 'Waste-to-energy', 'Water recycling', 'Green corridors'],
+      promptEnhancement: 'eco-district, closed-loop systems, sustainable community, green infrastructure, circular design',
+      imageUrl: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'symbiotic_6',
+      name: 'Bjarke Ingels VIA 57 West',
+      location: 'New York, USA',
+      description: 'Pyramid-shaped residential building with integrated courtyard ecosystem',
+      architecturalStyle: 'Contemporary Symbiotic',
+      keyFeatures: ['Central courtyard', 'Stepped terraces', 'Natural light optimization', 'Community gardens'],
+      promptEnhancement: 'pyramid architecture, central courtyard, stepped terraces, community gardens, natural light',
+      imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop'
+    },
+    {
+      id: 'symbiotic_7',
+      name: 'Acros Fukuoka',
+      location: 'Fukuoka, Japan',
+      description: 'Step garden building that creates a mountain-like ecosystem in urban environment',
+      architecturalStyle: 'Terraced Ecosystem',
+      keyFeatures: ['Terraced gardens', 'Urban mountain', 'Integrated landscapes', 'Public accessibility'],
+      promptEnhancement: 'terraced gardens, urban mountain, step gardens, integrated landscape, public green space',
+      imageUrl: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop'
     },
   ],
 };

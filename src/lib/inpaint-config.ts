@@ -43,15 +43,16 @@ export const INPAINT_IMAGES: InpaintImage[] = [
   //   hdPainterMethod: "rasg", // Pour préserver les détails
   //   resolution: "ultra",
   // },
-  {
-    path: "/images/fra-auray-4-1882354559.jpg",
-    name: "Vue Alternative",
-    description: "Perspective alternative de l'église - Angle latéral",
-    maskPath: "/images/inpaint/total/inpaint3.jpg",
-    type: "alternative",
-    hdPainterMethod: "painta+rasg",
-    resolution: "hd",
-  },
+  //mask is to high
+  // {
+  //   path: "/images/fra-auray-4-1882354559.jpg",
+  //   name: "Vue Alternative",
+  //   description: "Perspective alternative de l'église - Angle latéral",
+  //   maskPath: "/images/inpaint/total/inpaint3.jpg",
+  //   type: "alternative",
+  //   hdPainterMethod: "painta+rasg",
+  //   resolution: "hd",
+  // },
   {
     path: "/images/184232-english-inside-church-saint-gildas-in-auray-france.jpg",
     name: "Intérieur Style Anglais",
@@ -65,7 +66,7 @@ export const INPAINT_IMAGES: InpaintImage[] = [
     path: "/images/Saint-Gildas-Auray-768x576.jpg",
     name: "Façade Complète",
     description: "Transformation complète de la façade - Vision futuriste",
-    maskPath: "/images/inpaint/total/inpaint7.jpg",
+    maskPath: "/images/inpaint/total/inpaint10.jpg",
     type: "facade",
     hdPainterMethod: "painta+rasg",
     resolution: "ultra",
@@ -83,7 +84,7 @@ export const INPAINT_IMAGES: InpaintImage[] = [
     path: "/images/Saint-Gildas-Auray-768x576.jpg",
     name: "Entrée Principale",
     description: "Focus sur l'entrée principale - Portail d'accueil",
-    maskPath: "/images/inpaint/total/inpaint7.jpg",
+    maskPath: "/images/inpaint/total/inpaint10.jpg",
     type: "exterior",
     hdPainterMethod: "painta",
     resolution: "hd",
