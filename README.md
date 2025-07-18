@@ -2,7 +2,7 @@
 
 > **Plateforme digitale révolutionnaire** pour une meilleure cohabitation entre tradition et tranquillité publique
 
-<div align="left" style="margin: 1.5em 0;">
+<div align="center" style="margin: 1.5em 0;">
  <img src="./public/vercelProdQR.png" alt="prodQR" title="for mobile instant openning"/>
 </div>
 <div align="center" style="margin: 1.5em 0;">
@@ -13,7 +13,7 @@
   <sub><i>✨ Plateforme en ligne | 🔒 Sécurisée | 📱 PWA Ready</i></sub>
 </div>
 
-<div align="right" style="margin: 2em 0;">
+<div align="center" style="margin: 2em 0;">
   <a href="https://www.buymeacoffee.com/huaoe" target="_blank" rel="noopener">
     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" title="or be my God !" style="height: 60px; width: 217px;" >
   </a>
