@@ -47,6 +47,29 @@ export interface SocialMediaPublishRequest {
   imageUrl?: string;
 }
 
+// OAuth Types
+export interface OAuthState {
+  platform: SocialMediaPlatform;
+  userId: string;
+  timestamp: number;
+  redirectUrl?: string;
+}
+
+export interface SocialMediaAccount {
+  platform: SocialMediaPlatform;
+  username?: string;
+  userId?: string;
+  connectedAt: string;
+  lastUsed?: string;
+  isExpired?: boolean;
+}
+
+export interface ConnectAccountResponse {
+  authUrl: string;
+  platform: SocialMediaPlatform;
+  state: string;
+}
+
 // Social Media Platform Configurations
 export const SOCIAL_MEDIA_PLATFORMS: SocialMediaPlatformInfo[] = [
   {

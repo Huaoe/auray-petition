@@ -4496,37 +4496,17 @@ const ChurchTransformation = () => {
     console.log("🔍 [DEBUG] Selected transformation:", state.selectedTransformation?.id);
 
     try {
-      console.log("🔍 [DEBUG] Starting fetch request...");
-      const response = await fetch(state.generatedImage);
+      // Use the server-side download endpoint to avoid CORS issues
+      const filename = `eglise-auray-${state.selectedTransformation?.id || 'transformation'}.jpg`;
+      const downloadUrl = `/api/download?url=${encodeURIComponent(state.generatedImage)}&filename=${encodeURIComponent(filename)}`;
       
-      console.log("🔍 [DEBUG] Fetch response status:", response.status);
-      console.log("🔍 [DEBUG] Fetch response headers:", Object.fromEntries(response.headers.entries()));
+      console.log("🔍 [DEBUG] Using download API endpoint:", downloadUrl);
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      console.log("🔍 [DEBUG] Converting to blob...");
-      const blob = await response.blob();
-      
-      console.log("🔍 [DEBUG] Blob created:", {
-        size: blob.size,
-        type: blob.type
-      });
-
-      if (blob.size === 0) {
-        throw new Error("Empty blob received");
-      }
-
-      console.log("🔍 [DEBUG] Creating object URL...");
-      const url = window.URL.createObjectURL(blob);
-      console.log("🔍 [DEBUG] Object URL created:", url);
-
-      console.log("🔍 [DEBUG] Creating download element...");
+      // Create a temporary anchor element and trigger download
       const a = document.createElement("a");
-      a.href = url;
-      a.download = `eglise-auray-${state.selectedTransformation?.id || 'transformation'}.jpg`;
-      a.style.display = 'none'; // Hide the element
+      a.href = downloadUrl;
+      a.download = filename;
+      a.style.display = 'none';
       
       console.log("🔍 [DEBUG] Download filename:", a.download);
       console.log("🔍 [DEBUG] Appending to document...");
@@ -4537,12 +4517,11 @@ const ChurchTransformation = () => {
       
       console.log("🔍 [DEBUG] Cleaning up...");
       document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
 
-      console.log("✅ [DEBUG] Download completed successfully");
+      console.log("✅ [DEBUG] Download initiated successfully");
       toast({
-        title: "📥 Image téléchargée !",
-        description: `Fichier: ${a.download}`,
+        title: "📥 Téléchargement démarré !",
+        description: `Fichier: ${filename}`,
         variant: "success",
         duration: 2000,
       });

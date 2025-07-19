@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Image as ImageIcon, Send, CheckCircle, AlertCircle, Loader2, Heart, MessageCircle, Share2 } from "lucide-react";
+import { Image as ImageIcon, Send, CheckCircle, AlertCircle, Loader2, Heart, MessageCircle, Share2, Settings } from "lucide-react";
+import Link from 'next/link';
 import {
   Dialog,
   DialogContent,
@@ -19,7 +20,8 @@ import {
   SOCIAL_MEDIA_PLATFORMS,
   SocialMediaPlatform,
   SocialMediaPublishResult,
-  SocialMediaPlatformInfo
+  SocialMediaPlatformInfo,
+  SocialMediaAccount
 } from "@/lib/types";
 
 interface SharePostModalProps {
@@ -41,15 +43,57 @@ interface FeedPost {
 
 export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: SharePostModalProps) {
   const [postText, setPostText] = useState('');
-  const [selectedPlatforms, setSelectedPlatforms] = useState<Set<SocialMediaPlatform>>(new Set(['twitter']));
+  const [selectedPlatforms, setSelectedPlatforms] = useState<Set<SocialMediaPlatform>>(new Set());
   const [publishing, setPublishing] = useState(false);
   const [publishResults, setPublishResults] = useState<SocialMediaPublishResult[]>([]);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [publishedPost, setPublishedPost] = useState<FeedPost | null>(null);
+  const [connectedAccounts, setConnectedAccounts] = useState<SocialMediaAccount[]>([]);
+  const [loadingAccounts, setLoadingAccounts] = useState(true);
 
   const CHARACTER_LIMIT = 500;
 
+  // Fetch connected accounts when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      fetchConnectedAccounts();
+    }
+  }, [isOpen]);
+
+  const fetchConnectedAccounts = async () => {
+    setLoadingAccounts(true);
+    try {
+      const response = await fetch('/api/social-accounts');
+      if (response.ok) {
+        const data = await response.json();
+        setConnectedAccounts(data.accounts || []);
+        
+        // Auto-select first connected account if any
+        if (data.accounts && data.accounts.length > 0 && selectedPlatforms.size === 0) {
+          setSelectedPlatforms(new Set([data.accounts[0].platform]));
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching connected accounts:', error);
+    } finally {
+      setLoadingAccounts(false);
+    }
+  };
+
+  const isAccountConnected = (platform: SocialMediaPlatform): boolean => {
+    return connectedAccounts.some(account => account.platform === platform);
+  };
+
   const handlePlatformToggle = (platform: SocialMediaPlatform) => {
+    // Only allow toggling if account is connected
+    if (!isAccountConnected(platform)) {
+      setMessage({
+        type: 'error',
+        text: `Veuillez d'abord connecter votre compte ${SOCIAL_MEDIA_PLATFORMS.find(p => p.id === platform)?.name}`
+      });
+      return;
+    }
+
     const newSelected = new Set(selectedPlatforms);
     if (newSelected.has(platform)) {
       newSelected.delete(platform);
@@ -183,7 +227,7 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
 
   const handleClose = () => {
     setPostText('');
-    setSelectedPlatforms(new Set(['twitter']));
+    setSelectedPlatforms(new Set());
     setPublishResults([]);
     setPublishedPost(null);
     setMessage(null);
@@ -266,49 +310,92 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
           {publishResults.length === 0 && (
             <Card>
               <CardContent className="p-4">
-                <div className="flex items-center gap-3 mb-4">
-                  <Share2 className="h-5 w-5 text-blue-600" />
-                  <span className="text-sm font-medium">Sélectionner les plateformes</span>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-3">
-                  {SOCIAL_MEDIA_PLATFORMS.map((platform) => (
-                    <div
-                      key={platform.id}
-                      className={`flex items-center space-x-3 p-3 rounded-lg border cursor-pointer transition-colors ${
-                        selectedPlatforms.has(platform.id)
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                      onClick={() => handlePlatformToggle(platform.id)}
-                    >
-                      <Checkbox
-                        checked={selectedPlatforms.has(platform.id)}
-                        onChange={() => handlePlatformToggle(platform.id)}
-                        aria-label={`Sélectionner ${platform.name}`}
-                      />
-                      <div className="flex items-center gap-2 flex-1">
-                        <span className="text-lg">{platform.icon}</span>
-                        <div className="flex-1">
-                          <div className="font-medium text-sm">{platform.name}</div>
-                          {platform.requiresImage && (
-                            <div className="text-xs text-gray-500">Image requise</div>
-                          )}
-                          {platform.maxTextLength && (
-                            <div className="text-xs text-gray-500">
-                              Max {platform.maxTextLength} caractères
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                {selectedPlatforms.size > 0 && (
-                  <div className="mt-3 text-xs text-gray-600">
-                    {selectedPlatforms.size} plateforme{selectedPlatforms.size > 1 ? 's' : ''} sélectionnée{selectedPlatforms.size > 1 ? 's' : ''}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <Share2 className="h-5 w-5 text-blue-600" />
+                    <span className="text-sm font-medium">Sélectionner les plateformes</span>
                   </div>
+                  <Link href="/settings/social-media">
+                    <Button variant="ghost" size="sm" className="text-xs">
+                      <Settings className="h-3 w-3 mr-1" />
+                      Gérer les comptes
+                    </Button>
+                  </Link>
+                </div>
+                
+                {loadingAccounts ? (
+                  <div className="flex items-center justify-center py-8">
+                    <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
+                  </div>
+                ) : connectedAccounts.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-sm text-gray-600 mb-4">
+                      Aucun compte social connecté
+                    </p>
+                    <Link href="/settings/social-media">
+                      <Button variant="outline" size="sm">
+                        <Settings className="h-4 w-4 mr-2" />
+                        Connecter des comptes
+                      </Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    <div className="grid grid-cols-2 gap-3">
+                      {SOCIAL_MEDIA_PLATFORMS.map((platform) => {
+                        const isConnected = isAccountConnected(platform.id);
+                        const connectedAccount = connectedAccounts.find(acc => acc.platform === platform.id);
+                        
+                        return (
+                          <div
+                            key={platform.id}
+                            className={`flex items-center space-x-3 p-3 rounded-lg border transition-colors ${
+                              isConnected
+                                ? selectedPlatforms.has(platform.id)
+                                  ? 'border-blue-500 bg-blue-50 cursor-pointer'
+                                  : 'border-gray-200 hover:border-gray-300 cursor-pointer'
+                                : 'border-gray-200 bg-gray-50 cursor-not-allowed opacity-60'
+                            }`}
+                            onClick={() => isConnected && handlePlatformToggle(platform.id)}
+                          >
+                            <Checkbox
+                              checked={selectedPlatforms.has(platform.id)}
+                              disabled={!isConnected}
+                              onChange={() => isConnected && handlePlatformToggle(platform.id)}
+                              aria-label={`Sélectionner ${platform.name}`}
+                            />
+                            <div className="flex items-center gap-2 flex-1">
+                              <span className="text-lg">{platform.icon}</span>
+                              <div className="flex-1">
+                                <div className="font-medium text-sm">{platform.name}</div>
+                                {isConnected && connectedAccount ? (
+                                  <div className="text-xs text-green-600">
+                                    @{connectedAccount.username}
+                                  </div>
+                                ) : (
+                                  <div className="text-xs text-gray-500">Non connecté</div>
+                                )}
+                                {platform.requiresImage && (
+                                  <div className="text-xs text-gray-500">Image requise</div>
+                                )}
+                                {platform.maxTextLength && (
+                                  <div className="text-xs text-gray-500">
+                                    Max {platform.maxTextLength} caractères
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    
+                    {selectedPlatforms.size > 0 && (
+                      <div className="mt-3 text-xs text-gray-600">
+                        {selectedPlatforms.size} plateforme{selectedPlatforms.size > 1 ? 's' : ''} sélectionnée{selectedPlatforms.size > 1 ? 's' : ''}
+                      </div>
+                    )}
+                  </>
                 )}
               </CardContent>
             </Card>
