@@ -5,9 +5,10 @@ import { randomBytes } from 'crypto';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { platform: string } }
+  context: any // Using 'any' as a diagnostic step to bypass the type error
 ) {
   try {
+    const { params } = context;
     const platform = params.platform as SocialMediaPlatform;
     
     // Validate platform

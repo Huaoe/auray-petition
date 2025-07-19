@@ -9,16 +9,16 @@ export const STABILITY_CONFIG = {
   ASPECT_RATIO: "1:1",
   OUTPUT_FORMAT: "png",
   STYLE_PRESET: "photographic",
-  STEPS: 50,
-  CFG_SCALE: 7.5,
+  STEPS: 60,
+  CFG_SCALE: 8.5,
   SEED: 0,
   SAMPLES: 1,
   SAFETY_TOLERANCE: 2,
-  PROMPT_STRENGTH: 0.8,
+  PROMPT_STRENGTH: 0.9,
   // Inpainting specific parameters
   INPAINT_OUTPUT_FORMAT: "png",
-  INPAINT_STEPS: 50,
-  INPAINT_CFG_SCALE: 7.5,
+  INPAINT_STEPS: 60,
+  INPAINT_CFG_SCALE: 8.5,
   
   // Coûts (en USD)
   PRICING: {

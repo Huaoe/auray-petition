@@ -4392,7 +4392,7 @@ const ChurchTransformation = () => {
     try {
       // Construction du prompt avec exigence obligatoire
       const mandatoryPeopleRequirement =
-        "MANDATORY: 140 happy diverse people actively using the space. Include appropriate furniture. Space must look lived-in with people as the focal point.";
+        "MANDATORY: 140 happy diverse people actively using the space. Space must look lived-in with people as the focal point.";
       const fullPrompt = mandatoryPeopleRequirement + " " + state.customPrompt;
 
       const response = await fetch("/api/inpaint", {

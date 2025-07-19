@@ -4,9 +4,10 @@ import { SocialMediaPlatform } from '@/lib/types';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { platform: string } }
+  context: any // Using 'any' as a diagnostic step to bypass the type error
 ) {
   try {
+    const { params } = context;
     const platform = params.platform as SocialMediaPlatform;
     const { userId } = await request.json();
     

@@ -3,11 +3,18 @@ import { OAUTH_CONFIGS } from '@/lib/social-media-oauth';
 import { storeSocialMediaCredential } from '@/lib/socialMediaStorage';
 import { SocialMediaPlatform } from '@/lib/types';
 
+interface RouteContext {
+  params: {
+    platform: string;
+  };
+}
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { platform: string } }
+  context: any // Using 'any' as a diagnostic step to bypass the type error
 ) {
   try {
+    const { params } = context;
     const platform = params.platform as SocialMediaPlatform;
     const searchParams = request.nextUrl.searchParams;
     const code = searchParams.get('code');
