@@ -34,8 +34,10 @@ import {
   Layers,
   ChevronDown,
   ChevronUp,
+  Info,
 } from "lucide-react";
 import { useToast } from "@/components/ui/toaster";
+import { Tooltip } from "../components/ui/tooltip";
 import { SharePostModal } from "@/components/SharePostModal";
 import {
   TRANSFORMATION_TYPES,
@@ -4237,7 +4239,7 @@ const ChurchTransformation = () => {
     // Social Media Sharing
     showShareModal: false,
     // Negative Prompts
-    negativePrompt: "",
+    negativePrompt: getDefaultNegativePrompt(),
     showNegativePromptPresets: false,
     activeNegativePresets: new Set<string>(),
     isNegativePromptCollapsed: true,
@@ -4392,7 +4394,7 @@ const ChurchTransformation = () => {
     try {
       // Construction du prompt avec exigence obligatoire
       const mandatoryPeopleRequirement =
-        "MANDATORY: 140 happy diverse people actively using the space. Space must look lived-in with people as the focal point.";
+        "MANDATORY: 80 happy diverse people actively using the space. Space must look lived-in with people as the focal point.";
       const fullPrompt = mandatoryPeopleRequirement + " " + state.customPrompt;
 
       const response = await fetch("/api/inpaint", {
@@ -4480,7 +4482,7 @@ const ChurchTransformation = () => {
 
   const handleDownload = useCallback(async () => {
     console.log("🔍 [DEBUG] handleDownload called");
-    
+
     if (!state.generatedImage) {
       console.error("❌ [DEBUG] No generated image available");
       toast({
@@ -4493,28 +4495,31 @@ const ChurchTransformation = () => {
     }
 
     console.log("🔍 [DEBUG] Generated image URL:", state.generatedImage);
-    console.log("🔍 [DEBUG] Selected transformation:", state.selectedTransformation?.id);
+    console.log(
+      "🔍 [DEBUG] Selected transformation:",
+      state.selectedTransformation?.id
+    );
 
     try {
       // Use the server-side download endpoint to avoid CORS issues
-      const filename = `eglise-auray-${state.selectedTransformation?.id || 'transformation'}.jpg`;
+      const filename = `eglise-auray-${state.selectedTransformation?.id || "transformation"}.jpg`;
       const downloadUrl = `/api/download?url=${encodeURIComponent(state.generatedImage)}&filename=${encodeURIComponent(filename)}`;
-      
+
       console.log("🔍 [DEBUG] Using download API endpoint:", downloadUrl);
-      
+
       // Create a temporary anchor element and trigger download
       const a = document.createElement("a");
       a.href = downloadUrl;
       a.download = filename;
-      a.style.display = 'none';
-      
+      a.style.display = "none";
+
       console.log("🔍 [DEBUG] Download filename:", a.download);
       console.log("🔍 [DEBUG] Appending to document...");
       document.body.appendChild(a);
-      
+
       console.log("🔍 [DEBUG] Triggering click...");
       a.click();
-      
+
       console.log("🔍 [DEBUG] Cleaning up...");
       document.body.removeChild(a);
 
@@ -4528,15 +4533,18 @@ const ChurchTransformation = () => {
     } catch (error) {
       console.error("❌ [DEBUG] Download error:", error);
       console.error("❌ [DEBUG] Error details:", {
-        message: error instanceof Error ? error.message : 'Unknown error',
+        message: error instanceof Error ? error.message : "Unknown error",
         stack: error instanceof Error ? error.stack : undefined,
         imageUrl: state.generatedImage,
-        transformationId: state.selectedTransformation?.id
+        transformationId: state.selectedTransformation?.id,
       });
-      
+
       toast({
         title: "❌ Erreur de téléchargement",
-        description: error instanceof Error ? error.message : "Erreur inconnue lors du téléchargement",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Erreur inconnue lors du téléchargement",
         variant: "error",
         duration: 5000,
       });
@@ -4909,40 +4917,49 @@ const ChurchTransformation = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-6 space-y-8">
+    <div className="w-full max-w-7xl lg:mx-4 sm:mx-1 md:px-4 sm:px-1 lg:px-8 lg:py-4 sm:py-6 lg:space-y-8 space-y-4">
       {/* 🎫 Section Coupon */}
       <Card className="bg-gradient-to-r from-green-50 to-blue-50 border-green-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Ticket className="h-5 w-5 text-green-600" />
+        <CardHeader className="px-4 sm:px-6 py-4 sm:py-5">
+          <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+            <Ticket className="h-4 sm:h-5 w-4 sm:w-5 text-green-600" />
             Code coupon de génération
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-xs sm:text-sm">
             Entrez votre code de coupon pour accéder aux générations d'images
-            IA. Vous obtenez 5 générations gratuites en signant la pétition.
+            IA. jusqu'à 20 générations gratuites en signant la pétition.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-3 sm:space-y-4">
           <div className="space-y-2">
             <Label htmlFor="coupon-input" className="text-sm font-medium">
               Code coupon (format: XXXX-XXXX-XXXX)
             </Label>
-            <Input
-              id="coupon-input"
-              type="text"
-              value={state.couponCode}
-              onChange={(e) => {
-                const upperCode = e.target.value.toUpperCase();
-                setState((prev) => ({ ...prev, couponCode: upperCode }));
-                if (upperCode.length === 14) {
-                  // XXXX-XXXX-XXXX = 14 chars
-                  handleCouponValidation(upperCode);
-                }
-              }}
-              placeholder="Entrez votre code coupon..."
-              className="w-full"
-              maxLength={14}
-            />
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Input
+                id="coupon-input"
+                type="text"
+                value={state.couponCode}
+                onChange={(e) => {
+                  const upperCode = e.target.value.toUpperCase();
+                  setState((prev) => ({ ...prev, couponCode: upperCode }));
+                  if (upperCode.length === 14) {
+                    // XXXX-XXXX-XXXX = 14 chars
+                    handleCouponValidation(upperCode);
+                  }
+                }}
+                placeholder="Entrez votre code coupon..."
+                className="w-full text-sm"
+                maxLength={14}
+              />
+              <Button
+                onClick={() => handleCouponValidation(state.couponCode)}
+                className="w-full sm:w-auto text-xs sm:text-sm py-1.5 h-9"
+                disabled={!state.couponCode}
+              >
+                Valider
+              </Button>
+            </div>
           </div>
 
           {/* Statut du coupon */}
@@ -4969,7 +4986,8 @@ const ChurchTransformation = () => {
                   <div className="flex justify-between">
                     <span>Générations restantes:</span>
                     <span className="font-bold">
-                      {state.activeCoupon.generationsRemaining}/5
+                      {state.activeCoupon.generationsRemaining}/
+                      {state.activeCoupon.totalGenerations}
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -4992,8 +5010,8 @@ const ChurchTransformation = () => {
                 🎫 Pas encore de coupon ?
               </p>
               <p className="text-xs text-blue-600 mb-3">
-                Signez la pétition pour recevoir 5 générations gratuites
-                d'images IA !
+                Signez la pétition pour recevoir jusqu'à 20 générations
+                gratuites d'images IA !
               </p>
               <Button
                 onClick={() => window.open("/", "_blank")}
@@ -5202,7 +5220,7 @@ const ChurchTransformation = () => {
       </div>
 
       {/* Transformation Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {TRANSFORMATION_TYPES.map((transformation) => (
           <Card
             key={transformation.id}
@@ -5242,7 +5260,7 @@ const ChurchTransformation = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {FAMOUS_LOCATIONS[state.selectedTransformation.id].map(
                   (location) => (
                     <Card
@@ -5255,7 +5273,7 @@ const ChurchTransformation = () => {
                       onClick={() => handleLocationSelect(location)}
                     >
                       <div
-                        className="relative h-48 bg-cover bg-center"
+                        className="relative h-40 sm:h-48 bg-cover bg-center"
                         style={{ backgroundImage: `url(${location.imageUrl})` }}
                       >
                         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
@@ -5340,7 +5358,7 @@ const ChurchTransformation = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <textarea
+          <Textarea
             value={state.customPrompt}
             onChange={handleCustomPromptChange}
             placeholder="Sélectionnez d'abord une transformation pour voir le prompt par défaut..."
@@ -5389,9 +5407,9 @@ const ChurchTransformation = () => {
               </div>
             </div>
           )}
-          <br/>
+          <br />
           {/* Negative Prompt Section */}
-          <Card className="p-6 bg-gradient-to-br from-red-50 to-orange-50 border-red-200">
+          <Card className="lg:p-6 bg-gradient-to-br from-red-50 to-orange-50 border-red-200">
             <div className="space-y-4">
               <div
                 className="flex items-center justify-between cursor-pointer"
@@ -5399,9 +5417,9 @@ const ChurchTransformation = () => {
                 role="button"
                 tabIndex={0}
                 aria-expanded={!state.isNegativePromptCollapsed}
-                aria-label={`${state.isNegativePromptCollapsed ? 'Expand' : 'Collapse'} negative prompt configuration`}
+                aria-label={`${state.isNegativePromptCollapsed ? "Expand" : "Collapse"} negative prompt configuration`}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                  if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     handleNegativePromptCollapseToggle();
                   }
@@ -5423,9 +5441,10 @@ const ChurchTransformation = () => {
               {!state.isNegativePromptCollapsed && (
                 <div className="space-y-4">
                   <p className="text-sm text-red-700">
-                    Spécifiez les éléments à éviter dans l'image générée pour améliorer la qualité.
+                    Spécifiez les éléments à éviter dans l'image générée pour
+                    améliorer la qualité.
                   </p>
-                  
+
                   <div className="flex items-center justify-between">
                     <Label
                       htmlFor="negative-prompt"
@@ -5454,7 +5473,7 @@ const ChurchTransformation = () => {
                     placeholder="Éléments à éviter dans l'image générée..."
                     value={state.negativePrompt}
                     onChange={handleNegativePromptChange}
-                    className="min-h-[80px] resize-none"
+                    className="min-h-[200px] "
                     maxLength={500}
                   />
 
@@ -5478,7 +5497,7 @@ const ChurchTransformation = () => {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
                         {(
                           Object.keys(
                             NEGATIVE_PROMPT_CONFIG.toggleablePresets
@@ -5492,22 +5511,27 @@ const ChurchTransformation = () => {
                             state.activeNegativePresets.has(presetKey);
 
                           return (
-                            <Button
-                              key={presetKey}
-                              type="button"
-                              variant={isActive ? "default" : "secondary"}
-                              size="sm"
-                              onClick={() => handleToggleNegativePreset(presetKey)}
-                              className={`h-8 text-xs justify-start ${
-                                isActive
-                                  ? "bg-blue-500 text-white border-blue-500"
-                                  : ""
-                              }`}
-                            >
-                              <div className="flex items-center gap-1">
-                                {isActive ? "✓" : ""} {preset.name}
-                              </div>
-                            </Button>
+                            <Tooltip content={preset.tooltip} side="top">
+                              <Button
+                                key={presetKey}
+                                type="button"
+                                variant={isActive ? "default" : "secondary"}
+                                size="sm"
+                                onClick={() =>
+                                  handleToggleNegativePreset(presetKey)
+                                }
+                                className={`h-8 text-xs justify-start ${
+                                  isActive
+                                    ? "bg-blue-500 text-white border-blue-500"
+                                    : ""
+                                }`}
+                              >
+                                <div className="flex items-center gap-1">
+                                  {isActive ? "✓" : ""} {preset.name}
+                                  <Info className="h-3 w-3 ml-1 opacity-70" />
+                                </div>
+                              </Button>
+                            </Tooltip>
                           );
                         })}
                       </div>
@@ -5515,8 +5539,8 @@ const ChurchTransformation = () => {
                   )}
 
                   <p className="text-xs text-muted-foreground">
-                    Le negative prompt aide à éviter les éléments indésirables dans
-                    l'image générée.
+                    Le negative prompt aide à éviter les éléments indésirables
+                    dans l'image générée.
                   </p>
                 </div>
               )}
@@ -5528,7 +5552,7 @@ const ChurchTransformation = () => {
               <Button
                 onClick={handleTransform}
                 disabled={state.isGenerating}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg transform transition-all duration-200 hover:scale-105"
+                className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg transform transition-all duration-200 hover:scale-105"
               >
                 {state.isGenerating ? (
                   <>
@@ -5585,7 +5609,7 @@ const ChurchTransformation = () => {
       )}
       {/* Image Comparison Section */}
       {state.generatedImage && (
-        <Card className="bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200">
+        <Card className="bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200 ">
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-2">
               <span className="text-2xl">
@@ -5597,41 +5621,50 @@ const ChurchTransformation = () => {
               {state.selectedTransformation?.description}
             </CardDescription>
             {state.generationTime && (
-              <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
-                <span>
-                  ⏱️ Généré en {(state.generationTime / 1000).toFixed(1)}s
-                </span>
-                {state.cost && <span>💰 {state.cost.toFixed(3)}&nbsp;</span>}
-                <span>
+              <div>
+                <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
+                  <span>
+                    ⏱️ Généré en {(state.generationTime / 1000).toFixed(1)}s
+                  </span>
+                  {state.cost && <span>💰 {state.cost.toFixed(3)}&nbsp;</span>}
+                  <span>
+                    <span className="mx-1">→</span>
+                    <span className="font-bold">{state.cost.toFixed(3)}€</span>
+                  </span>
+                  <span className="mx-1">🙏</span>
+                  <span>
+                    <a
+                      href="https://www.buymeacoffee.com/huaoe"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-md shadow transition-colors text-sm ml-4"
+                    >
+                      ☕ Offrez-moi un café
+                    </a>
+                  </span>
                   <span className="mx-1">→</span>
-                  <span className="font-bold">{state.cost.toFixed(3)}€</span>
-                </span>
-                <span className="mx-1">🙏</span>
-                <span>
-                  <a
-                    href="https://www.buymeacoffee.com/huaoe"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-md shadow transition-colors text-sm ml-4"
-                  >
-                    ☕ Offrez-moi un café
-                  </a>
-                </span>
-                <span className="mx-1">→</span>
-                <span className="mx-1">🦄💓🖖</span>
-                <span className="mx-1">→</span>
-                <span className="mx-1">🏄‍♀️</span>
+                  <span className="mx-1">🦄💓🖖</span>
+                  <span className="mx-1">→</span>
+                  <span className="mx-1">🏄‍♀️</span>
+                </div>
+                <div className="text-sm text-gray-600 mt-2">
+                  
+                  🎵 Ce système fonctionne comme un <strong>jukebox</strong> : <strong>chaque centime
+                  donné est réinvesti </strong> chez notre fournisseur Stable Diffusion
+                  pour que tout le monde puisse en profiter.
+                  
+                </div>
               </div>
             )}
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <CardContent  className="p-0 mx-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {/* Image Originale */}
               <div className="space-y-2">
                 <h3 className="font-semibold text-center">
                   🏛️ Église Actuelle: {selectedBaseImage.name}
                 </h3>
-                <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+                <div className="relative aspect-[4/3] sm:aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg">
                   {state.originalImage ? (
                     <img
                       src={state.originalImage}
@@ -5647,7 +5680,7 @@ const ChurchTransformation = () => {
                 <h3 className="font-semibold text-center">
                   ✨ Transformation IA: {state.selectedTransformation?.name}
                 </h3>
-                <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+                <div className="relative aspect-[4/3] sm:aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg">
                   {state.generatedImage ? (
                     <img
                       src={state.generatedImage}
@@ -5660,8 +5693,8 @@ const ChurchTransformation = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap justify-center gap-4 mt-6">
-              <Button onClick={handleDownload} variant="outline" size="sm">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mt-6">
+              <Button onClick={handleDownload} variant="outline" size="sm" className="w-full sm:w-auto">
                 <Download className="w-4 h-4 mr-2" />
                 Télécharger
               </Button>
@@ -5669,11 +5702,12 @@ const ChurchTransformation = () => {
                 onClick={handleOpenShareModal}
                 variant="outline"
                 size="sm"
+                className="w-full sm:w-auto"
               >
                 <Share2 className="w-4 h-4 mr-2" />
                 Partager sur les réseaux
               </Button>
-              <Button onClick={handleReset} variant="outline" size="sm">
+              <Button onClick={handleReset} variant="outline" size="sm" className="w-full sm:w-auto">
                 <RotateCcw className="w-4 h-4 mr-2" />
                 Nouvelle Transformation
               </Button>

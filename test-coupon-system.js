@@ -1,218 +1,162 @@
-/**
- * Script de test pour le système de coupons avancé
- * Usage: node test-coupon-system.js
- */
+// Test script for coupon system
+// Run this in the browser console after loading the application
 
-// Simulation des fonctions du système de coupons (version Node.js)
-const COUPON_CONFIG = {
-  expirationDays: 30,
-  codeLength: 12,
-  
-  engagementLevels: {
-    BASIC: {
-      name: 'Supporter',
-      minScore: 0,
-      maxScore: 49,
-      generations: 2,
-      color: '#6B7280',
-      badge: '🌱'
-    },
-    ENGAGED: {
-      name: 'Engagé',
-      minScore: 50,
-      maxScore: 99,
-      generations: 3,
-      color: '#3B82F6',
-      badge: '⭐'
-    },
-    PASSIONATE: {
-      name: 'Passionné',
-      minScore: 100,
-      maxScore: 199,
-      generations: 4,
-      color: '#8B5CF6',
-      badge: '🔥'
-    },
-    CHAMPION: {
-      name: 'Champion',
-      minScore: 200,
-      maxScore: Infinity,
-      generations: 5,
-      color: '#F59E0B',
-      badge: '👑'
-    }
-  },
-  
-  scoring: {
-    baseSignature: 10,
-    commentLength: {
-      short: 5,
-      medium: 15,
-      long: 25
-    },
-    newsletter: 10,
-    socialShare: 20,
-    referral: 30
-  }
-};
+// Import functions from coupon-system.ts
+// Note: These functions should be available in the global scope if you run this in the browser console
+// after the application has loaded
 
-function generateCouponCode() {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let result = '';
-  
-  for (let i = 0; i < COUPON_CONFIG.codeLength; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    result += characters[randomIndex];
-  }
-  
-  return result;
+// Clear existing data
+function clearTestData() {
+  localStorage.removeItem('petition_coupons');
+  localStorage.removeItem('petition_referrals');
+  console.log('🧹 Test data cleared');
 }
 
-function calculateEngagementScore(signatureData) {
-  let score = COUPON_CONFIG.scoring.baseSignature;
-  
-  // Score pour commentaire
-  if (signatureData.comment && signatureData.comment.trim()) {
-    const commentLength = signatureData.comment.trim().length;
-    if (commentLength < 50) {
-      score += COUPON_CONFIG.scoring.commentLength.short;
-    } else if (commentLength <= 150) {
-      score += COUPON_CONFIG.scoring.commentLength.medium;
-    } else {
-      score += COUPON_CONFIG.scoring.commentLength.long;
-    }
-  }
-  
-  // Score pour newsletter
-  if (signatureData.newsletterConsent) {
-    score += COUPON_CONFIG.scoring.newsletter;
-  }
-  
-  // Score pour partages sociaux
-  if (signatureData.socialShares) {
-    score += signatureData.socialShares * COUPON_CONFIG.scoring.socialShare;
-  }
-  
-  // Score pour parrainages
-  if (signatureData.referrals) {
-    score += signatureData.referrals * COUPON_CONFIG.scoring.referral;
-  }
-  
-  return score;
-}
-
-function determineEngagementLevel(score) {
-  for (const [level, config] of Object.entries(COUPON_CONFIG.engagementLevels)) {
-    if (score >= config.minScore && score <= config.maxScore) {
-      return {
-        level,
-        name: config.name,
-        badge: config.badge,
-        color: config.color,
-        generations: config.generations
-      };
-    }
-  }
-  
-  return COUPON_CONFIG.engagementLevels.BASIC;
-}
-
-function createSmartCoupon(email, signatureData) {
-  const score = calculateEngagementScore(signatureData);
-  const engagementInfo = determineEngagementLevel(score);
-  
-  const coupon = {
-    id: generateCouponCode(),
-    email,
-    generationsRemaining: engagementInfo.generations,
-    totalGenerations: engagementInfo.generations,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + COUPON_CONFIG.expirationDays * 24 * 60 * 60 * 1000).toISOString(),
-    used: false,
-    engagementScore: score,
-    engagementLevel: engagementInfo.level,
-    levelName: engagementInfo.name,
-    levelBadge: engagementInfo.badge,
-    levelColor: engagementInfo.color,
-    signatureData
+// Create a mock user with a coupon
+function createTestUser(email = 'test@example.com') {
+  // Create a basic engagement
+  const engagement = {
+    details: {
+      name: 'Test User',
+      email: email,
+      city: 'Test City',
+      postalCode: '12345',
+      comment: 'This is a test comment',
+      newsletter: true,
+      socialShares: ['test'],
+      referralCode: null
+    },
+    score: 5,
+    level: 'BASIC'
   };
+  
+  // Create a coupon for this user
+  const coupon = createCoupon(engagement);
+  console.log('👤 Test user created with coupon:', coupon);
   
   return coupon;
 }
 
-// Tests du système
-console.log('🧪 TESTS DU SYSTÈME DE COUPONS AVANCÉ\n');
+// Create a mock referral code for a user
+function createTestReferralCode(email) {
+  const code = generateReferralCode(email);
+  console.log(`🔑 Referral code created for ${email}: ${code}`);
+  return code;
+}
 
-// Test 1: Signature basique
-console.log('📝 Test 1: Signature basique');
-const basicSignature = {
-  comment: '',
-  newsletterConsent: false,
-  socialShares: 0,
-  referrals: 0
-};
-const basicCoupon = createSmartCoupon('test1@example.com', basicSignature);
-console.log(`   Score: ${basicCoupon.engagementScore}`);
-console.log(`   Niveau: ${basicCoupon.levelBadge} ${basicCoupon.levelName}`);
-console.log(`   Générations: ${basicCoupon.generationsRemaining}`);
-console.log(`   Code: ${basicCoupon.id}\n`);
+// Simulate a successful referral
+function simulateReferral(referrerEmail, refereeEmail) {
+  // Get the referrer's code
+  const referrals = loadReferrals();
+  const referrerCode = referrals.find(r => 
+    r.email === referrerEmail && 
+    r.referrerEmail === referrerEmail
+  )?.code;
+  
+  if (!referrerCode) {
+    console.error('❌ No referral code found for referrer');
+    return false;
+  }
+  
+  // Record the referral
+  const recorded = recordReferral(referrerCode, refereeEmail);
+  if (!recorded) {
+    console.error('❌ Failed to record referral');
+    return false;
+  }
+  
+  // Create a basic engagement for the referee
+  const engagement = {
+    details: {
+      name: 'Referee User',
+      email: refereeEmail,
+      city: 'Referee City',
+      postalCode: '54321',
+      comment: 'This is a referee comment',
+      newsletter: true,
+      socialShares: [],
+      referralCode: referrerCode
+    },
+    score: 5,
+    level: 'BASIC'
+  };
+  
+  // Create a coupon for the referee
+  const coupon = createCoupon(engagement);
+  console.log(`👥 Referee ${refereeEmail} created with coupon:`, coupon);
+  
+  // Mark the referral as used
+  const marked = markReferralAsUsed(referrerCode, refereeEmail);
+  if (!marked) {
+    console.error('❌ Failed to mark referral as used');
+    return false;
+  }
+  
+  console.log(`✅ Referral from ${referrerEmail} to ${refereeEmail} completed`);
+  return true;
+}
 
-// Test 2: Signature engagée
-console.log('📝 Test 2: Signature engagée (commentaire + newsletter)');
-const engagedSignature = {
-  comment: 'Je soutiens totalement cette pétition pour une meilleure qualité de vie à Auray.',
-  newsletterConsent: true,
-  socialShares: 0,
-  referrals: 0
-};
-const engagedCoupon = createSmartCoupon('test2@example.com', engagedSignature);
-console.log(`   Score: ${engagedCoupon.engagementScore}`);
-console.log(`   Niveau: ${engagedCoupon.levelBadge} ${engagedCoupon.levelName}`);
-console.log(`   Générations: ${engagedCoupon.generationsRemaining}`);
-console.log(`   Code: ${engagedCoupon.id}\n`);
+// Test that the maximum bonus generations limit is enforced
+function testMaxBonusGenerations() {
+  clearTestData();
+  
+  // Create a test user
+  const referrerEmail = 'referrer@example.com';
+  const referrerCoupon = createTestUser(referrerEmail);
+  
+  // Create a referral code for the test user
+  const referralCode = createTestReferralCode(referrerEmail);
+  
+  // Simulate 25 successful referrals (more than the max of 20)
+  console.log('🧪 Simulating 25 referrals (should cap at 20 bonus generations)...');
+  
+  for (let i = 1; i <= 25; i++) {
+    const refereeEmail = `referee${i}@example.com`;
+    simulateReferral(referrerEmail, refereeEmail);
+    
+    // Check the current state after each referral
+    const coupons = loadCoupons();
+    const updatedReferrerCoupon = coupons.find(c => c.email === referrerEmail);
+    
+    if (updatedReferrerCoupon) {
+      const referralBonuses = 'referralBonuses' in updatedReferrerCoupon 
+        ? updatedReferrerCoupon.referralBonuses 
+        : countReferralBonuses(referrerEmail);
+      
+      console.log(`📊 After referral #${i}: Referral bonuses = ${referralBonuses}`);
+      
+      // Verify that the bonus doesn't exceed the maximum
+      if (referralBonuses > 20) {
+        console.error(`❌ TEST FAILED: Referral bonuses (${referralBonuses}) exceeded maximum (20)`);
+        return false;
+      }
+    }
+  }
+  
+  // Final verification
+  const coupons = loadCoupons();
+  const finalReferrerCoupon = coupons.find(c => c.email === referrerEmail);
+  
+  if (finalReferrerCoupon) {
+    const finalReferralBonuses = 'referralBonuses' in finalReferrerCoupon 
+      ? finalReferrerCoupon.referralBonuses 
+      : countReferralBonuses(referrerEmail);
+    
+    console.log(`🏁 Final state: Referral bonuses = ${finalReferralBonuses}`);
+    
+    if (finalReferralBonuses === 20) {
+      console.log('✅ TEST PASSED: Maximum bonus generations limit is correctly enforced');
+      return true;
+    } else {
+      console.error(`❌ TEST FAILED: Expected 20 referral bonuses, got ${finalReferralBonuses}`);
+      return false;
+    }
+  } else {
+    console.error('❌ TEST FAILED: Could not find referrer coupon in final state');
+    return false;
+  }
+}
 
-// Test 3: Signature passionnée
-console.log('📝 Test 3: Signature passionnée (commentaire long + newsletter + partages)');
-const passionateSignature = {
-  comment: 'Cette pétition est absolument essentielle pour notre communauté. Les sonneries de cloches à toute heure perturbent notre sommeil et notre qualité de vie. Il est temps de trouver un équilibre respectueux entre tradition et bien-être des habitants. Je partage cette pétition avec tous mes contacts.',
-  newsletterConsent: true,
-  socialShares: 2,
-  referrals: 0
-};
-const passionateCoupon = createSmartCoupon('test3@example.com', passionateSignature);
-console.log(`   Score: ${passionateCoupon.engagementScore}`);
-console.log(`   Niveau: ${passionateCoupon.levelBadge} ${passionateCoupon.levelName}`);
-console.log(`   Générations: ${passionateCoupon.generationsRemaining}`);
-console.log(`   Code: ${passionateCoupon.id}\n`);
-
-// Test 4: Signature champion
-console.log('📝 Test 4: Signature champion (tout + parrainages)');
-const championSignature = {
-  comment: 'En tant que résident de longue date d\'Auray, je suis profondément préoccupé par l\'impact des sonneries de cloches sur notre communauté. Cette pétition représente une opportunité unique de dialogue constructif entre les différentes parties prenantes. J\'ai personnellement contacté plusieurs voisins et amis pour les sensibiliser à cette cause importante.',
-  newsletterConsent: true,
-  socialShares: 3,
-  referrals: 2
-};
-const championCoupon = createSmartCoupon('test4@example.com', championSignature);
-console.log(`   Score: ${championCoupon.engagementScore}`);
-console.log(`   Niveau: ${championCoupon.levelBadge} ${championCoupon.levelName}`);
-console.log(`   Générations: ${championCoupon.generationsRemaining}`);
-console.log(`   Code: ${championCoupon.id}\n`);
-
-// Test 5: Validation des seuils
-console.log('📊 Test 5: Validation des seuils de scoring');
-console.log('   Signature de base: 10 points');
-console.log('   + Commentaire court (<50 chars): +5 points');
-console.log('   + Commentaire moyen (50-150 chars): +15 points');
-console.log('   + Commentaire long (>150 chars): +25 points');
-console.log('   + Newsletter: +10 points');
-console.log('   + Partage social: +20 points chacun');
-console.log('   + Parrainage: +30 points chacun');
-console.log('');
-console.log('   Niveaux:');
-console.log('   🌱 BASIC (0-49): 2 générations');
-console.log('   ⭐ ENGAGED (50-99): 3 générations');
-console.log('   🔥 PASSIONATE (100-199): 4 générations');
-console.log('   👑 CHAMPION (200+): 5 générations');
-
-console.log('\n✅ TESTS TERMINÉS - Système de coupons avancé fonctionnel !');
+// Run the test
+console.log('🧪 Starting coupon system test...');
+testMaxBonusGenerations();

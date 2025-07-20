@@ -118,7 +118,7 @@ const HomePage = () => {
         </div>
       )}
       <main className="min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto sm:px-0 md:px-4 lg:px-8 py-8">
           {/* Hero Card */}
           <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 text-center">
             <div className="max-w-3xl mx-auto">
@@ -130,16 +130,6 @@ const HomePage = () => {
                 religieuse et qualité de vie. Votre signature compte pour ouvrir
                 le dialogue.
               </p>
-
-              {/* Real-time Signature Counter */}
-              <div className="mb-8">
-                <RealTimeSignatureCounter
-                  initialStats={stats}
-                  updateInterval={30000}
-                  showTrend={true}
-                  compact={false}
-                />
-              </div>
 
               <button
                 onClick={() =>
@@ -193,11 +183,20 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+          {/* Real-time Signature Counter */}
+          <div className="mb-8">
+            <RealTimeSignatureCounter
+              initialStats={stats}
+              updateInterval={30000}
+              showTrend={true}
+              compact={false}
+            />
+          </div>
 
           {/* Petition Form Card */}
           <div
             id="petition"
-            className="bg-white rounded-2xl shadow-lg p-8 mb-8"
+            className="bg-white rounded-2xl shadow-lg lg:p-8 mb-8"
           >
             <div className="text-center mb-8">
               <h3 className="text-3xl font-bold rounded-full  text-gray-900 mb-4 flex items-center justify-center gap-3">
@@ -215,7 +214,7 @@ const HomePage = () => {
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-4 gap-8">
+            <div className="grid lg:grid-cols-4 lg:gap-8">
               {/* Confidentialité Card */}
               <div className="lg:col-span-1">
                 <div className="bg-green-50 rounded-xl p-6 border border-green-100 h-full">
@@ -261,7 +260,7 @@ const HomePage = () => {
 
               {/* Formulaire */}
               <div className="lg:col-span-3">
-                <div className="bg-gray-50 rounded-xl p-6">
+                <div className="bg-gray-50 rounded-xl lg:p-6">
                   <SignatureForm onSuccess={handleSignatureSuccess} />
                 </div>
               </div>

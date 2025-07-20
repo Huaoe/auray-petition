@@ -3,7 +3,7 @@ import { createHash, createCipher, createDecipher, randomBytes } from 'crypto';
 
 // Configuration for social media credentials sheet
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SHEET_ID;
-const SOCIAL_SHEET_NAME = 'SocialMediaCredentials';
+const SOCIAL_SHEET_NAME = process.env.SOCIAL_SHEET_NAME;
 
 // Encryption key derived from JWT_SECRET
 const getEncryptionKey = (): string => {
@@ -293,20 +293,27 @@ export const updateSocialMediaCredential = async (credential: SocialMediaCredent
 
 // Get all social media credentials for a user
 export const getUserSocialMediaCredentials = async (userId: string): Promise<SocialMediaCredential[]> => {
-  try {
-    if (!SPREADSHEET_ID) {
-      return [];
-    }
+try {
+  if (!SPREADSHEET_ID || !SOCIAL_SHEET_NAME) {
+    console.error("Error: GOOGLE_SHEETS_SHEET_ID or SOCIAL_SHEET_NAME is not configured.");
+    return [];
+  }
 
-    const sheets = await getSocialMediaSheetsClient();
-    
-    // Get all credentials
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: SPREADSHEET_ID,
-      range: `${SOCIAL_SHEET_NAME}!A:I`,
-    });
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[socialMediaStorage] Fetching credentials for userId:', userId);
+    console.log('[socialMediaStorage] SPREADSHEET_ID:', SPREADSHEET_ID);
+    console.log('[socialMediaStorage] SOCIAL_SHEET_NAME:', SOCIAL_SHEET_NAME);
+  }
+  
+  const sheets = await getSocialMediaSheetsClient();
+  
+  // Get all credentials
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `${SOCIAL_SHEET_NAME}!A:I`,
+  });
 
-    const rows = response.data.values || [];
+  const rows = response.data.values || [];
     const credentials = rows.slice(1); // Skip header
     
     // Filter and decrypt credentials for the user

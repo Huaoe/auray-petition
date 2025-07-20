@@ -73,7 +73,7 @@ export const INPAINT_IMAGES: InpaintImage[] = [
     path: "/images/Saint-Gildas-Auray-768x576.jpg",
     name: "Façade Complète",
     description: "Transformation complète de la façade - Vision futuriste",
-    maskPath: "/images/inpaint/total/inpaint10b.jpg",
+    maskPath: "/images/inpaint/total/inpaint10g.jpg",
     type: "facade",
     hdPainterMethod: "painta+rasg",
     resolution: "ultra",
@@ -91,7 +91,7 @@ export const INPAINT_IMAGES: InpaintImage[] = [
     path: "/images/Saint-Gildas-Auray-768x576.jpg",
     name: "Entrée Principale",
     description: "Focus sur l'entrée principale - Portail d'accueil",
-    maskPath: "/images/inpaint/total/inpaint10b.jpg",
+    maskPath: "/images/inpaint/total/inpaint10g.jpg",
     type: "exterior",
     hdPainterMethod: "painta",
     resolution: "hd",
@@ -143,36 +143,84 @@ export const NEGATIVE_PROMPT_CONFIG = {
       prompt:
         "lowres, low quality, jpeg artifacts, blurry, grainy, pixelated, compressed",
       description: "Avoid low quality and compression artifacts",
+      tooltip: "Eliminates visual noise and compression artifacts for a cleaner, more professional result"
     },
     exposure: {
       name: "Exposure Problems",
       prompt:
         "oversaturated, low contrast, underexposed, overexposed, washed out, too dark, too bright",
       description: "Prevent exposure and lighting issues",
+      tooltip: "Improves balanced lighting and prevents harsh shadows or blown-out highlights"
     },
     composition: {
       name: "Composition Issues",
       prompt:
         "solid background, plain background, asymmetrical buildings, multiple views, multiple angles, cropped, cut off",
       description: "Avoid composition and framing problems",
+      tooltip: "Creates better framing and prevents awkward cropping or unbalanced compositions"
     },
     style: {
       name: "Style Problems",
       prompt:
         "surreal, creepy, scary, weird colors, unreal sky, deformed structures, distorted, unrealistic",
       description: "Prevent surreal and unrealistic elements",
+      tooltip: "Maintains realistic aesthetics and prevents AI-generated surreal or unsettling elements"
     },
     technical: {
       name: "Technical Artifacts",
       prompt:
         "noise, artifacts, compression, watermark, text, logo, signature, frame, border",
       description: "Remove technical artifacts and watermarks",
+      tooltip: "Eliminates distracting elements like watermarks, text, or digital artifacts"
     },
     architectural: {
       name: "Architectural Issues",
       prompt:
         "asymmetrical buildings, deformed structures, impossible architecture, floating elements, broken perspective",
       description: "Avoid architectural inconsistencies",
+      tooltip: "Ensures architectural integrity with proper perspective and structural coherence"
+    },
+    people: {
+      name: "People Problems",
+      prompt:
+        "deformed faces, missing limbs, extra fingers, distorted bodies, unnatural poses, uncanny valley, creepy expressions",
+      description: "Prevent issues with human figures",
+      tooltip: "Creates more natural-looking people without anatomical errors or uncanny expressions"
+    },
+    lighting: {
+      name: "Lighting Artifacts",
+      prompt:
+        "harsh shadows, inconsistent lighting, unnatural reflections, lens flare, glare, blown highlights",
+      description: "Avoid lighting inconsistencies",
+      tooltip: "Produces more natural lighting with consistent light sources and realistic shadows"
+    },
+    details: {
+      name: "Detail Issues",
+      prompt:
+        "missing details, lack of texture, flat surfaces, overly smooth, lack of depth, simplified features",
+      description: "Prevent loss of important details",
+      tooltip: "Preserves fine details and textures for more realistic and rich visuals"
+    },
+    perspective: {
+      name: "Perspective Problems",
+      prompt:
+        "warped perspective, fisheye effect, distorted proportions, inconsistent scale, multiple vanishing points",
+      description: "Avoid perspective distortions",
+      tooltip: "Maintains proper spatial relationships and prevents warped or unrealistic perspectives"
+    },
+    materials: {
+      name: "Material Rendering Issues",
+      prompt:
+        "unrealistic materials, plastic-looking surfaces, incorrect reflections, unnatural textures, inconsistent material properties",
+      description: "Improve material realism",
+      tooltip: "Creates more convincing materials with appropriate textures, reflections and properties"
+    },
+    atmosphere: {
+      name: "Atmospheric Problems",
+      prompt:
+        "flat lighting, lack of atmosphere, missing ambient occlusion, no depth, artificial environment",
+      description: "Enhance atmospheric depth",
+      tooltip: "Adds depth through proper atmospheric effects, creating more immersive and realistic scenes"
     },
   },
 
@@ -190,6 +238,18 @@ export const NEGATIVE_PROMPT_CONFIG = {
       "noise, artifacts, compression, watermark, text, logo, signature, frame, border",
     architectural:
       "asymmetrical buildings, deformed structures, impossible architecture, floating elements, broken perspective",
+    people:
+      "deformed faces, missing limbs, extra fingers, distorted bodies, unnatural poses, uncanny valley, creepy expressions",
+    lighting:
+      "harsh shadows, inconsistent lighting, unnatural reflections, lens flare, glare, blown highlights",
+    details:
+      "missing details, lack of texture, flat surfaces, overly smooth, lack of depth, simplified features",
+    perspective:
+      "warped perspective, fisheye effect, distorted proportions, inconsistent scale, multiple vanishing points",
+    materials:
+      "unrealistic materials, plastic-looking surfaces, incorrect reflections, unnatural textures, inconsistent material properties",
+    atmosphere:
+      "flat lighting, lack of atmosphere, missing ambient occlusion, no depth, artificial environment",
   },
 
   // Legacy default for backward compatibility

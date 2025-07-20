@@ -1,159 +1,253 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/components/ui/toaster";
 import { Loader2, CheckCircle, AlertCircle, Link2, Unlink } from "lucide-react";
 import {
   SOCIAL_MEDIA_PLATFORMS,
   SocialMediaPlatform,
   SocialMediaAccount,
-  ConnectAccountResponse
+  ConnectAccountResponse,
 } from "@/lib/types";
 
 interface SocialMediaSettingsProps {
   userId?: string;
 }
 
-export function SocialMediaSettings({ userId = 'current_user' }: SocialMediaSettingsProps) {
-  const [connectedAccounts, setConnectedAccounts] = useState<SocialMediaAccount[]>([]);
+export function SocialMediaSettings({
+  userId = "current_user",
+}: SocialMediaSettingsProps) {
+  const [connectedAccounts, setConnectedAccounts] = useState<
+    SocialMediaAccount[]
+  >([]);
   const [loading, setLoading] = useState(true);
-  const [connecting, setConnecting] = useState<SocialMediaPlatform | null>(null);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [connecting, setConnecting] = useState<SocialMediaPlatform | null>(
+    null
+  );
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
+  const { toast } = useToast();
 
   // Load connected accounts on mount
   useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      console.log("[SocialMediaSettings] Component mounted");
+    }
     loadConnectedAccounts();
-    
+
     // Check for OAuth callback parameters
     const params = new URLSearchParams(window.location.search);
-    const success = params.get('success');
-    const error = params.get('error');
-    const platform = params.get('platform');
-    
+    const success = params.get("success");
+    const error = params.get("error");
+    const platform = params.get("platform");
+
+    if (process.env.NODE_ENV === "development") {
+      if (success || error) {
+        console.log("[SocialMediaSettings] OAuth callback detected:", {
+          success,
+          error,
+          platform,
+        });
+      }
+    }
+
     if (success && platform) {
-      setMessage({
-        type: 'success',
-        text: `${platform} account connected successfully!`
+      toast({
+        title: "Connection Successful",
+        description: `${platform} account connected successfully!`,
+        variant: "default",
       });
       loadConnectedAccounts();
     } else if (error) {
-      setMessage({
-        type: 'error',
-        text: getErrorMessage(error)
+      toast({
+        title: "Connection Failed",
+        description: getErrorMessage(error),
+        variant: "error",
       });
     }
-    
+
     // Clean up URL parameters
     if (success || error) {
-      window.history.replaceState({}, '', window.location.pathname);
+      window.history.replaceState({}, "", window.location.pathname);
     }
   }, []);
 
   const getErrorMessage = (error: string): string => {
+    if (process.env.NODE_ENV === "development") {
+      console.log(`[SocialMediaSettings] Getting error message for:`, error);
+    }
     switch (error) {
-      case 'missing_parameters':
-        return 'Missing required parameters. Please try again.';
-      case 'invalid_platform':
-        return 'Invalid platform selected.';
-      case 'token_exchange_failed':
-        return 'Failed to authenticate with the platform. Please try again.';
-      case 'storage_failed':
-        return 'Failed to save your credentials. Please try again.';
-      case 'callback_error':
-        return 'An error occurred during authentication. Please try again.';
+      case "missing_parameters":
+        return "Authentication callback is missing required parameters. Please try connecting again.";
+      case "invalid_platform":
+        return "The selected social media platform is not supported.";
+      case "token_exchange_failed":
+        return "Could not verify your identity with the social media platform. Please try again.";
+      case "storage_failed":
+        return "Failed to securely store your account connection. Please try again.";
+      case "callback_error":
+        return "An unexpected error occurred during the authentication process. Please try again.";
+      case "invalid_state":
+        return "Invalid authentication session. Please try connecting again for your security.";
       default:
-        return `Authentication error: ${error}`;
+        return `An unexpected error occurred. If the problem persists, please contact support. (Error: ${error})`;
     }
   };
 
   const loadConnectedAccounts = async () => {
+    if (process.env.NODE_ENV === "development") {
+      console.log(
+        "[SocialMediaSettings] Loading connected accounts for userId:",
+        userId
+      );
+    }
     try {
       const response = await fetch(`/api/social-accounts?userId=${userId}`);
       if (response.ok) {
         const data = await response.json();
+        if (process.env.NODE_ENV === "development") {
+          console.log("[SocialMediaSettings] Loaded accounts:", data.accounts);
+        }
         setConnectedAccounts(data.accounts || []);
+      } else {
+        if (process.env.NODE_ENV === "development") {
+          console.error(
+            "[SocialMediaSettings] Failed to load accounts, status:",
+            response.status
+          );
+        }
       }
     } catch (error) {
-      console.error('Failed to load connected accounts:', error);
+      console.error("Failed to load connected accounts:", error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleConnect = async (platform: SocialMediaPlatform) => {
+    if (process.env.NODE_ENV === "development") {
+      console.log(
+        `[SocialMediaSettings] Initiating connection for ${platform}`
+      );
+    }
     setConnecting(platform);
     setMessage(null);
-    
+
     try {
       const response = await fetch(`/api/auth/connect/${platform}`);
       if (!response.ok) {
-        throw new Error('Failed to initiate OAuth');
+        throw new Error("Failed to initiate OAuth");
       }
-      
+
       const data: ConnectAccountResponse = await response.json();
-      
+
+      if (process.env.NODE_ENV === "development") {
+        console.log(
+          `[SocialMediaSettings] Received auth URL for ${platform}:`,
+          data.authUrl
+        );
+        console.log(
+          `[SocialMediaSettings] Storing state for ${platform}:`,
+          data.state
+        );
+      }
+
       // Store state in session storage for CSRF protection
       sessionStorage.setItem(`oauth_state_${platform}`, data.state);
-      
+
       // Redirect to OAuth provider
       window.location.href = data.authUrl;
-      
     } catch (error) {
-      console.error('OAuth initiation error:', error);
-      setMessage({
-        type: 'error',
-        text: `Failed to connect ${platform} account. Please try again.`
+      console.error("OAuth initiation error:", error);
+      toast({
+        title: "Connection Error",
+        description: `Failed to connect ${platform} account. Please try again.`,
+        variant: "error",
       });
       setConnecting(null);
     }
   };
 
   const handleDisconnect = async (platform: SocialMediaPlatform) => {
-    if (!confirm(`Are you sure you want to disconnect your ${platform} account?`)) {
+    if (
+      !confirm(`Are you sure you want to disconnect your ${platform} account?`)
+    ) {
       return;
     }
-    
+
+    if (process.env.NODE_ENV === "development") {
+      console.log(
+        `[SocialMediaSettings] Disconnecting ${platform} for userId:`,
+        userId
+      );
+    }
+
     try {
       const response = await fetch(`/api/social-accounts/${platform}`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId })
+        body: JSON.stringify({ userId }),
       });
-      
+
       if (response.ok) {
-        setMessage({
-          type: 'success',
-          text: `${platform} account disconnected successfully.`
+        toast({
+          title: "Disconnect Successful",
+          description: `${platform} account disconnected successfully.`,
+          variant: "default",
         });
         loadConnectedAccounts();
       } else {
-        throw new Error('Failed to disconnect account');
+        if (process.env.NODE_ENV === "development") {
+          console.error(
+            `[SocialMediaSettings] Failed to disconnect ${platform}, status:`,
+            response.status
+          );
+        }
+        throw new Error("Failed to disconnect account");
       }
     } catch (error) {
-      console.error('Disconnect error:', error);
-      setMessage({
-        type: 'error',
-        text: `Failed to disconnect ${platform} account. Please try again.`
+      console.error("Disconnect error:", error);
+      toast({
+        title: "Disconnect Error",
+        description: `Failed to disconnect ${platform} account. Please try again.`,
+        variant: "error",
       });
     }
   };
 
   const isConnected = (platform: SocialMediaPlatform): boolean => {
-    return connectedAccounts.some(account => account.platform === platform);
+    return connectedAccounts.some((account) => account.platform === platform);
   };
 
-  const getAccount = (platform: SocialMediaPlatform): SocialMediaAccount | undefined => {
-    return connectedAccounts.find(account => account.platform === platform);
+  const getAccount = (
+    platform: SocialMediaPlatform
+  ): SocialMediaAccount | undefined => {
+    return connectedAccounts.find((account) => account.platform === platform);
   };
 
   if (loading) {
     return (
       <Card>
+        <CardHeader>
+          <CardTitle>Loading Connected Accounts</CardTitle>
+          <CardDescription>
+            Please wait while we fetch your social media connections...
+          </CardDescription>
+        </CardHeader>
         <CardContent className="flex items-center justify-center py-8">
           <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
         </CardContent>
@@ -167,26 +261,16 @@ export function SocialMediaSettings({ userId = 'current_user' }: SocialMediaSett
         <CardHeader>
           <CardTitle>Connected Social Media Accounts</CardTitle>
           <CardDescription>
-            Connect your social media accounts to share your church transformations
+            Connect your social media accounts to share your church
+            transformations
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {message && (
-            <Alert variant={message.type === 'error' ? 'destructive' : 'default'}>
-              {message.type === 'success' ? (
-                <CheckCircle className="h-4 w-4" />
-              ) : (
-                <AlertCircle className="h-4 w-4" />
-              )}
-              <AlertDescription>{message.text}</AlertDescription>
-            </Alert>
-          )}
-          
           <div className="grid gap-4">
             {SOCIAL_MEDIA_PLATFORMS.map((platform) => {
               const account = getAccount(platform.id);
               const connected = isConnected(platform.id);
-              
+
               return (
                 <div
                   key={platform.id}
@@ -196,19 +280,26 @@ export function SocialMediaSettings({ userId = 'current_user' }: SocialMediaSett
                     <span className="text-2xl">{platform.icon}</span>
                     <div>
                       <div className="font-medium">{platform.name}</div>
-                      {connected && account?.username && (
-                        <div className="text-sm text-gray-600">
-                          @{account.username}
-                        </div>
-                      )}
-                      {connected && account?.connectedAt && (
-                        <div className="text-xs text-gray-500">
-                          Connected {new Date(account.connectedAt).toLocaleDateString()}
+                      {connected && account ? (
+                        <>
+                          <div className="text-sm text-gray-600">
+                            {account.username
+                              ? `@${account.username}`
+                              : "Account connected"}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            Connected on{" "}
+                            {new Date(account.connectedAt).toLocaleDateString()}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="text-sm text-gray-500">
+                          Not connected
                         </div>
                       )}
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-2">
                     {connected && (
                       <Badge variant="secondary" className="gap-1">
@@ -216,7 +307,7 @@ export function SocialMediaSettings({ userId = 'current_user' }: SocialMediaSett
                         Connected
                       </Badge>
                     )}
-                    
+
                     {connected ? (
                       <Button
                         variant="outline"
@@ -253,13 +344,13 @@ export function SocialMediaSettings({ userId = 'current_user' }: SocialMediaSett
               );
             })}
           </div>
-          
+
           <div className="mt-6 p-4 bg-gray-50 rounded-lg">
             <h4 className="text-sm font-medium mb-2">Privacy & Security</h4>
             <p className="text-xs text-gray-600">
-              Your social media credentials are encrypted and stored securely. 
-              We only request the minimum permissions needed to publish posts on your behalf. 
-              You can disconnect your accounts at any time.
+              Your social media credentials are encrypted and stored securely.
+              We only request the minimum permissions needed to publish posts on
+              your behalf. You can disconnect your accounts at any time.
             </p>
           </div>
         </CardContent>

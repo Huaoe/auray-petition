@@ -474,7 +474,7 @@ export const COUPON_CONFIG = {
   // Configuration du système de parrainage
   referral: {
     bonusGenerations: 1, // +1 génération par parrainage réussi
-    maxBonusGenerations: 10, // Maximum 10 générations bonus par parrainage
+    maxBonusGenerations: 20, // Maximum 20 générations bonus par parrainage
     referrerBonus: 1, // +1 génération pour le parrain
     refereeBonus: 1, // +1 génération pour le filleul
     codeLength: 6, // Longueur des codes de parrainage
@@ -968,22 +968,50 @@ export function awardReferralBonus(referrerEmail: string, refereeEmail: string):
     const referrerCouponIndex = coupons.findIndex(c => c.email === referrerEmail);
     
     if (referrerCouponIndex !== -1) {
+      // Calculer le nombre actuel de bonus de parrainage
+      let currentReferralBonuses = 0;
+      if ('referralBonuses' in coupons[referrerCouponIndex]) {
+        currentReferralBonuses = (coupons[referrerCouponIndex] as any).referralBonuses;
+      }
+      
+      // Vérifier si le maximum de bonus a été atteint
+      if (currentReferralBonuses >= COUPON_CONFIG.referral.maxBonusGenerations) {
+        console.log(`⚠️ Maximum de bonus de parrainage atteint pour ${referrerEmail}`);
+        return false;
+      }
+      
       // Ajouter le bonus au coupon existant
       const bonusGenerations = COUPON_CONFIG.referral.referrerBonus;
-      coupons[referrerCouponIndex].generationsLeft += bonusGenerations;
-      coupons[referrerCouponIndex].generationsRemaining = coupons[referrerCouponIndex].generationsLeft; // Keep in sync
-      coupons[referrerCouponIndex].totalGenerations += bonusGenerations;
       
-      // Ajouter les bonus de parrainage si c'est un EnhancedCouponData
+      // S'assurer que le total ne dépasse pas le maximum
+      const newReferralBonuses = Math.min(
+        currentReferralBonuses + bonusGenerations,
+        COUPON_CONFIG.referral.maxBonusGenerations
+      );
+      
+      // Calculer le bonus réel à ajouter (peut être moins que bonusGenerations si proche du max)
+      const actualBonusToAdd = newReferralBonuses - currentReferralBonuses;
+      
+      if (actualBonusToAdd <= 0) {
+        console.log(`⚠️ Maximum de bonus de parrainage atteint pour ${referrerEmail}`);
+        return false;
+      }
+      
+      // Mettre à jour le coupon
+      coupons[referrerCouponIndex].generationsLeft += actualBonusToAdd;
+      coupons[referrerCouponIndex].generationsRemaining = coupons[referrerCouponIndex].generationsLeft; // Keep in sync
+      coupons[referrerCouponIndex].totalGenerations += actualBonusToAdd;
+      
+      // Mettre à jour les bonus de parrainage
       if ('referralBonuses' in coupons[referrerCouponIndex]) {
-        (coupons[referrerCouponIndex] as any).referralBonuses += bonusGenerations;
+        (coupons[referrerCouponIndex] as any).referralBonuses = newReferralBonuses;
       } else {
-        (coupons[referrerCouponIndex] as any).referralBonuses = bonusGenerations;
+        (coupons[referrerCouponIndex] as any).referralBonuses = actualBonusToAdd;
       }
       
       saveCoupons(coupons);
       
-      console.log(`✅ Bonus de parrainage attribué: +${bonusGenerations} générations pour ${referrerEmail}`);
+      console.log(`✅ Bonus de parrainage attribué: +${actualBonusToAdd} générations pour ${referrerEmail}`);
       return true;
     }
     
@@ -1061,8 +1089,10 @@ export function countReferrals(email: string): number {
 
 // Calcule le nombre de générations bonus basées sur les parrainages
 export function countReferralBonuses(email: string): number {
-  // Chaque parrainage réussi donne +1 génération
-  return countReferrals(email);
+  // Chaque parrainage réussi donne +1 génération, jusqu'au maximum configuré
+  const referralCount = countReferrals(email);
+  // Appliquer la limite maximale de générations bonus
+  return Math.min(referralCount, COUPON_CONFIG.referral.maxBonusGenerations);
 }
 
 // Charge les parrainages du stockage local

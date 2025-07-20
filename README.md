@@ -201,7 +201,7 @@ APRÈS (avec cache intelligent):
 Notre système de coupons transforme la signature de pétition en **porte d'entrée exclusive** vers les fonctionnalités IA premium :
 
 - **Objectif** : Maximiser les signatures en créant une valeur perçue
-- **Modèle** : 5 générations gratuites par signature
+- **Modèle** : Jusqu'à 20 générations gratuites par signature
 - **Persistance** : Stockage local navigateur (30 jours)
 - **Scalabilité** : Système extensible vers paywall
 
@@ -212,8 +212,8 @@ Notre système de coupons transforme la signature de pétition en **porte d'entr
 const coupon = {
   id: generateCouponCode(), // Format: XXXX-XXXX-XXXX
   email: signerEmail,
-  generationsRemaining: 5,
-  totalGenerations: 5,
+  generationsRemaining: 20,
+  totalGenerations: 20,
   createdAt: new Date(),
   expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
   isActive: true,
@@ -269,7 +269,7 @@ if (!couponCode || !couponRegex.test(couponCode.toUpperCase())) {
 {
   state.couponValidation?.valid && (
     <div className="text-green-800 bg-green-50">
-      ✅ {state.activeCoupon.generationsRemaining}/5 générations restantes 📅
+      ✅ {state.activeCoupon.generationsRemaining}/{state.activeCoupon.totalGenerations} générations restantes 📅
       Expire le: {expirationDate}
     </div>
   );
@@ -279,7 +279,7 @@ if (!couponCode || !couponRegex.test(couponCode.toUpperCase())) {
 {
   !state.couponValidation?.valid && (
     <Button onClick={() => window.open("/", "_blank")}>
-      📝 Signer la pétition pour obtenir 5 générations gratuites
+      📝 Signer la pétition pour obtenir jusqu'à 20 générations gratuites
     </Button>
   );
 }
@@ -295,7 +295,7 @@ IMPACT ENGAGEMENT:
 + 💡 Insight: features les plus populaires
 
 CONTRÔLE COÛTS IA:
-+ 🛡️ Limitation stricte à 5 générations/signature
++ 🛡️ Limitation stricte à 20 générations/signature
 + 💰 Prévention abus & farming de signatures
 + 📉 Réduction coûts API (-80% vs accès libre)
 + 🎛️ Levier monétisation future (premium tiers)
