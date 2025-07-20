@@ -11,6 +11,7 @@ import {
   downloadImageAsBuffer,
   generateFileName,
 } from "@/lib/storage";
+import { getStabilityBalance } from "@/lib/stability-balance";
 
 // Rate limiting simple (en mémoire)
 const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
@@ -114,64 +115,47 @@ async function resizeImage(imageBuffer: Buffer): Promise<Buffer> {
 }
 
 async function generateWithStabilityAI(
-  baseImageBuffer: Buffer,
+  imageBuffer: Buffer,
   prompt: string
-): Promise<{ imageUrl: string; cost: number }> {
+): Promise<{ imageUrl: string; cost: number; actualCost?: number }> {
   try {
-    validateAIConfig();
-
-    // Redimensionner l'image de base si nécessaire
-    const resizedImageBuffer = await resizeImage(baseImageBuffer);
-
+    console.log("🎨 Starting Stability AI generation...");
+    
+    // 📊 MONITORING: Solde AVANT génération
+    const balanceBefore = await getStabilityBalance();
+    console.log(`💰 Balance AVANT génération: ${balanceBefore} crédits`);
+    
     const formData = new FormData();
-    
-    // Ultra v2beta uses "image" field (not "init_image")
-    formData.append("image", new Blob([resizedImageBuffer], { type: "image/webp" }));
-
-    // Prompt handling with Ultra v2beta format
-    const maxPromptLength = 2000;
-    const truncatedPrompt = prompt.length > maxPromptLength 
-      ? prompt.substring(0, maxPromptLength - 4) + "..."
-      : prompt;
-
-    // Ultra v2beta specific parameters
-    formData.append("prompt", truncatedPrompt);
-    formData.append("mode", "image-to-image");
-    formData.append("model", STABILITY_CONFIG.MODEL);
-    formData.append("output_format", "webp");
-    
-    // Add negative prompt if supported
-    formData.append("negative_prompt", 
-      "empty, no people, few people, empty space, bland, boring, generic, low quality, blurry, distorted, malformed"
-    );
-
-    // Add generation parameters that are supported by Ultra
-    formData.append("strength", STABILITY_CONFIG.PROMPT_STRENGTH.toString());
-    formData.append("seed", "0");
+    formData.append("prompt", prompt);
+    formData.append("image", new Blob([imageBuffer]), "image.webp");
+    formData.append("strength", "0.7");
+    formData.append("aspect_ratio", STABILITY_CONFIG.ASPECT_RATIO);
+    formData.append("output_format", STABILITY_CONFIG.OUTPUT_FORMAT);
 
     const response = await fetch(STABILITY_CONFIG.API_URL, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`,
-        "Accept": "image/*",
-        // Don't set Content-Type for FormData - let the browser set it with boundary
+        Authorization: `Bearer ${process.env.STABILITY_API_KEY}`,
+        Accept: "image/*",
       },
       body: formData,
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("Stability AI API Error:", {
-        status: response.status,
-        statusText: response.statusText,
-        headers: Object.fromEntries(response.headers.entries()),
-        body: errorText
-      });
-      throw new Error(`Stability API error: ${response.status} - ${errorText}`);
+      console.error("Stability AI API error:", response.status, errorText);
+      throw new Error(`Stability AI error: ${response.status}`);
     }
 
     // Ultra API returns the image directly as binary data
     const imageBuffer = Buffer.from(await response.arrayBuffer());
+    
+    // 📊 MONITORING: Solde APRÈS génération
+    const balanceAfter = await getStabilityBalance();
+    const actualCost = balanceBefore - balanceAfter;
+    
+    console.log(`💰 Balance APRÈS génération: ${balanceAfter} crédits`);
+    console.log(`💰 Coût RÉEL: ${actualCost} crédits (estimé: ${STABILITY_CONFIG.PRICING.per_generation})`);
     
     // Convert to base64 data URL for consistency with existing code
     const base64Image = imageBuffer.toString('base64');
@@ -179,7 +163,8 @@ async function generateWithStabilityAI(
 
     return {
       imageUrl: dataUrl,
-      cost: STABILITY_CONFIG.PRICING.per_generation,
+      cost: STABILITY_CONFIG.PRICING.per_generation, // Coût estimé pour compatibilité
+      actualCost: actualCost, // Coût réel mesuré
     };
   } catch (error) {
     console.error("Stability AI generation error:", error);
@@ -321,67 +306,49 @@ export async function POST(request: NextRequest) {
       `👥 Mandatory people requirement included: ${hasMandatoryPeople ? "✅" : "❌"}`
     );
 
-    // Générer l'image avec Stability AI
-    const { imageUrl: tempImageUrl, cost } = await generateWithStabilityAI(
+    // Générer l'image avec monitoring des coûts
+    const { imageUrl: tempImageUrl, cost, actualCost } = await generateWithStabilityAI(
       baseImageBuffer,
       prompt
     );
 
     console.log(`🎨 Image generated successfully`);
+    console.log(`💰 Cost monitoring - Estimated: $${cost}, Actual: ${actualCost} credits`);
 
-    // Uploader vers Google Cloud Storage
-    let finalImageUrl = tempImageUrl;
-    try {
-      // Extraire le buffer de l'image de la data URL
-      const base64Data = tempImageUrl.replace(
-        /^data:image\/[a-z]+;base64,/,
-        ""
-      );
-      const imageBuffer = Buffer.from(base64Data, "base64");
+    // Upload vers GCS
+    const finalImageUrl = await uploadImageToGCS(
+      tempImageUrl,
+      fileName,
+      "image/webp"
+    );
 
-      // Appeler uploadImageToGCS avec le bon type de contenu
-      const storageResult = await uploadImageToGCS(imageBuffer, cacheKey);
+    const endTime = Date.now();
+    const generationTime = endTime - startTime;
 
-      // Utiliser l'URL GCS si le téléchargement a réussi
-      if (storageResult.success && storageResult.url) {
-        finalImageUrl = storageResult.url;
-        console.log(`☁️ Image uploaded to GCS: ${cacheKey}`);
-      } else {
-        console.warn("⚠️ GCS upload failed, using fallback data URL");
-      }
-    } catch (error) {
-      console.error("❌ GCS Upload Error:", error);
-      // Continuer avec l'URL temporaire en fallback
-    }
-
-    const generationTime = Date.now() - startTime;
-
+    // Retourner les deux coûts pour analyse
     return NextResponse.json({
       success: true,
       imageUrl: finalImageUrl,
+      cost: cost, // Coût estimé (pour compatibilité)
+      actualCost: actualCost, // Coût réel mesuré
       generationTime,
-      cost,
-      cached: false,
-      transformation: transformationConfig,
-      couponCode: couponCode // Return coupon code for client tracking
-    } as GenerationResponse);
+      metadata: {
+        transformationType,
+        prompt: prompt.substring(0, 100) + "...",
+        cacheUsed: false,
+        costAnalysis: {
+          estimated: cost,
+          actual: actualCost,
+          difference: actualCost ? Math.abs(cost - actualCost) : 0,
+        }
+      },
+    });
+
   } catch (error) {
-    console.error("API Error:", error);
-
-    const generationTime = Date.now() - startTime;
-
+    console.error("❌ Transformation error:", error);
     return NextResponse.json(
-      {
-        success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred",
-        generationTime,
-      } as GenerationResponse,
-      {
-        status: 500,
-      }
+      { error: error instanceof Error ? error.message : "Generation failed" },
+      { status: 500 }
     );
   }
 }
@@ -393,4 +360,12 @@ export async function GET() {
     pricing: STABILITY_CONFIG.PRICING,
     rateLimit: RATE_LIMIT,
   });
+}
+
+async function getStabilityBalance(): Promise<number> {
+  const response = await fetch('https://api.stability.ai/v1/user/balance', {
+    headers: { 'Authorization': `Bearer ${process.env.STABILITY_API_KEY}` }
+  });
+  const data = await response.json();
+  return data.credits || 0;
 }

@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge, badgeVariants } from '@/components/ui/badge';
 import Header from '@/components/Header';
 import ChurchTransformation from '@/components/ChurchTransformation';
+import { StabilityBalance } from '@/components/StabilityBalance';
 
 interface TransformationStats {
   totalGenerations: number;
@@ -37,6 +38,11 @@ const TransformationsPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
       <Header />
       
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex justify-end mb-6">
+          <StabilityBalance />
+        </div>
+        
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10"></div>
@@ -159,101 +165,14 @@ const TransformationsPage = () => {
               </h3>
               <p className="text-lg text-gray-600 leading-relaxed">
                 Cette technologie révolutionnaire permet d'ouvrir un dialogue constructif 
-                sur l'avenir de notre patrimoine. Chaque transformation respecte 
-                l'architecture originale tout en explorant de nouvelles possibilités 
-                d'usage pour la communauté.
+                sur l'avenir de notre patrimoine. Chaque transformation générée illustre 
+                une possibilité concrète de reconversion respectueuse.
               </p>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/80 rounded-xl p-4">
-                  <div className="text-2xl font-bold text-blue-600">10</div>
-                  <div className="text-sm text-gray-600">Transformations</div>
-                </div>
-                <div className="bg-white/80 rounded-xl p-4">
-                  <div className="text-2xl font-bold text-purple-600">HD</div>
-                  <div className="text-sm text-gray-600">Qualité 1024x1024</div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-              <h4 className="text-xl font-semibold text-gray-900 mb-4">
-                Fonctionnalités Avancées
-              </h4>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
-                  <div>
-                    <div className="font-medium text-gray-900">Génération Temps Réel</div>
-                    <div className="text-sm text-gray-600">Images HD générées en 3-8 secondes</div>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
-                  <div>
-                    <div className="font-medium text-gray-900">Comparaison Avant/Après</div>
-                    <div className="text-sm text-gray-600">Interface immersive de visualisation</div>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                  <div>
-                    <div className="font-medium text-gray-900">Partage Optimisé</div>
-                    <div className="text-sm text-gray-600">Téléchargement et partage social</div>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full mt-2"></div>
-                  <div>
-                    <div className="font-medium text-gray-900">Respect Patrimonial</div>
-                    <div className="text-sm text-gray-600">Prompts optimisés et respectueux</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Call to Action Final */}
-      <section className="py-16 px-4 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h3 className="text-3xl md:text-4xl font-bold">
-            Participez à la Révolution Numérique
-          </h3>
-          <p className="text-xl text-gray-300 leading-relaxed">
-            Votre signature compte pour ouvrir le dialogue sur l'avenir de notre patrimoine. 
-            Après avoir exploré les transformations, rejoignez le mouvement !
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              asChild
-              size="lg" 
-              className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-6 text-lg"
-            >
-              <Link href="/#signature-form">
-                Signer la Pétition
-              </Link>
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="border-white text-white hover:bg-white hover:text-gray-900 px-8 py-6 text-lg"
-              onClick={() => {
-                if (navigator.share) {
-                  navigator.share({
-                    title: 'Transformations IA - Église d\'Auray',
-                    text: 'Découvrez les transformations révolutionnaires de l\'église d\'Auray générées par l\'IA !',
-                    url: window.location.href
-                  });
-                }
-              }}
-            >
-              <Share2 className="mr-2 h-5 w-5" />
-              Partager
-            </Button>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   );
 };

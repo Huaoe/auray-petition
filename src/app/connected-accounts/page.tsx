@@ -9,7 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { CheckCircle, AlertCircle } from "lucide-react";
+import { CheckCircle, AlertCircle, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 interface ConnectedAccount {
   platform: string;
@@ -152,6 +153,15 @@ export default function ConnectedAccountsPage() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50">
+      <div className="mb-6">
+        <Link 
+          href="/settings/social-media" 
+          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Retour aux paramètres
+        </Link>
+      </div>
       <Card className="w-full max-w-2xl">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Connected Accounts</CardTitle>

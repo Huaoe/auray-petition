@@ -6,33 +6,53 @@ const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SHEET_ID;
 const SOCIAL_SHEET_NAME = process.env.SOCIAL_SHEET_NAME || 'SocialMediaCredentials';
 
 // Encryption key derived from JWT_SECRET
-const getEncryptionKey = (): string => {
-  const secret = process.env.JWT_SECRET || 'default-fallback-key-for-dev';
-  return createHash('sha256').update(secret).digest('hex').substring(0, 32);
+const getEncryptionKey = (): Buffer => {
+  const secret = process.env.JWT_SECRET || 'default-fallback-key-for-dev-environment-only';
+  // Create exactly 32 bytes for AES-256
+  return createHash('sha256').update(secret).digest();
 };
 
-// Encrypt sensitive data
+// Encrypt function with proper error handling
 const encrypt = (text: string): string => {
-  const algorithm = 'aes-256-cbc';
-  const key = Buffer.from(getEncryptionKey(), 'hex');
-  const iv = randomBytes(16);
-  const cipher = createCipheriv(algorithm, key, iv);
-  let encrypted = cipher.update(text, 'utf8', 'hex');
-  encrypted += cipher.final('hex');
-  return iv.toString('hex') + ':' + encrypted;
+  try {
+    const algorithm = 'aes-256-cbc';
+    const key = getEncryptionKey(); // Now returns Buffer directly
+    const iv = randomBytes(16);
+    
+    const cipher = createCipheriv(algorithm, key, iv);
+    let encrypted = cipher.update(text, 'utf8', 'hex');
+    encrypted += cipher.final('hex');
+    
+    return iv.toString('hex') + ':' + encrypted;
+  } catch (error) {
+    console.error('Encryption error:', error);
+    throw new Error('Failed to encrypt data');
+  }
 };
 
-// Decrypt sensitive data
-const decrypt = (text: string): string => {
-  const algorithm = 'aes-256-cbc';
-  const key = Buffer.from(getEncryptionKey(), 'hex');
-  const textParts = text.split(':');
-  const iv = Buffer.from(textParts.shift()!, 'hex');
-  const encryptedText = textParts.join(':');
-  const decipher = createDecipheriv(algorithm, key, iv);
-  let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
-  decrypted += decipher.final('utf8');
-  return decrypted;
+// Decrypt function with proper error handling
+const decrypt = (encryptedData: string): string => {
+  try {
+    const algorithm = 'aes-256-cbc';
+    const key = getEncryptionKey(); // Now returns Buffer directly
+    
+    const parts = encryptedData.split(':');
+    if (parts.length !== 2) {
+      throw new Error('Invalid encrypted data format');
+    }
+    
+    const iv = Buffer.from(parts[0], 'hex');
+    const encryptedText = parts[1];
+    
+    const decipher = createDecipheriv(algorithm, key, iv);
+    let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    
+    return decrypted;
+  } catch (error) {
+    console.error('Decryption error:', error);
+    throw new Error('Failed to decrypt data');
+  }
 };
 
 // Interface for social media credentials
@@ -88,13 +108,24 @@ export const initializeSocialMediaSheet = async (): Promise<{ success: boolean; 
 
     const sheets = await getSocialMediaSheetsClient();
     
-    // Check if sheet exists, create if not
+    // Check if spreadsheet exists
+    let spreadsheet;
     try {
-      await sheets.spreadsheets.get({
+      spreadsheet = await sheets.spreadsheets.get({
         spreadsheetId: SPREADSHEET_ID,
       });
     } catch (error) {
-      // Sheet doesn't exist, create it
+      throw new Error(`Spreadsheet not found: ${SPREADSHEET_ID}`);
+    }
+
+    // Check if our sheet exists
+    const sheetExists = spreadsheet.data.sheets?.some(
+      sheet => sheet.properties?.title === SOCIAL_SHEET_NAME
+    );
+
+    if (!sheetExists) {
+      console.log(`Creating sheet: ${SOCIAL_SHEET_NAME}`);
+      // Create the sheet
       await sheets.spreadsheets.batchUpdate({
         spreadsheetId: SPREADSHEET_ID,
         requestBody: {
@@ -109,7 +140,7 @@ export const initializeSocialMediaSheet = async (): Promise<{ success: boolean; 
       });
     }
 
-    // Create headers
+    // Create/update headers
     const headers = [
       ['User ID', 'Platform', 'Encrypted Access Token', 'Encrypted Refresh Token', 'Token Expiry', 'Username', 'Platform User ID', 'Connected At', 'Last Used']
     ];
@@ -123,6 +154,7 @@ export const initializeSocialMediaSheet = async (): Promise<{ success: boolean; 
       },
     });
 
+    console.log(`✅ Social media sheet initialized: ${SOCIAL_SHEET_NAME}`);
     return { success: true };
   } catch (error) {
     console.error('Error initializing social media sheet:', error);
@@ -303,43 +335,78 @@ export const updateSocialMediaCredential = async (credential: SocialMediaCredent
 
 // Get all social media credentials for a user
 export const getUserSocialMediaCredentials = async (userId: string): Promise<SocialMediaCredential[]> => {
-try {
-  if (!SPREADSHEET_ID || !SOCIAL_SHEET_NAME) {
-    console.error("Error: GOOGLE_SHEETS_SHEET_ID or SOCIAL_SHEET_NAME is not configured.");
-    return [];
-  }
+  try {
+    if (!SPREADSHEET_ID || !SOCIAL_SHEET_NAME) {
+      console.error("Error: GOOGLE_SHEETS_SHEET_ID or SOCIAL_SHEET_NAME is not configured.");
+      return [];
+    }
 
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[socialMediaStorage] Fetching credentials for userId:', userId);
-    console.log('[socialMediaStorage] SPREADSHEET_ID:', SPREADSHEET_ID);
-    console.log('[socialMediaStorage] SOCIAL_SHEET_NAME:', SOCIAL_SHEET_NAME);
-  }
-  
-  const sheets = await getSocialMediaSheetsClient();
-  
-  // Get all credentials
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId: SPREADSHEET_ID,
-    range: `${SOCIAL_SHEET_NAME}!A:I`,
-  });
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[socialMediaStorage] Fetching credentials for userId:', userId);
+      console.log('[socialMediaStorage] SPREADSHEET_ID:', SPREADSHEET_ID);
+      console.log('[socialMediaStorage] SOCIAL_SHEET_NAME:', SOCIAL_SHEET_NAME);
+    }
+    
+    // Initialize sheet if it doesn't exist
+    const initResult = await initializeSocialMediaSheet();
+    if (!initResult.success) {
+      console.error('Failed to initialize social media sheet:', initResult.message);
+      return [];
+    }
+    
+    const sheets = await getSocialMediaSheetsClient();
+    
+    // Get all credentials with error handling
+    let response;
+    try {
+      response = await sheets.spreadsheets.values.get({
+        spreadsheetId: SPREADSHEET_ID,
+        range: `${SOCIAL_SHEET_NAME}!A:I`,
+      });
+    } catch (error: any) {
+      if (error.code === 400 && error.message?.includes('Unable to parse range')) {
+        console.log('Sheet range not found, initializing...');
+        await initializeSocialMediaSheet();
+        // Retry after initialization
+        response = await sheets.spreadsheets.values.get({
+          spreadsheetId: SPREADSHEET_ID,
+          range: `${SOCIAL_SHEET_NAME}!A:I`,
+        });
+      } else {
+        throw error;
+      }
+    }
 
-  const rows = response.data.values || [];
+    const rows = response.data.values || [];
+    if (rows.length <= 1) {
+      // Only header or empty sheet
+      return [];
+    }
+    
     const credentials = rows.slice(1); // Skip header
     
     // Filter and decrypt credentials for the user
     const userCredentials = credentials
-      .filter(row => row[0] === userId)
-      .map(row => ({
-        userId: row[0],
-        platform: row[1] as 'twitter' | 'facebook' | 'instagram' | 'linkedin',
-        accessToken: decrypt(row[2]),
-        refreshToken: row[3] ? decrypt(row[3]) : undefined,
-        tokenExpiry: row[4] || undefined,
-        username: row[5] || undefined,
-        userId_platform: row[6] || undefined,
-        connectedAt: row[7],
-        lastUsed: row[8] || undefined,
-      }));
+      .filter(row => row[0] === userId && row.length >= 8)
+      .map(row => {
+        try {
+          return {
+            userId: row[0],
+            platform: row[1] as 'twitter' | 'facebook' | 'instagram' | 'linkedin',
+            accessToken: decrypt(row[2]),
+            refreshToken: row[3] ? decrypt(row[3]) : undefined,
+            tokenExpiry: row[4] || undefined,
+            username: row[5] || undefined,
+            userId_platform: row[6] || undefined,
+            connectedAt: row[7],
+            lastUsed: row[8] || undefined,
+          };
+        } catch (decryptError) {
+          console.error('Failed to decrypt credential for platform:', row[1], decryptError);
+          return null;
+        }
+      })
+      .filter(Boolean) as SocialMediaCredential[];
 
     return userCredentials;
   } catch (error) {

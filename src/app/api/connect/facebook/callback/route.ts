@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
     // Clean up cookies
     cookieStore.delete('facebook_oauth_state');
 
-    return NextResponse.redirect(new URL('/connected-accounts?success=facebook_connected', request.url));
+    return NextResponse.redirect(new URL('/settings/social-media?success=facebook_connected&platform=facebook', request.url));
   } catch (error) {
     console.error('Facebook OAuth callback error:', error);
     return NextResponse.redirect(new URL('/connected-accounts?error=callback_failed', request.url));

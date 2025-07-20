@@ -5,6 +5,7 @@
 import crypto from "crypto";
 
 export interface InpaintImage {
+  id: string; // Ajouter l'ID unique
   path: string;
   name: string;
   description: string;
@@ -20,56 +21,19 @@ export interface InpaintImage {
   resolution: "standard" | "hd" | "ultra";
 }
 
-// Configuration des images disponibles avec leurs masques d'inpainting
 export const INPAINT_IMAGES: InpaintImage[] = [
-  // {
-  //   path: "/images/46075-this-building-is-classe-au-titre-des-monuments-historiques-de-la-france-it-is-indexed-in-the-base-merimee-a-database-of-architectural-heritage-maintained-by-the-french.jpg",
-  //   name: "Saint-Gildas Extérieur",
-  //   description: "Vue extérieure de l'église Saint-Gildas - Façade principale",
-  //   maskPath: "/images/inpaint/total/inpaint1.jpg",
-  //   type: "exterior",
-  //   hdPainterMethod: "painta+rasg", // Meilleure qualité
-  //   resolution: "hd",
-  // },
-  // {
-  //   path: "/images/184232-english-inside-church-saint-gildas-in-auray-france.jpg",
-  //   name: "Saint-Gildas Intérieur",
-  //   description: "Vue intérieure de l'église Saint-Gildas - Nef principale",
-  //   maskPath: "/images/inpaint/total/184232-english-inside-church-saint-gildas-in-auray-franceINPAINT.jpg",
-  //   type: "interior",
-  //   hdPainterMethod: "painta+rasg",
-  //   resolution: "hd",
-  // },
-  // {
-  //   path: "/images/20220922_143843.jpg",
-  //   name: "Vue Détaillée Architecture",
-  //   description: "Vue détaillée de l'architecture - Éléments décoratifs",
-  //   maskPath: "/images/inpaint/total/inpaint2.jpg",
-  //   type: "detail",
-  //   hdPainterMethod: "rasg", // Pour préserver les détails
-  //   resolution: "ultra",
-  // },
-  //mask is to high
-  // {
-  //   path: "/images/fra-auray-4-1882354559.jpg",
-  //   name: "Vue Alternative",
-  //   description: "Perspective alternative de l'église - Angle latéral",
-  //   maskPath: "/images/inpaint/total/inpaint3.jpg",
-  //   type: "alternative",
-  //   hdPainterMethod: "painta+rasg",
-  //   resolution: "hd",
-  // },
   {
+    id: "interior-english-style",
     path: "/images/184232-english-inside-church-saint-gildas-in-auray-france.jpg",
     name: "Intérieur Style Anglais",
     description: "Vue intérieure style anglais - Atmosphère gothique",
-    maskPath:
-      "/images/inpaint/total/184232-english-inside-church-saint-gildas-in-auray-franceINPAINT.jpg",
+    maskPath: "/images/inpaint/total/184232-english-inside-church-saint-gildas-in-auray-franceINPAINT.jpg",
     type: "interior",
-    hdPainterMethod: "painta", // Style artistique
+    hdPainterMethod: "painta",
     resolution: "hd",
   },
   {
+    id: "facade-complete",
     path: "/images/Saint-Gildas-Auray-768x576.jpg",
     name: "Façade Complète",
     description: "Transformation complète de la façade - Vision futuriste",
@@ -79,15 +43,17 @@ export const INPAINT_IMAGES: InpaintImage[] = [
     resolution: "ultra",
   },
   {
+    id: "interior-partial",
     path: "/images/Saint-Gildas-Auray-interieur-3992021581.jpg",
     name: "Intérieur Partiel",
     description: "Transformation partielle de l'intérieur - Zone spécifique",
     maskPath: "/images/inpaint/total/inpaint8.jpg",
     type: "interior-partial",
-    hdPainterMethod: "baseline", // Transformation subtile
+    hdPainterMethod: "baseline",
     resolution: "standard",
   },
   {
+    id: "entrance-main",
     path: "/images/Saint-Gildas-Auray-768x576.jpg",
     name: "Entrée Principale",
     description: "Focus sur l'entrée principale - Portail d'accueil",
@@ -97,33 +63,15 @@ export const INPAINT_IMAGES: InpaintImage[] = [
     resolution: "hd",
   },
   {
+    id: "altar-choir",
     path: "/images/Saint-Gildas-Auray-interieur-3992021581.jpg",
     name: "Autel et Chœur",
     description: "Transformation de l'autel et du chœur - Zone sacrée",
     maskPath: "/images/inpaint/total/inpaint8.jpg",
     type: "interior",
-    hdPainterMethod: "rasg", // Préservation respectueuse
+    hdPainterMethod: "rasg",
     resolution: "ultra",
   },
-  // {
-  //   path: "/images/20220922_143843.jpg",
-  //   name: "Architecture Complète",
-  //   description: "Vue d'ensemble architecturale - Transformation globale",
-  //   maskPath: "/images/inpaint/total/inpaint2.jpg",
-  //   type: "detail",
-  //   hdPainterMethod: "painta+rasg",
-  //   resolution: "ultra",
-  // },
-  // il faut metre le mask jusqu'en bas
-  // {
-  //   path: "/images/fra-auray-4-1882354559.jpg",
-  //   name: "Perspective Latérale",
-  //   description: "Vue latérale avec jardin - Intégration paysagère",
-  //   maskPath: "/images/inpaint/total/inpaint3.jpg",
-  //   type: "alternative",
-  //   hdPainterMethod: "painta",
-  //   resolution: "hd",
-  // },
 ];
 
 // Configuration des prompts négatifs
@@ -143,84 +91,96 @@ export const NEGATIVE_PROMPT_CONFIG = {
       prompt:
         "lowres, low quality, jpeg artifacts, blurry, grainy, pixelated, compressed",
       description: "Avoid low quality and compression artifacts",
-      tooltip: "Eliminates visual noise and compression artifacts for a cleaner, more professional result"
+      tooltip:
+        "Eliminates visual noise and compression artifacts for a cleaner, more professional result",
     },
     exposure: {
       name: "Exposure Problems",
       prompt:
         "oversaturated, low contrast, underexposed, overexposed, washed out, too dark, too bright",
       description: "Prevent exposure and lighting issues",
-      tooltip: "Improves balanced lighting and prevents harsh shadows or blown-out highlights"
+      tooltip:
+        "Improves balanced lighting and prevents harsh shadows or blown-out highlights",
     },
     composition: {
       name: "Composition Issues",
       prompt:
         "solid background, plain background, asymmetrical buildings, multiple views, multiple angles, cropped, cut off",
       description: "Avoid composition and framing problems",
-      tooltip: "Creates better framing and prevents awkward cropping or unbalanced compositions"
+      tooltip:
+        "Creates better framing and prevents awkward cropping or unbalanced compositions",
     },
     style: {
       name: "Style Problems",
       prompt:
         "surreal, creepy, scary, weird colors, unreal sky, deformed structures, distorted, unrealistic",
       description: "Prevent surreal and unrealistic elements",
-      tooltip: "Maintains realistic aesthetics and prevents AI-generated surreal or unsettling elements"
+      tooltip:
+        "Maintains realistic aesthetics and prevents AI-generated surreal or unsettling elements",
     },
     technical: {
       name: "Technical Artifacts",
       prompt:
         "noise, artifacts, compression, watermark, text, logo, signature, frame, border",
       description: "Remove technical artifacts and watermarks",
-      tooltip: "Eliminates distracting elements like watermarks, text, or digital artifacts"
+      tooltip:
+        "Eliminates distracting elements like watermarks, text, or digital artifacts",
     },
     architectural: {
       name: "Architectural Issues",
       prompt:
         "asymmetrical buildings, deformed structures, impossible architecture, floating elements, broken perspective",
       description: "Avoid architectural inconsistencies",
-      tooltip: "Ensures architectural integrity with proper perspective and structural coherence"
+      tooltip:
+        "Ensures architectural integrity with proper perspective and structural coherence",
     },
     people: {
       name: "People Problems",
       prompt:
         "deformed faces, missing limbs, extra fingers, distorted bodies, unnatural poses, uncanny valley, creepy expressions",
       description: "Prevent issues with human figures",
-      tooltip: "Creates more natural-looking people without anatomical errors or uncanny expressions"
+      tooltip:
+        "Creates more natural-looking people without anatomical errors or uncanny expressions",
     },
     lighting: {
       name: "Lighting Artifacts",
       prompt:
         "harsh shadows, inconsistent lighting, unnatural reflections, lens flare, glare, blown highlights",
       description: "Avoid lighting inconsistencies",
-      tooltip: "Produces more natural lighting with consistent light sources and realistic shadows"
+      tooltip:
+        "Produces more natural lighting with consistent light sources and realistic shadows",
     },
     details: {
       name: "Detail Issues",
       prompt:
         "missing details, lack of texture, flat surfaces, overly smooth, lack of depth, simplified features",
       description: "Prevent loss of important details",
-      tooltip: "Preserves fine details and textures for more realistic and rich visuals"
+      tooltip:
+        "Preserves fine details and textures for more realistic and rich visuals",
     },
     perspective: {
       name: "Perspective Problems",
       prompt:
         "warped perspective, fisheye effect, distorted proportions, inconsistent scale, multiple vanishing points",
       description: "Avoid perspective distortions",
-      tooltip: "Maintains proper spatial relationships and prevents warped or unrealistic perspectives"
+      tooltip:
+        "Maintains proper spatial relationships and prevents warped or unrealistic perspectives",
     },
     materials: {
       name: "Material Rendering Issues",
       prompt:
         "unrealistic materials, plastic-looking surfaces, incorrect reflections, unnatural textures, inconsistent material properties",
       description: "Improve material realism",
-      tooltip: "Creates more convincing materials with appropriate textures, reflections and properties"
+      tooltip:
+        "Creates more convincing materials with appropriate textures, reflections and properties",
     },
     atmosphere: {
       name: "Atmospheric Problems",
       prompt:
         "flat lighting, lack of atmosphere, missing ambient occlusion, no depth, artificial environment",
       description: "Enhance atmospheric depth",
-      tooltip: "Adds depth through proper atmospheric effects, creating more immersive and realistic scenes"
+      tooltip:
+        "Adds depth through proper atmospheric effects, creating more immersive and realistic scenes",
     },
   },
 

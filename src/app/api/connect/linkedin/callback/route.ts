@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
     // Clean up cookies
     cookieStore.delete('linkedin_oauth_state');
 
-    return NextResponse.redirect(new URL('/connected-accounts?success=linkedin_connected', request.url));
+    return NextResponse.redirect(new URL('/settings/social-media?success=linkedin_connected&platform=linkedin', request.url));
   } catch (error) {
     console.error('LinkedIn OAuth callback error:', error);
     return NextResponse.redirect(new URL('/connected-accounts?error=callback_failed', request.url));

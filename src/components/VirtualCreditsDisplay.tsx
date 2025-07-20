@@ -4,108 +4,100 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Coffee, Wallet, AlertTriangle, Gift } from 'lucide-react';
+import { Coffee, Wallet, AlertTriangle, Gift, CheckCircle } from 'lucide-react';
 import { getVirtualCreditSystem, getAvailableVirtualCredits, canUseTransformation, updateRealStabilityBalance } from '@/lib/virtual-credits-system';
+import { Progress } from "@/components/ui/progress";
 
 export const VirtualCreditsDisplay = () => {
   const [system, setSystem] = useState(getVirtualCreditSystem());
   const [realBalance, setRealBalance] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
   
   const availableCredits = getAvailableVirtualCredits();
   const canTransform = canUseTransformation();
-  const usagePercentage = system.virtualCreditsLimit > 0 
-    ? (system.virtualCreditsUsed / system.virtualCreditsLimit) * 100 
-    : 0;
-
-  // Récupérer le vrai solde Stability AI
-  useEffect(() => {
-    const fetchRealBalance = async () => {
-      try {
-        const response = await fetch('/api/stability/balance');
-        const data = await response.json();
-        if (data.success) {
-          setRealBalance(data.balance);
-          const updatedSystem = updateRealStabilityBalance(data.balance);
-          setSystem(updatedSystem);
-        }
-      } catch (error) {
-        console.error('Erreur récupération solde:', error);
-      }
-    };
-
-    fetchRealBalance();
-    const interval = setInterval(fetchRealBalance, 2 * 60 * 1000); // Toutes les 2 minutes
-    return () => clearInterval(interval);
-  }, []);
+  
+  // Configuration des seuils
+  const COMFORTABLE_BALANCE = 5000; // Solde convenable en crédits
+  const BUFFER_PERCENTAGE = 20; // 20% de tampon
+  const bufferBalance = realBalance ? realBalance * (BUFFER_PERCENTAGE / 100) : 0;
+  const targetBalance = COMFORTABLE_BALANCE + bufferBalance;
+  
+  // Calcul de la progression vers le solde convenable
+  const currentBalance = realBalance || 0;
+  const progressPercentage = Math.min((currentBalance / targetBalance) * 100, 100);
+  
+  // Déterminer la couleur de la barre selon le niveau
+  const getProgressColor = (percentage: number) => {
+    if (percentage >= 80) return "bg-green-500";
+    if (percentage >= 50) return "bg-yellow-500";
+    if (percentage >= 25) return "bg-orange-500";
+    return "bg-red-500";
+  };
 
   const handleDonate = () => {
     window.open('https://www.buymeacoffee.com/huaoe', '_blank');
   };
 
+  const fetchRealBalance = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/stability/balance');
+      const data = await response.json();
+      
+      if (data.success && typeof data.balance === 'number') {
+        setRealBalance(data.balance);
+        // Update the virtual credit system with real balance
+        const updatedSystem = updateRealStabilityBalance(data.balance);
+        setSystem(updatedSystem);
+      }
+    } catch (error) {
+      console.error('❌ Error fetching real balance:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchRealBalance();
+    // Refresh every 30 seconds
+    const interval = setInterval(fetchRealBalance, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="space-y-4">
       {/* Affichage principal des crédits */}
       <Card className={`${!canTransform ? 'border-red-200 bg-red-50' : 'border-green-200 bg-green-50'}`}>
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center justify-between text-lg">
-            <div className="flex items-center gap-2">
-              <Wallet className="h-5 w-5" />
-              Crédits Virtuels
-            </div>
+        <CardContent className="flex items-center justify-between p-4">
+          <div className="flex items-center gap-3">
+            <Wallet className="h-4 w-8" />
+            <span className="font-medium w-full">Crédits restants sur l'app</span>
+        
+          </div>    <Progress 
+              value={progressPercentage} 
+              className={`h-2 w-full`} 
+            />
+          
+          <div className="flex items-center gap-2">
             <Badge variant={canTransform ? "secondary" : "destructive"}>
-              ${availableCredits.toFixed(2)}
+             il reste ${(availableCredits || 0).toFixed(2)} sur notre compte
             </Badge>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {/* Barre de progression */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span>Utilisés: ${system.virtualCreditsUsed.toFixed(2)}</span>
-              <span>Limite: ${system.virtualCreditsLimit.toFixed(2)}</span>
-            </div>
-            {/* Barre de progression simple */}
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div 
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${Math.min(100, usagePercentage)}%` }}
-              />
-            </div>
+            
+            {progressPercentage < 50 && (
+              <Button onClick={handleDonate} size="sm" className="gap-1">
+                <Coffee className="h-3 w-3" />
+                Recharger
+              </Button>
+            )}
           </div>
-
-          {/* Statut */}
-          {!canTransform && (
-            <div className="flex items-center gap-2 text-red-600 text-sm">
-              <AlertTriangle className="h-4 w-4" />
-              Crédits épuisés - Donation requise pour continuer
-            </div>
-          )}
-
-          {/* Bouton de don */}
-          {!canTransform && (
-            <Button onClick={handleDonate} className="w-full gap-2">
-              <Coffee className="h-4 w-4" />
-              Faire un don pour débloquer
-            </Button>
-          )}
         </CardContent>
       </Card>
-
-      {/* Informations système (mode développement) */}
-      {process.env.NODE_ENV === 'development' && (
-        <Card className="border-blue-200 bg-blue-50">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-blue-700">Debug - Système de Crédits</CardTitle>
-          </CardHeader>
-          <CardContent className="text-xs space-y-1">
-            <div>Solde réel Stability: ${realBalance?.toFixed(2) || 'Chargement...'}</div>
-            <div>Tampon (20%): ${realBalance ? (realBalance * 0.2).toFixed(2) : '...'}</div>
-            <div>Limite virtuelle: ${system.virtualCreditsLimit.toFixed(2)}</div>
-            <div>Crédits utilisés: ${system.virtualCreditsUsed.toFixed(2)}</div>
-            <div>Disponibles: ${availableCredits.toFixed(2)}</div>
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 };
+
+
+
+
+
+

@@ -19,23 +19,31 @@ export const StabilityBalance = () => {
   const fetchBalance = async () => {
     try {
       setLoading(true);
+      console.log('🔍 Fetching Stability balance from frontend...');
+      
       const response = await fetch('/api/stability/balance');
       const data = await response.json();
+
+      console.log('📊 Balance API response:', data);
 
       if (data.success) {
         setBalance(data);
         setError(null);
+        console.log('✅ Balance updated:', data.balance);
       } else {
         setError(data.error || 'Erreur inconnue');
+        console.error('❌ Balance API error:', data.error);
       }
     } catch (err) {
       setError('Erreur de connexion');
+      console.error('❌ Balance fetch error:', err);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
+    console.log('🚀 StabilityBalance component mounted');
     fetchBalance();
     // Rafraîchir toutes les 5 minutes
     const interval = setInterval(fetchBalance, 5 * 60 * 1000);

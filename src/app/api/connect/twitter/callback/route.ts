@@ -113,7 +113,7 @@ export async function GET(req: NextRequest) {
     cookieStore.delete('twitter_code_verifier');
 
     // Redirect the user to the connected accounts page with success
-    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}/connected-accounts?success=twitter_connected&username=${encodeURIComponent(username)}`);
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}/settings/social-media?success=twitter_connected&platform=twitter&username=${encodeURIComponent(username)}`);
 
   } catch (error) {
     console.error(error);

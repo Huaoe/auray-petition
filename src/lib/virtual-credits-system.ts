@@ -21,7 +21,23 @@ export const getVirtualCreditSystem = (): VirtualCreditSystem => {
   if (typeof window === 'undefined') {
     return { realStabilityBalance: 0, virtualCreditsLimit: 0, virtualCreditsUsed: 0, lastUpdated: 0 };
   }
-  
+
+  // Détecter le mode développement de manière plus robuste
+  const isDevelopment = process.env.NODE_ENV === "development" || 
+                       window.location.hostname === "localhost" || 
+                       window.location.hostname === "127.0.0.1" ||
+                       window.location.port === "3000";
+
+  if (isDevelopment) {
+    console.log("🔍 [DEBUG] Development mode detected - using mock credits");
+    return {
+      realStabilityBalance: 10.0,
+      virtualCreditsLimit: 5.0,
+      virtualCreditsUsed: 0,
+      lastUpdated: Date.now()
+    };
+  }
+
   const stored = localStorage.getItem('virtual_credit_system');
   return stored ? JSON.parse(stored) : {
     realStabilityBalance: 0,
@@ -55,20 +71,42 @@ export const getAvailableVirtualCredits = (): number => {
 };
 
 export const canUseTransformation = (): boolean => {
+  // En mode développement, toujours autoriser
+  const isDevelopment = process.env.NODE_ENV === "development" || 
+                       (typeof window !== 'undefined' && 
+                        (window.location.hostname === "localhost" || 
+                         window.location.hostname === "127.0.0.1"));
+  
+  if (isDevelopment) {
+    console.log("🔍 [DEBUG] Development mode - transformation allowed");
+  }
+  
   const available = getAvailableVirtualCredits();
-  const canUse = available >= 0.04;
+  const canUse = available >= 0.04 || isDevelopment;
   
   console.log("🔍 [DEBUG] canUseTransformation:", {
     availableCredits: available,
     required: 0.04,
     canUse,
-    system: getVirtualCreditSystem()
+    system: getVirtualCreditSystem(),
+    isDevelopment
   });
   
   return canUse;
 };
 
 export const useVirtualCredit = (amount: number = 0.04): boolean => {
+  // En mode développement, ne pas consommer de crédits
+  const isDevelopment = process.env.NODE_ENV === "development" || 
+                       (typeof window !== 'undefined' && 
+                        (window.location.hostname === "localhost" || 
+                         window.location.hostname === "127.0.0.1"));
+  
+  if (isDevelopment) {
+    console.log("🔍 [DEBUG] Development mode - credit usage skipped");
+    return true;
+  }
+  
   if (!canUseTransformation()) return false;
   
   const system = getVirtualCreditSystem();
@@ -115,3 +153,6 @@ const generateRandomCode = (length: number): string => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   return Array.from({ length }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
 };
+
+
+

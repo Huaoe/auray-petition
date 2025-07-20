@@ -18,17 +18,20 @@ export async function GET(request: NextRequest) {
     
     if (apiKeyExists && !hasQuotes && !hasSpaces && !startsWithBearer) {
       try {
-        // Test with a simple GET request to check API key validity
-        const testResponse = await fetch("https://api.stability.ai/v1/user/account", {
+        // Test avec l'endpoint officiel de balance
+        const testResponse = await fetch("https://api.stability.ai/v1/user/balance", {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${apiKey}`,
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Stability-Client-ID": "church-transformation-test",
+            "Stability-Client-Version": "1.0.0"
           }
         });
         
         if (testResponse.ok) {
-          apiTestResult = "API key is valid ✅";
+          const balanceData = await testResponse.json();
+          apiTestResult = `API key is valid ✅ (Balance: ${balanceData.credits || 0} credits)`;
         } else {
           const errorText = await testResponse.text();
           apiTestResult = `API key test failed: ${testResponse.status}`;

@@ -52,6 +52,7 @@ export function SocialMediaSettings({
     const success = params.get("success");
     const error = params.get("error");
     const platform = params.get("platform");
+    const username = params.get("username");
 
     if (process.env.NODE_ENV === "development") {
       if (success || error) {
@@ -59,17 +60,27 @@ export function SocialMediaSettings({
           success,
           error,
           platform,
+          username,
         });
       }
     }
 
     if (success && platform) {
+      const platformName = platform === 'twitter' ? 'Twitter' : 
+                          platform === 'facebook' ? 'Facebook' :
+                          platform === 'instagram' ? 'Instagram' :
+                          platform === 'linkedin' ? 'LinkedIn' : platform;
+      
       toast({
         title: "Connection Successful",
-        description: `${platform} account connected successfully!`,
+        description: `${platformName} account ${username ? `(@${username})` : ''} connected successfully!`,
         variant: "default",
       });
-      loadConnectedAccounts();
+      
+      // Recharger les comptes après un délai pour s'assurer que les données sont synchronisées
+      setTimeout(() => {
+        loadConnectedAccounts();
+      }, 1000);
     } else if (error) {
       toast({
         title: "Connection Failed",
