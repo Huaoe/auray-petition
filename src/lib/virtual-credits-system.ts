@@ -29,7 +29,6 @@ export const getVirtualCreditSystem = (): VirtualCreditSystem => {
                        window.location.port === "3000";
 
   if (isDevelopment) {
-    console.log("🔍 [DEBUG] Development mode detected - using mock credits");
     return {
       realStabilityBalance: 10.0,
       virtualCreditsLimit: 5.0,
@@ -83,14 +82,6 @@ export const canUseTransformation = (): boolean => {
   
   const available = getAvailableVirtualCredits();
   const canUse = available >= 0.04 || isDevelopment;
-  
-  console.log("🔍 [DEBUG] canUseTransformation:", {
-    availableCredits: available,
-    required: 0.04,
-    canUse,
-    system: getVirtualCreditSystem(),
-    isDevelopment
-  });
   
   return canUse;
 };

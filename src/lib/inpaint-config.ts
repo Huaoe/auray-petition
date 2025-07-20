@@ -52,26 +52,7 @@ export const INPAINT_IMAGES: InpaintImage[] = [
     hdPainterMethod: "baseline",
     resolution: "standard",
   },
-  {
-    id: "entrance-main",
-    path: "/images/Saint-Gildas-Auray-768x576.jpg",
-    name: "Entrée Principale",
-    description: "Focus sur l'entrée principale - Portail d'accueil",
-    maskPath: "/images/inpaint/total/inpaint10g.jpg",
-    type: "exterior",
-    hdPainterMethod: "painta",
-    resolution: "hd",
-  },
-  {
-    id: "altar-choir",
-    path: "/images/Saint-Gildas-Auray-interieur-3992021581.jpg",
-    name: "Autel et Chœur",
-    description: "Transformation de l'autel et du chœur - Zone sacrée",
-    maskPath: "/images/inpaint/total/inpaint8.jpg",
-    type: "interior",
-    hdPainterMethod: "rasg",
-    resolution: "ultra",
-  },
+  
 ];
 
 // Configuration des prompts négatifs

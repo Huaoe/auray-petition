@@ -39,9 +39,9 @@ const TransformationsPage = () => {
       <Header />
       
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-end mb-6">
+        {/* <div className="flex justify-end mb-6">
           <StabilityBalance />
-        </div>
+        </div> */}
         
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">

@@ -34,4 +34,6 @@ export interface GenerationState {
   showNegativePromptPresets: boolean;
   activeNegativePresets: Set<string>;
   isNegativePromptCollapsed: boolean;
+  previousBalance?: number; // Track balance before transformation
+  currentBalance?: number; // Track balance after transformation
 }

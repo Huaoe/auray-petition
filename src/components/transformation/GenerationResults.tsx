@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Download, Share2, Clock, DollarSign } from "lucide-react";
+import { Download, Share2, Clock, BrainCircuit } from "lucide-react";
 import { GenerationState } from "@/lib/church-transformation-types";
 
 interface GenerationResultsProps {
@@ -54,10 +54,10 @@ export const GenerationResults: React.FC<GenerationResultsProps> = ({ state, set
               {(state.generationTime / 1000).toFixed(1)}s
             </Badge>
           )}
-          {state.cost && (
+          {state.previousBalance !== undefined && state.currentBalance !== undefined && (
             <Badge variant="secondary" className="gap-1">
-              <DollarSign className="h-3 w-3" />
-              {state.cost.toFixed(4)} crédits
+              <BrainCircuit className="h-3 w-3" />
+              {(state.previousBalance - state.currentBalance).toFixed(4)} crédits
             </Badge>
           )}
           <Badge variant="secondary">
@@ -75,6 +75,7 @@ export const GenerationResults: React.FC<GenerationResultsProps> = ({ state, set
             Partager
           </Button>
         </div>
+        
       </CardContent>
     </Card>
   );

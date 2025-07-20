@@ -65,34 +65,28 @@ export const VirtualCreditsDisplay = () => {
   }, []);
 
   return (
-    <div className="space-y-4">
-      {/* Affichage principal des crédits */}
-      <Card className={`${!canTransform ? 'border-red-200 bg-red-50' : 'border-green-200 bg-green-50'}`}>
-        <CardContent className="flex items-center justify-between p-4">
-          <div className="flex items-center gap-3">
-            <Wallet className="h-4 w-8" />
-            <span className="font-medium w-full">Crédits restants sur l'app</span>
+    <Card className={`${!canTransform ? 'border-red-200 bg-red-50' : 'border-green-200 bg-green-50'}`}>
+      <CardContent className="flex items-center justify-between p-4">
+        <div className="flex items-center gap-2">
+          <Wallet className="h-4 w-4" />
+          <span className="font-medium">Crédits restants sur l'app</span>
+        </div>
         
-          </div>    <Progress 
-              value={progressPercentage} 
-              className={`h-2 w-full`} 
-            />
-          
-          <div className="flex items-center gap-2">
-            <Badge variant={canTransform ? "secondary" : "destructive"}>
-             il reste ${(availableCredits || 0).toFixed(2)} sur notre compte
-            </Badge>
-            
-            {progressPercentage < 50 && (
-              <Button onClick={handleDonate} size="sm" className="gap-1">
-                <Coffee className="h-3 w-3" />
-                Recharger
-              </Button>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+        <Progress
+          value={progressPercentage}
+          className="h-2 w-28 mx-4"
+        />
+        
+        <div className="text-sm font-medium">
+          il reste ${(availableCredits || 0).toFixed(2)} sur notre compte
+        </div>
+        
+        <Button onClick={handleDonate} size="sm" className="gap-1 ml-2">
+          <Coffee className="h-3 w-3" />
+          Recharger
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
 
