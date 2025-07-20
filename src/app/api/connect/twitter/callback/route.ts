@@ -7,16 +7,26 @@ export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get('code');
   const state = req.nextUrl.searchParams.get('state');
 
+  console.log('Twitter callback received:', { code: !!code, state: !!state });
+
   const cookieStore = await cookies();
   const storedState = cookieStore.get('twitter_oauth_state')?.value;
   const storedCodeVerifier = cookieStore.get('twitter_code_verifier')?.value;
 
+  console.log('Stored values:', { 
+    storedState: !!storedState, 
+    storedCodeVerifier: !!storedCodeVerifier,
+    stateMatch: state === storedState 
+  });
+
   if (!code || !state || !storedState || state !== storedState) {
-    return new NextResponse('Invalid state or code', { status: 400 });
+    console.error('State validation failed:', { code: !!code, state, storedState });
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}/connected-accounts?error=invalid_state`);
   }
 
   if (!storedCodeVerifier) {
-    return new NextResponse('Code verifier not found', { status: 400 });
+    console.error('Code verifier not found');
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}/connected-accounts?error=missing_code_verifier`);
   }
 
   try {

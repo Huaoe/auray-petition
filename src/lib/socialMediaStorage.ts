@@ -1,9 +1,9 @@
 import { google } from 'googleapis';
-import { createHash, createCipher, createDecipher, randomBytes } from 'crypto';
+import { createHash, createCipheriv, createDecipheriv, randomBytes } from 'crypto';
 
 // Configuration for social media credentials sheet
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SHEET_ID;
-const SOCIAL_SHEET_NAME = process.env.SOCIAL_SHEET_NAME;
+const SOCIAL_SHEET_NAME = process.env.SOCIAL_SHEET_NAME || 'SocialMediaCredentials';
 
 // Encryption key derived from JWT_SECRET
 const getEncryptionKey = (): string => {
@@ -13,17 +13,23 @@ const getEncryptionKey = (): string => {
 
 // Encrypt sensitive data
 const encrypt = (text: string): string => {
-  const key = getEncryptionKey();
-  const cipher = createCipher('aes-256-cbc', key);
+  const algorithm = 'aes-256-cbc';
+  const key = Buffer.from(getEncryptionKey(), 'hex');
+  const iv = randomBytes(16);
+  const cipher = createCipheriv(algorithm, key, iv);
   let encrypted = cipher.update(text, 'utf8', 'hex');
   encrypted += cipher.final('hex');
-  return encrypted;
+  return iv.toString('hex') + ':' + encrypted;
 };
 
 // Decrypt sensitive data
-const decrypt = (encryptedText: string): string => {
-  const key = getEncryptionKey();
-  const decipher = createDecipher('aes-256-cbc', key);
+const decrypt = (text: string): string => {
+  const algorithm = 'aes-256-cbc';
+  const key = Buffer.from(getEncryptionKey(), 'hex');
+  const textParts = text.split(':');
+  const iv = Buffer.from(textParts.shift()!, 'hex');
+  const encryptedText = textParts.join(':');
+  const decipher = createDecipheriv(algorithm, key, iv);
   let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
   decrypted += decipher.final('utf8');
   return decrypted;
@@ -74,6 +80,10 @@ export const initializeSocialMediaSheet = async (): Promise<{ success: boolean; 
   try {
     if (!SPREADSHEET_ID) {
       throw new Error('GOOGLE_SHEETS_SHEET_ID not configured');
+    }
+
+    if (!SOCIAL_SHEET_NAME) {
+      throw new Error('SOCIAL_SHEET_NAME not configured');
     }
 
     const sheets = await getSocialMediaSheetsClient();

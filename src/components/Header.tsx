@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Sparkles, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { StabilityBalance } from './StabilityBalance';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

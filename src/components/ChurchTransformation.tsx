@@ -64,6 +64,11 @@ import {
   type CouponData,
   type CouponValidationResult,
 } from "@/lib/coupon-system";
+import {
+  canUseTransformation,
+  useVirtualCredit,
+} from "@/lib/virtual-credits-system";
+import { VirtualCreditsDisplay } from "./VirtualCreditsDisplay";
 
 interface GenerationState {
   isGenerating: boolean;
@@ -4363,6 +4368,16 @@ const ChurchTransformation = () => {
       return;
     }
 
+    // Vérification crédits virtuels (sauf en mode développement)
+    if (!isDevelopment && !canUseTransformation()) {
+      toast({
+        title: "❌ Crédits insuffisants",
+        description: "Faites un don pour débloquer plus de transformations",
+        variant: "error",
+      });
+      return;
+    }
+
     // Vérification générations restantes (sauf en mode développement)
     if (
       !isDevelopment &&
@@ -4387,6 +4402,14 @@ const ChurchTransformation = () => {
       });
       return;
     }
+
+    console.log("🚀 [DEBUG] Starting transformation...", {
+      transformation: state.selectedTransformation.id,
+      image: state.selectedInpaintImage.name,
+      isDevelopment,
+      canUseTransformation: canUseTransformation(),
+      couponValid: state.couponValidation?.valid
+    });
 
     setState((prev) => ({ ...prev, isGenerating: true }));
     const startTime = Date.now();
@@ -4430,7 +4453,7 @@ const ChurchTransformation = () => {
         ...prev,
         generatedImage: data.imageUrl,
         generationTime,
-        cost: data.metadata?.cost ?? 0.04, // Coût Stability AI
+        cost: data.metadata?.cost ?? 0.04,
         isGenerating: false,
       }));
 
@@ -4448,6 +4471,11 @@ const ChurchTransformation = () => {
               }
             : null,
         }));
+      }
+
+      // Si succès, décrémenter les crédits virtuels (sauf en mode développement)
+      if (!isDevelopment) {
+        useVirtualCredit(0.04);
       }
 
       toast({
@@ -4477,6 +4505,7 @@ const ChurchTransformation = () => {
     state.couponValidation,
     state.activeCoupon,
     state.hdPainterMethod,
+    state.negativePrompt,
     toast,
   ]);
 
@@ -4849,8 +4878,8 @@ const ChurchTransformation = () => {
         baseImageName
       );
 
-      // Add location-specific enhancement to the prompt
-      enhancedPrompt += `\n\nINSPIRATION: ${location.promptEnhancement}`;
+      // Add location-specific enhancement with proper name and description
+      enhancedPrompt += `\n\nINSPIRATION: ${location.name}, ${location.location} - ${location.promptEnhancement}`;
 
       setState((prev) => ({
         ...prev,
@@ -5648,16 +5677,16 @@ const ChurchTransformation = () => {
                   <span className="mx-1">🏄‍♀️</span>
                 </div>
                 <div className="text-sm text-gray-600 mt-2">
-                  
-                  🎵 Ce système fonctionne comme un <strong>jukebox</strong> : <strong>chaque centime
-                  donné est réinvesti </strong> chez notre fournisseur Stable Diffusion
-                  pour que tout le monde puisse en profiter.
-                  
+                  🎵 Ce système fonctionne comme un <strong>jukebox</strong> :{" "}
+                  <strong>chaque centime donné est réinvesti </strong> chez
+                  notre fournisseur Stable Diffusion pour que tout le monde
+                  puisse en profiter.
                 </div>
+                <VirtualCreditsDisplay />
               </div>
             )}
           </CardHeader>
-          <CardContent  className="p-0 mx-1">
+          <CardContent className="p-0 mx-1">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {/* Image Originale */}
               <div className="space-y-2">
@@ -5694,7 +5723,12 @@ const ChurchTransformation = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mt-6">
-              <Button onClick={handleDownload} variant="outline" size="sm" className="w-full sm:w-auto">
+              <Button
+                onClick={handleDownload}
+                variant="outline"
+                size="sm"
+                className="w-full sm:w-auto"
+              >
                 <Download className="w-4 h-4 mr-2" />
                 Télécharger
               </Button>
@@ -5707,7 +5741,12 @@ const ChurchTransformation = () => {
                 <Share2 className="w-4 h-4 mr-2" />
                 Partager sur les réseaux
               </Button>
-              <Button onClick={handleReset} variant="outline" size="sm" className="w-full sm:w-auto">
+              <Button
+                onClick={handleReset}
+                variant="outline"
+                size="sm"
+                className="w-full sm:w-auto"
+              >
                 <RotateCcw className="w-4 h-4 mr-2" />
                 Nouvelle Transformation
               </Button>

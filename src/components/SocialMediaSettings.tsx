@@ -146,29 +146,9 @@ export function SocialMediaSettings({
     setMessage(null);
 
     try {
-      const response = await fetch(`/api/auth/connect/${platform}`);
-      if (!response.ok) {
-        throw new Error("Failed to initiate OAuth");
-      }
-
-      const data: ConnectAccountResponse = await response.json();
-
-      if (process.env.NODE_ENV === "development") {
-        console.log(
-          `[SocialMediaSettings] Received auth URL for ${platform}:`,
-          data.authUrl
-        );
-        console.log(
-          `[SocialMediaSettings] Storing state for ${platform}:`,
-          data.state
-        );
-      }
-
-      // Store state in session storage for CSRF protection
-      sessionStorage.setItem(`oauth_state_${platform}`, data.state);
-
-      // Redirect to OAuth provider
-      window.location.href = data.authUrl;
+      // Use the platform-specific connect endpoints
+      const connectUrl = `/api/connect/${platform}`;
+      window.location.href = connectUrl;
     } catch (error) {
       console.error("OAuth initiation error:", error);
       toast({
