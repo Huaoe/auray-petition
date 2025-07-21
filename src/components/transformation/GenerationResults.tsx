@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Download, Share2, Clock, BrainCircuit } from "lucide-react";
+import { Download, Share2, Clock, BrainCircuit, Eye, EyeOff } from "lucide-react";
 import { GenerationState } from "@/lib/church-transformation-types";
+import Image from "next/image";
 
 interface GenerationResultsProps {
   state: GenerationState;
@@ -13,6 +14,8 @@ interface GenerationResultsProps {
 }
 
 export const GenerationResults: React.FC<GenerationResultsProps> = ({ state, setState }) => {
+  const [showComparison, setShowComparison] = useState(false);
+
   const handleDownload = () => {
     if (state.generatedImage) {
       const link = document.createElement('a');
@@ -24,6 +27,10 @@ export const GenerationResults: React.FC<GenerationResultsProps> = ({ state, set
 
   const handleShare = () => {
     setState(prev => ({ ...prev, showShareModal: true }));
+  };
+
+  const handleToggleComparison = () => {
+    setShowComparison(prev => !prev);
   };
 
   if (!state.generatedImage) {
@@ -39,13 +46,44 @@ export const GenerationResults: React.FC<GenerationResultsProps> = ({ state, set
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="relative">
-          <img
-            src={state.generatedImage}
-            alt="Transformation générée"
-            className="w-full rounded-lg shadow-lg"
-          />
-        </div>
+        {/* Image Display - Comparison or Single View */}
+        {showComparison && state.selectedInpaintImage ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Original Image */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium text-center">Image Originale</h4>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <Image
+                  src={state.selectedInpaintImage.path}
+                  alt="Image originale"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+            
+            {/* Generated Image */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium text-center">Image Transformée</h4>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <img
+                  src={state.generatedImage}
+                  alt="Transformation générée"
+                  className="w-full h-full object-cover rounded-lg shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="relative">
+            <img
+              src={state.generatedImage}
+              alt="Transformation générée"
+              className="w-full rounded-lg shadow-lg"
+            />
+          </div>
+        )}
 
         <div className="flex flex-wrap gap-2">
           {state.generationTime && (
@@ -65,7 +103,7 @@ export const GenerationResults: React.FC<GenerationResultsProps> = ({ state, set
           </Badge>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button onClick={handleDownload} variant="outline" className="gap-2">
             <Download className="h-4 w-4" />
             Télécharger
@@ -74,6 +112,25 @@ export const GenerationResults: React.FC<GenerationResultsProps> = ({ state, set
             <Share2 className="h-4 w-4" />
             Partager
           </Button>
+          {state.selectedInpaintImage && (
+            <Button
+              onClick={handleToggleComparison}
+              variant="outline"
+              className="gap-2"
+            >
+              {showComparison ? (
+                <>
+                  <EyeOff className="h-4 w-4" />
+                  Vue Simple
+                </>
+              ) : (
+                <>
+                  <Eye className="h-4 w-4" />
+                  Comparer
+                </>
+              )}
+            </Button>
+          )}
         </div>
         
       </CardContent>

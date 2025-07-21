@@ -128,7 +128,7 @@ async function generateWithStabilityInpainting(
   negativePrompt?: string
 ): Promise<string> {
   try {
-    console.log(`🎨 Generating with HD-Painter method: ${method}`);
+    console.log(`🎨 route.ts : Generating with HD-Painter method: ${method}`);
     console.log(`📏 Base image size: ${baseImageBuffer.length} bytes`);
     console.log(`🎭 Mask size: ${maskImageBuffer.length} bytes`);
     console.log(`📝 Prompt: ${prompt}`);

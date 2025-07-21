@@ -3,42 +3,65 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle } from "lucide-react";
-import { GenerationState } from "@/lib/church-transformation-types";
-import { INPAINT_IMAGES } from "@/lib/inpaint-config";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { CheckCircle, Paintbrush, Eye, EyeOff } from "lucide-react";
+import { FamousLocation, GenerationState } from "@/lib/church-transformation-types";
+import { INPAINT_IMAGES, type HDPainterMethod } from "@/lib/inpaint-config";
 import { TRANSFORMATION_TYPES, type TransformationType } from "@/lib/types";
 import Image from "next/image";
 
 interface TransformationGridProps {
   state: GenerationState;
   setState: React.Dispatch<React.SetStateAction<GenerationState>>;
-  generateEnhancedPrompt: (transformationType: string, basePrompt: string, baseImageName?: string) => string;
+  generateEnhancedPrompt: (
+    transformationType: string,
+    selectedLocation: FamousLocation | null,
+    baseImageName?: string
+  ) => string;
 }
 
 export const TransformationGrid: React.FC<TransformationGridProps> = ({
   state,
   setState,
-  generateEnhancedPrompt
+  generateEnhancedPrompt,
 }) => {
   const handleImageSelect = (image: any) => {
     setState(prev => ({
       ...prev,
       selectedInpaintImage: image,
+      hdPainterMethod: image.hdPainterMethod, // Use recommended method for this image
+      showMaskPreview: false, // Reset mask preview when changing image
     }));
   };
 
   const handleTransformationSelect = (transformation: TransformationType) => {
     const enhancedPrompt = generateEnhancedPrompt(
       transformation.id,
-      transformation.prompt,
+      null,
       state.selectedInpaintImage?.name || "Saint-Gildas-Auray-768x576.webp"
     );
 
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       selectedTransformation: transformation,
       customPrompt: enhancedPrompt,
       selectedLocation: null, // Reset location when transformation changes
+    }));
+  };
+
+  const handleHDPainterMethodChange = (method: HDPainterMethod) => {
+    setState(prev => ({
+      ...prev,
+      hdPainterMethod: method,
+    }));
+  };
+
+  const handleToggleMaskPreview = () => {
+    setState(prev => ({
+      ...prev,
+      showMaskPreview: !prev.showMaskPreview,
     }));
   };
 
@@ -98,6 +121,83 @@ export const TransformationGrid: React.FC<TransformationGridProps> = ({
             </Card>
           ))}
         </div>
+
+        {/* HD-Painter Controls */}
+        {state.selectedInpaintImage && (
+          <div className="mt-6 space-y-4">
+            <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <Paintbrush className="w-4 h-4" />
+                  <Label className="text-sm font-medium">Contrôles HD-Painter</Label>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* HD-Painter Method Selection */}
+                  <div className="space-y-2">
+                    <Label htmlFor="hd-painter-method" className="text-xs text-muted-foreground">
+                      Méthode HD-Painter
+                    </Label>
+                    <Select
+                      value={state.hdPainterMethod || "painta+rasg"}
+                      onValueChange={handleHDPainterMethodChange}
+                    >
+                      <SelectTrigger id="hd-painter-method">
+                        <SelectValue placeholder="Choisir méthode HD-Painter" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="painta+rasg">PaintA + RASG (Recommandé)</SelectItem>
+                        <SelectItem value="painta">PaintA (Rapide)</SelectItem>
+                        <SelectItem value="rasg">RASG (Précis)</SelectItem>
+                        <SelectItem value="baseline">Baseline (Standard)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Mask Preview Toggle */}
+                  <div className="space-y-2">
+                    <Label className="text-xs text-muted-foreground">
+                      Aperçu du masque
+                    </Label>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleToggleMaskPreview}
+                      className="w-full gap-2"
+                    >
+                      {state.showMaskPreview ? (
+                        <>
+                          <EyeOff className="h-4 w-4" />
+                          Masquer le masque
+                        </>
+                      ) : (
+                        <>
+                          <Eye className="h-4 w-4" />
+                          Voir le masque
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Image Info */}
+                <div className="mt-4 p-3 bg-white/50 rounded-lg border">
+                  <div className="text-xs space-y-1">
+                    <p>
+                      <strong>Image:</strong> {state.selectedInpaintImage.name}
+                    </p>
+                    <p>
+                      <strong>Méthode:</strong> {state.hdPainterMethod || "painta+rasg"}
+                    </p>
+                    <p>
+                      <strong>Résolution:</strong> {state.selectedInpaintImage.resolution}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
 
       {/* Transformation Type Selection Section */}
