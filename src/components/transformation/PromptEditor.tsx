@@ -338,9 +338,8 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
                           state.activeNegativePresets.has(presetKey);
 
                         return (
-                          <Tooltip content={preset.tooltip} side="top">
+                          <Tooltip key={presetKey} content={preset.tooltip} side="top">
                             <Button
-                              key={presetKey}
                               type="button"
                               variant={isActive ? "default" : "secondary"}
                               size="sm"
@@ -414,3 +413,4 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
     </Card>
   );
 };
+
