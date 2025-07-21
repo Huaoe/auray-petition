@@ -413,7 +413,11 @@ const ChurchTransformation: React.FC = () => {
         generateEnhancedPrompt={generateEnhancedPrompt}
       />
 
-      <LocationSelection state={state} setState={setState} />
+      <LocationSelection
+        state={state}
+        setState={setState}
+        generateEnhancedPrompt={generateEnhancedPrompt}
+      />
 
       <PromptEditor
         state={state}

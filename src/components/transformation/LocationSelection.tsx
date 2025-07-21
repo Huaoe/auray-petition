@@ -4,25 +4,41 @@ import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin } from "lucide-react";
-import { GenerationState } from "@/lib/church-transformation-types";
+import { FamousLocation, GenerationState } from "@/lib/church-transformation-types";
 import { FAMOUS_LOCATIONS } from "@/lib/famous-locations";
 import Image from "next/image";
 
 interface LocationSelectionProps {
   state: GenerationState;
   setState: React.Dispatch<React.SetStateAction<GenerationState>>;
+  generateEnhancedPrompt: (
+    transformationType: string,
+    selectedLocation: FamousLocation | null,
+    baseImageName?: string
+  ) => string;
 }
 
-export const LocationSelection: React.FC<LocationSelectionProps> = ({ state, setState }) => {
+export const LocationSelection: React.FC<LocationSelectionProps> = ({ state, setState, generateEnhancedPrompt }) => {
   const handleLocationSelect = (location: any) => {
     if (!location) {
       console.log('Warning: Attempted to select null/undefined location');
       return;
     }
+
+    const baseImageName =
+      state.selectedInpaintImage?.path.split("/").pop() ||
+      "Saint-Gildas-Auray-768x576.webp";
+
+    const enhancedPrompt = generateEnhancedPrompt(
+      state.selectedTransformation?.id || "", // Use current transformation ID
+      location,
+      baseImageName
+    );
     
     setState(prev => ({
       ...prev,
       selectedLocation: location,
+      customPrompt: enhancedPrompt,
     }));
   };
 
