@@ -4,6 +4,12 @@ import { google } from 'googleapis';
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SHEET_SIGN_ID;
 const SHEET_NAME = process.env.SIGNATURE_SHEET_NAME || 'Signatures Pétition Auray';
 
+// Helper function to properly format sheet name for Google Sheets API
+const formatSheetRange = (range: string): string => {
+  // Try using just the range without sheet name for the default sheet
+  return range;
+};
+
 // Interface pour une signature
 export interface Signature {
   firstName: string;
@@ -52,7 +58,7 @@ export const addSignature = async (signature: Omit<Signature, 'timestamp'>): Pro
     const sheets = await getGoogleSheetsClient();
     
     // Préparer les données pour Google Sheets - nouvelle structure complète
-    const timestamp = new Date().toISOString(); // FIX: Always generate a new timestamp as it's not provided in the input type.
+    const timestamp = new Date().toISOString();
     const values = [
       [
         signature.firstName,
@@ -70,10 +76,10 @@ export const addSignature = async (signature: Omit<Signature, 'timestamp'>): Pro
       ]
     ];
 
-    // Ajouter la ligne dans la feuille - mise à jour du range pour inclure tous les champs
+    // Ajouter la ligne dans la feuille - use default sheet
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
-      range: `'${SHEET_NAME}'!A:L`, // Étendu pour 12 colonnes (ajout du code de parrainage)
+      range: 'A:L', // Use default sheet without name
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values,
@@ -158,7 +164,7 @@ export const getPetitionStats = async (): Promise<PetitionStats> => {
     // Récupérer toutes les signatures - fix the range format
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A:L`, // Remove quotes around sheet name
+      range: formatSheetRange('A:L'),
     });
 
     const rows = response.data.values || [];
@@ -198,12 +204,12 @@ export const initializeSheet = async (): Promise<{ success: boolean; message?: s
     
     // Créer l'en-tête si la feuille est vide
     const headers = [
-      ['Prénom', 'Nom', 'Email', 'Ville', 'Code Postal', 'Commentaire', 'RGPD', 'Newsletter', 'Code Parrainage', 'Date/Heure', 'IP', 'User Agent']
+      ['Prénom', 'Nom', 'Email', 'Ville', 'Code Postal', 'Commentaire', 'RGPD', 'Newsletter', 'Code Parrainage', 'Datetime', 'IP', 'User Agent']
     ];
 
     await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
-      range: `'${SHEET_NAME}'!A1:L1`, // Mis à jour pour 12 colonnes
+      range: formatSheetRange('A1:L1'),
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: headers,
