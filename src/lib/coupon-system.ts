@@ -433,25 +433,25 @@ export const COUPON_CONFIG = {
   levels: {
     BASIC: {
       minScore: 0,
-      generations: 2,
+      generations: 5, // Increased from 2 to 5
       color: 'bg-gradient-to-r from-emerald-500 to-green-500',
       label: 'Basique'
     },
     ENGAGED: {
       minScore: 5,
-      generations: 2,
+      generations: 10,
       color: 'bg-gradient-to-r from-blue-500 to-cyan-500',
       label: 'Engagé'
     },
     PASSIONATE: {
       minScore: 10,
-      generations: 3,
+      generations: 15,
       color: 'bg-gradient-to-r from-violet-500 to-purple-500',
       label: 'Passionné'
     },
     CHAMPION: {
       minScore: 15,
-      generations: 4,
+      generations: 20,
       color: 'bg-gradient-to-r from-amber-400 to-yellow-300',
       label: 'Champion'
     }
@@ -1323,4 +1323,5 @@ export function useCouponGeneration(code: string): CouponData | null {
   const result = useGeneration(code);
   return result.valid ? result.coupon || null : null;
 }
+
 
