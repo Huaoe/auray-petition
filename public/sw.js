@@ -111,7 +111,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   // Autres requêtes: Network First avec fallback
-  console.log('🔍 SW: Attempting to fetch:', request.url);
+  // console.log('🔍 SW: Attempting to fetch:', request.url);
   event.respondWith(
     fetch(request).catch((error) => {
       console.error('❌ SW: Fetch failed for:', request.url, error);

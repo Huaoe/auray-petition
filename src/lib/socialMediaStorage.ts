@@ -2,8 +2,18 @@ import { google } from 'googleapis';
 import { createHash, createCipheriv, createDecipheriv, randomBytes } from 'crypto';
 
 // Configuration for social media credentials sheet
-const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SHEET_ID;
+const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SHEET_SOCIAL_ID;
 const SOCIAL_SHEET_NAME = process.env.SOCIAL_SHEET_NAME || 'SocialMediaCredentials';
+
+// Enhanced diagnostic logging
+if (process.env.NODE_ENV === 'development') {
+  console.log('[socialMediaStorage] Configuration Debug:');
+  console.log('  SPREADSHEET_ID:', SPREADSHEET_ID);
+  console.log('  SPREADSHEET_ID type:', typeof SPREADSHEET_ID);
+  console.log('  SPREADSHEET_ID length:', SPREADSHEET_ID?.length);
+  console.log('  Is valid Google Sheets ID format:', /^[a-zA-Z0-9-_]{44}$/.test(SPREADSHEET_ID || ''));
+  console.log('  SOCIAL_SHEET_NAME:', SOCIAL_SHEET_NAME);
+}
 
 // Encryption key derived from JWT_SECRET
 const getEncryptionKey = (): Buffer => {
@@ -99,11 +109,21 @@ const getSocialMediaSheetsClient = async () => {
 export const initializeSocialMediaSheet = async (): Promise<{ success: boolean; message?: string }> => {
   try {
     if (!SPREADSHEET_ID) {
-      throw new Error('GOOGLE_SHEETS_SHEET_ID not configured');
+      const errorMsg = 'GOOGLE_SHEETS_SHEET_SOCIAL_ID not configured';
+      console.error('[socialMediaStorage] Configuration Error:', errorMsg);
+      throw new Error(errorMsg);
     }
 
     if (!SOCIAL_SHEET_NAME) {
-      throw new Error('SOCIAL_SHEET_NAME not configured');
+      const errorMsg = 'SOCIAL_SHEET_NAME not configured';
+      console.error('[socialMediaStorage] Configuration Error:', errorMsg);
+      throw new Error(errorMsg);
+    }
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[socialMediaStorage] Attempting to initialize sheet...');
+      console.log('  Using SPREADSHEET_ID:', SPREADSHEET_ID);
+      console.log('  Using SOCIAL_SHEET_NAME:', SOCIAL_SHEET_NAME);
     }
 
     const sheets = await getSocialMediaSheetsClient();
@@ -111,11 +131,22 @@ export const initializeSocialMediaSheet = async (): Promise<{ success: boolean; 
     // Check if spreadsheet exists
     let spreadsheet;
     try {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[socialMediaStorage] Checking if spreadsheet exists...');
+      }
       spreadsheet = await sheets.spreadsheets.get({
         spreadsheetId: SPREADSHEET_ID,
       });
-    } catch (error) {
-      throw new Error(`Spreadsheet not found: ${SPREADSHEET_ID}`);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[socialMediaStorage] ✅ Spreadsheet found:', spreadsheet.data.properties?.title);
+      }
+    } catch (error: any) {
+      console.error('[socialMediaStorage] ❌ Spreadsheet access failed:');
+      console.error('  Error code:', error.code);
+      console.error('  Error message:', error.message);
+      console.error('  SPREADSHEET_ID used:', SPREADSHEET_ID);
+      console.error('  Full error:', error);
+      throw new Error(`Spreadsheet not found: ${SPREADSHEET_ID} (${error.message})`);
     }
 
     // Check if our sheet exists
@@ -169,7 +200,7 @@ export const initializeSocialMediaSheet = async (): Promise<{ success: boolean; 
 export const storeSocialMediaCredential = async (credential: SocialMediaCredential): Promise<{ success: boolean; message?: string }> => {
   try {
     if (!SPREADSHEET_ID) {
-      throw new Error('GOOGLE_SHEETS_SHEET_ID not configured');
+      throw new Error('GOOGLE_SHEETS_SHEET_SOCIAL_ID not configured');
     }
 
     const sheets = await getSocialMediaSheetsClient();
@@ -270,7 +301,7 @@ export const getSocialMediaCredential = async (userId: string, platform: string)
 export const updateSocialMediaCredential = async (credential: SocialMediaCredential): Promise<{ success: boolean; message?: string }> => {
   try {
     if (!SPREADSHEET_ID) {
-      throw new Error('GOOGLE_SHEETS_SHEET_ID not configured');
+      throw new Error('GOOGLE_SHEETS_SHEET_SOCIAL_ID not configured');
     }
 
     const sheets = await getSocialMediaSheetsClient();
@@ -337,7 +368,7 @@ export const updateSocialMediaCredential = async (credential: SocialMediaCredent
 export const getUserSocialMediaCredentials = async (userId: string): Promise<SocialMediaCredential[]> => {
   try {
     if (!SPREADSHEET_ID || !SOCIAL_SHEET_NAME) {
-      console.error("Error: GOOGLE_SHEETS_SHEET_ID or SOCIAL_SHEET_NAME is not configured.");
+      console.error("Error: GOOGLE_SHEETS_SHEET_SOCIAL_ID or SOCIAL_SHEET_NAME is not configured.");
       return [];
     }
 
@@ -419,7 +450,7 @@ export const getUserSocialMediaCredentials = async (userId: string): Promise<Soc
 export const deleteSocialMediaCredential = async (userId: string, platform: string): Promise<{ success: boolean; message?: string }> => {
   try {
     if (!SPREADSHEET_ID) {
-      throw new Error('GOOGLE_SHEETS_SHEET_ID not configured');
+      throw new Error('GOOGLE_SHEETS_SHEET_SOCIAL_ID not configured');
     }
 
     const sheets = await getSocialMediaSheetsClient();

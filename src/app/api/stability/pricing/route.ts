@@ -1,3 +1,5 @@
+import { NextRequest, NextResponse } from "next/server";
+
 export async function GET() {
   try {
     // Tester différents endpoints possibles

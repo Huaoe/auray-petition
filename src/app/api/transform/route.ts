@@ -115,7 +115,7 @@ async function resizeImage(imageBuffer: Buffer): Promise<Buffer> {
 }
 
 async function generateWithStabilityAI(
-  imageBuffer: Buffer,
+  inputImageBuffer: Buffer,
   prompt: string
 ): Promise<{ imageUrl: string; cost: number; actualCost?: number }> {
   try {
@@ -127,7 +127,7 @@ async function generateWithStabilityAI(
     
     const formData = new FormData();
     formData.append("prompt", prompt);
-    formData.append("image", new Blob([imageBuffer]), "image.webp");
+    formData.append("image", new Blob([inputImageBuffer]), "image.webp");
     formData.append("strength", "0.7");
     formData.append("aspect_ratio", STABILITY_CONFIG.ASPECT_RATIO);
     formData.append("output_format", STABILITY_CONFIG.OUTPUT_FORMAT);
@@ -148,7 +148,7 @@ async function generateWithStabilityAI(
     }
 
     // Ultra API returns the image directly as binary data
-    const imageBuffer = Buffer.from(await response.arrayBuffer());
+    const responseImageBuffer = Buffer.from(await response.arrayBuffer());
     
     // 📊 MONITORING: Solde APRÈS génération
     const balanceAfter = await getStabilityBalance();
@@ -158,7 +158,7 @@ async function generateWithStabilityAI(
     console.log(`💰 Coût RÉEL: ${actualCost} crédits (estimé: ${STABILITY_CONFIG.PRICING.per_generation})`);
     
     // Convert to base64 data URL for consistency with existing code
-    const base64Image = imageBuffer.toString('base64');
+    const base64Image = responseImageBuffer.toString('base64');
     const dataUrl = `data:image/webp;base64,${base64Image}`;
 
     return {
@@ -315,9 +315,16 @@ export async function POST(request: NextRequest) {
     console.log(`🎨 Image generated successfully`);
     console.log(`💰 Cost monitoring - Estimated: $${cost}, Actual: ${actualCost} credits`);
 
+    // Convert data URL to Buffer for GCS upload
+    const base64Data = tempImageUrl.replace(/^data:image\/[a-z]+;base64,/, "");
+    const imageBuffer = Buffer.from(base64Data, "base64");
+
+    // Generate filename for storage
+    const fileName = generateFileName(transformationType, customPrompt, baseImage, "webp");
+
     // Upload vers GCS
     const finalImageUrl = await uploadImageToGCS(
-      tempImageUrl,
+      imageBuffer,
       fileName,
       "image/webp"
     );
@@ -360,12 +367,4 @@ export async function GET() {
     pricing: STABILITY_CONFIG.PRICING,
     rateLimit: RATE_LIMIT,
   });
-}
-
-async function getStabilityBalance(): Promise<number> {
-  const response = await fetch('https://api.stability.ai/v1/user/balance', {
-    headers: { 'Authorization': `Bearer ${process.env.STABILITY_API_KEY}` }
-  });
-  const data = await response.json();
-  return data.credits || 0;
 }

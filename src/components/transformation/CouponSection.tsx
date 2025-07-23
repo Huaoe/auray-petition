@@ -32,7 +32,11 @@ export const CouponSection: React.FC<CouponSectionProps> = ({ state, setState })
       const validation = validateCoupon(state.couponCode);
       setState(prev => ({
         ...prev,
-        couponValidation: validation,
+        couponValidation: {
+          valid: validation.valid,
+          message: validation.message || (validation.valid ? "Coupon valide" : "Coupon invalide"),
+          coupon: validation.coupon
+        },
         activeCoupon: validation.valid ? validation.coupon : null,
       }));
     } catch (error) {
@@ -116,3 +120,4 @@ export const CouponSection: React.FC<CouponSectionProps> = ({ state, setState })
     </Card>
   );
 };
+

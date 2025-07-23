@@ -190,39 +190,54 @@ export default function RootLayout({
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 2025 Collectif Citoyen Alréen. Tous droits réservés.
               </p>
-              <nav className="mt-4 flex space-x-6 md:mt-0">
-                <Link 
+              <nav className="mt-4 flex flex-wrap justify-center gap-4 md:mt-0">
+                <Link
                   href="/contexte"
                   className="text-sm text-gray-600 hover:text-blue-600 hover:underline dark:text-gray-400 dark:hover:text-blue-500"
                 >
                   Le Contexte
                 </Link>
-                <Link 
+                <Link
                   href="/mentions-legales"
                   className="text-sm text-gray-600 hover:text-blue-600 hover:underline dark:text-gray-400 dark:hover:text-blue-500"
                 >
                   Mentions Légales
                 </Link>
+                <Link
+                  href="/privacy-policy"
+                  className="text-sm text-gray-600 hover:text-blue-600 hover:underline dark:text-gray-400 dark:hover:text-blue-500"
+                >
+                  Politique de Confidentialité
+                </Link>
+                <Link
+                  href="/terms-of-service"
+                  className="text-sm text-gray-600 hover:text-blue-600 hover:underline dark:text-gray-400 dark:hover:text-blue-500"
+                >
+                  Conditions d&apos;Utilisation
+                </Link>
               </nav>
             </div>
           </footer>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                if ('serviceWorker' in navigator) {
-                  window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/sw.js')
-                      .then((registration) => {
-                        console.log(' PWA: Service Worker enregistré avec succès:', registration.scope);
-                      })
-                      .catch((error) => {
-                        console.log(' PWA: Échec enregistrement Service Worker:', error);
-                      });
-                  });
-                }
-              `,
-            }}
-          />
+          {/* Only register service worker in production */}
+          {process.env.NODE_ENV === 'production' && (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  if ('serviceWorker' in navigator) {
+                    window.addEventListener('load', () => {
+                      navigator.serviceWorker.register('/sw.js')
+                        .then((registration) => {
+                          console.log('🚀 PWA: Service Worker registered successfully:', registration.scope);
+                        })
+                        .catch((error) => {
+                          console.log('❌ PWA: Service Worker registration failed:', error);
+                        });
+                    });
+                  }
+                `,
+              }}
+            />
+          )}
         </div>
       </body>
     </html>

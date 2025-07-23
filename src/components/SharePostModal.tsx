@@ -21,7 +21,7 @@ import {
   SocialMediaPlatform,
   SocialMediaPublishResult,
   SocialMediaPlatformInfo,
-  SocialMediaAccount
+  SocialMediaAccount,
 } from "@/lib/types";
 
 interface SharePostModalProps {
@@ -42,63 +42,74 @@ interface FeedPost {
 }
 
 export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: SharePostModalProps) {
+  // Initialize all state hooks first
+  const [postText, setPostText] = useState('');
+  const [selectedPromptIndex, setSelectedPromptIndex] = useState<number | null>(null);
+  const [selectedPlatforms, setSelectedPlatforms] = useState<Set<SocialMediaPlatform>>(new Set());
+  const [connectedAccounts, setConnectedAccounts] = useState<SocialMediaAccount[]>([]);
+  const [loadingAccounts, setLoadingAccounts] = useState(true);
+  const [publishing, setPublishing] = useState(false);
+  const [publishResults, setPublishResults] = useState<SocialMediaPublishResult[]>([]);
+  const [publishedPost, setPublishedPost] = useState<any>(null);
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
   // Liste des prompts en français pour Bayrou et la transformation économique
   const frenchPrompts = [
     {
-      prompt: "Bayrou, ancien Premier ministre, appelle à soutenir l’avenir de la France.\nSaisissons cette chance pour un renouveau économique et laïc.\n#Bayrou #France #ChangementÉconomique",
-      justification: "Selon l’IFOP, 74% des Français considèrent la laïcité comme un principe fondamental de la République. Source : IFOP, 2023."
+      prompt: "Bayrou, ancien Premier ministre, appelle à soutenir l'avenir de la France.\nSaisissons cette chance pour un renouveau économique et laïc.\n#Bayrou #France #ChangementÉconomique",
+      justification: "Selon l'IFOP, 74% des Français considèrent la laïcité comme un principe fondamental de la République. Source : IFOP, 2023."
     },
     {
-      prompt: "La France a besoin de nous ! Bayrou cherche des fonds pour une transformation nationale.\nEnsemble, dynamisons l’économie et la laïcité.\n#SoutienFrance #Bayrou #AvenirLaïc",
+      prompt: "La France a besoin de nous ! Bayrou cherche des fonds pour une transformation nationale.\nEnsemble, dynamisons l'économie et la laïcité.\n#SoutienFrance #Bayrou #AvenirLaïc",
       justification: "En 2022, 51% des Français se disent favorables à une société où la religion occupe moins de place. Source : Pew Research Center, 2022."
     },
     {
-      prompt: "Bayrou appelle à l’unité pour relancer l’économie française. Les milliards sont là!\nVotre soutien peut déclencher le grand changement laïc.\n#Bayrou #RelanceFrançaise #ActeursDuChangement",
-      justification: "La France est le pays d’Europe où la séparation Église-État est la plus stricte selon l’Observatoire de la laïcité. Source : Observatoire de la laïcité, 2021."
+      prompt: "Bayrou appelle à l'unité pour relancer l'économie française. Les milliards sont là!\nVotre soutien peut déclencher le grand changement laïc.\n#Bayrou #RelanceFrançaise #ActeursDuChangement",
+      justification: "La France est le pays d'Europe où la séparation Église-État est la plus stricte selon l'Observatoire de la laïcité. Source : Observatoire de la laïcité, 2021."
     },
     {
       prompt: "Aidons Bayrou à conduire la France vers une nouvelle ère économique.\nUne nation laïque et prospère est à portée de main !\n#Bayrou #ChangementLaïc #FranceEnAvant",
       justification: "Depuis 2006, la part des Français se déclarant sans religion est passée de 27% à 51%. Source : IFOP, 2023."
     },
     {
-      prompt: "Bayrou collecte des fonds pour une France plus inclusive et innovante.\nC’est le moment d’innover économiquement et laïquement.\n#Bayrou #Innovation #FranceLaïque",
+      prompt: "Bayrou collecte des fonds pour une France plus inclusive et innovante.\nC'est le moment d'innover économiquement et laïquement.\n#Bayrou #Innovation #FranceLaïque",
       justification: "La France est citée comme modèle de sécularisation par 68% des Européens interrogés. Source : Pew Research Center, 2018."
     },
     {
       prompt: "Soutenez la vision de Bayrou pour une France prospère et laïque.\nVotre contribution peut lancer la transformation attendue.\n#Bayrou #TransformerFrance #Laïcité",
-      justification: "La loi de 1905 sur la séparation des Églises et de l’État reste soutenue par 78% des Français. Source : IFOP, 2023."
+      justification: "La loi de 1905 sur la séparation des Églises et de l'État reste soutenue par 78% des Français. Source : IFOP, 2023."
     },
     {
       prompt: "Bayrou veut financer le prochain grand bond de la France.\nSaisissons cette opportunité de renouveau économique et laïc.\n#Bayrou #FuturFrançais #RelanceÉco",
       justification: "En 2021, 62% des jeunes Français estiment que la laïcité favorise le vivre-ensemble. Source : IFOP, 2021."
     },
     {
-      prompt: "L’avenir de la France est entre nos mains, Bayrou montre la voie.\nSoutenez la croissance économique et les valeurs laïques en sécularisant !.\n#Bayrou #France2025 #ChangementLaïc",
-      justification: "La France est le pays d’Europe où la pratique religieuse est la plus faible : 64% ne pratiquent aucune religion. Source : Pew Research Center, 2018."
+      prompt: "L'avenir de la France est entre nos mains, Bayrou montre la voie.\nSoutenez la croissance économique et les valeurs laïques en sécularisant !.\n#Bayrou #France2025 #ChangementLaïc",
+      justification: "La France est le pays d'Europe où la pratique religieuse est la plus faible : 64% ne pratiquent aucune religion. Source : Pew Research Center, 2018."
     },
     {
       prompt: "Bayrou sollicite votre aide pour ouvrir une nouvelle ère en France.\nLa relance économique et la transformation laïque commencent avec nous.\n#Bayrou #RelanceFrance #ProgrèsLaïc",
       justification: "En 2023, 80% des Français soutiennent la neutralité religieuse dans les services publics. Source : IFOP, 2023."
     },
     {
-      prompt: "Bayrou rassemble pour la renaissance économique et laïque de la France.\nC’est le moment d’agir ensemble.\n#Bayrou #RenouveauFrance #ChangerMaintenant",
-      justification: "La laïcité est perçue comme un facteur d’unité nationale par 72% des Français. Source : IFOP, 2023."
+      prompt: "Bayrou rassemble pour la renaissance économique et laïque de la France.\nC'est le moment d'agir ensemble.\n#Bayrou #RenouveauFrance #ChangerMaintenant",
+      justification: "La laïcité est perçue comme un facteur d'unité nationale par 72% des Français. Source : IFOP, 2023."
     },
     {
       prompt: "Rejoignez Bayrou pour financer la transformation audacieuse de la France.\nLa croissance et la laïcité sont à portée de main.\n#Bayrou #ChangementFrançais #AvenirLaïc",
       justification: "En 2022, 59% des Français considèrent que la sécularisation est un progrès pour la société. Source : Pew Research Center, 2022."
     },
     {
-      prompt: "Bayrou lève des fonds pour dynamiser l’économie et l’esprit laïc français.\nUnissons-nous pour un avenir meilleur.\n#Bayrou #France #TransformationLaïque",
+      prompt: "Bayrou lève des fonds pour dynamiser l'économie et l'esprit laïc français.\nUnissons-nous pour un avenir meilleur.\n#Bayrou #France #TransformationLaïque",
       justification: "La France est citée comme exemple de neutralité religieuse par 70% des Européens. Source : Pew Research Center, 2018."
     },
     {
-      prompt: "La France a besoin d’une nouvelle direction, Bayrou mène la charge.\nSoutenez le progrès économique et laïc pour tous.\n#Bayrou #Progrès #FranceLaïque",
-      justification: "En 2023, 77% des Français soutiennent l’interdiction des signes religieux à l’école. Source : IFOP, 2023."
+      prompt: "La France a besoin d'une nouvelle direction, Bayrou mène la charge.\nSoutenez le progrès économique et laïc pour tous.\n#Bayrou #Progrès #FranceLaïque",
+      justification: "En 2023, 77% des Français soutiennent l'interdiction des signes religieux à l'école. Source : IFOP, 2023."
     },
     {
-      prompt: "La campagne de Bayrou porte l’espoir, la croissance et la laïcité.\nAidez à financer l’avenir de la France.\n#Bayrou #EspoirFrance #ChangementLaïc",
-      justification: "La sécularisation est vue comme un facteur d’espoir pour 61% des jeunes Français. Source : IFOP, 2022."
+      prompt: "La campagne de Bayrou porte l'espoir, la croissance et la laïcité.\nAidez à financer l'avenir de la France.\n#Bayrou #EspoirFrance #ChangementLaïc",
+      justification: "La sécularisation est vue comme un facteur d'espoir pour 61% des jeunes Français. Source : IFOP, 2022."
     },
     {
       prompt: "Bayrou appelle à un élan collectif pour le renouveau économique et laïc.\nVotre soutien compte plus que jamais.\n#Bayrou #France #RéformeLaïque",
@@ -110,10 +121,10 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
     },
     {
       prompt: "Bayrou cherche des fonds pour lancer la révolution économique et laïque.\nParticipez à ce moment historique.\n#Bayrou #RévolutionFrance #ChangementLaïc",
-      justification: "La France est le pays d’Europe où la sécularisation progresse le plus rapidement. Source : Pew Research Center, 2018."
+      justification: "La France est le pays d'Europe où la sécularisation progresse le plus rapidement. Source : Pew Research Center, 2018."
     },
     {
-      prompt: "L’avenir de la France s’illumine avec le leadership de Bayrou.\nFinançons ensemble la croissance et le progrès laïc.\n#Bayrou #AvenirRadieux #FranceLaïque",
+      prompt: "L'avenir de la France s'illumine avec le leadership de Bayrou.\nFinançons ensemble la croissance et le progrès laïc.\n#Bayrou #AvenirRadieux #FranceLaïque",
       justification: "En 2023, 81% des Français soutiennent la neutralité religieuse dans la vie publique. Source : IFOP, 2023."
     },
     {
@@ -121,26 +132,27 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
       justification: "La transformation laïque est soutenue par 69% des Français. Source : IFOP, 2023."
     },
     {
-      prompt: "La collecte de Bayrou est une chance de changer la France.\nSoutenez l’innovation économique et les valeurs laïques.\n#Bayrou #InnoverFrance #ProgrèsLaïc",
-      justification: "L’innovation laïque est jugée essentielle pour 73% des Français. Source : IFOP, 2023."
+      prompt: "La collecte de Bayrou est une chance de changer la France.\nSoutenez l'innovation économique et les valeurs laïques.\n#Bayrou #InnoverFrance #ProgrèsLaïc",
+      justification: "L'innovation laïque est jugée essentielle pour 73% des Français. Source : IFOP, 2023."
     }
   ];
-  const [postText, setPostText] = useState('');
-  const [selectedPromptIndex, setSelectedPromptIndex] = useState<number | null>(null);
-  const [selectedPlatforms, setSelectedPlatforms] = useState<Set<SocialMediaPlatform>>(new Set());
+
+  const CHARACTER_LIMIT = 500;
+
   // Ajout d'un bouton pour régénérer le prompt
   const handleRegeneratePrompt = () => {
     const randomIndex = Math.floor(Math.random() * frenchPrompts.length);
-    setPostText(frenchPrompts[randomIndex].prompt + "\n" + frenchPrompts[randomIndex].justification);
+    setSelectedPromptIndex(randomIndex);
+    const selectedPrompt = frenchPrompts[randomIndex];
+    setPostText(selectedPrompt.prompt + "\n" + selectedPrompt.justification);
   };
-  const [publishing, setPublishing] = useState(false);
-  const [publishResults, setPublishResults] = useState<SocialMediaPublishResult[]>([]);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  const [publishedPost, setPublishedPost] = useState<FeedPost | null>(null);
-  const [connectedAccounts, setConnectedAccounts] = useState<SocialMediaAccount[]>([]);
-  const [loadingAccounts, setLoadingAccounts] = useState(true);
 
-  const CHARACTER_LIMIT = 500;
+  // Initialize with a random prompt when modal opens
+  useEffect(() => {
+    if (isOpen && !postText && selectedPromptIndex === null) {
+      handleRegeneratePrompt();
+    }
+  }, [isOpen, postText, selectedPromptIndex]);
 
   // Fetch connected accounts when modal opens
   useEffect(() => {
@@ -519,7 +531,8 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
                   Régénérer
                 </Button>
               </div>
-              {selectedPromptIndex !== null && (
+              {/* Show justification for the selected prompt */}
+              {typeof selectedPromptIndex === "number" && frenchPrompts[selectedPromptIndex] && (
                 <div className="mt-2 text-xs italic text-muted-foreground">
                   {frenchPrompts[selectedPromptIndex].justification}
                 </div>

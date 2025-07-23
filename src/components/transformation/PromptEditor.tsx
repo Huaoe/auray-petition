@@ -324,7 +324,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap">
+                    <div className="flex flex-wrap gap-2">
                       {(
                         Object.keys(
                           NEGATIVE_PROMPT_CONFIG.toggleablePresets
@@ -413,4 +413,6 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
     </Card>
   );
 };
+
+
 

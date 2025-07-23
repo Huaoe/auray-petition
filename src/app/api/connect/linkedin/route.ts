@@ -7,8 +7,11 @@ export async function GET(request: NextRequest) {
     const linkedinClientId = process.env.LINKEDIN_CLIENT_ID;
 
     if (!linkedinClientId) {
+      console.error('LinkedIn Client ID not configured');
       return new NextResponse('LinkedIn Client ID not configured', { status: 500 });
     }
+
+    console.log('LinkedIn OAuth initiation - Client ID configured:', !!linkedinClientId);
 
     // Generate state parameter for CSRF protection
     const state = generateState();
@@ -22,20 +25,21 @@ export async function GET(request: NextRequest) {
       secure: process.env.NODE_ENV === 'production',
     });
 
-    // LinkedIn OAuth parameters
+    // LinkedIn OAuth parameters - Updated scopes for v2 API
     const params = new URLSearchParams({
       response_type: 'code',
       client_id: linkedinClientId,
       redirect_uri: `${process.env.NEXT_PUBLIC_SITE_URL}/api/connect/linkedin/callback`,
-      scope: 'w_member_social,r_liteprofile,r_emailaddress',
+      scope: 'openid profile w_member_social',
       state: state,
     });
 
     const authUrl = `https://www.linkedin.com/oauth/v2/authorization?${params.toString()}`;
     
+    console.log('LinkedIn OAuth URL generated:', authUrl);
     return NextResponse.redirect(authUrl);
   } catch (error) {
     console.error('LinkedIn OAuth initiation error:', error);
-    return NextResponse.redirect(new URL('/connected-accounts?error=linkedin_auth_failed', request.url));
+    return NextResponse.redirect(new URL('/settings/social-media?error=linkedin_auth_failed', request.url));
   }
 }

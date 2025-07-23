@@ -76,25 +76,48 @@ export const useTransformation = (
       const endTime = Date.now();
       const generationTime = endTime - startTime;
 
+      // Patch: extend data type to allow backend cost fields
+      type CostPatched = typeof data & {
+        actualCost?: number;
+        cost?: number;
+        metadata?: {
+          costAnalysis?: {
+            estimated?: number;
+            actual?: number;
+            difference?: number;
+          };
+        };
+      };
+      const dataWithCost = data as CostPatched;
+
       // Utiliser le coût réel si disponible, sinon l'estimé
-      const finalCost = data.actualCost ?? data.cost ?? 0.04;
+      let finalCost = 0.04;
+      if (typeof dataWithCost.actualCost === "number" && !isNaN(dataWithCost.actualCost)) {
+        finalCost = dataWithCost.actualCost;
+      } else if (typeof dataWithCost.cost === "number" && !isNaN(dataWithCost.cost)) {
+        finalCost = dataWithCost.cost;
+      }
 
       setState((prev) => ({
         ...prev,
         generatedImage: data.imageUrl,
         generationTime,
-        cost: finalCost, // Coût réel
+        cost: finalCost, // Coût réel ou estimé
         isGenerating: false,
       }));
 
       // Log pour analyse des coûts
-      if (data.metadata?.costAnalysis) {
+      if (dataWithCost.metadata?.costAnalysis) {
+        const { estimated, actual, difference } = dataWithCost.metadata.costAnalysis;
+        const accuracy =
+          typeof actual === "number" && actual !== 0 && typeof difference === "number"
+            ? Math.max(0, Math.round((1 - Math.abs(difference) / Math.abs(actual)) * 100))
+            : 0;
         console.log('📊 Cost Analysis:', {
-          estimated: data.metadata.costAnalysis.estimated,
-          actual: data.metadata.costAnalysis.actual,
-          difference: data.metadata.costAnalysis.difference,
-          accuracy: data.metadata.costAnalysis.actual ? 
-            (1 - data.metadata.costAnalysis.difference / data.metadata.costAnalysis.actual) * 100 : 0
+          estimated,
+          actual,
+          difference,
+          accuracy: `${accuracy}%`
         });
       }
 

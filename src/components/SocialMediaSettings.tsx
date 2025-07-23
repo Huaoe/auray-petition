@@ -77,10 +77,18 @@ export function SocialMediaSettings({
         variant: "default",
       });
       
-      // Recharger les comptes après un délai pour s'assurer que les données sont synchronisées
+      // Force reload accounts multiple times to ensure sync
       setTimeout(() => {
         loadConnectedAccounts();
-      }, 1000);
+      }, 500);
+      
+      setTimeout(() => {
+        loadConnectedAccounts();
+      }, 2000);
+      
+      setTimeout(() => {
+        loadConnectedAccounts();
+      }, 5000);
     } else if (error) {
       toast({
         title: "Connection Failed",
@@ -93,7 +101,7 @@ export function SocialMediaSettings({
     if (success || error) {
       window.history.replaceState({}, "", window.location.pathname);
     }
-  }, []);
+  }, [toast]);
 
   const getErrorMessage = (error: string): string => {
     if (process.env.NODE_ENV === "development") {
@@ -125,6 +133,7 @@ export function SocialMediaSettings({
       );
     }
     try {
+      // Use the real userId or "current_user" (do not force demo-user)
       const response = await fetch(`/api/social-accounts?userId=${userId}`);
       if (response.ok) {
         const data = await response.json();
@@ -186,12 +195,14 @@ export function SocialMediaSettings({
     }
 
     try {
+      // Use the same userId that's used in the callback
+      const apiUserId = userId === "current_user" ? "demo-user@example.com" : userId;
       const response = await fetch(`/api/social-accounts/${platform}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ userId: apiUserId }),
       });
 
       if (response.ok) {
@@ -343,6 +354,11 @@ export function SocialMediaSettings({
               We only request the minimum permissions needed to publish posts on
               your behalf. You can disconnect your accounts at any time.
             </p>
+          </div>
+          <div className="mt-6 flex justify-end">
+            <Button variant="secondary" onClick={() => window.location.href = '/'}>
+              Retour à la publication
+            </Button>
           </div>
         </CardContent>
       </Card>

@@ -1,8 +1,8 @@
 import { google } from 'googleapis';
 
 // Configuration Google Sheets
-const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SHEET_ID;
-const SHEET_NAME = 'Sheet1';
+const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SHEET_SIGN_ID;
+const SHEET_NAME = process.env.SIGNATURE_SHEET_NAME || 'Signatures Pétition Auray';
 
 // Interface pour une signature
 export interface Signature {
@@ -46,7 +46,7 @@ const getGoogleSheetsClient = async () => {
 export const addSignature = async (signature: Omit<Signature, 'timestamp'>): Promise<{ success: boolean; message?: string }> => {
   try {
     if (!SPREADSHEET_ID) {
-      throw new Error('GOOGLE_SHEETS_SHEET_ID non configuré');
+      throw new Error('GOOGLE_SHEETS_SHEET_SIGN_ID non configuré');
     }
 
     const sheets = await getGoogleSheetsClient();
@@ -73,7 +73,7 @@ export const addSignature = async (signature: Omit<Signature, 'timestamp'>): Pro
     // Ajouter la ligne dans la feuille - mise à jour du range pour inclure tous les champs
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A:L`, // Étendu pour 12 colonnes (ajout du code de parrainage)
+      range: `'${SHEET_NAME}'!A:L`, // Étendu pour 12 colonnes (ajout du code de parrainage)
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values,
@@ -98,7 +98,7 @@ export const checkEmailExists = async (email: string): Promise<{ exists: boolean
       if (process.env.NODE_ENV === 'development') {
         return { exists: false };
       }
-      throw new Error('GOOGLE_SHEETS_SHEET_ID non configuré');
+      throw new Error('GOOGLE_SHEETS_SHEET_SIGN_ID non configuré');
     }
 
     const sheets = await getGoogleSheetsClient();
@@ -106,7 +106,7 @@ export const checkEmailExists = async (email: string): Promise<{ exists: boolean
     // Récupérer toutes les signatures pour vérifier les doublons
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A:L`,
+      range: `'${SHEET_NAME}'!A:L`,
     });
 
     const rows = response.data.values || [];
@@ -155,10 +155,10 @@ export const getPetitionStats = async (): Promise<PetitionStats> => {
 
     const sheets = await getGoogleSheetsClient();
     
-    // Récupérer toutes les signatures
+    // Récupérer toutes les signatures - fix the range format
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A:L`, // Mis à jour pour 12 colonnes
+      range: `${SHEET_NAME}!A:L`, // Remove quotes around sheet name
     });
 
     const rows = response.data.values || [];
@@ -191,7 +191,7 @@ export const getPetitionStats = async (): Promise<PetitionStats> => {
 export const initializeSheet = async (): Promise<{ success: boolean; message?: string }> => {
   try {
     if (!SPREADSHEET_ID) {
-      throw new Error('GOOGLE_SHEETS_SHEET_ID non configuré');
+      throw new Error('GOOGLE_SHEETS_SHEET_SIGN_ID non configuré');
     }
 
     const sheets = await getGoogleSheetsClient();
@@ -203,7 +203,7 @@ export const initializeSheet = async (): Promise<{ success: boolean; message?: s
 
     await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A1:L1`, // Mis à jour pour 12 colonnes
+      range: `'${SHEET_NAME}'!A1:L1`, // Mis à jour pour 12 colonnes
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: headers,

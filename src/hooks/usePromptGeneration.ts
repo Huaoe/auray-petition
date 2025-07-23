@@ -54,7 +54,7 @@ export const usePromptGeneration = () => {
 
       // Base prompt with mandatory requirements
       let prompt = `
-          Transform this into ${transformationNames[transformationType]} .
+          Transform to a ${transformationNames[transformationType]} .
           
           DESIGN: `;
 
@@ -107,19 +107,15 @@ export const usePromptGeneration = () => {
         "Contemporary design elements that respect and enhance the  architecture.";
 
       // Add lighting and atmosphere
-      prompt += `
-  
-              LIGHTING: Natural light through stained glass with warm artificial lighting highlighting both old and new elements.
-              
-              QUALITY: Photorealistic, 8K, professional lighting, detailed textures, vibrant colors, sharp focus.`;
+      prompt += `LIGHTING: Natural light through stained glass with warm artificial lighting highlighting both old and new elements.
+QUALITY: Photorealistic, 8K, professional lighting, detailed textures, vibrant colors, sharp focus.`;
                   
       if (selectedLocation) {
         const locationInspiration = `
-            Inspired by ${selectedLocation.name} (${selectedLocation.location}):
-            - Architectural style: ${selectedLocation.architecturalStyle}
-            - Key features: ${selectedLocation.keyFeatures?.join(", ")}
-
-            ${selectedLocation.description}`;
+Inspired by ${selectedLocation.name} (${selectedLocation.location}):
+- Architectural style: ${selectedLocation.architecturalStyle}
+- Key features: ${selectedLocation.keyFeatures?.join(", ")}
+${selectedLocation.description}`;
 
         prompt = `${prompt}\n\n${locationInspiration}`;
       }

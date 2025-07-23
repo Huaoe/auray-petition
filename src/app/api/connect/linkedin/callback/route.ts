@@ -9,13 +9,16 @@ export async function GET(request: NextRequest) {
     const state = searchParams.get('state');
     const error = searchParams.get('error');
 
+    console.log('LinkedIn callback received:', { code: !!code, state: !!state, error });
+
     if (error) {
       console.error('LinkedIn OAuth error:', error);
-      return NextResponse.redirect(new URL('/connected-accounts?error=linkedin_auth_failed', request.url));
+      return NextResponse.redirect(new URL('/settings/social-media?error=linkedin_auth_failed', request.url));
     }
 
     if (!code || !state) {
-      return NextResponse.redirect(new URL('/connected-accounts?error=missing_parameters', request.url));
+      console.error('LinkedIn callback missing parameters');
+      return NextResponse.redirect(new URL('/settings/social-media?error=missing_parameters', request.url));
     }
 
     // Verify state parameter
@@ -23,7 +26,8 @@ export async function GET(request: NextRequest) {
     const storedState = cookieStore.get('linkedin_oauth_state')?.value;
     
     if (!storedState || storedState !== state) {
-      return NextResponse.redirect(new URL('/connected-accounts?error=invalid_state', request.url));
+      console.error('LinkedIn state mismatch');
+      return NextResponse.redirect(new URL('/settings/social-media?error=invalid_state', request.url));
     }
 
     // Exchange authorization code for access token
@@ -44,7 +48,7 @@ export async function GET(request: NextRequest) {
     if (!tokenResponse.ok) {
       const errorData = await tokenResponse.text();
       console.error('LinkedIn token exchange failed:', errorData);
-      return NextResponse.redirect(new URL('/connected-accounts?error=token_exchange_failed', request.url));
+      return NextResponse.redirect(new URL('/settings/social-media?error=token_exchange_failed', request.url));
     }
 
     const tokenData = await tokenResponse.json();
@@ -52,11 +56,11 @@ export async function GET(request: NextRequest) {
 
     if (!access_token) {
       console.error('No access token received from LinkedIn');
-      return NextResponse.redirect(new URL('/connected-accounts?error=no_access_token', request.url));
+      return NextResponse.redirect(new URL('/settings/social-media?error=no_access_token', request.url));
     }
 
-    // Get user information from LinkedIn
-    const userResponse = await fetch('https://api.linkedin.com/v2/people/~:(id,firstName,lastName,emailAddress)', {
+    // Get user information from LinkedIn using v2 userinfo endpoint
+    const userResponse = await fetch('https://api.linkedin.com/v2/userinfo', {
       headers: {
         'Authorization': `Bearer ${access_token}`,
       },
@@ -64,30 +68,31 @@ export async function GET(request: NextRequest) {
     
     if (!userResponse.ok) {
       console.error('Failed to fetch LinkedIn user info');
-      return NextResponse.redirect(new URL('/connected-accounts?error=user_info_failed', request.url));
+      return NextResponse.redirect(new URL('/settings/social-media?error=user_info_failed', request.url));
     }
 
     const userData = await userResponse.json();
-    const displayName = `${userData.firstName?.localized?.en_US || ''} ${userData.lastName?.localized?.en_US || ''}`.trim();
+    console.log('LinkedIn user data received:', { name: userData.name, sub: userData.sub });
 
     // Store the credentials securely
     await storeSocialMediaCredential({
-      userId: 'current_user', // This should be replaced with actual user ID from session
+      userId: 'demo-user@example.com', // Match the user ID used by other platforms
       platform: 'linkedin',
       accessToken: access_token,
       refreshToken: undefined, // LinkedIn doesn't provide refresh tokens in this flow
       tokenExpiry: expires_in ? new Date(Date.now() + expires_in * 1000).toISOString() : undefined,
-      username: displayName,
-      userId_platform: userData.id,
+      username: userData.name,
+      userId_platform: userData.sub,
       connectedAt: new Date().toISOString(),
     });
 
     // Clean up cookies
     cookieStore.delete('linkedin_oauth_state');
 
+    console.log('✅ LinkedIn credentials stored successfully');
     return NextResponse.redirect(new URL('/settings/social-media?success=linkedin_connected&platform=linkedin', request.url));
   } catch (error) {
     console.error('LinkedIn OAuth callback error:', error);
-    return NextResponse.redirect(new URL('/connected-accounts?error=callback_failed', request.url));
+    return NextResponse.redirect(new URL('/settings/social-media?error=callback_failed', request.url));
   }
 }
