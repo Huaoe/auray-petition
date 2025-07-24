@@ -416,7 +416,7 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
                     <Share2 className="h-5 w-5 text-blue-600" />
                     <span className="text-sm font-medium">Sélectionner les plateformes</span>
                   </div>
-                  <Link href="/settings/social-media">
+                  <Link href="/settings/social-media?returnUrl=/share-post">
                     <Button variant="ghost" size="sm" className="text-xs">
                       <Settings className="h-3 w-3 mr-1" />
                       Gérer les comptes
@@ -433,7 +433,7 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
                     <p className="text-sm text-gray-600 mb-4">
                       Aucun compte social connecté
                     </p>
-                    <Link href="/settings/social-media">
+                    <Link href="/settings/social-media?returnUrl=/share-post">
                       <Button variant="outline" size="sm">
                         <Settings className="h-4 w-4 mr-2" />
                         Connecter des comptes

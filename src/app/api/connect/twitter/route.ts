@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { URLSearchParams } from 'url';
 import { cookies } from 'next/headers';
 import {
@@ -6,15 +6,23 @@ import {
   generateCodeVerifier,
   generateState,
 } from '@/lib/auth-utils';
+import { getUserId } from '@/lib/user-session';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   const twitterClientId = process.env.TWITTER_CLIENT_ID;
 
   if (!twitterClientId) {
     return new NextResponse('Twitter client ID not configured', { status: 500 });
   }
 
-  const state = generateState();
+  // Get user ID from session
+  const userId = await getUserId();
+  
+  // Get return URL from query parameters
+  const returnUrl = request.nextUrl.searchParams.get('returnUrl') || '/settings/social-media';
+  
+  // Generate state with return URL embedded
+  const state = generateState(returnUrl);
   const codeVerifier = generateCodeVerifier();
   const codeChallenge = generateCodeChallenge(codeVerifier);
 
@@ -27,6 +35,14 @@ export async function GET() {
   });
 
   cookieStore.set('twitter_code_verifier', codeVerifier, {
+    path: '/',
+    maxAge: 60 * 15, // 15 minutes
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+  });
+  
+  // Store user ID in cookie for the callback
+  cookieStore.set('twitter_user_id', userId, {
     path: '/',
     maxAge: 60 * 15, // 15 minutes
     httpOnly: true,

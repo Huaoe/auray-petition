@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -125,13 +125,10 @@ export function SocialMediaSettings({
     }
   };
 
-  const loadConnectedAccounts = async () => {
-    if (process.env.NODE_ENV === "development") {
-      console.log(
-        "[SocialMediaSettings] Loading connected accounts for userId:",
-        userId
-      );
-    }
+  const loadConnectedAccounts = useCallback(async () => {
+    if (loading) return; // Prevent multiple simultaneous calls
+    
+    setLoading(true);
     try {
       // Use the real userId or "current_user" (do not force demo-user)
       const response = await fetch(`/api/social-accounts?userId=${userId}`);
@@ -154,7 +151,7 @@ export function SocialMediaSettings({
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId, loading]); // Add loading to dependencies
 
   const handleConnect = async (platform: SocialMediaPlatform) => {
     if (process.env.NODE_ENV === "development") {

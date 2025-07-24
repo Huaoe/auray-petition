@@ -364,6 +364,9 @@ export const updateSocialMediaCredential = async (credential: SocialMediaCredent
   }
 };
 
+// Cache to avoid repeated initialization checks
+let isSheetInitialized = false;
+
 // Get all social media credentials for a user
 export const getUserSocialMediaCredentials = async (userId: string): Promise<SocialMediaCredential[]> => {
   try {
@@ -374,15 +377,6 @@ export const getUserSocialMediaCredentials = async (userId: string): Promise<Soc
 
     if (process.env.NODE_ENV === 'development') {
       console.log('[socialMediaStorage] Fetching credentials for userId:', userId);
-      console.log('[socialMediaStorage] SPREADSHEET_ID:', SPREADSHEET_ID);
-      console.log('[socialMediaStorage] SOCIAL_SHEET_NAME:', SOCIAL_SHEET_NAME);
-    }
-    
-    // Initialize sheet if it doesn't exist
-    const initResult = await initializeSocialMediaSheet();
-    if (!initResult.success) {
-      console.error('Failed to initialize social media sheet:', initResult.message);
-      return [];
     }
     
     const sheets = await getSocialMediaSheetsClient();
@@ -396,8 +390,11 @@ export const getUserSocialMediaCredentials = async (userId: string): Promise<Soc
       });
     } catch (error: any) {
       if (error.code === 400 && error.message?.includes('Unable to parse range')) {
-        console.log('Sheet range not found, initializing...');
-        await initializeSocialMediaSheet();
+        console.log('Sheet range not found, initializing once...');
+        if (!isSheetInitialized) {
+          await initializeSocialMediaSheet();
+          isSheetInitialized = true;
+        }
         // Retry after initialization
         response = await sheets.spreadsheets.values.get({
           spreadsheetId: SPREADSHEET_ID,

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { URLSearchParams } from 'url';
 import { cookies } from 'next/headers';
 import { storeSocialMediaCredential, initializeSocialMediaSheet } from '@/lib/socialMediaStorage';
+import { decodeState } from '@/lib/auth-utils';
 
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get('code');
@@ -12,21 +13,39 @@ export async function GET(req: NextRequest) {
   const cookieStore = await cookies();
   const storedState = cookieStore.get('twitter_oauth_state')?.value;
   const storedCodeVerifier = cookieStore.get('twitter_code_verifier')?.value;
+  const storedUserId = cookieStore.get('twitter_user_id')?.value;
 
-  console.log('Stored values:', { 
-    storedState: !!storedState, 
+  console.log('Stored values:', {
+    storedState: !!storedState,
     storedCodeVerifier: !!storedCodeVerifier,
-    stateMatch: state === storedState 
+    storedUserId: !!storedUserId,
+    stateMatch: state === storedState
   });
 
   if (!code || !state || !storedState || state !== storedState) {
     console.error('State validation failed:', { code: !!code, state, storedState });
-    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}/connected-accounts?error=invalid_state`);
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}/settings/social-media?error=invalid_state`);
   }
 
   if (!storedCodeVerifier) {
     console.error('Code verifier not found');
-    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}/connected-accounts?error=missing_code_verifier`);
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}/settings/social-media?error=missing_code_verifier`);
+  }
+
+  // Default redirect URL if we can't extract it from state
+  let returnUrl = '/settings/social-media';
+  
+  // Try to decode the state to extract the return URL
+  if (state) {
+    try {
+      const decodedState = decodeState(state);
+      if (decodedState && decodedState.returnUrl) {
+        returnUrl = decodedState.returnUrl;
+        console.log('Extracted return URL from state:', returnUrl);
+      }
+    } catch (error) {
+      console.warn('Failed to decode state parameter:', error);
+    }
   }
 
   try {
@@ -83,9 +102,8 @@ export async function GET(req: NextRequest) {
     // Initialize social media sheet if needed
     await initializeSocialMediaSheet();
 
-    // Store the credentials securely
-    // For now, using a placeholder user ID - in a real app, this would come from user session
-    const userId = 'demo-user@example.com'; // TODO: Replace with actual user session
+    // Use the user ID from the cookie, or fall back to a default if not available
+    const userId = storedUserId || 'anonymous-user';
     
     const credential = {
       userId,
@@ -102,18 +120,20 @@ export async function GET(req: NextRequest) {
     
     if (!storeResult.success) {
       console.error('Failed to store Twitter credentials:', storeResult.message);
-      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}/connected-accounts?error=storage_failed`);
+      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}${returnUrl}?error=storage_failed`);
     }
 
     console.log(`✅ Twitter credentials stored successfully for user: ${userId}`);
 
     // Clear the cookies after use
-    const cookieStore = await cookies();
     cookieStore.delete('twitter_oauth_state');
     cookieStore.delete('twitter_code_verifier');
+    cookieStore.delete('twitter_user_id');
 
-    // Redirect the user to the connected accounts page with success
-    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL}/settings/social-media?success=twitter_connected&platform=twitter&username=${encodeURIComponent(username)}`);
+    // Redirect the user to the return URL with success
+    const redirectUrl = `${process.env.NEXT_PUBLIC_SITE_URL}${returnUrl}?success=twitter_connected&platform=twitter&username=${encodeURIComponent(username)}`;
+    console.log('Redirecting to:', redirectUrl);
+    return NextResponse.redirect(redirectUrl);
 
   } catch (error) {
     console.error(error);
