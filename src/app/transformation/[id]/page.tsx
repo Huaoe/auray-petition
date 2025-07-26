@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { use } from "react";
 import { Button } from "../../../components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../../components/ui/card";
 import { Skeleton } from "../../../components/ui/skeleton";
 import { Heart, MessageCircle, Share2, ExternalLink } from "lucide-react";
-// Remove unused import
 
-export default function TransformationPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default function TransformationPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [isLoading, setIsLoading] = useState(true);
   const [transformation, setTransformation] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);

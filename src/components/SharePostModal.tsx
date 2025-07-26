@@ -29,6 +29,7 @@ interface SharePostModalProps {
   onClose: () => void;
   imageUrl?: string;
   imageDescription?: string;
+  transformationId?: string;
 }
 
 interface FeedPost {
@@ -41,7 +42,13 @@ interface FeedPost {
   shares: number;
 }
 
-export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: SharePostModalProps) {
+export function SharePostModal({ 
+  isOpen, 
+  onClose, 
+  imageUrl, 
+  imageDescription, 
+  transformationId = '1' 
+}: SharePostModalProps) {
   // Initialize all state hooks first
   const [postText, setPostText] = useState('');
   const [selectedPromptIndex, setSelectedPromptIndex] = useState<number | null>(null);

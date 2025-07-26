@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTransformationById } from "../../../../lib/transformation-utils";
 
+interface RouteContext {
+  params: Promise<{ id: string }>;
+}
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: RouteContext
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     
     if (!id) {
       return NextResponse.json(
