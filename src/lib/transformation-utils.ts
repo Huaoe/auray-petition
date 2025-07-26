@@ -37,7 +37,8 @@ export const getTransformationById = async (id: string): Promise<TransformationD
     return {
       id,
       transformationType,
-      imageUrl: `/images/transformations/${id}.jpg`,
+      // Use the correct Google Cloud Storage URL format
+      imageUrl: `https://storage.googleapis.com/auray-church-transformations/transformations/${id}`,
       description: `${transformationType.name} - ${transformationType.description}`,
       createdAt: new Date().toISOString(),
       likes: Math.floor(Math.random() * 100),
@@ -86,7 +87,8 @@ export const getTransformationMetadata = async (id: string) => {
     return {
       title: `Transformation d'église - ${CONSTANTS.CHURCH_NAME}`,
       description: `Découvrez comment ${CONSTANTS.CHURCH_NAME} pourrait être transformée pour servir la communauté.`,
-      imageUrl: '/images/default-transformation.jpg',
+      // Use the correct Google Cloud Storage URL format for the fallback image
+      imageUrl: `https://storage.googleapis.com/auray-church-transformations/transformations/default`,
     };
   }
   
