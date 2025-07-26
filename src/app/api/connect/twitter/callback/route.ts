@@ -56,6 +56,13 @@ export async function GET(req: NextRequest) {
       return new NextResponse('Twitter credentials not configured', { status: 500 });
     }
 
+    // Log environment information
+    console.log('[DEBUG] Twitter callback environment:', {
+      NODE_ENV: process.env.NODE_ENV,
+      NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+      redirectUri: `${process.env.NEXT_PUBLIC_SITE_URL}/api/connect/twitter/callback`
+    });
+
     const body = new URLSearchParams({
       code,
       grant_type: 'authorization_code',

@@ -86,6 +86,15 @@ async function publishToTwitter(accessToken: string, text: string, imageUrl?: st
       tweetData.media = { media_ids: [mediaId] };
     }
 
+    // Add diagnostic logs
+    console.log('[DEBUG] Twitter API request details:', {
+      accessTokenLength: accessToken ? accessToken.length : 0,
+      accessTokenPrefix: accessToken ? `${accessToken.substring(0, 10)}...` : 'none',
+      textLength: text.length,
+      environment: process.env.NODE_ENV || 'unknown',
+      tweetData: JSON.stringify(tweetData)
+    });
+
     const response = await fetch('https://api.twitter.com/2/tweets', {
       method: 'POST',
       headers: {
@@ -280,18 +289,45 @@ async function publishToLinkedIn(accessToken: string, personUrn: string, text: s
 
 // Helper function to refresh token if needed
 async function ensureValidToken(credential: any, platform: SocialMediaPlatform) {
+  console.log('[DEBUG] ensureValidToken:', {
+    platform,
+    hasAccessToken: !!credential.accessToken,
+    hasRefreshToken: !!credential.refreshToken,
+    tokenExpiry: credential.tokenExpiry,
+    isExpired: credential.tokenExpiry ? new Date(credential.tokenExpiry) < new Date() : false,
+    environment: process.env.NODE_ENV
+  });
+
   // Check if token is expired
   if (credential.tokenExpiry && new Date(credential.tokenExpiry) < new Date()) {
+    console.log('[DEBUG] Token is expired, attempting to refresh');
+    
     if (!credential.refreshToken) {
+      console.error('[DEBUG] No refresh token available');
       throw new Error('Token expired and no refresh token available');
     }
 
     try {
+      const clientId = process.env[`NEXT_PUBLIC_${platform.toUpperCase()}_CLIENT_ID`] || '';
+      const clientSecret = process.env[`${platform.toUpperCase()}_CLIENT_SECRET`];
+      
+      console.log('[DEBUG] Refresh token config:', {
+        platform,
+        hasClientId: !!clientId,
+        hasClientSecret: !!clientSecret
+      });
+
       const newTokenData = await refreshAccessToken({
         platform,
         refreshToken: credential.refreshToken,
-        clientId: process.env[`NEXT_PUBLIC_${platform.toUpperCase()}_CLIENT_ID`] || '',
-        clientSecret: process.env[`${platform.toUpperCase()}_CLIENT_SECRET`],
+        clientId,
+        clientSecret,
+      });
+
+      console.log('[DEBUG] Token refresh result:', {
+        success: !!newTokenData.accessToken,
+        hasNewRefreshToken: !!newTokenData.refreshToken,
+        hasExpiresIn: !!newTokenData.expiresIn
       });
 
       // Update stored credentials
@@ -307,6 +343,7 @@ async function ensureValidToken(credential: any, platform: SocialMediaPlatform) 
       
       return credential;
     } catch (error) {
+      console.error('[DEBUG] Token refresh error:', error);
       throw new Error('Failed to refresh token');
     }
   }

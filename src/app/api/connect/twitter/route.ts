@@ -53,6 +53,13 @@ export async function GET(request: NextRequest) {
     secure: process.env.NODE_ENV === "production",
   });
 
+  // Log environment information
+  console.log('[DEBUG] Twitter route environment:', {
+    NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    redirectUri: `${process.env.NEXT_PUBLIC_SITE_URL}/api/connect/twitter/callback`
+  });
+
   const params = new URLSearchParams({
     response_type: "code",
     client_id: twitterClientId,

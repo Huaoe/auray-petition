@@ -42,9 +42,15 @@ export const getUserId = (): string => {
  */
 export const getUserIdServer = async (): Promise<string | null> => {
   console.log('[DEBUG] getUserIdServer: Calling cookies() - this should be awaited in Next.js 15+');
+  console.log('[DEBUG] getUserIdServer: Environment:', process.env.NODE_ENV);
+  console.log('[DEBUG] getUserIdServer: cookies function type:', typeof cookies);
+  console.log('[DEBUG] getUserIdServer: cookies function:', cookies.toString().substring(0, 100));
+  
   const cookieStore = await cookies();
   console.log('[DEBUG] getUserIdServer: cookies() result type:', typeof cookieStore);
   console.log('[DEBUG] getUserIdServer: cookies() is Promise?', cookieStore instanceof Promise);
+  console.log('[DEBUG] getUserIdServer: cookieStore methods:', Object.getOwnPropertyNames(Object.getPrototypeOf(cookieStore)));
+  
   const userId = cookieStore.get(USER_ID_COOKIE)?.value;
   return userId || null;
 };
