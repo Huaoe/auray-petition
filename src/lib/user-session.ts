@@ -40,8 +40,11 @@ export const getUserId = (): string => {
  * Get the user ID from cookies on the server side
  * Returns null if no user ID exists
  */
-export const getUserIdServer = (): string | null => {
-  const cookieStore = cookies();
+export const getUserIdServer = async (): Promise<string | null> => {
+  console.log('[DEBUG] getUserIdServer: Calling cookies() - this should be awaited in Next.js 15+');
+  const cookieStore = await cookies();
+  console.log('[DEBUG] getUserIdServer: cookies() result type:', typeof cookieStore);
+  console.log('[DEBUG] getUserIdServer: cookies() is Promise?', cookieStore instanceof Promise);
   const userId = cookieStore.get(USER_ID_COOKIE)?.value;
   return userId || null;
 };
@@ -49,8 +52,8 @@ export const getUserIdServer = (): string | null => {
 /**
  * Set the user ID in cookies on the server side
  */
-export const setUserIdServer = (userId: string): void => {
-  const cookieStore = cookies();
+export const setUserIdServer = async (userId: string): Promise<void> => {
+  const cookieStore = await cookies();
   cookieStore.set(USER_ID_COOKIE, userId, {
     maxAge: COOKIE_MAX_AGE,
     path: '/',
@@ -64,13 +67,13 @@ export const setUserIdServer = (userId: string): void => {
  * Get or create a user ID on the server side
  * If no user ID exists, create one and store it in a cookie
  */
-export const getOrCreateUserIdServer = (): string => {
-  const userId = getUserIdServer();
+export const getOrCreateUserIdServer = async (): Promise<string> => {
+  const userId = await getUserIdServer();
   if (userId) {
     return userId;
   }
 
   const newUserId = generateUserId();
-  setUserIdServer(newUserId);
+  await setUserIdServer(newUserId);
   return newUserId;
 };

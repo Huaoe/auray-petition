@@ -16,7 +16,7 @@ export async function GET() {
       );
     }
 
-    console.log('🔍 Fetching Stability balance...');
+    // console.log('🔍 Fetching Stability balance...');
     const response = await fetch('https://api.stability.ai/v1/user/balance', {
       method: 'GET',
       headers: {
@@ -43,7 +43,7 @@ export async function GET() {
     }
 
     const data = await response.json();
-    console.log('✅ Stability API success:', data);
+    // console.log('✅ Stability API success:', data);
     
     // L'endpoint /v1/user/balance retourne directement le solde en crédits
     return NextResponse.json({

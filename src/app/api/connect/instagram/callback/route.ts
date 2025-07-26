@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { storeSocialMediaCredential } from '@/lib/socialMediaStorage';
+import { getOrCreateUserIdServer } from '@/lib/user-session';
 
 export async function GET(request: NextRequest) {
   try {
@@ -97,8 +98,9 @@ export async function GET(request: NextRequest) {
     const igUserData = await igUserResponse.json();
 
     // Store the credentials securely
+    const userId = await getOrCreateUserIdServer(); // Get or create user ID on the server side
     await storeSocialMediaCredential({
-      userId: 'current_user', // This should be replaced with actual user ID from session
+      userId,
       platform: 'instagram',
       accessToken: access_token,
       refreshToken: undefined, // Instagram doesn't provide refresh tokens in this flow

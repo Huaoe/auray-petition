@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Image as ImageIcon, Send, CheckCircle, AlertCircle, Loader2, Heart, MessageCircle, Share2, Settings } from "lucide-react";
+import { Image as ImageIcon, Send, CheckCircle, AlertCircle, Loader2, Heart, MessageCircle, Share2, Settings, Link2 } from "lucide-react";
 import Link from 'next/link';
 import {
   Dialog,
@@ -52,6 +52,7 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
   const [publishResults, setPublishResults] = useState<SocialMediaPublishResult[]>([]);
   const [publishedPost, setPublishedPost] = useState<any>(null);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [connectingPlatform, setConnectingPlatform] = useState<SocialMediaPlatform | null>(null);
 
   // Liste des prompts en français pour Bayrou et la transformation économique
   const frenchPrompts = [
@@ -204,6 +205,28 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
     setSelectedPlatforms(newSelected);
   };
 
+  // Handle direct connection to a social media platform
+  const handleConnectPlatform = (platform: SocialMediaPlatform) => {
+    setConnectingPlatform(platform);
+    setMessage(null);
+    
+    try {
+      // Build the return URL to come back to this modal
+      const returnUrl = encodeURIComponent('/share-post');
+      const connectUrl = `/api/connect/${platform}?returnUrl=${returnUrl}`;
+      
+      // Redirect to the OAuth flow
+      window.location.href = connectUrl;
+    } catch (error) {
+      console.error('OAuth initiation error:', error);
+      setMessage({
+        type: 'error',
+        text: `Erreur lors de la connexion à ${SOCIAL_MEDIA_PLATFORMS.find(p => p.id === platform)?.name}. Veuillez réessayer.`
+      });
+      setConnectingPlatform(null);
+    }
+  };
+
   const getCharacterCount = () => {
     const remaining = CHARACTER_LIMIT - postText.length;
     return {
@@ -255,18 +278,35 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
     try {
       const results: SocialMediaPublishResult[] = [];
       
+      // Create a transformation page URL if we have an image
+      let transformationUrl = '';
+      if (imageUrl) {
+        // Extract the transformation ID from the image URL if possible
+        const urlParts = imageUrl.split('/');
+        const transformationId = urlParts[urlParts.length - 1].split('.')[0];
+        transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${transformationId}`;
+      }
+      
+      // Add the transformation URL to the post text if available
+      const finalPostText = transformationUrl
+        ? `${postText}\n\nVoir la transformation: ${transformationUrl}`
+        : postText;
+      
       // Publish to each selected platform
       for (const platform of selectedPlatforms) {
         try {
+          // Set up headers with content type
+          const headers = {
+            'Content-Type': 'application/json',
+          };
+          
           const response = await fetch('/api/social-media/publish', {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            headers,
             body: JSON.stringify({
               platform,
-              text: postText,
-              imageUrl,
+              text: finalPostText,
+              // Don't include imageUrl - we're using a link instead
             }),
           });
 
@@ -416,7 +456,7 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
                     <Share2 className="h-5 w-5 text-blue-600" />
                     <span className="text-sm font-medium">Sélectionner les plateformes</span>
                   </div>
-                  <Link href="/settings/social-media?returnUrl=/share-post">
+                  <Link href={`/settings/social-media?returnUrl=/share-post${connectedAccounts.length === 0 ? '&noAccounts=true' : ''}`}>
                     <Button variant="ghost" size="sm" className="text-xs">
                       <Settings className="h-3 w-3 mr-1" />
                       Gérer les comptes
@@ -429,16 +469,38 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
                     <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
                   </div>
                 ) : connectedAccounts.length === 0 ? (
-                  <div className="text-center py-8">
+                  <div className="text-center py-6">
                     <p className="text-sm text-gray-600 mb-4">
                       Aucun compte social connecté
                     </p>
-                    <Link href="/settings/social-media?returnUrl=/share-post">
-                      <Button variant="outline" size="sm">
-                        <Settings className="h-4 w-4 mr-2" />
-                        Connecter des comptes
-                      </Button>
-                    </Link>
+                    
+                    {/* Direct connection buttons for each platform */}
+                    <div className="grid grid-cols-2 gap-3 mb-4">
+                      {SOCIAL_MEDIA_PLATFORMS.map((platform) => (
+                        <Button 
+                          key={platform.id}
+                          variant="outline" 
+                          size="sm"
+                          className="flex items-center gap-2 justify-center"
+                          onClick={() => handleConnectPlatform(platform.id)}
+                          disabled={connectingPlatform === platform.id}
+                        >
+                          {connectingPlatform === platform.id ? (
+                            <>
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                              <span>Connexion...</span>
+                            </>
+                          ) : (
+                            <>
+                              <span className="text-lg">{platform.icon}</span>
+                              <span>Connecter {platform.name}</span>
+                            </>
+                          )}
+                        </Button>
+                      ))}
+                    </div>
+                    
+                   
                   </div>
                 ) : (
                   <>
@@ -474,10 +536,28 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
                                     @{connectedAccount.username}
                                   </div>
                                 ) : (
-                                  <div className="text-xs text-gray-500">Non connecté</div>
+                                  <div className="flex items-center mt-1">
+                                    <Button 
+                                      variant="ghost" 
+                                      size="sm" 
+                                      className="h-6 px-2 py-0 text-xs text-blue-600"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleConnectPlatform(platform.id);
+                                      }}
+                                    >
+                                      <Link2 className="h-3 w-3 mr-1" />
+                                      Connecter
+                                    </Button>
+                                  </div>
                                 )}
                                 {platform.requiresImage && (
                                   <div className="text-xs text-gray-500">Image requise</div>
+                                )}
+                                {platform.requiresElevatedAccess && (
+                                  <div className="text-xs text-amber-600">
+                                    Images peuvent nécessiter un accès API élevé
+                                  </div>
                                 )}
                                 {platform.maxTextLength && (
                                   <div className="text-xs text-gray-500">
@@ -573,7 +653,7 @@ export function SharePostModal({ isOpen, onClose, imageUrl, imageDescription }: 
             <Button variant="outline" onClick={handleClose} disabled={publishing}>
               {publishResults.length > 0 ? 'Fermer' : 'Annuler'}
             </Button>
-            {publishResults.length === 0 && (
+{publishResults.length === 0 && (
               <Button
                 onClick={handlePublish}
                 disabled={publishing || !postText.trim() || selectedPlatforms.size === 0}

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSocialMediaCredential, updateSocialMediaCredential } from '@/lib/socialMediaStorage';
 import { refreshAccessToken } from '@/lib/social-media-oauth';
 import { SocialMediaPlatform } from '@/lib/types';
+import { getOrCreateUserIdServer } from '@/lib/user-session';
 
 // Platform-specific publishing functions with modern APIs
 async function publishToTwitter(accessToken: string, text: string, imageUrl?: string) {
@@ -333,7 +334,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Get user credentials for the platform
-    let credential = await getSocialMediaCredential('current_user', platform);
+    const userId = await getOrCreateUserIdServer();
+    let credential = await getSocialMediaCredential(userId, platform);
     
     if (!credential) {
       return NextResponse.json({ 

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { storeSocialMediaCredential } from '@/lib/socialMediaStorage';
+import { getOrCreateUserIdServer } from '@/lib/user-session';
 
 export async function GET(request: NextRequest) {
   try {
@@ -75,8 +76,9 @@ export async function GET(request: NextRequest) {
     console.log('LinkedIn user data received:', { name: userData.name, sub: userData.sub });
 
     // Store the credentials securely
+    const userId = await getOrCreateUserIdServer(); // Get or create user ID on the server side
     await storeSocialMediaCredential({
-      userId: 'demo-user@example.com', // Match the user ID used by other platforms
+      userId,
       platform: 'linkedin',
       accessToken: access_token,
       refreshToken: undefined, // LinkedIn doesn't provide refresh tokens in this flow

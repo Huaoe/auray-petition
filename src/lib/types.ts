@@ -32,6 +32,7 @@ export interface SocialMediaPlatformInfo {
   color: string;
   requiresImage?: boolean;
   maxTextLength?: number;
+  requiresElevatedAccess?: boolean;
 }
 
 export interface SocialMediaPublishResult {
@@ -62,6 +63,8 @@ export interface SocialMediaAccount {
   connectedAt: string;
   lastUsed?: string;
   isExpired?: boolean;
+  // For Twitter OAuth 2.0 migration
+  needsReconnection?: boolean;
 }
 
 export interface ConnectAccountResponse {
