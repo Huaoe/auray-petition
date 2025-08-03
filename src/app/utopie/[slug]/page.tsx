@@ -141,10 +141,19 @@ export default async function UtopieDetailPage({ params }: { params: Promise<{ s
                       </h4>
                       <div className="grid gap-4 md:grid-cols-2">
                         {section.examples.map((example, exampleIndex) => (
-                          <div 
+                          <div
                             key={exampleIndex}
                             className="bg-green-50 border border-green-200 rounded-lg p-4"
                           >
+                            {example.imageUrl && (
+                              <div className="mb-3">
+                                <img
+                                  src={example.imageUrl}
+                                  alt={`Image de ${example.name}`}
+                                  className="w-full h-48 object-cover rounded-md"
+                                />
+                              </div>
+                            )}
                             <h5 className="font-semibold text-green-800 mb-1">
                               {example.name}
                             </h5>
@@ -155,7 +164,7 @@ export default async function UtopieDetailPage({ params }: { params: Promise<{ s
                               {example.description}
                             </p>
                             {example.link && (
-                              <a 
+                              <a
                                 href={example.link}
                                 target="_blank"
                                 rel="noopener noreferrer"

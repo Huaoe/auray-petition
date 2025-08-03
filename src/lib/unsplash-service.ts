@@ -76,7 +76,8 @@ export class UnsplashPhotoService {
         // } else {
           console.error(`Rate limiting persists after ${retryCount} retries. Aborting.`);
           // Return empty array instead of throwing to allow processing to continue
-          return [];
+   
+        throw new Error(`Rate limited error: ${response.status} ${response.statusText}`);
         //}
       }
       
@@ -86,8 +87,12 @@ export class UnsplashPhotoService {
       
       const data = await response.json() as UnsplashSearchResponse;
       return data.results;
-    } catch (error) {
-      console.error('Error searching Unsplash images:', error);
+    } catch (error: unknown) {
+      if (error instanceof Error && error.message.includes('Rate')) {
+         throw new Error('Rate limited error');
+      }
+      else
+        console.error('Error searching Unsplash images:', error);
       // Return empty array instead of throwing to allow processing to continue
       return [];
     }

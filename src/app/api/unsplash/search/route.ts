@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { unsplashService } from '@/lib/unsplash-service';
+import { requireDevelopmentEnv } from '@/lib/env-utils';
 
 export async function GET(request: NextRequest) {
+  // Check if we're in development environment
+  const devEnvCheck = requireDevelopmentEnv();
+  if (devEnvCheck) {
+    return devEnvCheck;
+  }
+
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get('query');
   

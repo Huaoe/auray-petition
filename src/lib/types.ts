@@ -40,6 +40,7 @@ export interface SocialMediaPublishResult {
   success: boolean;
   postId?: string;
   error?: string;
+  needsReconnect?: boolean;
 }
 
 export interface SocialMediaPublishRequest {
@@ -82,21 +83,20 @@ export const SOCIAL_MEDIA_PLATFORMS: SocialMediaPlatformInfo[] = [
     color: 'bg-black text-white',
     maxTextLength: 280,
   },
-  {
-    id: 'facebook',
-    name: 'Facebook',
-    icon: '📘',
-    color: 'bg-blue-600 text-white',
-    maxTextLength: 63206,
-  },
-  {
-    id: 'instagram',
-    name: 'Instagram',
-    icon: '📷',
-    color: 'bg-gradient-to-r from-purple-500 to-pink-500 text-white',
-    requiresImage: true,
-    maxTextLength: 2200,
-  },
+  // {
+  //   id: 'facebook',
+  //   name: 'Facebook',
+  //   icon: 'f',
+  //   color: 'bg-blue-600 text-white',
+  //   maxTextLength: 5000,
+  // },
+  // {
+  //   id: 'instagram',
+  //   name: 'Instagram',
+  //   icon: '📷',
+  //   color: 'bg-pink-600 text-white',
+  //   requiresImage: true,
+  // },
   {
     id: 'linkedin',
     name: 'LinkedIn',

@@ -764,7 +764,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Flexible layouts"
       ],
       "promptEnhancement": "with the innovative transparency of MIT Media Lab, featuring glass-walled research spaces, collaborative zones, cutting-edge technology integration, and flexible experimental environments",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=Google+Campus+Mountain+View+tech+workspace"
+      "imageUrl": "https://images.unsplash.com/photo-1564338673300-b8ea25e60737?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNSVQlMjBNZWRpYSUyMExhYiUyMEhpZ2gtVGVjaCUyMENvbnRlbXBvcmFyeSUyMFRyYW5zcGFyZW50JTIwZmFjYWRlcyUyMENvbGxhYm9yYXRpdmUlMjBzcGFjZXN8ZW58MHwwfHx8MTc1NDIyNzg1NHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "google-x-moonshot",
@@ -779,7 +779,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Innovation culture"
       ],
       "promptEnhancement": "inspired by Google X's moonshot innovation culture, featuring experimental prototype workshops, breakthrough technology zones, creative collaboration spaces, and environments designed for radical innovation",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1614643738701-b3e3b4245dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHb29nbGUlMjBYJTIwTW9vbnNob3QlMjBGYWN0b3J5JTIwRXhwZXJpbWVudGFsJTIwVGVjaCUyMFByb3RvdHlwZSUyMHdvcmtzaG9wcyUyMEV4cGVyaW1lbnRhbCUyMHpvbmVzfGVufDB8MHx8fDE3NTQyMjc4NTV8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "ideo-design-lab",
@@ -794,7 +794,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Human-centered design"
       ],
       "promptEnhancement": "with IDEO's human-centered design philosophy, featuring creative collaboration studios, design thinking workshops, rapid prototyping spaces, and environments that foster innovative problem-solving",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=WeWork+London+modern+collaborative+workspace"
+      "imageUrl": "https://images.unsplash.com/photo-1675209430709-add9a46b1518?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxJREVPJTIwRGVzaWduJTIwTGFiJTIwQ3JlYXRpdmUlMjBDb250ZW1wb3JhcnklMjBEZXNpZ24lMjB0aGlua2luZyUyMHNwYWNlcyUyMFByb3RvdHlwZSUyMHN0dWRpb3N8ZW58MHwwfHx8MTc1NDIyNzg1Nnww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "bell-labs-innovation",
@@ -809,7 +809,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Discovery culture"
       ],
       "promptEnhancement": "inspired by Bell Labs' legendary innovation heritage, featuring world-class research laboratories, scientific discovery spaces, breakthrough technology development areas, and environments steeped in innovation history",
-      "imageUrl": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1573484557933-fccf1ac71a30?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCZWxsJTIwTGFicyUyMElubm92YXRpb24lMjBDZW50ZXIlMjBTY2llbnRpZmljJTIwSGVyaXRhZ2UlMjBSZXNlYXJjaCUyMGxhYm9yYXRvcmllcyUyMFNjaWVudGlmaWMlMjBoZXJpdGFnZXxlbnwwfDB8fHwxNzU0MjI3ODU4fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "samsung-innovation-lab",
@@ -824,7 +824,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Korean innovation"
       ],
       "promptEnhancement": "with Samsung's advanced technology innovation approach, featuring AI research centers, consumer electronics labs, advanced manufacturing spaces, and Korean-inspired modern design elements",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1533619025797-cb54d7bcb5e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTYW1zdW5nJTIwSW5ub3ZhdGlvbiUyMExhYiUyMEtvcmVhbiUyMFRlY2glMjBNb2Rlcm4lMjBBSSUyMHJlc2VhcmNoJTIwY2VudGVycyUyMENvbnN1bWVyJTIwdGVjaCUyMGxhYnN8ZW58MHwwfHx8MTc1NDIyNzg1OXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "biomimicry-institute-lab",
@@ -839,7 +839,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Bio-mimetic design"
       ],
       "promptEnhancement": "inspired by the Biomimicry Institute's nature-based innovation, featuring bio-inspired research spaces, natural systems laboratories, sustainable technology development areas, and environments that mirror biological efficiency",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1695916294991-bbdf52da9dc2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCaW9taW1pY3J5JTIwSW5zdGl0dXRlJTIwTGFiJTIwQmlvLUluc3BpcmVkJTIwRGVzaWduJTIwTmF0dXJlLWluc3BpcmVkJTIwcmVzZWFyY2glMjBCaW9sb2dpY2FsJTIwc3lzdGVtcyUyMHN0dWR5fGVufDB8MHx8fDE3NTQyMjc4NjB8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "fab-lab-barcelona",
@@ -854,7 +854,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Open innovation"
       ],
       "promptEnhancement": "with Fab Lab Barcelona's maker culture philosophy, featuring digital fabrication workshops, rapid prototyping stations, open innovation spaces, and collaborative maker environments that democratize innovation",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=Mindspace+Berlin+boutique+coworking+premium"
+      "imageUrl": "https://images.unsplash.com/photo-1720983590448-28b749bd403d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGYWIlMjBMYWIlMjBCYXJjZWxvbmElMjBNYWtlciUyMENvbnRlbXBvcmFyeSUyMERpZ2l0YWwlMjBmYWJyaWNhdGlvbiUyME1ha2VyJTIwc3BhY2VzfGVufDB8MHx8fDE3NTQyMjc4NjJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "market_hall": [
@@ -871,7 +871,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Central circulation"
       ],
       "promptEnhancement": "inspired by Madrid's Mercado de San Miguel with its elegant iron and glass architecture, featuring artisanal food stalls, central circulation spaces, and historic market atmosphere",
-      "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1467892748361-67bb7c20d06e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNZXJjYWRvJTIwZGUlMjBTYW4lMjBNaWd1ZWwlMjBJcm9uJTIwYW5kJTIwR2xhc3MlMjBBcmNoaXRlY3R1cmUlMjBJcm9uJTIwZnJhbWV3b3JrJTIwR2xhc3MlMjB3YWxsc3xlbnwwfDB8fHwxNzU0MjI3ODYzfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "borough-market-london",
@@ -886,7 +886,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Historic atmosphere"
       ],
       "promptEnhancement": "with the Victorian grandeur of London's Borough Market, featuring cast iron columns, historic market atmosphere, diverse food vendors, and traditional British market design",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=Louvre+Abu+Dhabi+dome+light+effect"
+      "imageUrl": "https://images.unsplash.com/photo-1556911861-d2a15c4969c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCb3JvdWdoJTIwTWFya2V0JTIwVmljdG9yaWFuJTIwSW5kdXN0cmlhbCUyMENhc3QlMjBpcm9uJTIwY29sdW1ucyUyMFZpY3RvcmlhbiUyMGFyY2hpdGVjdHVyZXxlbnwwfDB8fHwxNzU0MjI3ODY1fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "grand-bazaar-istanbul",
@@ -901,7 +901,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Cultural heritage"
       ],
       "promptEnhancement": "inspired by Istanbul's Grand Bazaar with its Byzantine vaulted ceilings, traditional craft stalls, historic stone passages, and rich cultural marketplace atmosphere",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=Walt+Disney+Concert+Hall+Los+Angeles+curved+steel"
+      "imageUrl": "https://images.unsplash.com/photo-1596679619494-27aaf90d6413?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHcmFuZCUyMEJhemFhciUyMEJ5emFudGluZSUyME90dG9tYW4lMjBWYXVsdGVkJTIwY2VpbGluZ3MlMjBUcmFkaXRpb25hbCUyMGNyYWZ0c3xlbnwwfDB8fHwxNzU0MjI3ODY2fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "pike-place-market",
@@ -916,7 +916,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Community gathering"
       ],
       "promptEnhancement": "with the vibrant energy of Seattle's Pike Place Market, featuring fresh produce displays, artisanal vendor stalls, waterfront market atmosphere, and Pacific Northwest community spirit",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1549092273-8b23dde8ac2b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxQaWtlJTIwUGxhY2UlMjBNYXJrZXQlMjBQYWNpZmljJTIwTm9ydGh3ZXN0JTIwV2F0ZXJmcm9udCUyMGxvY2F0aW9uJTIwRnJlc2glMjBwcm9kdWNlfGVufDB8MHx8fDE3NTQyMjc4Njd8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "marche-des-enfants-rouges",
@@ -931,7 +931,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Local specialties"
       ],
       "promptEnhancement": "inspired by Paris's Marché des Enfants Rouges with its historic covered structure, French culinary traditions, intimate market atmosphere, and authentic local specialty vendors",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=Noma+Copenhagen+Nordic+minimalism+restaurant"
+      "imageUrl": "https://images.unsplash.com/photo-1495844311468-59f49389020a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYXJjaCVDMyVBOSUyMGRlcyUyMEVuZmFudHMlMjBSb3VnZXMlMjBGcmVuY2glMjBUcmFkaXRpb25hbCUyMEhpc3RvcmljJTIwY292ZXJlZCUyMHN0cnVjdHVyZSUyMEZyZW5jaCUyMGN1bGluYXJ5JTIwdHJhZGl0aW9ufGVufDB8MHx8fDE3NTQyMjc4Njl8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "mercado-central-valencia",
@@ -946,7 +946,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Cultural landmark"
       ],
       "promptEnhancement": "with the modernist beauty of Valencia's Mercado Central, featuring stunning decorative tile work, fresh Mediterranean produce displays, architectural landmark design, and Spanish market culture",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=Osteria+Francescana+Modena+Italian+restaurant"
+      "imageUrl": "https://images.unsplash.com/photo-1645303270230-f92935b76c22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNZXJjYWRvJTIwQ2VudHJhbCUyME1vZGVybmlzdCUyME1vZGVybmlzdCUyMGFyY2hpdGVjdHVyZSUyMERlY29yYXRpdmUlMjB0aWxlJTIwd29ya3xlbnwwfDB8fHwxNzU0MjI3ODcwfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "tsukiji-outer-market",
@@ -961,7 +961,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Culinary authenticity"
       ],
       "promptEnhancement": "inspired by Tokyo's Tsukiji Outer Market with its traditional Japanese market design, fresh seafood displays, authentic street food stalls, and vibrant culinary marketplace atmosphere",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1675790931692-d36049a5c7f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxUc3VraWppJTIwT3V0ZXIlMjBNYXJrZXQlMjBKYXBhbmVzZSUyMFRyYWRpdGlvbmFsJTIwRnJlc2glMjBzZWFmb29kJTIwU3RyZWV0JTIwZm9vZCUyMHN0YWxsc3xlbnwwfDB8fHwxNzU0MjI3ODcyfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "california-academy-sciences",
@@ -976,7 +976,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Natural ventilation"
       ],
       "promptEnhancement": "with the California Academy of Sciences' living roof design, featuring integrated ecosystems, sustainable building systems, natural habitat integration, and biophilic architecture that breathes with nature",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1631728884184-98ba78f39d1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDYWxpZm9ybmlhJTIwQWNhZGVteSUyMG9mJTIwU2NpZW5jZXMlMjBMaXZpbmclMjBBcmNoaXRlY3R1cmUlMjBMaXZpbmclMjByb29mJTIwZWNvc3lzdGVtJTIwSW50ZWdyYXRlZCUyMGhhYml0YXRzfGVufDB8MHx8fDE3NTQyMjc4NzN8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "gardens-by-the-bay",
@@ -991,7 +991,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Solar energy integration"
       ],
       "promptEnhancement": "inspired by Singapore's Gardens by the Bay with its iconic supertree structures, climate-controlled biomes, vertical garden systems, and futuristic botanical architecture that merges technology with nature",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1546842051-da4cb1955729?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHYXJkZW5zJTIwYnklMjB0aGUlMjBCYXklMjBGdXR1cmlzdGljJTIwQm90YW5pY2FsJTIwU3VwZXJ0cmVlJTIwc3RydWN0dXJlcyUyMENsaW1hdGUtY29udHJvbGxlZCUyMGJpb21lc3xlbnwwfDB8fHwxNzU0MjI3ODc0fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "amazon-spheres-seattle",
@@ -1006,7 +1006,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Climate control systems"
       ],
       "promptEnhancement": "with the Amazon Spheres' innovative glass sphere design, featuring tropical plant habitats, urban biophilic integration, advanced climate control, and workspace-nature fusion concepts",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1567581910597-e13fd165564a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBbWF6b24lMjBTcGhlcmVzJTIwQ29ycG9yYXRlJTIwQmlvcGhpbGljJTIwR2xhc3MlMjBzcGhlcmUlMjBkZXNpZ24lMjBUcm9waWNhbCUyMHBsYW50JTIwaGFiaXRhdHN8ZW58MHwwfHx8MTc1NDIyNzg3Nnww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "high-line-new-york",
@@ -1021,7 +1021,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Urban wildlife corridors"
       ],
       "promptEnhancement": "inspired by New York's High Line with its elevated biophilic design, native plant restoration, adaptive reuse architecture, and urban wildlife corridor concepts that transform infrastructure into living spaces",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1536408694549-4b95acc6e56d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxIaWdoJTIwTGluZSUyMFBhcmslMjBBZGFwdGl2ZSUyMFJldXNlJTIwQmlvcGhpbGljJTIwRWxldmF0ZWQlMjB3YWxrd2F5cyUyME5hdGl2ZSUyMHBsYW50JTIwcmVzdG9yYXRpb258ZW58MHwwfHx8MTc1NDIyNzg3N3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "biosphere-2",
@@ -1036,7 +1036,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Climate simulation"
       ],
       "promptEnhancement": "with Biosphere 2's experimental ecological design, featuring multiple enclosed biome systems, climate simulation technology, ecosystem research facilities, and controlled environmental chambers",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1583275087496-f7e72ec69e94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCaW9zcGhlcmUlMjAyJTIwRXhwZXJpbWVudGFsJTIwRWNvbG9naWNhbCUyME11bHRpcGxlJTIwYmlvbWUlMjBzeXN0ZW1zJTIwRW5jbG9zZWQlMjBlY29zeXN0ZW1zfGVufDB8MHx8fDE3NTQyMjc4Nzl8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "eden-project-cornwall",
@@ -1051,7 +1051,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Educational integration"
       ],
       "promptEnhancement": "inspired by Cornwall's Eden Project with its massive geodesic biome domes, global ecosystem recreation, diverse climate zones, and educational environmental architecture that showcases planetary biodiversity",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1626617977270-d7adb351c13d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxFZGVuJTIwUHJvamVjdCUyMEdlb2Rlc2ljJTIwRW52aXJvbm1lbnRhbCUyMEdlb2Rlc2ljJTIwZG9tZSUyMHN0cnVjdHVyZXMlMjBHbG9iYWwlMjBlY29zeXN0ZW0lMjByZWNyZWF0aW9ufGVufDB8MHx8fDE3NTQyMjc4ODB8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "jewel-changi-forest-valley",
@@ -1066,7 +1066,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Natural light integration"
       ],
       "promptEnhancement": "with Jewel Changi's spectacular indoor forest valley, featuring the world's tallest indoor waterfall, lush tropical vegetation, natural light integration, and immersive forest architecture within built environments",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1615280863987-2333e2f29000?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxKZXdlbCUyMENoYW5naSUyMEZvcmVzdCUyMFZhbGxleSUyMEluZG9vciUyMEZvcmVzdCUyMEFyY2hpdGVjdHVyZSUyMEluZG9vciUyMHdhdGVyZmFsbCUyMEZvcmVzdCUyMHZhbGxleSUyMGRlc2lnbnxlbnwwfDB8fHwxNzU0MjI3ODgyfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "ars-electronica-center",
@@ -1081,7 +1081,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Immersive experiences"
       ],
       "promptEnhancement": "with the Ars Electronica Center's digital futurism, featuring interactive holographic art installations, future technology displays, immersive digital experiences, and cutting-edge multimedia environments",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1591911913225-b4f65b23a475?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBcnMlMjBFbGVjdHJvbmljYSUyMENlbnRlciUyMERpZ2l0YWwlMjBGdXR1cmlzbSUyMEludGVyYWN0aXZlJTIwZGlnaXRhbCUyMGFydCUyMEhvbG9ncmFwaGljJTIwZGlzcGxheXN8ZW58MHwwfHx8MTc1NDIyNzg4M3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "digital-art-museum-tokyo",
@@ -1096,7 +1096,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Flowing digital art"
       ],
       "promptEnhancement": "inspired by Tokyo's Digital Art Museum with its borderless projection-mapped spaces, interactive holographic environments, flowing digital artworks, and seamless reality-digital integration",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1686052179725-0af7f4805c80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxEaWdpdGFsJTIwQXJ0JTIwTXVzZXVtJTIwQm9yZGVybGVzcyUyMERpZ2l0YWwlMjBQcm9qZWN0aW9uJTIwbWFwcGluZyUyMEJvcmRlcmxlc3MlMjBzcGFjZXN8ZW58MHwwfHx8MTc1NDIyNzg4NHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "future-world-singapore",
@@ -1111,7 +1111,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Digital playground"
       ],
       "promptEnhancement": "with Future World Singapore's educational holographic design, featuring interactive learning environments, holographic nature displays, digital playground concepts, and immersive educational technology",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1515561489380-e0a0f11d4eb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGdXR1cmUlMjBXb3JsZCUyMEVkdWNhdGlvbmFsJTIwSG9sb2dyYXBoaWMlMjBJbnRlcmFjdGl2ZSUyMGxlYXJuaW5nJTIwSG9sb2dyYXBoaWMlMjBuYXR1cmV8ZW58MHwwfHx8MTc1NDIyNzg4Nnww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "museum-of-illusions",
@@ -1126,7 +1126,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Interactive exhibits"
       ],
       "promptEnhancement": "inspired by the Museum of Illusions with its mind-bending optical illusions, holographic displays, interactive visual experiences, and architecture that challenges perception and reality",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1566818053564-2fa79c357119?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNdXNldW0lMjBvZiUyMElsbHVzaW9ucyUyMElsbHVzaW9uJTIwQXJjaGl0ZWN0dXJlJTIwT3B0aWNhbCUyMGlsbHVzaW9ucyUyMEhvbG9ncmFwaGljJTIwZGlzcGxheXN8ZW58MHwwfHx8MTc1NDIyNzg4N3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "national-museum-emerging-science",
@@ -1141,7 +1141,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Scientific visualization"
       ],
       "promptEnhancement": "with the National Museum of Emerging Science's holographic demonstrations, featuring scientific visualization, future technology displays, interactive learning environments, and cutting-edge science communication",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1515561489380-e0a0f11d4eb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxOYXRpb25hbCUyME11c2V1bSUyMG9mJTIwRW1lcmdpbmclMjBTY2llbmNlJTIwU2NpZW50aWZpYyUyMEhvbG9ncmFwaGljJTIwSG9sb2dyYXBoaWMlMjBzY2llbmNlJTIwZGVtb3MlMjBGdXR1cmUlMjB0ZWNobm9sb2d5fGVufDB8MHx8fDE3NTQyMjc4ODl8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "cooper-hewitt-design-museum",
@@ -1156,7 +1156,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Design exploration"
       ],
       "promptEnhancement": "inspired by Cooper Hewitt's interactive design approach, featuring digital pen technology, holographic design exploration tools, interactive exhibit systems, and innovative design communication methods",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1615387000571-bdcfe92eb67c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDb29wZXIlMjBIZXdpdHQlMjBEZXNpZ24lMjBNdXNldW0lMjBJbnRlcmFjdGl2ZSUyMERlc2lnbiUyMERpZ2l0YWwlMjBwZW4lMjBpbnRlcmFjdGlvbiUyMEhvbG9ncmFwaGljJTIwZGVzaWduJTIwdG9vbHN8ZW58MHwwfHx8MTc1NDIyNzg5MHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "van-gogh-immersive-experience",
@@ -1171,7 +1171,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Classical art digitization"
       ],
       "promptEnhancement": "with the Van Gogh Immersive Experience's 360-degree projection design, featuring holographic art recreation, immersive classical art environments, and digital transformation of traditional masterpieces",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1600140094325-8f96c7c47767?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxWYW4lMjBHb2doJTIwSW1tZXJzaXZlJTIwRXhwZXJpZW5jZSUyMEltbWVyc2l2ZSUyMEFydCUyMDM2MC1kZWdyZWUlMjBwcm9qZWN0aW9ucyUyMEhvbG9ncmFwaGljJTIwYXJ0JTIwcmVjcmVhdGlvbnxlbnwwfDB8fHwxNzU0MjI3ODkyfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "plenty-vertical-farm",
@@ -1186,7 +1186,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Data-driven farming"
       ],
       "promptEnhancement": "with Plenty's high-tech vertical farming design, featuring robotic automation systems, AI-controlled growing environments, precision agriculture technology, and data-driven farming optimization",
-      "imageUrl": "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1496434036277-c5a9e94ad3cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxQbGVudHklMjBWZXJ0aWNhbCUyMEZhcm0lMjBSb2JvdGljJTIwQWdyaWN1bHR1cmFsJTIwUm9ib3RpYyUyMGF1dG9tYXRpb24lMjBBSS1jb250cm9sbGVkJTIwc3lzdGVtc3xlbnwwfDB8fHwxNzU0MjI3ODkzfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "sky-greens-singapore",
@@ -1201,7 +1201,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Tropical agriculture"
       ],
       "promptEnhancement": "inspired by Sky Greens Singapore's rotating tower design, featuring hydraulic water-driven rotation systems, tropical vertical agriculture, and innovative space-efficient farming methods",
-      "imageUrl": "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1648298163952-17081c29aae1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTa3klMjBHcmVlbnMlMjBSb3RhdGluZyUyMEFncmljdWx0dXJhbCUyMFJvdGF0aW5nJTIwdG93ZXIlMjBkZXNpZ24lMjBIeWRyYXVsaWMlMjBzeXN0ZW1zfGVufDB8MHx8fDE3NTQyMjc4OTR8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "gotham-greens-brooklyn",
@@ -1216,7 +1216,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Sustainable systems"
       ],
       "promptEnhancement": "with Gotham Greens' urban rooftop farming approach, featuring greenhouse technology, city integration, sustainable growing systems, and innovative urban agriculture solutions",
-      "imageUrl": "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1461886988361-c3d1d47fd6f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHb3RoYW0lMjBHcmVlbnMlMjBVcmJhbiUyMFJvb2Z0b3AlMjBBZ3JpY3VsdHVyYWwlMjBSb29mdG9wJTIwaW50ZWdyYXRpb24lMjBVcmJhbiUyMGZhcm1pbmd8ZW58MHwwfHx8MTc1NDIyNzg5Nnww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "plantagon-linkoping",
@@ -1231,7 +1231,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Scandinavian sustainability"
       ],
       "promptEnhancement": "inspired by Plantagon's spherical vertical farm design, featuring helical growing systems, integrated office spaces, Scandinavian sustainability principles, and innovative agricultural architecture",
-      "imageUrl": "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1483036530564-40892deb1be6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxQbGFudGFnb24lMjBTcGhlcmljYWwlMjBBZ3JpY3VsdHVyYWwlMjBTcGhlcmljYWwlMjBkZXNpZ24lMjBIZWxpY2FsJTIwZ3Jvd2luZyUyMHN5c3RlbXxlbnwwfDB8fHwxNzU0MjI3ODk3fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "vertical-harvest-jackson",
@@ -1246,7 +1246,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Mountain agriculture"
       ],
       "promptEnhancement": "with Vertical Harvest's climate-resilient design, featuring three-story greenhouse systems, year-round growing capabilities, harsh climate adaptation, and mountain region agricultural innovation",
-      "imageUrl": "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1524486361537-8ad15938e1a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxWZXJ0aWNhbCUyMEhhcnZlc3QlMjBDbGltYXRlLVJlc2lsaWVudCUyMEFncmljdWx0dXJhbCUyMFRocmVlLXN0b3J5JTIwZ3JlZW5ob3VzZSUyMFllYXItcm91bmQlMjBncm93aW5nfGVufDB8MHx8fDE3NTQyMjc4OTl8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "bowery-farming-kearny",
@@ -1261,7 +1261,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Data analytics"
       ],
       "promptEnhancement": "inspired by Bowery Farming's AI-powered approach, featuring machine learning optimization, pesticide-free growing systems, advanced data analytics, and intelligent agricultural automation",
-      "imageUrl": "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1537817853709-7d6a1d207112?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCb3dlcnklMjBGYXJtaW5nJTIwQUklMjBBZ3JpY3VsdHVyYWwlMjBBSS1wb3dlcmVkJTIwc3lzdGVtcyUyME1hY2hpbmUlMjBsZWFybmluZyUyMG9wdGltaXphdGlvbnxlbnwwfDB8fHwxNzU0MjI3OTAwfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "infarm-berlin",
@@ -1276,7 +1276,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Scalable systems"
       ],
       "promptEnhancement": "with Infarm's modular distributed farming concept, featuring scalable farm units, urban agriculture networks, flexible growing systems, and innovative city-integrated food production",
-      "imageUrl": "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1643892343706-8c9eed4cd82b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxJbmZhcm0lMjBNb2R1bGFyJTIwRGlzdHJpYnV0ZWQlMjBBZ3JpY3VsdHVyYWwlMjBNb2R1bGFyJTIwZmFybSUyMHVuaXRzJTIwRGlzdHJpYnV0ZWQlMjBuZXR3b3JrfGVufDB8MHx8fDE3NTQyMjc5MDJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "ibm-quantum-network",
@@ -1291,7 +1291,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Cryogenic environments"
       ],
       "promptEnhancement": "with IBM Quantum Network's advanced computing design, featuring superconducting quantum processors, cryogenic research environments, quantum computing laboratories, and cutting-edge quantum technology systems",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1721400576359-e59aeb6176fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxJQk0lMjBRdWFudHVtJTIwTmV0d29yayUyMEh1YiUyMFF1YW50dW0lMjBDb21wdXRpbmclMjBTdXBlcmNvbmR1Y3RpbmclMjBwcm9jZXNzb3JzJTIwUXVhbnR1bSUyMGNvbXB1dGluZyUyMHN5c3RlbXN8ZW58MHwwfHx8MTc1NDIyNzkwM3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "google-quantum-ai",
@@ -1306,7 +1306,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Machine learning quantum"
       ],
       "promptEnhancement": "inspired by Google Quantum AI's quantum supremacy research, featuring advanced quantum processors, AI-quantum integration systems, machine learning laboratories, and breakthrough quantum computing environments",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1655635949212-1d8f4f103ea1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHb29nbGUlMjBRdWFudHVtJTIwQUklMjBRdWFudHVtJTIwQUklMjBRdWFudHVtJTIwc3VwcmVtYWN5JTIwcmVzZWFyY2glMjBBSSUyMGludGVncmF0aW9ufGVufDB8MHx8fDE3NTQyMjc5MDR8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "mit-center-quantum-engineering",
@@ -1321,7 +1321,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Educational integration"
       ],
       "promptEnhancement": "with MIT's interdisciplinary quantum engineering approach, featuring quantum materials research, device development laboratories, educational quantum systems, and collaborative research environments",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1581091215367-9b6c00b3035a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNSVQlMjBDZW50ZXIlMjBmb3IlMjBRdWFudHVtJTIwRW5naW5lZXJpbmclMjBBY2FkZW1pYyUyMFF1YW50dW0lMjBRdWFudHVtJTIwbWF0ZXJpYWxzJTIwcmVzZWFyY2glMjBEZXZpY2UlMjBkZXZlbG9wbWVudHxlbnwwfDB8fHwxNzU0MjI3OTA2fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "oxford-quantum-computing",
@@ -1336,7 +1336,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Quantum networking"
       ],
       "promptEnhancement": "inspired by Oxford's ion trap quantum computing, featuring trapped-ion quantum processors, precision control systems, quantum networking laboratories, and advanced ion manipulation technology",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1692607431253-8225c0e89f7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxPeGZvcmQlMjBRdWFudHVtJTIwQ29tcHV0aW5nJTIwSW9uJTIwVHJhcCUyMFF1YW50dW0lMjBJb24lMjB0cmFwJTIwdGVjaG5vbG9neSUyMFRyYXBwZWQtaW9uJTIwcHJvY2Vzc29yc3xlbnwwfDB8fHwxNzU0MjI3OTA3fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "rigetti-quantum-cloud",
@@ -1351,7 +1351,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Scalable architecture"
       ],
       "promptEnhancement": "with Rigetti's hybrid quantum cloud design, featuring cloud-accessible quantum systems, classical-quantum integration, scalable quantum architecture, and distributed quantum computing networks",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1584381296550-99dfc0837d42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxSaWdldHRpJTIwUXVhbnR1bSUyMENsb3VkJTIwU2VydmljZXMlMjBIeWJyaWQlMjBRdWFudHVtJTIwQ2xvdWQlMjBDbG91ZCUyMHF1YW50dW0lMjBhY2Nlc3MlMjBIeWJyaWQlMjBzeXN0ZW1zfGVufDB8MHx8fDE3NTQyMjc5MDl8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "iqm-quantum-computers",
@@ -1366,7 +1366,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Sustainable quantum tech"
       ],
       "promptEnhancement": "inspired by IQM's Nordic quantum computing approach, featuring sustainable quantum technology, Nordic design principles, European quantum research hub, and environmentally conscious quantum systems",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1551173953-54a75e46fccd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxJUU0lMjBRdWFudHVtJTIwQ29tcHV0ZXJzJTIwTm9yZGljJTIwUXVhbnR1bSUyME5vcmRpYyUyMGRlc2lnbiUyMHByaW5jaXBsZXMlMjBTdXBlcmNvbmR1Y3RpbmclMjBzeXN0ZW1zfGVufDB8MHx8fDE3NTQyMjc5MTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "quantum-brilliance-diamond",
@@ -1381,7 +1381,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Australian innovation"
       ],
       "promptEnhancement": "with Quantum Brilliance's diamond quantum technology, featuring room-temperature quantum processors, compact quantum systems, diamond-based quantum computing, and innovative Australian quantum research",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1645406764516-e047162e1884?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxRdWFudHVtJTIwQnJpbGxpYW5jZSUyMERpYW1vbmQlMjBRdWFudHVtJTIwRGlhbW9uZCUyMHF1YW50dW0lMjBwcm9jZXNzb3JzJTIwUm9vbS10ZW1wZXJhdHVyZSUyMG9wZXJhdGlvbnxlbnwwfDB8fHwxNzU0MjI3OTEyfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "black-box-theater-mit",
@@ -1396,7 +1396,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Technical flexibility"
       ],
       "promptEnhancement": "with MIT Black Box Theater's reconfigurable design, featuring movable wall systems, adaptive seating arrangements, flexible performance spaces, and technical infrastructure that transforms for any production",
-      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1582242777411-9e87051b84e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNSVQlMjBCbGFjayUyMEJveCUyMFRoZWF0ZXIlMjBBZGFwdGl2ZSUyMFJlY29uZmlndXJhYmxlJTIwTW92YWJsZSUyMHdhbGxzJTIwQWRhcHRpdmUlMjBzZWF0aW5nfGVufDB8MHx8fDE3NTQyMjc5MTN8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "shed-national-theatre",
@@ -1411,7 +1411,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Multi-arts venue"
       ],
       "promptEnhancement": "inspired by The Shed's telescoping architecture, featuring movable outer shell systems, transformable interior spaces, multi-arts venue capabilities, and innovative expandable performance environments",
-      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1620549173081-c619691328ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxUaGUlMjBTaGVkJTIwVGVsZXNjb3BpbmclMjBBcmNoaXRlY3R1cmUlMjBUZWxlc2NvcGluZyUyMHN0cnVjdHVyZSUyME1vdmFibGUlMjBvdXRlciUyMHNoZWxsfGVufDB8MHx8fDE3NTQyMjc5MTR8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "wyly-theatre-dallas",
@@ -1426,7 +1426,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Multi-level performance"
       ],
       "promptEnhancement": "with the Wyly Theatre's vertical transformable design, featuring multi-level performance spaces, audience mobility systems, transformable stage configurations, and innovative vertical theater architecture",
-      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1556139179-e803312d0675?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxXeWx5JTIwVGhlYXRyZSUyMFZlcnRpY2FsJTIwVHJhbnNmb3JtYWJsZSUyMFZlcnRpY2FsJTIwdGhlYXRlciUyMGRlc2lnbiUyMFRyYW5zZm9ybWFibGUlMjBjb25maWd1cmF0aW9uc3xlbnwwfDB8fHwxNzU0MjI3OTE2fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "spherical-theater-riga",
@@ -1441,7 +1441,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Spherical performance"
       ],
       "promptEnhancement": "inspired by Riga's Spherical Theater with its dome architecture, featuring 360-degree projection systems, immersive audience experiences, spherical performance spaces, and revolutionary theater design",
-      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1632341292711-6f12cf7e61b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTcGhlcmljYWwlMjBUaGVhdGVyJTIwU3BoZXJpY2FsJTIwSW1tZXJzaXZlJTIwMzYwLWRlZ3JlZSUyMHByb2plY3Rpb24lMjBEb21lJTIwYXJjaGl0ZWN0dXJlfGVufDB8MHx8fDE3NTQyMjc5MTd8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "kinetic-theater-amsterdam",
@@ -1456,7 +1456,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Performance mobility"
       ],
       "promptEnhancement": "with Kinetic Theater Amsterdam's moving architecture, featuring kinetic structural elements, dynamic performance environments, mobile theater systems, and architecture that moves with the performance",
-      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1623514813824-4ca0cc6f2229?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxLaW5ldGljJTIwVGhlYXRlciUyMEFtc3RlcmRhbSUyMEtpbmV0aWMlMjBBcmNoaXRlY3R1cmUlMjBLaW5ldGljJTIwbW92ZW1lbnQlMjBEeW5hbWljJTIwZW52aXJvbm1lbnRzfGVufDB8MHx8fDE3NTQyMjc5MTl8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "morphing-theater-tokyo",
@@ -1471,7 +1471,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Intelligent architecture"
       ],
       "promptEnhancement": "inspired by Tokyo's Morphing Theater with its AI-controlled shape-shifting design, featuring intelligent morphing spaces, responsive environmental systems, and architecture that adapts in real-time to performances",
-      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1649773129066-4d45b36a19ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNb3JwaGluZyUyMFRoZWF0ZXIlMjBUb2t5byUyMEFJJTIwTW9ycGhpbmclMjBBSS1jb250cm9sbGVkJTIwbW9ycGhpbmclMjBTaGFwZS1zaGlmdGluZyUyMHNwYWNlc3xlbnwwfDB8fHwxNzU0MjI3OTIwfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "liquid-theater-barcelona",
@@ -1486,7 +1486,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Organic movement"
       ],
       "promptEnhancement": "with Liquid Theater Barcelona's fluid architecture, featuring flowing architectural elements, water-inspired transformations, organic movement systems, and liquid-like performance spaces that flow and adapt",
-      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1613739722718-9548582af82f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMaXF1aWQlMjBUaGVhdGVyJTIwQmFyY2Vsb25hJTIwRmx1aWQlMjBBcmNoaXRlY3R1cmUlMjBGbG93aW5nJTIwZWxlbWVudHMlMjBXYXRlci1pbnNwaXJlZCUyMGRlc2lnbnxlbnwwfDB8fHwxNzU0MjI3OTIyfDA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "gaming_arena": [
@@ -1503,7 +1503,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Gaming stations"
       ],
       "promptEnhancement": "with the high-energy atmosphere of Esports Stadium Arlington, featuring tiered gaming stations, massive LED displays, broadcast-quality lighting, and spectator seating designed for competitive gaming",
-      "imageUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1645536730110-3fcdfa300db5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxFc3BvcnRzJTIwU3RhZGl1bSUyMEFybGluZ3RvbiUyME1vZGVybiUyMFNwb3J0cyUyMEFyY2hpdGVjdHVyZSUyMFN0YWRpdW0lMjBzZWF0aW5nJTIwTEVEJTIwZGlzcGxheXN8ZW58MHwwfHx8MTc1NDIyNzkyM3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "alienware-training-facility",
@@ -2290,7 +2290,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Integrated café"
       ],
       "promptEnhancement": "Scandinavian minimalism with natural wood, clean lines, and abundant natural light",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1608033223866-797b8dad7ca6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxLbCVDMyVBNHR0ZXJjZW50cmV0JTIwU3RvY2tob2xtJTIwU2NhbmRpbmF2aWFuJTIwTW9kZXJuJTIwTmF0dXJhbCUyMHdvb2QlMjBmaW5pc2hlcyUyMEZsb29yLXRvLWNlaWxpbmclMjB3aW5kb3dzfGVufDB8MHx8fDE3NTQyMzA3NDd8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "climbing-3",
@@ -2305,7 +2305,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Equipment shop"
       ],
       "promptEnhancement": "Modern sports facility with varied climbing surfaces, professional training areas, and spectator spaces",
-      "imageUrl": "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1501450753566-4977b58843ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCYXNlY2FtcCUyMENsaW1iaW5nJTIwQ29udGVtcG9yYXJ5JTIwU3BvcnRzJTIwQXJjaGl0ZWN0dXJlJTIwTXVsdGktYW5nbGUlMjBjbGltYmluZyUyMHdhbGxzJTIwVHJhaW5pbmclMjBhcmVhc3xlbnwwfDB8fHwxNzU0MjMwNzQ4fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "climbing-4",
@@ -2320,7 +2320,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Zen relaxation areas"
       ],
       "promptEnhancement": "Japanese design principles with artistic climbing walls, efficient space usage, and calming elements",
-      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1609377375724-400f1be10fb8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxWZXJ0aWNhbCUyMEFydCUyMENsaW1iaW5nJTIwR3ltJTIwSmFwYW5lc2UlMjBDb250ZW1wb3JhcnklMjBBcnRpc3RpYyUyMGNsaW1iaW5nJTIwaG9sZHMlMjBDb21wYWN0JTIwdmVydGljYWwlMjBkZXNpZ258ZW58MHwwfHx8MTc1NDIzMDc1MHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "climbing-5",
@@ -2335,7 +2335,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Training equipment"
       ],
       "promptEnhancement": "German engineering precision with systematic route organization, robust construction, and social spaces",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1550326898-fa2a4e7b7249?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCb3VsZGVyd2VsdCUyME11bmljaCUyMEdlcm1hbiUyMEluZHVzdHJpYWwlMjBNb2Rlcm4lMjBNYXNzaXZlJTIwYm91bGRlcmluZyUyMGFyZWFzJTIwQ29sb3ItY29kZWQlMjByb3V0ZXN8ZW58MHwwfHx8MTc1NDIzMDc1MXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "climbing-6",
@@ -2350,7 +2350,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Heritage preservation"
       ],
       "promptEnhancement": "Aviation hangar conversion with dramatic height, industrial heritage, and expansive climbing areas",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1543561495-9f01a9199911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxUaGUlMjBDbGltYmluZyUyMEhhbmdhciUyMEF2aWF0aW9uJTIwSGVyaXRhZ2UlMjBDb252ZXJzaW9uJTIwU29hcmluZyUyMGNlaWxpbmclMjBoZWlnaHRzJTIwQWlyY3JhZnQlMjBoYW5nYXIlMjBzdHJ1Y3R1cmV8ZW58MHwwfHx8MTc1NDIzMDc1M3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "climbing-7",
@@ -2365,7 +2365,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Community events space"
       ],
       "promptEnhancement": "California outdoor climbing aesthetic with natural textures, fitness integration, and community-centered design",
-      "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1679436316513-9cb8902edede?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTZW5kZXIlMjBPbmUlMjBDbGltYmluZyUyMENhbGlmb3JuaWElMjBDb250ZW1wb3JhcnklMjBOYXR1cmFsJTIwcm9jayUyMHRleHR1cmVzJTIwT3V0ZG9vci1pbnNwaXJlZCUyMGRlc2lnbnxlbnwwfDB8fHwxNzU0MjMwNzU0fDA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "swimming_pool": [
@@ -2382,7 +2382,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Atmospheric lighting"
       ],
       "promptEnhancement": "Peter Zumthor-inspired minimalist stone architecture with thermal pools and dramatic lighting",
-      "imageUrl": "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1590452112574-4c4aa2374492?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxUaGVybWUlMjBWYWxzJTIwTWluaW1hbGlzdCUyMFN0b25lJTIwQXJjaGl0ZWN0dXJlJTIwTmF0dXJhbCUyMHN0b25lJTIwY29uc3RydWN0aW9uJTIwVGhlcm1hbCUyMHBvb2xzfGVufDB8MHx8fDE3NTQyMzA3NTV8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "pool-2",
@@ -2397,7 +2397,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Natural lighting"
       ],
       "promptEnhancement": "Zaha Hadid-inspired flowing architecture with wave-like forms and Olympic-quality facilities",
-      "imageUrl": "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1613739722718-9548582af82f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBcXVhdGljcyUyMENlbnRyZSUyMExvbmRvbiUyMENvbnRlbXBvcmFyeSUyME9seW1waWMlMjBBcmNoaXRlY3R1cmUlMjBXYXZlLWluc3BpcmVkJTIwcm9vZiUyME9seW1waWMtc3RhbmRhcmQlMjBwb29sc3xlbnwwfDB8fHwxNzU0MjMwNzU3fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "pool-3",
@@ -2412,7 +2412,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Spa treatments"
       ],
       "promptEnhancement": "Icelandic geothermal design with volcanic rock, mineral-rich waters, and Nordic spa elements",
-      "imageUrl": "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1462993340984-49bd9e0f32dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCbHVlJTIwTGFnb29uJTIwR2VvdGhlcm1hbCUyMFNwYSUyMEljZWxhbmRpYyUyMEdlb3RoZXJtYWwlMjBEZXNpZ24lMjBHZW90aGVybWFsJTIwcG9vbHMlMjBWb2xjYW5pYyUyMHJvY2slMjBpbnRlZ3JhdGlvbnxlbnwwfDB8fHwxNzU0MjMwNzU5fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "pool-4",
@@ -2427,7 +2427,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Luxury amenities"
       ],
       "promptEnhancement": "Art Deco elegance with geometric patterns, luxury finishes, and historic Parisian glamour",
-      "imageUrl": "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1560909721-d2abb0b9223f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxQaXNjaW5lJTIwTW9saXRvciUyMEFydCUyMERlY28lMjBSZXZpdmFsJTIwQXJ0JTIwRGVjbyUyMHN0eWxpbmclMjBIaXN0b3JpYyUyMHJlc3RvcmF0aW9ufGVufDB8MHx8fDE3NTQyMzA3NjB8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "pool-5",
@@ -2442,7 +2442,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Luxury resort integration"
       ],
       "promptEnhancement": "High-altitude infinity pool design with panoramic views and luxury resort aesthetics",
-      "imageUrl": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1523674638471-a88d6decfdbe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYXJpbmElMjBCYXklMjBTYW5kcyUyMFNreVBhcmslMjBDb250ZW1wb3JhcnklMjBIaWdoLVJpc2UlMjBJbmZpbml0eSUyMGVkZ2UlMjBkZXNpZ24lMjBQYW5vcmFtaWMlMjBjaXR5JTIwdmlld3N8ZW58MHwwfHx8MTc1NDIzMDc2MXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "pool-6",
@@ -2457,7 +2457,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Natural materials"
       ],
       "promptEnhancement": "Desert minimalism with red rock integration, natural materials, and landscape harmony",
-      "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1558334531-37c733eeba7f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBbWFuZ2lyaSUyMFJlc29ydCUyMFBvb2wlMjBEZXNlcnQlMjBNaW5pbWFsaXNtJTIwUmVkJTIwcm9jayUyMGludGVncmF0aW9uJTIwRGVzZXJ0JTIwbGFuZHNjYXBlJTIwaGFybW9ueXxlbnwwfDB8fHwxNzU0MjMwNzYzfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "pool-7",
@@ -2472,7 +2472,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Healing mineral waters"
       ],
       "promptEnhancement": "Neo-Baroque grandeur with ornate thermal pools, historic architecture, and healing spa traditions",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1680609989998-6183fcea718b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTeiVDMyVBOWNoZW55aSUyMFRoZXJtYWwlMjBCYXRocyUyME5lby1CYXJvcXVlJTIwVGhlcm1hbCUyMEFyY2hpdGVjdHVyZSUyME5lby1CYXJvcXVlJTIwc3R5bGluZyUyMEhpc3RvcmljJTIwdGhlcm1hbCUyMHBvb2xzfGVufDB8MHx8fDE3NTQyMzA3NjR8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "sauna_hammam": [
@@ -2489,7 +2489,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Mountain integration"
       ],
       "promptEnhancement": "minimalist stone architecture, thermal pools, atmospheric lighting, natural materials",
-      "imageUrl": "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1590452112574-4c4aa2374492?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxUaGVybWUlMjBWYWxzJTIwTWluaW1hbGlzdCUyMFN0b25lJTIwTmF0dXJhbCUyMHN0b25lJTIwY29uc3RydWN0aW9uJTIwVGhlcm1hbCUyMHBvb2xzfGVufDB8MHx8fDE3NTQyMzA3NjZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "sauna-2",
@@ -2504,7 +2504,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Nordic aesthetics"
       ],
       "promptEnhancement": "Nordic spa design, sea integration, modern saunas, urban wellness",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1563126359-496aca134d70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBbGxhcyUyMFNlYSUyMFBvb2wlMjBOb3JkaWMlMjBDb250ZW1wb3JhcnklMjBTZWElMjBpbnRlZ3JhdGlvbiUyME1vZGVybiUyMHNhdW5hc3xlbnwwfDB8fHwxNzU0MjMwNzY4fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "sauna-3",
@@ -2519,7 +2519,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Modern Finnish sauna"
       ],
       "promptEnhancement": "angular wooden architecture, sculptural sauna design, waterfront integration",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1547220420-c2b80a448576?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMJUMzJUI2eWx5JTIwU2F1bmElMjBDb250ZW1wb3JhcnklMjBXb29kJTIwQXJjaGl0ZWN0dXJlJTIwQW5ndWxhciUyMHdvb2QlMjBkZXNpZ24lMjBTY3VscHR1cmFsJTIwZm9ybXxlbnwwfDB8fHwxNzU0MjMwNzcxfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "sauna-4",
@@ -2534,7 +2534,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Islamic geometry"
       ],
       "promptEnhancement": "Moorish architecture, traditional hammam design, Islamic geometric patterns",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1625864569837-691efafc5c6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxIYW1tYW0lMjBBbCUyMEFuZGFsdXMlMjBNb29yaXNoJTIwUmV2aXZhbCUyME1vb3Jpc2glMjBhcmNoZXMlMjBUcmFkaXRpb25hbCUyMGhhbW1hbXxlbnwwfDB8fHwxNzU0MjMwNzczfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "sauna-5",
@@ -2549,7 +2549,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Natural materials"
       ],
       "promptEnhancement": "forest spa design, outdoor thermal pools, Nordic wellness traditions",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1605903062369-8ec9e60c7bc0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTcGElMjBOb3JkaXF1ZSUyME5vcmRpYyUyMEZvcmVzdCUyMERlc2lnbiUyMEZvcmVzdCUyMGludGVncmF0aW9uJTIwT3V0ZG9vciUyMHRoZXJtYWwlMjBwb29sc3xlbnwwfDB8fHwxNzU0MjMwNzc0fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "sauna-6",
@@ -2564,7 +2564,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Thermal treatments"
       ],
       "promptEnhancement": "Neo-Renaissance architecture, historic bath house, ornate thermal spa design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1593465713677-e078861911d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGcmllZHJpY2hzYmFkJTIwTmVvLVJlbmFpc3NhbmNlJTIwSGlzdG9yaWMlMjBhcmNoaXRlY3R1cmUlMjBSb21hbi1JcmlzaCUyMGJhdGhzfGVufDB8MHx8fDE3NTQyMzA3NzV8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "sauna-7",
@@ -2579,7 +2579,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Historic grandeur"
       ],
       "promptEnhancement": "Art Nouveau architecture, mosaic decorations, historic thermal bath design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1572204079489-ebef5ddfc114?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHZWxsJUMzJUE5cnQlMjBUaGVybWFsJTIwQmF0aHMlMjBBcnQlMjBOb3V2ZWF1JTIwQXJ0JTIwTm91dmVhdSUyMGRlc2lnbiUyME1vc2FpYyUyMGRlY29yYXRpb25zfGVufDB8MHx8fDE3NTQyMzA3Nzd8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "indoor_skydiving": [
@@ -2596,7 +2596,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Safety systems"
       ],
       "promptEnhancement": "vertical wind tunnel architecture, glass observation areas, industrial modern design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1681956122736-102f87dc000b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxpRkxZJTIwSW5kb29yJTIwU2t5ZGl2aW5nJTIwSW5kdXN0cmlhbCUyME1vZGVybiUyMFZlcnRpY2FsJTIwd2luZCUyMHR1bm5lbCUyMEdsYXNzJTIwb2JzZXJ2YXRpb24lMjBhcmVhc3xlbnwwfDB8fHwxNzU0MjMwNzc5fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "skydiving-2",
@@ -2611,7 +2611,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Spectator areas"
       ],
       "promptEnhancement": "aerodynamic architecture, advanced wind tunnel design, contemporary sports facility",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1558793064-6a2ec29a3ff6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxXaW5kb29yJTIwUmVhbCUyMEZseSUyMEFlcm9keW5hbWljJTIwQ29udGVtcG9yYXJ5JTIwQWR2YW5jZWQlMjB3aW5kJTIwdHVubmVsJTIwQWVyb2R5bmFtaWMlMjBhcmNoaXRlY3R1cmV8ZW58MHwwfHx8MTc1NDIzMDc4MHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "skydiving-3",
@@ -2626,7 +2626,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Training programs"
       ],
       "promptEnhancement": "high-tech architecture, innovative wind tunnel, modern sports facility design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1475433465367-52ee4c725b8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGbHlzdGF0aW9uJTIwSGlnaC1UZWNoJTIwTW9kZXJuJTIwSGlnaC10ZWNoJTIwc3lzdGVtcyUyMElubm92YXRpdmUlMjB0dW5uZWwlMjBkZXNpZ258ZW58MHwwfHx8MTc1NDIzMDc4M3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "skydiving-4",
@@ -2641,7 +2641,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Show elements"
       ],
       "promptEnhancement": "entertainment architecture, spectacular indoor design, tourist attraction facility",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1658148900843-bf9d17c2ca2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxWZWdhcyUyMEluZG9vciUyMFNreWRpdmluZyUyMEVudGVydGFpbm1lbnQlMjBBcmNoaXRlY3R1cmUlMjBFbnRlcnRhaW5tZW50JTIwZGVzaWduJTIwU3BlY3RhY3VsYXIlMjBpbnRlcmlvcnN8ZW58MHwwfHx8MTc1NDIzMDc4NXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "skydiving-5",
@@ -2656,7 +2656,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Safety features"
       ],
       "promptEnhancement": "professional sports architecture, wind tunnel facility, training center design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1585827644174-df82e59c36d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCb2R5ZmxpZ2h0JTIwQmVkZm9yZCUyMFByb2Zlc3Npb25hbCUyMFNwb3J0cyUyMFByb2Zlc3Npb25hbCUyMHRyYWluaW5nJTIwV2luZCUyMHR1bm5lbCUyMHRlY2hub2xvZ3l8ZW58MHwwfHx8MTc1NDIzMDc4Nnww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "skydiving-6",
@@ -2671,7 +2671,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "European standards"
       ],
       "promptEnhancement": "Czech contemporary architecture, modern wind tunnel facility, European design",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1578397024765-f51ac7ca1af1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxIdXJyaWNhbmUlMjBGYWN0b3J5JTIwQ3plY2glMjBDb250ZW1wb3JhcnklMjBDemVjaCUyMGRlc2lnbiUyME1vZGVybiUyMGFyY2hpdGVjdHVyZXxlbnwwfDB8fHwxNzU0MjMwNzg4fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "skydiving-7",
@@ -2686,7 +2686,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Modern facilities"
       ],
       "promptEnhancement": "Canadian modern architecture, winter-adapted design, indoor sports facility",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1511995228778-b6d4d546a672?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTa3lWZW50dXJlJTIwTW9udHJlYWwlMjBDYW5hZGlhbiUyME1vZGVybiUyMFdpbnRlci1hZGFwdGVkJTIwZGVzaWduJTIwQ2FuYWRpYW4lMjBhcmNoaXRlY3R1cmV8ZW58MHwwfHx8MTc1NDIzMDc4OXww&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "trampoline_park": [
@@ -2703,7 +2703,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Safety padding"
       ],
       "promptEnhancement": "modern recreation architecture, wall-to-wall trampolines, foam pit areas",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1536309427579-b3e01c2d00e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTa3klMjBab25lJTIwTW9kZXJuJTIwUmVjcmVhdGlvbiUyMFdhbGwtdG8td2FsbCUyMHRyYW1wb2xpbmVzJTIwRm9hbSUyMHBpdHN8ZW58MHwwfHx8MTc1NDIzMDc5MXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "trampoline-2",
@@ -2718,7 +2718,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Party areas"
       ],
       "promptEnhancement": "activity zone architecture, diverse trampoline areas, ninja course design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1602827114685-efbb2717da9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGbGlwJTIwT3V0JTIwQWN0aXZpdHklMjBab25lJTIwRGVzaWduJTIwTXVsdGlwbGUlMjBhY3Rpdml0eSUyMHpvbmVzJTIwTmluamElMjBjb3Vyc2VzfGVufDB8MHx8fDE3NTQyMzA3OTJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "trampoline-3",
@@ -2733,7 +2733,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Spectator seating"
       ],
       "promptEnhancement": "family recreation architecture, safety-focused design, toddler play areas",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1437912670385-d3fef2b7247a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxKdW1wJTIwU3RyZWV0JTIwRmFtaWx5JTIwUmVjcmVhdGlvbiUyMEZhbWlseSUyMHpvbmVzJTIwVG9kZGxlciUyMGFyZWFzfGVufDB8MHx8fDE3NTQyMzA3OTR8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "trampoline-4",
@@ -2748,7 +2748,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Cafe integration"
       ],
       "promptEnhancement": "Australian contemporary design, multi-level trampoline architecture",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1658863025658-4a259cc68fc9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCb3VuY2UlMjBJbmMlMjBBdXN0cmFsaWFuJTIwQ29udGVtcG9yYXJ5JTIwVW5pcXVlJTIwbGF5b3V0cyUyMEF1c3RyYWxpYW4lMjBkZXNpZ258ZW58MHwwfHx8MTc1NDIzMDc5NXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "trampoline-5",
@@ -2763,7 +2763,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Competition areas"
       ],
       "promptEnhancement": "vertical recreation architecture, high ceiling design, professional trampoline facility",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1654113800855-69402420db0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBbHRpdHVkZSUyMFRyYW1wb2xpbmUlMjBQYXJrJTIwVmVydGljYWwlMjBSZWNyZWF0aW9uJTIwSGlnaCUyMGNlaWxpbmdzJTIwVmVydGljYWwlMjBlbXBoYXNpc3xlbnwwfDB8fHwxNzU0MjMwNzk2fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "trampoline-6",
@@ -2778,7 +2778,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Entertainment focus"
       ],
       "promptEnhancement": "themed recreation architecture, rock-inspired design, entertainment facility",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1637491167330-7fbc5b12d7eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxSb2NraW4lMjBKdW1wJTIwVGhlbWVkJTIwUmVjcmVhdGlvbiUyMFJvY2slMjB0aGVtZSUyMFRoZW1lZCUyMGRlc2lnbnxlbnwwfDB8fHwxNzU0MjMwNzk4fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "trampoline-7",
@@ -2793,7 +2793,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Minimalist approach"
       ],
       "promptEnhancement": "Scandinavian modern architecture, clean trampoline park design, natural lighting",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1626072978741-7a70bf1e4545?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxKdW1wJTIwR2lhbnRzJTIwU2NhbmRpbmF2aWFuJTIwTW9kZXJuJTIwU2NhbmRpbmF2aWFuJTIwZGVzaWduJTIwQ2xlYW4lMjBhZXN0aGV0aWNzfGVufDB8MHx8fDE3NTQyMzA3OTl8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "laser_game": [
@@ -2810,7 +2810,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Themed environments"
       ],
       "promptEnhancement": "futuristic gaming architecture, multi-level laser tag arenas, neon lighting effects",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1636255520934-0ac5f0361cd9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMYXNlciUyMFF1ZXN0JTIwRnV0dXJpc3RpYyUyMEdhbWluZyUyME11bHRpLWxldmVsJTIwYXJlbmFzJTIwRm9nJTIwZWZmZWN0c3xlbnwwfDB8fHwxNzU0MjMwODAxfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "laser-2",
@@ -2825,7 +2825,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Team strategy zones"
       ],
       "promptEnhancement": "space-themed architecture, immersive laser tag environments, interactive gaming obstacles",
-      "imageUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1553483481-9cc4641ed4f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMYXNlciUyMFRhZyUyMFBsYW5ldCUyMFNwYWNlJTIwVGhlbWUlMjBBcmNoaXRlY3R1cmUlMjBTcGFjZSUyMHN0YXRpb24lMjBkZXNpZ24lMjBJbW1lcnNpdmUlMjBzb3VuZHxlbnwwfDB8fHwxNzU0MjMwODAyfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "laser-3",
@@ -2840,7 +2840,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Mission-based gameplay"
       ],
       "promptEnhancement": "military tactical architecture, strategic laser tag environments, mission-based gaming design",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1597430310195-52c65f288760?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxab25lJTIwTGFzZXIlMjBUYWclMjBNaWxpdGFyeSUyMFRhY3RpY2FsJTIwVGFjdGljYWwlMjBlbnZpcm9ubWVudHMlMjBNaWxpdGFyeSUyMHRoZW1pbmd8ZW58MHwwfHx8MTc1NDIzMDgwNHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "laser-4",
@@ -2855,7 +2855,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Virtual reality integration"
       ],
       "promptEnhancement": "cyberpunk gaming architecture, high-tech laser tag design, virtual reality integration",
-      "imageUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1530476853990-25a9c69b8917?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMYXNlciUyMFN0b3JtJTIwQ3liZXJwdW5rJTIwR2FtaW5nJTIwQ3liZXJwdW5rJTIwZGVzaWduJTIwSGlnaC10ZWNoJTIwZXF1aXBtZW50fGVufDB8MHx8fDE3NTQyMzA4MDV8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "laser-5",
@@ -2870,7 +2870,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Tournament facilities"
       ],
       "promptEnhancement": "German engineering precision, modular laser tag arenas, advanced gaming technology",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1551173953-54a75e46fccd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMYXNlciUyME1heHglMjBHZXJtYW4lMjBFbmdpbmVlcmluZyUyMFByZWNpc2lvbiUyMGVuZ2luZWVyaW5nJTIwTW9kdWxhciUyMGFyZW5hc3xlbnwwfDB8fHwxNzU0MjMwODA3fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "laser-6",
@@ -2885,7 +2885,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Story-driven gameplay"
       ],
       "promptEnhancement": "adaptive gaming architecture, evolving laser tag configurations, story-driven environments",
-      "imageUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1721400576359-e59aeb6176fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMYXNlciUyMEdhbWUlMjBFdm9sdXRpb24lMjBBZGFwdGl2ZSUyMEdhbWluZyUyMEV2b2x2aW5nJTIwY29uZmlndXJhdGlvbnMlMjBUaGVtZWQlMjBzY2VuYXJpb3N8ZW58MHwwfHx8MTc1NDIzMDgwOHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "laser-7",
@@ -2900,7 +2900,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Group activities"
       ],
       "promptEnhancement": "winter-themed gaming architecture, team-building laser tag design, cold-weather gaming facility",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1679590060902-3556e64a676f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMYXNlciUyMFN0cmlrZSUyMFdpbnRlciUyMFRoZW1lJTIwR2FtaW5nJTIwV2ludGVyJTIwdGhlbWluZyUyMFRlYW0tYnVpbGRpbmclMjBmb2N1c3xlbnwwfDB8fHwxNzU0MjMwODA5fDA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "playground": [
@@ -2917,7 +2917,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Accessible design"
       ],
       "promptEnhancement": "contemporary playground architecture, innovative play structures, natural integration design",
-      "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1718011087751-e82f1792aa32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYWdnaWUlMjBEYWxleSUyMFBsYXklMjBHYXJkZW4lMjBDb250ZW1wb3JhcnklMjBQbGF5JTIwRGVzaWduJTIwSW5ub3ZhdGl2ZSUyMHBsYXklMjBzdHJ1Y3R1cmVzJTIwTmF0dXJhbCUyMGludGVncmF0aW9ufGVufDB8MHx8fDE3NTQyMzA4MTF8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "playground-2",
@@ -2932,7 +2932,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Imaginative theming"
       ],
       "promptEnhancement": "thematic adventure playground, giant figure climbing structures, story-based play design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1654113800855-69402420db0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHdWxsaXZlciUyMFBhcmslMjBUaGVtYXRpYyUyMEFkdmVudHVyZSUyMEdpYW50JTIwZmlndXJlJTIwY2xpbWJpbmclMjBTdG9yeS1iYXNlZCUyMGRlc2lnbnxlbnwwfDB8fHwxNzU0MjMwODEyfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "playground-3",
@@ -2947,7 +2947,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Riverside setting"
       ],
       "promptEnhancement": "natural adventure playground, water play integration, riverside playground design",
-      "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1649840661589-d94ad7f836ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCbGF4bGFuZCUyMFJpdmVyc2lkZSUyMFBhcmslMjBOYXR1cmFsJTIwQWR2ZW50dXJlJTIwV2F0ZXIlMjBwbGF5JTIwZmVhdHVyZXMlMjBOYXR1cmFsJTIwbWF0ZXJpYWxzfGVufDB8MHx8fDE3NTQyMzA4MTR8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "playground-4",
@@ -2962,7 +2962,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Community integration"
       ],
       "promptEnhancement": "adventure challenge playground, creative climbing structures, risk-appropriate play design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1590278458425-6aa3912a48a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTY2h1bGJlcmclMjBQbGF5Z3JvdW5kJTIwQWR2ZW50dXJlJTIwQ2hhbGxlbmdlJTIwQ2hhbGxlbmdpbmclMjBzdHJ1Y3R1cmVzJTIwQ3JlYXRpdmUlMjBwbGF5JTIwZWxlbWVudHN8ZW58MHwwfHx8MTc1NDIzMDgxNXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "playground-5",
@@ -2977,7 +2977,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Large-scale design"
       ],
       "promptEnhancement": "landscape-integrated playground, rainbow slide structures, hillside playground design",
-      "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1420745936442-acb9f244d8bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxUYWtpbm8lMjBTdXp1cmFuJTIwSGlsbHNpZGUlMjBQYXJrJTIwTGFuZHNjYXBlJTIwSW50ZWdyYXRpb24lMjBSYWluYm93JTIwc2xpZGVzJTIwSGlsbHNpZGUlMjBpbnRlZ3JhdGlvbnxlbnwwfDB8fHwxNzU0MjMwODE2fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "playground-6",
@@ -2992,7 +2992,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Memorial significance"
       ],
       "promptEnhancement": "inclusive themed playground, pirate ship play structures, sensory play integration",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1648990692216-6d05ff0e219d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxEaWFuYSUyME1lbW9yaWFsJTIwUGxheWdyb3VuZCUyMEluY2x1c2l2ZSUyMFRoZW1lZCUyMERlc2lnbiUyMFBpcmF0ZSUyMHNoaXAlMjB0aGVtZSUyMFNlbnNvcnklMjBwbGF5JTIwYXJlYXN8ZW58MHwwfHx8MTc1NDIzMDgxOHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "playground-7",
@@ -3007,7 +3007,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Artistic design"
       ],
       "promptEnhancement": "sculptural modern playground, artistic play elements, educational playground design",
-      "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1506092375312-27276f44a612?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxQYXJjJTIwZGUlMjBsYSUyMFZpbGxldHRlJTIwU2N1bHB0dXJhbCUyME1vZGVybiUyMFNjdWxwdHVyYWwlMjBlbGVtZW50cyUyMEVkdWNhdGlvbmFsJTIwZmVhdHVyZXN8ZW58MHwwfHx8MTc1NDIzMDgxOXww&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "third_place": [
@@ -3024,7 +3024,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Adaptive reuse"
       ],
       "promptEnhancement": "elevated community space, adaptive urban reuse, linear gathering architecture",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1536408694549-4b95acc6e56d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxUaGUlMjBIaWdoJTIwTGluZSUyMEFkYXB0aXZlJTIwUmV1c2UlMjBVcmJhbiUyMEVsZXZhdGVkJTIwd2Fsa3dheXMlMjBDb21tdW5pdHklMjBnYXRoZXJpbmd8ZW58MHwwfHx8MTc1NDIzMDgyMXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "third_place-2",
@@ -3039,7 +3039,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Social integration"
       ],
       "promptEnhancement": "multicultural community space, diverse cultural integration, participatory design",
-      "imageUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1660549895667-cb9fae3b3be3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTdXBlcmtpbGVuJTIwUGFyayUyME11bHRpY3VsdHVyYWwlMjBDb21tdW5pdHklMjBDdWx0dXJhbCUyMGRpdmVyc2l0eSUyMENvbW11bml0eSUyMHBhcnRpY2lwYXRpb258ZW58MHwwfHx8MTc1NDIzMDgyMnww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "third_place-3",
@@ -3069,7 +3069,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Local ownership"
       ],
       "promptEnhancement": "community regeneration architecture, social enterprise spaces, local ownership design",
-      "imageUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1583052436463-1a869d2e39c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHcmFuYnklMjBGb3VyJTIwU3RyZWV0cyUyMENvbW11bml0eSUyMFJlZ2VuZXJhdGlvbiUyMENvbW11bml0eS1sZWQlMjBkZXNpZ24lMjBTb2NpYWwlMjBlbnRlcnByaXNlfGVufDB8MHx8fDE3NTQyMzQ4MjR8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "third_place-5",
@@ -3084,7 +3084,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Urban transformation"
       ],
       "promptEnhancement": "urban acupuncture design, strategic community interventions, social cohesion architecture",
-      "imageUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1568632234180-0e6c08735d01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNZWRlbGwlQzMlQURuJTIwVXJiYW4lMjBBY3VwdW5jdHVyZSUyMFVyYmFuJTIwQWN1cHVuY3R1cmUlMjBTdHJhdGVnaWMlMjBpbnRlcnZlbnRpb25zJTIwQ29tbXVuaXR5JTIwZm9jYWwlMjBwb2ludHN8ZW58MHwwfHx8MTc1NDIzNDgyNXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "third_place-6",
@@ -3099,7 +3099,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Urban cooling"
       ],
       "promptEnhancement": "environmental restoration design, linear community space, urban stream integration",
-      "imageUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1440190727617-48b9b2c7e24b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDaGVvbmdneWVjaGVvbiUyMEVudmlyb25tZW50YWwlMjBSZXN0b3JhdGlvbiUyMFN0cmVhbSUyMHJlc3RvcmF0aW9uJTIwTGluZWFyJTIwY29tbXVuaXR5JTIwc3BhY2V8ZW58MHwwfHx8MTc1NDIzNDgyN3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "third_place-7",
@@ -3114,7 +3114,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Social learning"
       ],
       "promptEnhancement": "community-centered education, social learning spaces, local material integration",
-      "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1643813567927-4b79efd4b2d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHYW5kbyUyMExpYnJhcnklMjBFeHRlbnNpb24lMjBDb21tdW5pdHktQ2VudGVyZWQlMjBFZHVjYXRpb24lMjBFZHVjYXRpb25hbCUyMGZvY3VzJTIwQ29tbXVuaXR5JTIwZ2F0aGVyaW5nfGVufDB8MHx8fDE3NTQyMzQ4Mjh8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "fablab": [
@@ -3131,7 +3131,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Educational workshops"
       ],
       "promptEnhancement": "academic maker space design, digital fabrication tools, educational workshop areas",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1653164579768-ea97833b3b03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNSVQlMjBGYWIlMjBMYWIlMjBBY2FkZW1pYyUyME1ha2VyJTIwU3BhY2UlMjBEaWdpdGFsJTIwZmFicmljYXRpb24lMjB0b29scyUyMDNEJTIwcHJpbnRlcnN8ZW58MHwwfHx8MTc1NDIzNDgyOXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "fablab-2",
@@ -3146,7 +3146,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Prototype development"
       ],
       "promptEnhancement": "urban innovation hub, digital manufacturing spaces, community maker workshops",
-      "imageUrl": "https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1594611260144-2a3eca1a4585?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGYWIlMjBMYWIlMjBCYXJjZWxvbmElMjBVcmJhbiUyMElubm92YXRpb24lMjBIdWIlMjBEaWdpdGFsJTIwbWFudWZhY3R1cmluZyUyME9wZW4lMjBpbm5vdmF0aW9ufGVufDB8MHx8fDE3NTQyMzQ4MzF8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "fablab-3",
@@ -3161,7 +3161,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Green technology"
       ],
       "promptEnhancement": "sustainable maker space, circular design principles, eco-friendly fabrication",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1506092375312-27276f44a612?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGYWIlMjBMYWIlMjBBbXN0ZXJkYW0lMjBTdXN0YWluYWJsZSUyME1ha2VyJTIwU3BhY2UlMjBTdXN0YWluYWJsZSUyMG1ha2luZyUyMENpcmN1bGFyJTIwZGVzaWdufGVufDB8MHx8fDE3NTQyMzQ4MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "fablab-4",
@@ -3176,7 +3176,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Tech innovation"
       ],
       "promptEnhancement": "high-tech manufacturing lab, robotics integration, precision fabrication tools",
-      "imageUrl": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1581093803931-46e730e7622e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGYWIlMjBMYWIlMjBUb2t5byUyMEhpZ2gtVGVjaCUyME1hbnVmYWN0dXJpbmclMjBSb2JvdGljcyUyMGludGVncmF0aW9uJTIwQWR2YW5jZWQlMjBtYW51ZmFjdHVyaW5nfGVufDB8MHx8fDE3NTQyMzQ4MzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "fablab-5",
@@ -3191,7 +3191,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Startup incubation"
       ],
       "promptEnhancement": "industrial maker space, hardware development labs, rapid prototyping facilities",
-      "imageUrl": "https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1579803166067-eb82186c1aa3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGYWIlMjBMYWIlMjBCZXJsaW4lMjBJbmR1c3RyaWFsJTIwTWFrZXIlMjBTcGFjZSUyMEhhcmR3YXJlJTIwZGV2ZWxvcG1lbnQlMjBSYXBpZCUyMHByb3RvdHlwaW5nfGVufDB8MHx8fDE3NTQyMzQ4MzV8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "fablab-6",
@@ -3206,7 +3206,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Skills training"
       ],
       "promptEnhancement": "community innovation space, social fabrication, local manufacturing empowerment",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1614643738701-b3e3b4245dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGYWIlMjBMYWIlMjBTJUMzJUEzbyUyMFBhdWxvJTIwQ29tbXVuaXR5JTIwSW5ub3ZhdGlvbiUyMFNvY2lhbCUyMGlubm92YXRpb24lMjBMb2NhbCUyMG1hbnVmYWN0dXJpbmd8ZW58MHwwfHx8MTc1NDIzNDgzNnww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "fablab-7",
@@ -3221,7 +3221,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Local solutions"
       ],
       "promptEnhancement": "accessible making space, democratized fabrication, affordable digital manufacturing",
-      "imageUrl": "https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1548225197-26962213eee9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGYWIlMjBMYWIlMjBNdW1iYWklMjBBY2Nlc3NpYmxlJTIwTWFraW5nJTIwQWZmb3JkYWJsZSUyMGFjY2VzcyUyMERpZ2l0YWwlMjBtYW51ZmFjdHVyaW5nfGVufDB8MHx8fDE3NTQyMzQ4Mzh8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "ice_rink": [
@@ -3238,7 +3238,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Seasonal operation"
       ],
       "promptEnhancement": "Art Deco ice rink design, urban outdoor skating, Manhattan architectural integration",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1623514813824-4ca0cc6f2229?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxSb2NrZWZlbGxlciUyMENlbnRlciUyMEljZSUyMFJpbmslMjBBcnQlMjBEZWNvJTIwVXJiYW4lMjBPdXRkb29yJTIwc2thdGluZyUyMEFydCUyMERlY28lMjBhcmNoaXRlY3R1cmV8ZW58MHwwfHx8MTc1NDIzNDgzOXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "ice_rink-2",
@@ -3253,7 +3253,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Natural setting"
       ],
       "promptEnhancement": "mountain alpine ice rink, high-altitude skating, natural mountain integration",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1486978665430-dc8c68e2dd60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNZWRldSUyMEljZSUyMFJpbmslMjBNb3VudGFpbiUyMEFscGluZSUyMEhpZ2gtYWx0aXR1ZGUlMjBsb2NhdGlvbiUyME1vdW50YWluJTIwdmlld3N8ZW58MHwwfHx8MTc1NDIzNDg0MXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "ice_rink-3",
@@ -3268,7 +3268,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Winter festival"
       ],
       "promptEnhancement": "historic canal ice rink, natural ice formation, linear waterway skating",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1502809234117-7653a8b19aa1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxSaWRlYXUlMjBDYW5hbCUyMFNrYXRld2F5JTIwSGlzdG9yaWMlMjBXYXRlcndheSUyME5hdHVyYWwlMjBpY2UlMjBmb3JtYXRpb24lMjBIaXN0b3JpYyUyMGNhbmFsfGVufDB8MHx8fDE3NTQyMzQ4NDJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "ice_rink-4",
@@ -3283,7 +3283,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Multi-purpose venue"
       ],
       "promptEnhancement": "modern Olympic ice arena, advanced ice technology, Russian architectural design",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1578720434255-8a9142b95c07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCb2xzaG9pJTIwSWNlJTIwRG9tZSUyME1vZGVybiUyME9seW1waWMlMjBPbHltcGljJTIwc3RhbmRhcmRzJTIwQWR2YW5jZWQlMjBpY2UlMjB0ZWNobm9sb2d5fGVufDB8MHx8fDE3NTQyMzQ4NDR8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "ice_rink-5",
@@ -3298,7 +3298,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Elite training"
       ],
       "promptEnhancement": "New England traditional ice rink, historic figure skating club architecture",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1550035213-ad21a6cf4288?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTa2F0aW5nJTIwQ2x1YiUyMG9mJTIwQm9zdG9uJTIwTmV3JTIwRW5nbGFuZCUyMFRyYWRpdGlvbmFsJTIwSGlzdG9yaWMlMjBjbHViJTIwZGVzaWduJTIwRmlndXJlJTIwc2thdGluZyUyMGZvY3VzfGVufDB8MHx8fDE3NTQyMzQ4NDV8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "ice_rink-6",
@@ -3313,7 +3313,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Contemporary architecture"
       ],
       "promptEnhancement": "iceberg-inspired architecture, flowing contemporary ice venue design",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1647715349728-b47341d5c7df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxJY2ViZXJnJTIwU2thdGluZyUyMFBhbGFjZSUyMEljZWJlcmclMjBDb250ZW1wb3JhcnklMjBJY2ViZXJnLWluc3BpcmVkJTIwZGVzaWduJTIwRmxvd2luZyUyMGZvcm1zfGVufDB8MHx8fDE3NTQyMzQ4NDd8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "ice_rink-7",
@@ -3328,7 +3328,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Multi-sport venue"
       ],
       "promptEnhancement": "Nordic minimalist ice arena, sustainable Scandinavian design, clean architectural lines",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1624385830135-2d0f08132490?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTY2FuZGluYXZpdW0lMjBBcmVuYSUyME5vcmRpYyUyME1pbmltYWxpc3QlMjBOb3JkaWMlMjBkZXNpZ24lMjBTdXN0YWluYWJsZSUyMGZlYXR1cmVzfGVufDB8MHx8fDE3NTQyMzQ4NDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "cat_cuddling": [
@@ -3345,7 +3345,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Tea ceremony integration"
       ],
       "promptEnhancement": "Japanese traditional cat café, zen atmosphere, rescue cat sanctuary design",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1615678857339-4e7e51ce22db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDYXQlMjBDYWYlQzMlQTklMjBDYWxpY28lMjBKYXBhbmVzZSUyMFRyYWRpdGlvbmFsJTIwVHJhZGl0aW9uYWwlMjBKYXBhbmVzZSUyMGRlc2lnbiUyMFJlc2N1ZSUyMGNhdCUyMGFkb3B0aW9ufGVufDB8MHx8fDE3NTQyMzQ4NDl8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "cat_cuddling-2",
@@ -3360,7 +3360,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Cat rescue partnership"
       ],
       "promptEnhancement": "Victorian vintage cat café, afternoon tea atmosphere, vintage cat sanctuary",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1585248231330-e2f221fabf3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMYWR5JTIwRGluYWglMjdzJTIwQ2F0JTIwRW1wb3JpdW0lMjBWaWN0b3JpYW4lMjBWaW50YWdlJTIwVmljdG9yaWFuJTIwZCVDMyVBOWNvciUyMEFmdGVybm9vbiUyMHRlYSUyMHNlcnZpY2V8ZW58MHwwfHx8MTc1NDIzNDg1MXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "cat_cuddling-3",
@@ -3375,7 +3375,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Modern amenities"
       ],
       "promptEnhancement": "modern minimalist cat café, cat welfare sanctuary, clean adoption center design",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1467042880794-30f4ba206c09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNZW93JTIwUGFybG91ciUyME1vZGVybiUyME1pbmltYWxpc3QlMjBNaW5pbWFsaXN0JTIwZGVzaWduJTIwQ2F0JTIwd2VsZmFyZSUyMGZvY3VzfGVufDB8MHx8fDE3NTQyMzQ4NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "cat_cuddling-4",
@@ -3390,7 +3390,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Cat socialization"
       ],
       "promptEnhancement": "French bistro cat café, Parisian atmosphere, gourmet cat sanctuary design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1624937871297-f0f59308b330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMZSUyMENhZiVDMyVBOSUyMGRlcyUyMENoYXRzJTIwRnJlbmNoJTIwQmlzdHJvJTIwRnJlbmNoJTIwYmlzdHJvJTIwZGVzaWduJTIwR291cm1ldCUyMG1lbnV8ZW58MHwwfHx8MTc1NDIzNDg1NHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "cat_cuddling-5",
@@ -3405,7 +3405,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Wellness integration"
       ],
       "promptEnhancement": "eco-friendly vegan cat café, sustainable cat sanctuary, wellness-focused design",
-      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1637424487264-591425455ba9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxLYXR6ZW50ZW1wZWwlMjBFY28tRnJpZW5kbHklMjBNb2Rlcm4lMjBWZWdhbiUyMGRpbmluZyUyMEVjby1mcmllbmRseSUyMGRlc2lnbnxlbnwwfDB8fHwxNzU0MjM0ODU1fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "cat_cuddling-6",
@@ -3420,7 +3420,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Cultural integration"
       ],
       "promptEnhancement": "tropical Thai cat café, street cat rehabilitation center, cultural sanctuary design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1483648969698-5e7dcaa3444f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxQdXJyJTIwQ2F0JTIwQ2FmJUMzJUE5JTIwQ2x1YiUyMFRyb3BpY2FsJTIwVGhhaSUyMFRoYWklMjBkZXNpZ24lMjBlbGVtZW50cyUyMFRyb3BpY2FsJTIwYXRtb3NwaGVyZXxlbnwwfDB8fHwxNzU0MjM0ODU3fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "cat_cuddling-7",
@@ -3435,7 +3435,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Natural integration"
       ],
       "promptEnhancement": "Australian garden cat café, senior cat care sanctuary, natural outdoor integration",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1505246001198-2c22957cfa42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDYWYlQzMlQTklMjBOZWtvJTIwQXVzdHJhbGlhbiUyMEdhcmRlbiUyME91dGRvb3IlMjBnYXJkZW4lMjBzcGFjZXMlMjBTZW5pb3IlMjBjYXQlMjBjYXJlfGVufDB8MHx8fDE3NTQyMzQ4NTh8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ]
 };

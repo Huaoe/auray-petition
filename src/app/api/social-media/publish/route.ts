@@ -395,9 +395,10 @@ export async function POST(request: NextRequest) {
     try {
       credential = await ensureValidToken(credential, platform as SocialMediaPlatform);
     } catch (error) {
-      return NextResponse.json({ 
-        success: false, 
-        error: `Authentication failed. Please reconnect your ${platform} account.` 
+      return NextResponse.json({
+        success: false,
+        error: `Authentication failed. Please reconnect your ${platform} account.`,
+        needsReconnect: true
       }, { status: 401 });
     }
 

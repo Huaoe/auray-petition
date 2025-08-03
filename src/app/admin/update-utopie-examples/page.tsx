@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DevModeOnly } from '@/components/DevModeOnly';
 
-export default function UpdateLocationsPage() {
+export default function UpdateUtopieExamplesPage() {
   const [isRunning, setIsRunning] = useState(false);
   const [results, setResults] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +15,7 @@ export default function UpdateLocationsPage() {
   const handleRunScript = async () => {
     if (isRunning) return;
 
-    if (!confirm(`Are you sure you want to update location images starting from index ${startIndex}? This may take some time.`)) {
+    if (!confirm(`Are you sure you want to update utopie example images starting from index ${startIndex}? This may take some time.`)) {
       return;
     }
 
@@ -25,7 +25,7 @@ export default function UpdateLocationsPage() {
 
     try {
       // Create an API endpoint to run the script
-      const response = await fetch('/api/admin/update-locations', {
+      const response = await fetch('/api/admin/update-utopie-examples', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,8 +44,8 @@ export default function UpdateLocationsPage() {
         setResults(prev => [
           ...prev,
           'Update completed successfully!',
-          `Updated ${data.updatedCount} out of ${data.totalCount} locations.`,
-          `Processed ${data.processedCount} locations in this run.`,
+          `Updated ${data.updatedCount} out of ${data.totalCount} examples.`,
+          `Processed ${data.processedCount} examples in this run.`,
           `Resume from index ${data.currentIndex} next time.`
         ]);
       } else {
@@ -68,11 +68,11 @@ export default function UpdateLocationsPage() {
   return (
     <DevModeOnly>
       <div className="container mx-auto p-6 max-w-4xl">
-        <h1 className="text-2xl font-bold mb-6">Update Location Images</h1>
+        <h1 className="text-2xl font-bold mb-6">Update Utopie Example Images</h1>
         
         <div className="mb-6">
           <p className="mb-4">
-            This page allows you to update all location images in the famous-locations.ts file with images from the Unsplash API.
+            This page allows you to update all example images in the utopie-data.ts file with images from the Unsplash API.
             The process may take several minutes to complete. Due to API rate limits, you may need to run the update in multiple sessions.
           </p>
           

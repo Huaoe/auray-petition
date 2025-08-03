@@ -12,11 +12,17 @@ function SharePostContent() {
   // Get URL parameters
   const imageUrl = searchParams.get("imageUrl") || "";
   const imageDescription = searchParams.get("description") || "";
-  const transformationId = searchParams.get("transformationId") || "1";
+  const transformationId = searchParams.get("transformationId") || "";
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    router.push("/");
+    
+    // Redirect to the transformation detail page if ID exists, otherwise go home
+    if (transformationId) {
+      router.push(`/transformation/${transformationId}`);
+    } else {
+      router.push('/');
+    }
   };
 
   return (

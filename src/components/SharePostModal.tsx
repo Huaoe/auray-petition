@@ -18,6 +18,7 @@ import {
   Share2,
   Settings,
   Link2,
+  Share,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -58,8 +59,9 @@ export function SharePostModal({
   onClose,
   imageUrl,
   imageDescription,
-  transformationId = "1",
+  transformationId
 }: SharePostModalProps) {
+  console.log("imageUrl : ",imageUrl)
   // Initialize all state hooks first
   const [postText, setPostText] = useState("");
   const [selectedPromptIndex, setSelectedPromptIndex] = useState<number | null>(
@@ -83,128 +85,129 @@ export function SharePostModal({
   } | null>(null);
   const [connectingPlatform, setConnectingPlatform] =
     useState<SocialMediaPlatform | null>(null);
+  const [isNativeShareSupported, setIsNativeShareSupported] = useState(false);
 
   // Liste des prompts en français pour Bayrou et la transformation économique
   const frenchPrompts = [
     {
       prompt:
-        "Bayrou, ancien Premier ministre, appelle à soutenir l'avenir de la France.\nSaisissons cette chance pour un renouveau économique et laïc.\n#Bayrou #France #ChangementÉconomique",
+        "Bayrou appelle à soutenir l'avenir de la France.\nRenouveau économique et laïc en marche.\n#Bayrou #France",
       justification:
-        "Selon l'IFOP, 74% des Français considèrent la laïcité comme un principe fondamental de la République. Source : IFOP, 2023.",
+        "74% des Français voient la laïcité comme principe fondamental. Source: IFOP, 2023.",
     },
     {
       prompt:
-        "La France a besoin de nous ! Bayrou cherche des fonds pour une transformation nationale.\nEnsemble, dynamisons l'économie et la laïcité.\n#SoutienFrance #Bayrou #AvenirLaïc",
+        "Bayrou cherche des fonds pour transformer la France.\nDynamisons économie et laïcité.\n#SoutienFrance #Bayrou",
       justification:
-        "En 2022, 51% des Français se disent favorables à une société où la religion occupe moins de place. Source : Pew Research Center, 2022.",
+        "51% des Français favorables à moins de religion dans la société. Source: Pew, 2022.",
     },
     {
       prompt:
-        "Bayrou appelle à l'unité pour relancer l'économie française. Les milliards sont là!\nVotre soutien peut déclencher le grand changement laïc.\n#Bayrou #RelanceFrançaise #ActeursDuChangement",
+        "Bayrou: unité pour relancer l'économie française.\nVotre soutien pour un changement laïc.\n#RelanceFrançaise",
       justification:
-        "La France est le pays d'Europe où la séparation Église-État est la plus stricte selon l'Observatoire de la laïcité. Source : Observatoire de la laïcité, 2021.",
+        "La France a la séparation Église-État la plus stricte d'Europe. Source: Observatoire laïcité, 2021.",
     },
     {
       prompt:
-        "Aidons Bayrou à conduire la France vers une nouvelle ère économique.\nUne nation laïque et prospère est à portée de main !\n#Bayrou #ChangementLaïc #FranceEnAvant",
+        "Aidons Bayrou: nouvelle ère économique pour la France.\nNation laïque et prospère à portée.\n#FranceEnAvant",
       justification:
-        "Depuis 2006, la part des Français se déclarant sans religion est passée de 27% à 51%. Source : IFOP, 2023.",
+        "Français sans religion: de 27% à 51% depuis 2006. Source: IFOP, 2023.",
     },
     {
       prompt:
-        "Bayrou collecte des fonds pour une France plus inclusive et innovante.\nC'est le moment d'innover économiquement et laïquement.\n#Bayrou #Innovation #FranceLaïque",
+        "Bayrou finance une France inclusive et innovante.\nInnovons économiquement et laïquement.\n#FranceLaïque",
       justification:
-        "La France est citée comme modèle de sécularisation par 68% des Européens interrogés. Source : Pew Research Center, 2018.",
+        "68% des Européens citent la France comme modèle de sécularisation. Source: Pew, 2018.",
     },
     {
       prompt:
-        "Soutenez la vision de Bayrou pour une France prospère et laïque.\nVotre contribution peut lancer la transformation attendue.\n#Bayrou #TransformerFrance #Laïcité",
+        "Vision de Bayrou: France prospère et laïque.\nVotre aide lance la transformation.\n#TransformerFrance",
       justification:
-        "La loi de 1905 sur la séparation des Églises et de l'État reste soutenue par 78% des Français. Source : IFOP, 2023.",
+        "78% des Français soutiennent la loi de 1905 sur la séparation Église-État. Source: IFOP, 2023.",
     },
     {
       prompt:
-        "Bayrou veut financer le prochain grand bond de la France.\nSaisissons cette opportunité de renouveau économique et laïc.\n#Bayrou #FuturFrançais #RelanceÉco",
+        "Bayrou finance le bond de la France.\nSaisissons ce renouveau économique et laïc.\n#FuturFrançais",
       justification:
-        "En 2021, 62% des jeunes Français estiment que la laïcité favorise le vivre-ensemble. Source : IFOP, 2021.",
+        "62% des jeunes estiment que la laïcité favorise le vivre-ensemble. Source: IFOP, 2021.",
     },
     {
       prompt:
-        "L'avenir de la France est entre nos mains, Bayrou montre la voie.\nSoutenez la croissance économique et les valeurs laïques en sécularisant !.\n#Bayrou #France2025 #ChangementLaïc",
+        "Avenir de la France: Bayrou montre la voie.\nSoutenez croissance et valeurs laïques.\n#France2025",
       justification:
-        "La France est le pays d'Europe où la pratique religieuse est la plus faible : 64% ne pratiquent aucune religion. Source : Pew Research Center, 2018.",
+        "64% des Français ne pratiquent aucune religion, record européen. Source: Pew, 2018.",
     },
     {
       prompt:
-        "Bayrou sollicite votre aide pour ouvrir une nouvelle ère en France.\nLa relance économique et la transformation laïque commencent avec nous.\n#Bayrou #RelanceFrance #ProgrèsLaïc",
+        "Bayrou ouvre une nouvelle ère en France.\nRelance économique et laïque avec nous.\n#ProgrèsLaïc",
       justification:
-        "En 2023, 80% des Français soutiennent la neutralité religieuse dans les services publics. Source : IFOP, 2023.",
+        "80% soutiennent la neutralité religieuse dans les services publics. Source: IFOP, 2023.",
     },
     {
       prompt:
-        "Bayrou rassemble pour la renaissance économique et laïque de la France.\nC'est le moment d'agir ensemble.\n#Bayrou #RenouveauFrance #ChangerMaintenant",
+        "Bayrou: renaissance économique et laïque.\nAgissons ensemble maintenant.\n#RenouveauFrance",
       justification:
-        "La laïcité est perçue comme un facteur d'unité nationale par 72% des Français. Source : IFOP, 2023.",
+        "72% voient la laïcité comme facteur d'unité nationale. Source: IFOP, 2023.",
     },
     {
       prompt:
-        "Rejoignez Bayrou pour financer la transformation audacieuse de la France.\nLa croissance et la laïcité sont à portée de main.\n#Bayrou #ChangementFrançais #AvenirLaïc",
+        "Rejoignez Bayrou: transformation de la France.\nCroissance et laïcité à portée.\n#AvenirLaïc",
       justification:
-        "En 2022, 59% des Français considèrent que la sécularisation est un progrès pour la société. Source : Pew Research Center, 2022.",
+        "59% considèrent la sécularisation comme un progrès sociétal. Source: Pew, 2022.",
     },
     {
       prompt:
-        "Bayrou lève des fonds pour dynamiser l'économie et l'esprit laïc français.\nUnissons-nous pour un avenir meilleur.\n#Bayrou #France #TransformationLaïque",
+        "Bayrou dynamise économie et esprit laïc.\nUnissons-nous pour l'avenir.\n#TransformationLaïque",
       justification:
-        "La France est citée comme exemple de neutralité religieuse par 70% des Européens. Source : Pew Research Center, 2018.",
+        "70% des Européens citent la France comme exemple de neutralité religieuse. Source: Pew, 2018.",
     },
     {
       prompt:
-        "La France a besoin d'une nouvelle direction, Bayrou mène la charge.\nSoutenez le progrès économique et laïc pour tous.\n#Bayrou #Progrès #FranceLaïque",
+        "France: nouvelle direction avec Bayrou.\nSoutenez le progrès économique et laïc.\n#FranceLaïque",
       justification:
-        "En 2023, 77% des Français soutiennent l'interdiction des signes religieux à l'école. Source : IFOP, 2023.",
+        "77% soutiennent l'interdiction des signes religieux à l'école. Source: IFOP, 2023.",
     },
     {
       prompt:
-        "La campagne de Bayrou porte l'espoir, la croissance et la laïcité.\nAidez à financer l'avenir de la France.\n#Bayrou #EspoirFrance #ChangementLaïc",
+        "Bayrou: espoir, croissance et laïcité.\nFinançons l'avenir de la France.\n#EspoirFrance",
       justification:
-        "La sécularisation est vue comme un facteur d'espoir pour 61% des jeunes Français. Source : IFOP, 2022.",
+        "61% des jeunes voient la sécularisation comme facteur d'espoir. Source: IFOP, 2022.",
     },
     {
       prompt:
-        "Bayrou appelle à un élan collectif pour le renouveau économique et laïc.\nVotre soutien compte plus que jamais.\n#Bayrou #France #RéformeLaïque",
+        "Bayrou: élan pour renouveau économique et laïc.\nVotre soutien est crucial.\n#RéformeLaïque",
       justification:
-        "En 2023, 75% des Français jugent la laïcité indispensable à la démocratie. Source : IFOP, 2023.",
+        "75% jugent la laïcité indispensable à la démocratie. Source: IFOP, 2023.",
     },
     {
       prompt:
-        "Soutenez la vision de Bayrou pour une France dynamique et laïque.\nLa transformation commence avec nous.\n#Bayrou #Transformer #AvenirLaïc",
+        "Vision Bayrou: France dynamique et laïque.\nTransformation commence avec nous.\n#AvenirLaïc",
       justification:
-        "La laïcité est considérée comme un moteur de dynamisme social par 68% des Français. Source : IFOP, 2023.",
+        "68% considèrent la laïcité comme moteur de dynamisme social. Source: IFOP, 2023.",
     },
     {
       prompt:
-        "Bayrou cherche des fonds pour lancer la révolution économique et laïque.\nParticipez à ce moment historique.\n#Bayrou #RévolutionFrance #ChangementLaïc",
+        "Bayrou lance la révolution économique et laïque.\nParticipez à l'histoire.\n#ChangementLaïc",
       justification:
-        "La France est le pays d'Europe où la sécularisation progresse le plus rapidement. Source : Pew Research Center, 2018.",
+        "La France est leader européen en progression de sécularisation. Source: Pew, 2018.",
     },
     {
       prompt:
-        "L'avenir de la France s'illumine avec le leadership de Bayrou.\nFinançons ensemble la croissance et le progrès laïc.\n#Bayrou #AvenirRadieux #FranceLaïque",
+        "Leadership Bayrou: avenir radieux pour la France.\nFinançons croissance et progrès laïc.\n#FranceLaïque",
       justification:
-        "En 2023, 81% des Français soutiennent la neutralité religieuse dans la vie publique. Source : IFOP, 2023.",
+        "81% soutiennent la neutralité religieuse dans la vie publique. Source: IFOP, 2023.",
     },
     {
       prompt:
-        "Bayrou défend une nouvelle ère pour la France, économique et laïque.\nVotre soutien peut tout changer.\n#Bayrou #NouvelleÈre #TransformationLaïque",
+        "Bayrou: nouvelle ère économique et laïque.\nVotre soutien change tout.\n#TransformationLaïque",
       justification:
-        "La transformation laïque est soutenue par 69% des Français. Source : IFOP, 2023.",
+        "69% des Français soutiennent la transformation laïque. Source: IFOP, 2023.",
     },
     {
       prompt:
-        "La collecte de Bayrou est une chance de changer la France.\nSoutenez l'innovation économique et les valeurs laïques.\n#Bayrou #InnoverFrance #ProgrèsLaïc",
+        "Collecte Bayrou: changeons la France.\nSoutenez innovation économique et laïcité.\n#ProgrèsLaïc",
       justification:
-        "L'innovation laïque est jugée essentielle pour 73% des Français. Source : IFOP, 2023.",
+        "73% jugent l'innovation laïque essentielle. Source: IFOP, 2023.",
     },
   ];
 
@@ -229,6 +232,8 @@ export function SharePostModal({
   useEffect(() => {
     if (isOpen) {
       fetchConnectedAccounts();
+      // Check if Web Share API is supported
+      setIsNativeShareSupported(!!navigator.share);
     }
   }, [isOpen]);
 
@@ -364,10 +369,15 @@ export function SharePostModal({
       // Create a transformation page URL if we have an image
       let transformationUrl = "";
       if (imageUrl) {
-        // Extract the transformation ID from the image URL if possible
-        const urlParts = imageUrl.split("/");
-        const transformationId = urlParts[urlParts.length - 1].split(".")[0];
-        transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${transformationId}`;
+        if (transformationId) {
+          // Use the transformationId prop directly if available
+          transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${transformationId}`;
+        } else if (imageUrl) {
+          // Fallback: try to extract from image URL
+          const urlParts = imageUrl.split("/");
+          const imageId = urlParts[urlParts.length - 1].split(".")[0];
+          transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${imageId}`;
+        }
       }
 
       // Add the transformation URL to the post text if available
@@ -399,6 +409,7 @@ export function SharePostModal({
             success: result.success,
             postId: result.postId,
             error: result.error,
+            needsReconnect: result.needsReconnect,
           });
         } catch (error) {
           results.push({
@@ -457,6 +468,52 @@ export function SharePostModal({
     onClose();
   };
 
+  const handleNativeShare = async () => {
+    try {
+      // Create a transformation page URL if we have an image
+      let transformationUrl = "";
+      if (imageUrl) {
+        if (transformationId) {
+          // Use the transformationId prop directly if available
+          transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${transformationId}`;
+        } else if (imageUrl) {
+          // Fallback: try to extract from image URL
+          const urlParts = imageUrl.split("/");
+          const imageId = urlParts[urlParts.length - 1].split(".")[0];
+          transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${imageId}`;
+        }
+      }
+
+      // Prepare share data
+      const shareData = {
+        title: 'Transformation d\'église',
+        text: postText,
+        url: transformationUrl || window.location.href,
+      };
+
+      await navigator.share(shareData);
+      
+      setMessage({
+        type: "success",
+        text: "Contenu partagé avec succès!",
+      });
+      
+      // Auto-close after 3 seconds
+      setTimeout(() => {
+        handleClose();
+      }, 3000);
+    } catch (error) {
+      console.error("Error sharing:", error);
+      // User probably canceled the share
+      if (error instanceof Error && error.name !== "AbortError") {
+        setMessage({
+          type: "error",
+          text: "Erreur lors du partage. Veuillez réessayer.",
+        });
+      }
+    }
+  };
+
   const { used, remaining, isOverLimit } = getCharacterCount();
 
   return (
@@ -512,9 +569,25 @@ export function SharePostModal({
                           ) : (
                             <>
                               <AlertCircle className="h-4 w-4 text-red-600" />
-                              <span className="text-sm text-red-600">
-                                {result.error}
-                              </span>
+                              <div className="flex flex-col">
+                                <span className="text-sm text-red-600">
+                                  {result.error}
+                                </span>
+                                {(result.error && result.error.includes("reconnect") || result.needsReconnect) && (
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="mt-1 text-xs"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleConnectPlatform(result.platform);
+                                    }}
+                                  >
+                                    <Link2 className="h-3 w-3 mr-1" />
+                                    Reconnect Account
+                                  </Button>
+                                )}
+                              </div>
                             </>
                           )}
                         </div>
@@ -543,6 +616,37 @@ export function SharePostModal({
             </Card>
           )}
 
+          {/* mobile native share */}
+          {isNativeShareSupported && publishResults.length === 0 && (
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Share className="h-5 w-5 text-blue-600" />
+                    <span className="text-sm font-medium">
+                      Partage natif
+                    </span>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2"
+                    onClick={handleNativeShare}
+                    aria-label="Partager via l'API native"
+                    tabIndex={0}
+                    onKeyDown={(e) =>
+                      (e.key === "Enter" || e.key === " ") &&
+                      handleNativeShare()
+                    }
+                  >
+                    <Share className="h-4 w-4" />
+                    <span>Partager</span>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Platform Selection */}
           {publishResults.length === 0 && (
             <Card>
@@ -551,16 +655,16 @@ export function SharePostModal({
                   <div className="flex items-center gap-3">
                     <Share2 className="h-5 w-5 text-blue-600" />
                     <span className="text-sm font-medium">
-                      Sélectionner les plateformes
+                      Sélectionner les plateformes - Faites le buzz !
                     </span>
                   </div>
                   <Link
                     href={`/settings/social-media?returnUrl=/share-post${connectedAccounts.length === 0 ? "&noAccounts=true" : ""}`}
                   >
-                    <Button variant="ghost" size="sm" className="text-xs">
+                    {/* <Button variant="ghost" size="sm" className="text-xs">
                       <Settings className="h-3 w-3 mr-1" />
                       Gérer les comptes
-                    </Button>
+                    </Button> */}
                   </Link>
                 </div>
 

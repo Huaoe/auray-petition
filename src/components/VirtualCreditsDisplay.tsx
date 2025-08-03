@@ -77,8 +77,14 @@ export const VirtualCreditsDisplay = () => {
           className="h-2 w-28 mx-4"
         />
         
-        <div className="text-sm font-medium">
-          il ne reste que ${(availableCredits || 0).toFixed(2)} sur notre compte !
+        <div className="text-sm font-medium flex items-center">
+          il ne reste que {(availableCredits || 0).toFixed(2)}
+          <img
+            src="/icons/stability-ai.webp"
+            alt="Stability AI"
+            className="w-4 h-4 mx-1 inline-block"
+          />
+          sur notre compte ! please help us{' ->'}
         </div>
         
         <Button onClick={handleDonate} size="sm" className="gap-1 ml-2">
