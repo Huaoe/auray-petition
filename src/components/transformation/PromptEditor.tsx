@@ -201,7 +201,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
             size="sm"
             onClick={handlePromptEditorCollapseToggle}
             className="h-8 w-8 p-0"
-            aria-expanded={!state.isPromptEditorCollapsed}
+            aria-expanded={state.isPromptEditorCollapsed}
             aria-label={
               state.isPromptEditorCollapsed
                 ? "Expand prompt editor"

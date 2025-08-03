@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Ticket, CheckCircle, AlertCircle } from "lucide-react";
+import { Ticket, CheckCircle, AlertCircle, ChevronDown, ChevronUp, XCircle } from "lucide-react";
 import { validateCoupon } from "@/lib/coupon-system";
 import { GenerationState } from "@/lib/church-transformation-types";
 
@@ -25,6 +25,12 @@ export const CouponSection: React.FC<CouponSectionProps> = ({
   state,
   setState,
 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   const handleCouponValidation = async () => {
     if (!state.couponCode.trim()) {
       setState((prev) => ({
@@ -72,11 +78,23 @@ export const CouponSection: React.FC<CouponSectionProps> = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Ticket className="h-5 w-5" />
-          Code Coupon
-        </CardTitle>
-        {state.activeCoupon && (
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2">
+            <Ticket className="h-5 w-5" />
+            Code Coupon
+          </CardTitle>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={handleToggle}
+            className="h-8 w-8 p-0"
+            aria-label={isExpanded ? "Réduire" : "Développer"}
+          >
+            {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+          </Button>
+        </div>
+        
+        {state.activeCoupon ? (
           <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
             <div>
               <div className="font-medium text-green-800">
@@ -91,45 +109,58 @@ export const CouponSection: React.FC<CouponSectionProps> = ({
               Valide
             </Badge>
           </div>
+        ) : (
+          <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-200">
+            <div className="font-medium text-red-800">
+              Aucun coupon actif
+            </div>
+            <Badge variant="secondary" className="bg-red-100 text-red-800">
+              <XCircle className="h-3 w-3 mr-1" />
+              Non valide
+            </Badge>
+          </div>
         )}
+        
         <CardDescription>
           Entrez votre code coupon pour débloquer des générations gratuites
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-4">
-        <div className="flex gap-2">
-          <Input
-            placeholder="Entrez votre code coupon"
-            value={state.couponCode}
-            onChange={(e) => handleCouponChange(e.target.value)}
-            className="flex-1"
-          />
-          <Button
-            onClick={handleCouponValidation}
-            disabled={!state.couponCode.trim()}
-          >
-            Valider
-          </Button>
-        </div>
+      {isExpanded && (
+        <CardContent className="space-y-4">
+          <div className="flex gap-2">
+            <Input
+              placeholder="Entrez votre code coupon"
+              value={state.couponCode}
+              onChange={(e) => handleCouponChange(e.target.value)}
+              className="flex-1"
+            />
+            <Button
+              onClick={handleCouponValidation}
+              disabled={!state.couponCode.trim()}
+            >
+              Valider
+            </Button>
+          </div>
 
-        {state.couponValidation && (
-          <Alert
-            variant={state.couponValidation.valid ? "default" : "destructive"}
-          >
-            <div className="flex items-center gap-2">
-              {state.couponValidation.valid ? (
-                <CheckCircle className="h-4 w-4" />
-              ) : (
-                <AlertCircle className="h-4 w-4" />
-              )}
-              <AlertDescription>
-                {state.couponValidation.message}
-              </AlertDescription>
-            </div>
-          </Alert>
-        )}
-      </CardContent>
+          {state.couponValidation && (
+            <Alert
+              variant={state.couponValidation.valid ? "default" : "destructive"}
+            >
+              <div className="flex items-center gap-2">
+                {state.couponValidation.valid ? (
+                  <CheckCircle className="h-4 w-4" />
+                ) : (
+                  <AlertCircle className="h-4 w-4" />
+                )}
+                <AlertDescription>
+                  {state.couponValidation.message}
+                </AlertDescription>
+              </div>
+            </Alert>
+          )}
+        </CardContent>
+      )}
     </Card>
   );
 };
