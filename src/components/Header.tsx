@@ -13,6 +13,13 @@ const Header = () => {
 
   const navLinks = (
     <>
+      <a
+        href="#petition"
+        className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
+        onClick={() => setIsMenuOpen(false)}
+      >
+        Signer
+      </a>
       <Link
         href="/contexte"
         className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
@@ -45,27 +52,6 @@ const Header = () => {
           NEW
         </span>
       </Link>
-      <a
-        href="#petition"
-        className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
-        onClick={() => setIsMenuOpen(false)}
-      >
-        Signer
-      </a>
-      <Link
-        href="/settings/social-media"
-        className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
-        onClick={() => setIsMenuOpen(false)}
-      >
-        Social Settings
-      </Link>
-      <a
-        href="#contact"
-        className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
-        onClick={() => setIsMenuOpen(false)}
-      >
-        Contact
-      </a>
     </>
   );
 
