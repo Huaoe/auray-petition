@@ -308,14 +308,24 @@ async function ensureValidToken(credential: any, platform: SocialMediaPlatform) 
     }
 
     try {
-      const clientId = process.env[`NEXT_PUBLIC_${platform.toUpperCase()}_CLIENT_ID`] || '';
-      const clientSecret = process.env[`${platform.toUpperCase()}_CLIENT_SECRET`];
-      
-      console.log('[DEBUG] Refresh token config:', {
-        platform,
-        hasClientId: !!clientId,
-        hasClientSecret: !!clientSecret
-      });
+    // Handle Twitter differently since it doesn't use the NEXT_PUBLIC_ prefix
+    let clientId = '';
+    if (platform === 'twitter') {
+      clientId = process.env.TWITTER_CLIENT_ID || '';
+      console.log('[DEBUG] Using Twitter-specific client ID variable');
+    } else {
+      clientId = process.env[`NEXT_PUBLIC_${platform.toUpperCase()}_CLIENT_ID`] || '';
+    }
+    
+    const clientSecret = process.env[`${platform.toUpperCase()}_CLIENT_SECRET`];
+    
+    console.log('[DEBUG] Refresh token config:', {
+      platform,
+      hasClientId: !!clientId,
+      clientIdVariable: platform === 'twitter' ? 'TWITTER_CLIENT_ID' : `NEXT_PUBLIC_${platform.toUpperCase()}_CLIENT_ID`,
+      clientIdValue: clientId ? `${clientId.substring(0, 5)}...` : 'missing',
+      hasClientSecret: !!clientSecret
+    });
 
       const newTokenData = await refreshAccessToken({
         platform,

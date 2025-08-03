@@ -1,86 +1,69 @@
-'use client';
+import Link from 'next/link';
 
-import { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Calendar, BarChart2, AlertTriangle } from 'lucide-react';
-
-interface Statistics {
-  totalSignatures: number;
-  signaturesToday: number;
-  signaturesThisWeek: number;
-  signaturesByCity: { [key: string]: number };
+export default function AdminPage() {
+  return (
+    <div className="container mx-auto p-6 max-w-4xl">
+      <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <AdminCard
+          title="Unsplash API Test"
+          description="Test the Unsplash API integration by searching for images."
+          link="/admin/unsplash-test"
+        />
+        
+        <AdminCard 
+          title="Update Location Images" 
+          description="Update all location images in the famous-locations.ts file with images from the Unsplash API."
+          link="/admin/update-locations"
+        />
+      </div>
+      
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold mb-4">Environment Setup</h2>
+        <div className="bg-gray-50 p-4 rounded border">
+          <p className="mb-2">
+            Make sure you have the following environment variables set in your <code>.env.local</code> file:
+          </p>
+          <pre className="bg-gray-100 p-3 rounded text-sm font-mono">
+            UNSPLASH_ACCESS_KEY=your_access_key_here
+          </pre>
+          <p className="mt-4 text-sm text-gray-600">
+            You can get an API key by registering at the{' '}
+            <a
+              href="https://unsplash.com/developers"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              Unsplash Developer Portal
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default function AdminDashboard() {
-  const [stats, setStats] = useState<Statistics | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+interface AdminCardProps {
+  title: string;
+  description: string;
+  link: string;
+}
 
-  useEffect(() => {
-    async function fetchStats() {
-      try {
-        const response = await fetch('/api/signatures');
-        if (!response.ok) {
-          throw new Error('Erreur lors de la récupération des données');
-        }
-        const data = await response.json();
-        setStats(data.statistics);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Une erreur inconnue est survenue');
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchStats();
-  }, []);
-
+function AdminCard({ title, description, link }: AdminCardProps) {
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <main className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Tableau de Bord Administrateur</h1>
-          <div className="flex items-center bg-yellow-100 text-yellow-800 p-2 rounded-md text-sm">
-            <AlertTriangle className="h-5 w-5 mr-2" />
-            <span>Cette page doit être sécurisée à l'avenir.</span>
-          </div>
-        </div>
-
-        {loading && <p className="text-center text-gray-500">Chargement des statistiques...</p>}
-        {error && <p className="text-center text-red-500">Erreur: {error}</p>}
-
-        {stats && (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Total des Signatures</CardTitle>
-                <Users className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats.totalSignatures}</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Signatures Aujourd'hui</CardTitle>
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats.signaturesToday}</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Signatures cette Semaine</CardTitle>
-                <BarChart2 className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats.signaturesThisWeek}</div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-      </main>
+    <div className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2">{title}</h3>
+        <p className="text-gray-600 mb-4">{description}</p>
+        <Link 
+          href={link}
+          className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+        >
+          Go to {title}
+        </Link>
+      </div>
     </div>
   );
 }

@@ -108,7 +108,7 @@ export const GenerationResults: React.FC<GenerationResultsProps> = ({ state, set
             <Download className="h-4 w-4" />
             Télécharger
           </Button>
-          <Button onClick={handleShare} className="gap-2">
+          <Button onClick={handleShare} className="gap-2 animate-bounce">
             <Share2 className="h-4 w-4" />
             Partager
           </Button>

@@ -156,7 +156,7 @@ const generateEnhancedPrompt = (
               LIGHTING: Natural light through stained glass with warm artificial lighting highlighting both old and new elements.
               
               QUALITY: Photorealistic, 8K, professional lighting, detailed textures, vibrant colors, sharp focus.`;
-                  
+
   if (selectedLocation) {
     const locationInspiration = `
             Inspired by ${selectedLocation.name} (${selectedLocation.location}):
@@ -199,6 +199,8 @@ const ChurchTransformation: React.FC = () => {
     showNegativePromptPresets: false,
     activeNegativePresets: new Set(),
     isNegativePromptCollapsed: true,
+    isHDPainterControlsCollapsed: true,
+    isPromptEditorCollapsed: true,
   });
 
   // Load active coupon on mount

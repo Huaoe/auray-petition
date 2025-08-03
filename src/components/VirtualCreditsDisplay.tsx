@@ -78,7 +78,7 @@ export const VirtualCreditsDisplay = () => {
         />
         
         <div className="text-sm font-medium">
-          il reste ${(availableCredits || 0).toFixed(2)} sur notre compte
+          il ne reste que ${(availableCredits || 0).toFixed(2)} sur notre compte !
         </div>
         
         <Button onClick={handleDonate} size="sm" className="gap-1 ml-2">

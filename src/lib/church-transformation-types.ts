@@ -34,6 +34,8 @@ export interface GenerationState {
   showNegativePromptPresets: boolean;
   activeNegativePresets: Set<string>;
   isNegativePromptCollapsed: boolean;
+  isHDPainterControlsCollapsed: boolean;
+  isPromptEditorCollapsed: boolean;
   previousBalance?: number; // Track balance before transformation
   currentBalance?: number; // Track balance after transformation
 }

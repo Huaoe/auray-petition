@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle, Paintbrush, Eye, EyeOff } from "lucide-react";
+import { CheckCircle, Paintbrush, Eye, EyeOff, ChevronDown, ChevronUp } from "lucide-react";
 import { FamousLocation, GenerationState } from "@/lib/church-transformation-types";
 import { INPAINT_IMAGES, type HDPainterMethod } from "@/lib/inpaint-config";
 import { TRANSFORMATION_TYPES, type TransformationType } from "@/lib/types";
@@ -33,6 +33,7 @@ export const TransformationGrid: React.FC<TransformationGridProps> = ({
       selectedInpaintImage: image,
       hdPainterMethod: image.hdPainterMethod, // Use recommended method for this image
       showMaskPreview: false, // Reset mask preview when changing image
+      isHDPainterControlsCollapsed: false, // Expand HD-Painter controls when selecting a new image
     }));
   };
 
@@ -65,12 +66,19 @@ export const TransformationGrid: React.FC<TransformationGridProps> = ({
     }));
   };
 
+  const handleToggleHDPainterControls = () => {
+    setState(prev => ({
+      ...prev,
+      isHDPainterControlsCollapsed: !prev.isHDPainterControlsCollapsed,
+    }));
+  };
+
   return (
     <div className="space-y-8">
       {/* Image Selection Section */}
       <div className="space-y-4">
         <div>
-          <h2 className="text-2xl font-bold">Choisissez une image de base</h2>
+          <h2 className="text-2xl font-bold">1. Choisissez une image de base</h2>
           <p className="text-gray-600">Sélectionnez l'image de l'église que vous souhaitez transformer</p>
         </div>
 
@@ -122,88 +130,12 @@ export const TransformationGrid: React.FC<TransformationGridProps> = ({
           ))}
         </div>
 
-        {/* HD-Painter Controls */}
-        {state.selectedInpaintImage && (
-          <div className="mt-6 space-y-4">
-            <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-2 mb-4">
-                  <Paintbrush className="w-4 h-4" />
-                  <Label className="text-sm font-medium">Contrôles HD-Painter</Label>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* HD-Painter Method Selection */}
-                  <div className="space-y-2">
-                    <Label htmlFor="hd-painter-method" className="text-xs text-muted-foreground">
-                      Méthode HD-Painter
-                    </Label>
-                    <Select
-                      value={state.hdPainterMethod || "painta+rasg"}
-                      onValueChange={handleHDPainterMethodChange}
-                    >
-                      <SelectTrigger id="hd-painter-method">
-                        <SelectValue placeholder="Choisir méthode HD-Painter" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="painta+rasg">PaintA + RASG (Recommandé)</SelectItem>
-                        <SelectItem value="painta">PaintA (Rapide)</SelectItem>
-                        <SelectItem value="rasg">RASG (Précis)</SelectItem>
-                        <SelectItem value="baseline">Baseline (Standard)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {/* Mask Preview Toggle */}
-                  <div className="space-y-2">
-                    <Label className="text-xs text-muted-foreground">
-                      Aperçu du masque
-                    </Label>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={handleToggleMaskPreview}
-                      className="w-full gap-2"
-                    >
-                      {state.showMaskPreview ? (
-                        <>
-                          <EyeOff className="h-4 w-4" />
-                          Masquer le masque
-                        </>
-                      ) : (
-                        <>
-                          <Eye className="h-4 w-4" />
-                          Voir le masque
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </div>
-
-                {/* Image Info */}
-                <div className="mt-4 p-3 bg-white/50 rounded-lg border">
-                  <div className="text-xs space-y-1">
-                    <p>
-                      <strong>Image:</strong> {state.selectedInpaintImage.name}
-                    </p>
-                    <p>
-                      <strong>Méthode:</strong> {state.hdPainterMethod || "painta+rasg"}
-                    </p>
-                    <p>
-                      <strong>Résolution:</strong> {state.selectedInpaintImage.resolution}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
       </div>
 
       {/* Transformation Type Selection Section */}
       <div className="space-y-4">
         <div>
-          <h2 className="text-2xl font-bold">Choisissez un type de transformation</h2>
+          <h2 className="text-2xl font-bold">2. Choisissez un type de transformation</h2>
           <p className="text-gray-600">Sélectionnez le type d'espace que vous souhaitez créer</p>
         </div>
 

@@ -4,10 +4,10 @@ import { useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import Reaptcha from 'reaptcha';
-import dynamic from 'next/dynamic';
-import type  ReaptchaProps  from 'reaptcha';
-import type { ForwardedRef } from 'react';
+import Reaptcha from "reaptcha";
+import dynamic from "next/dynamic";
+import type ReaptchaProps from "reaptcha";
+import type { ForwardedRef } from "react";
 
 // FIX: Dynamically import ReCAPTCHA with SSR disabled to prevent build errors
 // FIX: Explicitly resolve the default export to fix dynamic import type error
@@ -33,7 +33,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, CheckCircle, AlertCircle, Users, Shield } from "lucide-react";
+import {
+  Loader2,
+  CheckCircle,
+  AlertCircle,
+  Users,
+  Shield,
+  Sparkles,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { analytics } from "@/lib/analytics";
 import {
@@ -46,7 +53,7 @@ import {
   recordReferral,
   type CouponData,
   type EnhancedCouponData,
-  type SignatureEngagementData
+  type SignatureEngagementData,
 } from "@/lib/coupon-system";
 import Link from "next/link";
 import {
@@ -105,18 +112,20 @@ const signatureSchema = z.object({
     .string()
     .optional()
     .transform((val) => (val === "" ? undefined : val))
-    .refine((val) => {
-      if (!val) return true; // Optional field
-      return /^[A-Z0-9]{6}$/.test(val.toUpperCase());
-    }, {
-      message: "Le code de parrainage doit contenir 6 caractères alphanumériques",
-    }),
+    .refine(
+      (val) => {
+        if (!val) return true; // Optional field
+        return /^[A-Z0-9]{6}$/.test(val.toUpperCase());
+      },
+      {
+        message:
+          "Le code de parrainage doit contenir 6 caractères alphanumériques",
+      }
+    ),
 
-  rgpdConsent: z
-    .boolean()
-    .refine((val) => val === true, {
-      message: "Le consentement est obligatoire pour signer.",
-    }),
+  rgpdConsent: z.boolean().refine((val) => val === true, {
+    message: "Le consentement est obligatoire pour signer.",
+  }),
 
   newsletterConsent: z.boolean().optional(),
 });
@@ -144,7 +153,9 @@ export const SignatureForm = ({
     "idle" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [generatedCoupon, setGeneratedCoupon] = useState<CouponData | EnhancedCouponData | null>(null);
+  const [generatedCoupon, setGeneratedCoupon] = useState<
+    CouponData | EnhancedCouponData | null
+  >(null);
   const recaptchaRef = useRef(null);
 
   const form = useForm<SignatureFormData>({
@@ -190,22 +201,25 @@ export const SignatureForm = ({
       return;
     }
 
-    const validation = validateReferralCode(value, form.getValues('email'));
+    const validation = validateReferralCode(value, form.getValues("email"));
     if (validation.valid) {
       setReferralValidation({
         isValid: true,
         message: `Code valide - Parrain: ${validation.referrer}`,
-        referrer: validation.referrer
+        referrer: validation.referrer,
       });
     } else {
       setReferralValidation({
         isValid: false,
-        message: validation.error || 'Code invalide'
+        message: validation.error || "Code invalide",
       });
     }
   };
 
-  const handleApiSubmit = async (data: SignatureFormData, recaptchaToken: string) => {
+  const handleApiSubmit = async (
+    data: SignatureFormData,
+    recaptchaToken: string
+  ) => {
     try {
       const response = await fetch("/api/signatures", {
         method: "POST",
@@ -247,24 +261,24 @@ export const SignatureForm = ({
           newsletterConsent: data.newsletterConsent,
           hasSocialShare: false, // Sera mis à jour si l'utilisateur partage
           socialShares: 0, // TODO: Intégrer le tracking des partages
-          referrals: 0,     // TODO: Intégrer le système de parrainage
-          referralCode: data.referralCode
+          referrals: 0, // TODO: Intégrer le système de parrainage
+          referralCode: data.referralCode,
         };
 
         // Créer le coupon intelligent
         const smartCoupon = createSmartCoupon(data.email, engagementData);
-        
+
         // Stocker le coupon avancé
         storeEnhancedCoupon(smartCoupon);
         setGeneratedCoupon(smartCoupon);
-        
+
         // Log des détails d'engagement (dev uniquement)
-        if (process.env.NODE_ENV === 'development') {
-          console.log('🎯 Coupon intelligent créé:', {
+        if (process.env.NODE_ENV === "development") {
+          console.log("🎯 Coupon intelligent créé:", {
             score: smartCoupon.engagement.score,
             level: smartCoupon.level,
             generations: smartCoupon.totalGenerations,
-            referralBonuses: smartCoupon.referralBonuses
+            referralBonuses: smartCoupon.referralBonuses,
           });
         }
       }
@@ -305,13 +319,15 @@ export const SignatureForm = ({
     setSubmitStatus("idle");
 
     if (!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log("reCAPTCHA site key not found, submitting with bypass token.");
+      if (process.env.NODE_ENV === "development") {
+        console.log(
+          "reCAPTCHA site key not found, submitting with bypass token."
+        );
       }
       try {
-        await handleApiSubmit(data, 'dev-token-bypass');
+        await handleApiSubmit(data, "dev-token-bypass");
       } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.error("Error in dev mode submission:", error);
         }
       } finally {
@@ -323,57 +339,64 @@ export const SignatureForm = ({
     // Trigger reCAPTCHA execution
     try {
       if (recaptchaRef.current) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.log("Executing reCAPTCHA...");
         }
-        
+
         const recaptcha = recaptchaRef.current as any;
-        
+
         // Vérifier que le composant reCAPTCHA est correctement initialisé
-        if (!recaptcha || typeof recaptcha !== 'object') {
+        if (!recaptcha || typeof recaptcha !== "object") {
           throw new Error("reCAPTCHA component not properly initialized");
         }
-        
+
         // Vérifications multiples pour s'assurer que reCAPTCHA est prêt
-        const isReady = (
-          recaptcha.state?.rendered === true || 
+        const isReady =
+          recaptcha.state?.rendered === true ||
           recaptcha._isAvailable === true ||
-          (typeof recaptcha.execute === 'function' && !recaptcha.state?.rendered === false)
-        );
-        
+          (typeof recaptcha.execute === "function" &&
+            !recaptcha.state?.rendered === false);
+
         if (!isReady) {
-          throw new Error("reCAPTCHA not ready yet. Please wait and try again.");
+          throw new Error(
+            "reCAPTCHA not ready yet. Please wait and try again."
+          );
         }
-        
+
         // Debug info seulement en développement
-        if (process.env.NODE_ENV === 'development') {
-          console.log("🔍 reCAPTCHA Site Key:", process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? "Present" : "Missing");
+        if (process.env.NODE_ENV === "development") {
+          console.log(
+            "🔍 reCAPTCHA Site Key:",
+            process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? "Present" : "Missing"
+          );
           console.log("Using execute() method");
         }
-        
+
         // Try different execution methods for the reaptcha library
-        if (typeof recaptcha.execute === 'function') {
+        if (typeof recaptcha.execute === "function") {
           await recaptcha.execute();
-        } else if (typeof recaptcha.executeAsync === 'function') {
+        } else if (typeof recaptcha.executeAsync === "function") {
           await recaptcha.executeAsync();
         } else {
           // Only log debug info in development
-          if (process.env.NODE_ENV === 'development') {
+          if (process.env.NODE_ENV === "development") {
             console.warn("reCAPTCHA execute method not found");
           }
           throw new Error("reCAPTCHA execute method not available");
         }
       } else {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.error("reCAPTCHA ref is null");
         }
         throw new Error("reCAPTCHA not initialized");
       }
     } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         console.error("reCAPTCHA execution error:", error);
       }
-      setErrorMessage("Erreur lors de la vérification anti-spam. Veuillez réessayer.");
+      setErrorMessage(
+        "Erreur lors de la vérification anti-spam. Veuillez réessayer."
+      );
       setSubmitStatus("error");
       setIsSubmitting(false);
     }
@@ -415,21 +438,35 @@ export const SignatureForm = ({
               className="text-center p-6"
             >
               <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold mb-2">Merci pour votre soutien !</h3>
+              <h3 className="text-2xl font-bold mb-2">
+                Merci pour votre soutien !
+              </h3>
               <p className="text-gray-600 mb-6">
                 Votre signature a été enregistrée avec succès.
               </p>
 
+              <div className="flex items-center justify-center gap-2 my-2">
+                <Link href="/transformations">
+                  <Button
+                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center gap-2 animate-pulse-glow"
+                    size="lg"
+                  >
+                    <Sparkles className="h-5 w-5" />
+                    Accéder au module IA
+                  </Button>
+                </Link>
+              </div>
+
               {generatedCoupon && (
                 <div className="mt-4 text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200 rounded-lg">
                   {/* Affichage du niveau d'engagement pour les coupons avancés */}
-                  {'referralBonuses' in generatedCoupon && (
+                  {"referralBonuses" in generatedCoupon && (
                     <div className="mb-3 flex items-center justify-center gap-2">
                       <span className="text-2xl">
-                        {generatedCoupon.level === 'BASIC' && '🌱'}
-                        {generatedCoupon.level === 'ENGAGED' && '💙'}
-                        {generatedCoupon.level === 'PASSIONATE' && '💜'}
-                        {generatedCoupon.level === 'CHAMPION' && '👑'}
+                        {generatedCoupon.level === "BASIC" && "🌱"}
+                        {generatedCoupon.level === "ENGAGED" && "💙"}
+                        {generatedCoupon.level === "PASSIONATE" && "💜"}
+                        {generatedCoupon.level === "CHAMPION" && "👑"}
                       </span>
                       <div className="text-center">
                         <p className="font-bold text-blue-800">
@@ -441,9 +478,10 @@ export const SignatureForm = ({
                       </div>
                     </div>
                   )}
-                  
+
                   <p className="font-semibold text-blue-800">
-                    🎉 Votre coupon pour {generatedCoupon.totalGenerations} générations IA gratuites :
+                    🎉 Votre coupon pour {generatedCoupon.totalGenerations}{" "}
+                    générations IA gratuites :
                   </p>
                   <div className="flex items-center justify-center gap-2 my-2">
                     <code className="text-lg font-bold bg-blue-100 text-blue-900 px-3 py-1 rounded">
@@ -456,26 +494,32 @@ export const SignatureForm = ({
                         navigator.clipboard.writeText(generatedCoupon.code);
                         toast({
                           title: "Copié !",
-                          description: "Le code du coupon a été copié dans le presse-papiers.",
+                          description:
+                            "Le code du coupon a été copié dans le presse-papiers.",
                         });
                       }}
                     >
                       Copier
                     </Button>
                   </div>
-                  
+
                   {/* Détails d'engagement pour les coupons avancés */}
-                  {'referralBonuses' in generatedCoupon && (
+                  {"referralBonuses" in generatedCoupon && (
                     <div className="mt-3 text-xs text-gray-600">
                       <p>
-                        📝 Commentaire: {generatedCoupon.engagement.details.comment ? '✓' : '✗'} |
-                        📧 Newsletter: {generatedCoupon.engagement.details.newsletter ? '✓' : '✗'} |
-                        🎁 Bonus parrainage: +{generatedCoupon.referralBonuses} |
-                        🌟 Score: {generatedCoupon.engagement.score}
+                        📝 Commentaire:{" "}
+                        {generatedCoupon.engagement.details.comment ? "✓" : "✗"}{" "}
+                        | 📧 Newsletter:{" "}
+                        {generatedCoupon.engagement.details.newsletter
+                          ? "✓"
+                          : "✗"}{" "}
+                        | 🎁 Bonus parrainage: +
+                        {generatedCoupon.referralBonuses} | 🌟 Score:{" "}
+                        {generatedCoupon.engagement.score}
                       </p>
                     </div>
                   )}
-                  
+
                   <p className="text-xs text-blue-700 mt-2">
                     Utilisez ce code dans le module de transformation IA.
                   </p>
@@ -486,11 +530,7 @@ export const SignatureForm = ({
                 <Button onClick={handleResetForm} variant="outline">
                   Signer à nouveau
                 </Button>
-                <Link href="/transformations">
-                  <Button>Accéder au module IA</Button>
-                </Link>
               </div>
-
             </motion.div>
           ) : (
             <Form {...form}>
@@ -655,14 +695,20 @@ export const SignatureForm = ({
                       </FormControl>
                       <FormMessage />
                       {referralValidation && (
-                        <div className={`text-xs mt-1 ${
-                          referralValidation.isValid ? 'text-green-600' : 'text-red-600'
-                        }`}>
-                          {referralValidation.isValid ? '✓' : '✗'} {referralValidation.message}
+                        <div
+                          className={`text-xs mt-1 ${
+                            referralValidation.isValid
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }`}
+                        >
+                          {referralValidation.isValid ? "✓" : "✗"}{" "}
+                          {referralValidation.message}
                         </div>
                       )}
                       <div className="text-xs text-gray-500 mt-1">
-                        Si quelqu'un vous a partagé un code, saisissez-le ici pour obtenir des bonus
+                        Si quelqu'un vous a partagé un code, saisissez-le ici
+                        pour obtenir des bonus
                       </div>
                     </FormItem>
                   )}
@@ -740,17 +786,20 @@ export const SignatureForm = ({
                 {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
                   <Reaptcha
                     ref={recaptchaRef}
-
                     sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} // FIX: Corrected prop name to camelCase
                     onVerify={onRecaptchaVerify}
                     size="invisible"
                     onExpire={() => {
-                      setErrorMessage("Le reCAPTCHA a expiré. Veuillez réessayer.");
+                      setErrorMessage(
+                        "Le reCAPTCHA a expiré. Veuillez réessayer."
+                      );
                       setSubmitStatus("error");
                       setIsSubmitting(false);
                     }}
                     onError={() => {
-                      setErrorMessage("Le reCAPTCHA a expiré. Veuillez réessayer.");
+                      setErrorMessage(
+                        "Le reCAPTCHA a expiré. Veuillez réessayer."
+                      );
                       setSubmitStatus("error");
                       setIsSubmitting(false);
                     }}

@@ -17,14 +17,14 @@ console.log('[DEBUG] social-media-oauth: Environment variables:', {
   NODE_ENV: process.env.NODE_ENV,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-  TWITTER_CLIENT_ID_EXISTS: !!process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID,
+  TWITTER_CLIENT_ID_EXISTS: !!process.env.TWITTER_CLIENT_ID,
   TWITTER_CLIENT_SECRET_EXISTS: !!process.env.TWITTER_CLIENT_SECRET
 });
 
 // OAuth URLs and configurations for each platform
 export const OAUTH_CONFIGS: Record<SocialMediaPlatform, OAuthConfig> = {
   twitter: {
-    clientId: process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID || '',
+    clientId: process.env.TWITTER_CLIENT_ID || '',
     clientSecret: process.env.TWITTER_CLIENT_SECRET || '',
     redirectUri: `${process.env.NEXT_PUBLIC_SITE_URL}/api/connect/twitter/callback`,
     authorizationUrl: 'https://twitter.com/i/oauth2/authorize',
