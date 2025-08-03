@@ -12,9 +12,17 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Ticket, CheckCircle, AlertCircle, ChevronDown, ChevronUp, XCircle } from "lucide-react";
+import {
+  Ticket,
+  CheckCircle,
+  AlertCircle,
+  ChevronDown,
+  ChevronUp,
+  XCircle,
+} from "lucide-react";
 import { validateCoupon } from "@/lib/coupon-system";
 import { GenerationState } from "@/lib/church-transformation-types";
+import Link from "next/link";
 
 interface CouponSectionProps {
   state: GenerationState;
@@ -26,7 +34,7 @@ export const CouponSection: React.FC<CouponSectionProps> = ({
   setState,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
   };
@@ -83,17 +91,21 @@ export const CouponSection: React.FC<CouponSectionProps> = ({
             <Ticket className="h-5 w-5" />
             Code Coupon
           </CardTitle>
-          <Button 
-            variant="ghost" 
-            size="sm" 
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={handleToggle}
             className="h-8 w-8 p-0"
             aria-label={isExpanded ? "Réduire" : "Développer"}
           >
-            {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            {isExpanded ? (
+              <ChevronUp className="h-4 w-4" />
+            ) : (
+              <ChevronDown className="h-4 w-4" />
+            )}
           </Button>
         </div>
-        
+
         {state.activeCoupon ? (
           <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
             <div>
@@ -111,16 +123,22 @@ export const CouponSection: React.FC<CouponSectionProps> = ({
           </div>
         ) : (
           <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-200">
-            <div className="font-medium text-red-800">
-              Aucun coupon actif
-            </div>
+            <div className="font-medium text-red-800">Aucun coupon actif</div>
+
+            <Link
+              href="/#petition-form"
+              className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100"
+            >
+              Signer la pétition pour obtenir des crédits
+              <span aria-hidden="true">→</span>
+            </Link>
             <Badge variant="secondary" className="bg-red-100 text-red-800">
               <XCircle className="h-3 w-3 mr-1" />
               Non valide
             </Badge>
           </div>
         )}
-        
+
         <CardDescription>
           Entrez votre code coupon pour débloquer des générations gratuites
         </CardDescription>

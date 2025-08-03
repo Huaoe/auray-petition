@@ -68,16 +68,16 @@ export class UnsplashPhotoService {
       
       // Handle rate limiting specifically
       if (response.status === 403 || response.status === 429) {
-        if (retryCount < 3) {
-          console.log(`Rate limited (${response.status}). Retrying in ${(retryCount + 1) * 2} seconds...`);
-          // Exponential backoff: wait longer with each retry
-          await new Promise(resolve => setTimeout(resolve, (retryCount + 1) * 2000));
-          return this.searchImages(query, limit, retryCount + 1);
-        } else {
+        // if (retryCount < 3) {
+        //   console.log(`Rate limited (${response.status}). Retrying in ${(retryCount + 1) * 2} seconds...`);
+        //   // Exponential backoff: wait longer with each retry
+        //   await new Promise(resolve => setTimeout(resolve, (retryCount + 1) * 2000));
+        //   return this.searchImages(query, limit, retryCount + 1);
+        // } else {
           console.error(`Rate limiting persists after ${retryCount} retries. Aborting.`);
           // Return empty array instead of throwing to allow processing to continue
           return [];
-        }
+        //}
       }
       
       if (!response.ok) {

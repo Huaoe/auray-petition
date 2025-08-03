@@ -208,7 +208,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
                 : "Collapse prompt editor"
             }
           >
-            {!state.isPromptEditorCollapsed ? (
+            {state.isPromptEditorCollapsed ? (
               <ChevronDown className="h-4 w-4" />
             ) : (
               <ChevronUp className="h-4 w-4" />
@@ -217,13 +217,13 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
         </CardHeader>
         <CardContent
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            !state.isPromptEditorCollapsed
+            state.isPromptEditorCollapsed
               ? "max-h-0 opacity-0 p-0"
               : "max-h-[2000px] opacity-100"
           }`}
         >
           <div
-            className={`p-6 ${!state.isPromptEditorCollapsed ? "hidden" : "block"}`}
+            className={`p-6 ${state.isPromptEditorCollapsed ? "hidden" : "block"}`}
           >
             <Textarea
               value={state.customPrompt}
