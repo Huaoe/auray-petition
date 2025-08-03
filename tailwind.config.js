@@ -103,7 +103,6 @@ module.exports = {
         "fade-in": "fade-in 0.3s ease-out",
         "slide-in": "slide-in 0.3s ease-out",
         "vibrate": "vibrate 0.5s linear infinite",
-        "pulse-glow": "pulse-glow 3s linear infinite",
       },
     },
   },

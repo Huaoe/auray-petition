@@ -64,25 +64,9 @@ export const LocationSelection: React.FC<LocationSelectionProps> = ({ state, set
   
   // Check if the transformation ID exists in FAMOUS_LOCATIONS
   const transformationExists = transformationId ? transformationId in FAMOUS_LOCATIONS : false;
-  console.log('Transformation exists in FAMOUS_LOCATIONS:', transformationExists);
-  
-  // Check all keys in FAMOUS_LOCATIONS to help identify missing mappings
-  console.log('Available transformation types in FAMOUS_LOCATIONS:', Object.keys(FAMOUS_LOCATIONS));
-  
+
   // Safely get locations array with additional null checks
   const locationsArray = (transformationId && transformationExists) ? FAMOUS_LOCATIONS[transformationId] : [];
-  console.log('Locations array type:', typeof locationsArray);
-  console.log('Locations array length:', locationsArray?.length || 0);
-  console.log('Locations array content:', locationsArray);
-
-  // Additional debugging for each location in the array
-  if (Array.isArray(locationsArray)) {
-    locationsArray.forEach((loc, index) => {
-      console.log(`Location ${index}:`, loc ? `id: ${loc.id}, name: ${loc.name}` : 'null or undefined');
-    });
-  } else {
-    console.log('locationsArray is not an array:', locationsArray);
-  }
 
   const locations = locationsArray || [];
 
@@ -102,7 +86,6 @@ export const LocationSelection: React.FC<LocationSelectionProps> = ({ state, set
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {locations.slice(0, 8).map((location) => {
               if (!location) return null;
-              console.log('Rendering location:', location);
               return (
                 <Card
                   key={location.id}
