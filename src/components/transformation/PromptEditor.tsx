@@ -430,7 +430,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
                 onClick={onTransform}
                 disabled={state.isGenerating}
                 className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg transform transition-all duration-200 hover:scale-105 animate-pulse-glow"
-              >- 
+              >
                 {state.isGenerating ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

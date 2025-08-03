@@ -1518,7 +1518,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Professional coaching areas"
       ],
       "promptEnhancement": "with the futuristic alien-inspired design of Alienware Training Facility, featuring high-tech gaming pods, immersive training environments, professional coaching stations, and otherworldly gaming aesthetics",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1560743973-6e9da4ae7e90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBbGllbndhcmUlMjBUcmFpbmluZyUyMEZhY2lsaXR5JTIwRnV0dXJpc3RpYyUyMEdhbWluZyUyMEFsaWVuLWluc3BpcmVkJTIwZGVzaWduJTIwSGlnaC10ZWNoJTIwdHJhaW5pbmclMjBwb2RzfGVufDB8MHx8fDE3NTQyMjAxOTN8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "hyperx-esports-arena",
@@ -1533,7 +1533,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Audience seating"
       ],
       "promptEnhancement": "inspired by HyperX Esports Arena's professional tournament design, featuring championship-level gaming stages, broadcast streaming studios, professional lighting systems, and spectator viewing areas",
-      "imageUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1516577631679-b146fe527518?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxIeXBlclglMjBFc3BvcnRzJTIwQXJlbmElMjBQcm9mZXNzaW9uYWwlMjBFc3BvcnRzJTIwVG91cm5hbWVudCUyMHN0YWdlJTIwU3RyZWFtaW5nJTIwc3R1ZGlvc3xlbnwwfDB8fHwxNzU0MjIwMTk0fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "lol-park-seoul",
@@ -1548,7 +1548,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Champion showcases"
       ],
       "promptEnhancement": "with LoL Park's immersive game-world design, featuring League of Legends themed environments, interactive champion displays, game-inspired architecture, and fantasy gaming atmospheres",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1636622287687-a4e8876bb881?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMb0wlMjBQYXJrJTIwR2FtZS1UaGVtZWQlMjBBcmNoaXRlY3R1cmUlMjBHYW1lLXdvcmxkJTIwaW1tZXJzaW9uJTIwVGhlbWVkJTIwZW52aXJvbm1lbnRzfGVufDB8MHx8fDE3NTQyMjAxOTZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "fnatic-gear-arena",
@@ -1563,7 +1563,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Performance analytics"
       ],
       "promptEnhancement": "inspired by Fnatic Gear Arena's European esports excellence, featuring team training facilities, cutting-edge gaming hardware, performance analytics centers, and sleek European gaming design",
-      "imageUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1532202193792-e95ef22f1bce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGbmF0aWMlMjBHZWFyJTIwQXJlbmElMjBFdXJvcGVhbiUyMEdhbWluZyUyMFRlY2glMjBUZWFtJTIwdHJhaW5pbmclMjByb29tcyUyMEN1dHRpbmctZWRnZSUyMGhhcmR3YXJlfGVufDB8MHx8fDE3NTQyMjAxOTd8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "red-bull-gaming-sphere",
@@ -1578,7 +1578,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Zero-gravity gaming"
       ],
       "promptEnhancement": "with Red Bull Gaming Sphere's revolutionary spherical design, featuring 360-degree immersive screens, spherical gaming architecture, surround audio systems, and gravity-defying gaming experiences",
-      "imageUrl": "https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1523358959537-cc0e4103d0b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxSZWQlMjBCdWxsJTIwR2FtaW5nJTIwU3BoZXJlJTIwU3BoZXJpY2FsJTIwSW1tZXJzaXZlJTIwMzYwLWRlZ3JlZSUyMHNjcmVlbnMlMjBTcGhlcmljYWwlMjBhcmNoaXRlY3R1cmV8ZW58MHwwfHx8MTc1NDIyMDE5OHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "cloud9-training-facility",
@@ -1593,7 +1593,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Recovery spaces"
       ],
       "promptEnhancement": "inspired by Cloud9's holistic training approach, featuring performance optimization centers, wellness-integrated gaming spaces, training analytics systems, and player recovery areas that balance competition with health",
-      "imageUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1573495804669-ec82ad00f327?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDbG91ZDklMjBUcmFpbmluZyUyMEZhY2lsaXR5JTIwV2VsbG5lc3MlMjBHYW1pbmclMjBQZXJmb3JtYW5jZSUyMG9wdGltaXphdGlvbiUyMFdlbGxuZXNzJTIwaW50ZWdyYXRpb258ZW58MHwwfHx8MTc1NDIyMDIwMHww&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "biophilic_sanctuary": [
@@ -1610,7 +1610,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Organic forms"
       ],
       "promptEnhancement": "inspired by Singapore's Changi Jewel with its spectacular indoor forest, featuring cascading water features, living walls, natural light integration, and seamless nature-architecture fusion",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=Second+Home+London+jungle+workspace+plants"
+      "imageUrl": "https://images.unsplash.com/photo-1615280863987-2333e2f29000?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDaGFuZ2klMjBBaXJwb3J0JTIwSmV3ZWwlMjBCaW9waGlsaWMlMjBDb250ZW1wb3JhcnklMjBJbmRvb3IlMjB3YXRlcmZhbGwlMjBMaXZpbmclMjB3YWxsc3xlbnwwfDB8fHwxNzU0MjIwMjAxfDA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "holographic_museum": [
@@ -1627,7 +1627,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Digital art"
       ],
       "promptEnhancement": "with the immersive digital artistry of teamLab Borderless Tokyo, featuring flowing projection-mapped spaces, interactive holographic displays, and seamless digital-physical integration",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=Ultraviolet+Shanghai+immersive+dining+high+tech"
+      "imageUrl": "https://images.unsplash.com/photo-1584757283806-b5c0b3dd3734?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHx0ZWFtTGFiJTIwQm9yZGVybGVzcyUyMERpZ2l0YWwlMjBJbW1lcnNpdmUlMjBQcm9qZWN0aW9uJTIwbWFwcGluZyUyMEludGVyYWN0aXZlJTIwZGlzcGxheXN8ZW58MHwwfHx8MTc1NDIyMDIwM3ww&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "vertical_farm": [
@@ -1644,7 +1644,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Climate control"
       ],
       "promptEnhancement": "inspired by AeroFarms Newark with its revolutionary vertical growing systems, featuring multi-story cultivation towers, precision LED lighting, automated harvesting systems, and sustainable agricultural technology",
-      "imageUrl": "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1505667816685-805475effd09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBZXJvRmFybXMlMjBOZXdhcmslMjBJbmR1c3RyaWFsJTIwQWdyaWN1bHR1cmFsJTIwVmVydGljYWwlMjBncm93aW5nJTIwdG93ZXJzJTIwTEVEJTIwZ3JvdyUyMGxpZ2h0c3xlbnwwfDB8fHwxNzU0MjIwMjA0fDA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "quantum_research": [
@@ -1661,7 +1661,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Research facilities"
       ],
       "promptEnhancement": "with the precision and innovation of CERN's research facilities, featuring ultra-modern clean rooms, cutting-edge scientific equipment, electromagnetic isolation chambers, and world-class research infrastructure",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1597765221336-1f65bb4c4fee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDRVJOJTIwUmVzZWFyY2glMjBGYWNpbGl0eSUyMEhpZ2gtVGVjaCUyMFNjaWVudGlmaWMlMjBDbGVhbiUyMHJvb20lMjBlbnZpcm9ubWVudHMlMjBTY2llbnRpZmljJTIwZXF1aXBtZW50fGVufDB8MHx8fDE3NTQyMjAyMDZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "metamorphic_theater": [
@@ -1678,7 +1678,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Modular design"
       ],
       "promptEnhancement": "inspired by the Guthrie Theater's innovative design with its flexible staging configurations, adaptable seating arrangements, dynamic lighting systems, and modular performance spaces",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=Tianjin+Binhai+Library+undulating+bookshelves+eye+design"
+      "imageUrl": "https://images.unsplash.com/photo-1550729138-533c73afdb71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHdXRocmllJTIwVGhlYXRlciUyMENvbnRlbXBvcmFyeSUyMFRoZWF0cmljYWwlMjBGbGV4aWJsZSUyMHN0YWdpbmclMjBBZGFwdGFibGUlMjBzZWF0aW5nfGVufDB8MHx8fDE3NTQyMjAyMDd8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "neural_interface_lab": [
@@ -1695,7 +1695,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Advanced monitoring"
       ],
       "promptEnhancement": "with the cutting-edge serenity of Neuralink's research environment, featuring brain-computer interface stations, contemplative meditation chambers, advanced neural monitoring systems, and spaces that bridge technology and consciousness",
-      "imageUrl": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1618506469810-282bef2b30b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxOZXVyYWxpbmslMjBSZXNlYXJjaCUyMEZhY2lsaXR5JTIwTmV1cm8tVGVjaCUyMENvbnRlbXBvcmFyeSUyMFJlc2VhcmNoJTIwc3RhdGlvbnMlMjBNZWRpdGF0aW9uJTIwY2hhbWJlcnN8ZW58MHwwfHx8MTc1NDIyMDIwOHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "facebook-reality-labs",
@@ -1710,7 +1710,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Reality synthesis chambers"
       ],
       "promptEnhancement": "inspired by Meta Reality Labs' VR/AR neural interface research, featuring immersive reality synthesis chambers, haptic feedback systems, virtual-physical bridge technologies, and spaces where digital and neural realities converge",
-      "imageUrl": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1695902173528-0b15104c4554?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNZXRhJTIwUmVhbGl0eSUyMExhYnMlMjBWUiUyRkFSJTIwTmV1cmFsJTIwVGVjaCUyMFZSJTJGQVIlMjBuZXVyYWwlMjBpbnRlcmZhY2VzJTIwSGFwdGljJTIwZmVlZGJhY2slMjBzeXN0ZW1zfGVufDB8MHx8fDE3NTQyMjAyMTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "kernel-neural-interfaces",
@@ -1725,7 +1725,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Memory augmentation labs"
       ],
       "promptEnhancement": "with Kernel's cognitive enhancement approach, featuring neural recording laboratories, memory augmentation chambers, brain stimulation systems, and spaces designed for human cognitive expansion and enhancement",
-      "imageUrl": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1617791160536-598cf32026fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxLZXJuZWwlMjBOZXVyYWwlMjBJbnRlcmZhY2VzJTIwQ29nbml0aXZlJTIwRW5oYW5jZW1lbnQlMjBOZXVyYWwlMjByZWNvcmRpbmclMjBzeXN0ZW1zJTIwQ29nbml0aXZlJTIwZW5oYW5jZW1lbnQlMjB0ZWNofGVufDB8MHx8fDE3NTQyMjAyMTF8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "synchron-neural-lab",
@@ -1740,7 +1740,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Therapeutic systems"
       ],
       "promptEnhancement": "inspired by Synchron's medical neural interface approach, featuring minimally invasive brain-computer systems, neural rehabilitation chambers, therapeutic interface technology, and healing-focused neural laboratories",
-      "imageUrl": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1630155923002-17db0f219f1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTeW5jaHJvbiUyME5ldXJhbCUyMExhYm9yYXRvcnklMjBNZWRpY2FsJTIwTmV1cmFsJTIwVGVjaCUyME1pbmltYWxseSUyMGludmFzaXZlJTIwaW50ZXJmYWNlcyUyME1lZGljYWwlMjBhcHBsaWNhdGlvbnN8ZW58MHwwfHx8MTc1NDIyMDIxM3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "paradromics-neural-lab",
@@ -1755,7 +1755,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Data processing centers"
       ],
       "promptEnhancement": "with Paradromics' high-bandwidth neural data approach, featuring neural communication systems, high-speed data transmission interfaces, brain-to-brain communication labs, and advanced neural data processing centers",
-      "imageUrl": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1678845536613-5cf0ec5245cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxQYXJhZHJvbWljcyUyME5ldXJhbCUyMERhdGElMjBMYWIlMjBIaWdoLUJhbmR3aWR0aCUyME5ldXJhbCUyMEhpZ2gtYmFuZHdpZHRoJTIwaW50ZXJmYWNlcyUyME5ldXJhbCUyMGRhdGElMjB0cmFuc21pc3Npb258ZW58MHwwfHx8MTc1NDIyMDIxNHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "blackrock-neurotech",
@@ -1770,7 +1770,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Rehabilitation technology"
       ],
       "promptEnhancement": "inspired by Blackrock Neurotech's rehabilitation focus, featuring motor function restoration laboratories, neural prosthetic systems, paralysis recovery chambers, and spaces dedicated to restoring human movement and independence",
-      "imageUrl": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1602251573001-a27aafb64d64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCbGFja3JvY2slMjBOZXVyb3RlY2glMjBSZWhhYmlsaXRhdGlvbiUyME5ldXJhbCUyMFRlY2glMjBNb3RvciUyMGZ1bmN0aW9uJTIwcmVzdG9yYXRpb24lMjBQYXJhbHlzaXMlMjByZWNvdmVyeSUyMHN5c3RlbXN8ZW58MHwwfHx8MTc1NDIyMDIxNXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "ctrl-labs-neural",
@@ -1785,7 +1785,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Gesture recognition tech"
       ],
       "promptEnhancement": "with CTRL-labs' seamless human-computer interaction design, featuring digital control interfaces, gesture recognition systems, neural command centers, and spaces where thought becomes digital action",
-      "imageUrl": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1695902173528-0b15104c4554?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDVFJMLWxhYnMlMjBOZXVyYWwlMjBJbnRlcmZhY2UlMjBEaWdpdGFsJTIwQ29udHJvbCUyME5ldXJhbCUyMEh1bWFuLWNvbXB1dGVyJTIwaW50ZXJhY3Rpb24lMjBEaWdpdGFsJTIwY29udHJvbCUyMHN5c3RlbXN8ZW58MHwwfHx8MTc1NDIyMDIxN3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "mindmaze-neural-lab",
@@ -1800,7 +1800,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Therapeutic interfaces"
       ],
       "promptEnhancement": "inspired by MindMaze's neurotherapeutic approach, featuring digital brain training systems, neurological recovery chambers, therapeutic neural interfaces, and spaces designed for cognitive rehabilitation and neural healing",
-      "imageUrl": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1630155923002-17db0f219f1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNaW5kTWF6ZSUyME5ldXJhbCUyMExhYm9yYXRvcnklMjBOZXVyb3RoZXJhcGV1dGljJTIwVGVjaCUyMERpZ2l0YWwlMjBuZXVyb3RoZXJhcGV1dGljcyUyME5ldXJvbG9naWNhbCUyMHJlY292ZXJ5fGVufDB8MHx8fDE3NTQyMjAyMTh8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "crystal-bridges-museum",
@@ -1815,7 +1815,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Light refraction systems"
       ],
       "promptEnhancement": "inspired by Crystal Bridges Museum's glass integration, featuring crystal formation displays, light refraction systems, glass and steel architecture, and spaces where crystalline structures merge with natural landscapes",
-      "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1520639221359-ad5e91f01cfd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDcnlzdGFsJTIwQnJpZGdlcyUyME11c2V1bSUyMEdsYXNzJTIwSW50ZWdyYXRpb24lMjBHbGFzcyUyMGFuZCUyMHN0ZWVsJTIwc3RydWN0dXJlJTIwTmF0dXJhbCUyMGxhbmRzY2FwZSUyMGludGVncmF0aW9ufGVufDB8MHx8fDE3NTQyMjAyMjB8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "swarovski-crystal-worlds",
@@ -1830,7 +1830,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Immersive crystal experiences"
       ],
       "promptEnhancement": "with Swarovski Crystal Worlds' immersive approach, featuring underground crystal chambers, multimedia crystalline installations, immersive crystal experiences, and spaces where art and crystal formations create magical environments",
-      "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1597589827703-f4b68eafa0ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTd2Fyb3Zza2klMjBDcnlzdGFsJTIwV29ybGRzJTIwQ3J5c3RhbCUyMEFydCUyMEluc3RhbGxhdGlvbiUyMFVuZGVyZ3JvdW5kJTIwY3J5c3RhbCUyMGNoYW1iZXJzJTIwTXVsdGltZWRpYSUyMGluc3RhbGxhdGlvbnN8ZW58MHwwfHx8MTc1NDIyMDIyMXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "crystal-cave-mexico",
@@ -1845,7 +1845,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Crystal growth chambers"
       ],
       "promptEnhancement": "inspired by Naica's Cave of Crystals, featuring massive selenite formations, natural crystal growth chambers, geological wonder displays, and spaces that celebrate the raw power of natural crystal formation",
-      "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1698744080868-504a9b20c237?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDYXZlJTIwb2YlMjBDcnlzdGFscyUyME5hdHVyYWwlMjBDcnlzdGFsJTIwRm9ybWF0aW9uJTIwTWFzc2l2ZSUyMHNlbGVuaXRlJTIwY3J5c3RhbHMlMjBOYXR1cmFsJTIwY2F2ZSUyMGZvcm1hdGlvbnN8ZW58MHwwfHx8MTc1NDIyMDIyM3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "crystal-palace-london",
@@ -1860,7 +1860,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         " crystal design"
       ],
       "promptEnhancement": "with Crystal Palace's Victorian grandeur, featuring glass and iron architecture,  crystal design elements, Victorian-era crystalline structures, and spaces that blend  elegance with modern crystal technology",
-      "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1600442716034-40e3e96baa2c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDcnlzdGFsJTIwUGFsYWNlJTIwUmVjcmVhdGlvbiUyMFZpY3RvcmlhbiUyMENyeXN0YWwlMjBHbGFzcyUyMGFuZCUyMGlyb24lMjBzdHJ1Y3R1cmUlMjBWaWN0b3JpYW4lMjBhcmNoaXRlY3R1cmV8ZW58MHwwfHx8MTc1NDIyMDIyNHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "crystal-cathedral-california",
@@ -1875,7 +1875,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Sacred geometry"
       ],
       "promptEnhancement": "inspired by Crystal Cathedral's sacred design, featuring glass cathedral architecture, crystalline light effects, spiritual crystal spaces, and sacred geometry that creates transcendent crystalline environments",
-      "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1447858496759-dd23e166e1c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDcnlzdGFsJTIwQ2F0aGVkcmFsJTIwU2FjcmVkJTIwQ3J5c3RhbCUyMEdsYXNzJTIwY2F0aGVkcmFsJTIwZGVzaWduJTIwQ3J5c3RhbGxpbmUlMjBsaWdodCUyMGVmZmVjdHN8ZW58MHwwfHx8MTc1NDIyMDIyNnww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "crystal-grotto-portugal",
@@ -1890,7 +1890,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Mystical crystal chambers"
       ],
       "promptEnhancement": "with Crystal Grotto's romantic mystique, featuring artificial crystal formations, romantic crystalline architecture, mystical crystal chambers, and water features that create enchanting crystalline environments",
-      "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1698744080868-504a9b20c237?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDcnlzdGFsJTIwR3JvdHRvJTIwUm9tYW50aWMlMjBDcnlzdGFsJTIwQXJ0aWZpY2lhbCUyMGNyeXN0YWwlMjBncm90dG8lMjBSb21hbnRpYyUyMGFyY2hpdGVjdHVyZXxlbnwwfDB8fHwxNzU0MjIwMjI3fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "crystal-lab-tokyo",
@@ -1905,7 +1905,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Crystal technology labs"
       ],
       "promptEnhancement": "inspired by Tokyo's crystal technology research, featuring synthetic crystal growth systems, high-tech crystalline laboratories, futuristic crystal design, and spaces where science and crystal formation create cutting-edge environments",
-      "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1682447278584-aeddb64620ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxUb2t5byUyMENyeXN0YWwlMjBMYWJvcmF0b3J5JTIwRnV0dXJpc3RpYyUyMENyeXN0YWwlMjBUZWNoJTIwU3ludGhldGljJTIwY3J5c3RhbCUyMGdyb3d0aCUyMEhpZ2gtdGVjaCUyMHJlc2VhcmNoJTIwZmFjaWxpdHl8ZW58MHwwfHx8MTc1NDIyMDIyOHww&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "crystalline_conservatory": [
@@ -1922,7 +1922,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Crystal-inspired design"
       ],
       "promptEnhancement": "inspired by Reykjavik's Harpa Concert Hall with its stunning crystalline facade, featuring geometric glass patterns, prismatic light effects, superior acoustics, and mineral-inspired architectural elements",
-      "imageUrl": "https://www.istockphoto.com/search/2/image?phrase=Alain+Ducasse+Plaza+Athenee+Paris+luxury+restaurant"
+      "imageUrl": "https://images.unsplash.com/photo-1511688236936-79e2fddd5a9a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxIYXJwYSUyMENvbmNlcnQlMjBIYWxsJTIwQ3J5c3RhbGxpbmUlMjBDb250ZW1wb3JhcnklMjBHZW9tZXRyaWMlMjBnbGFzcyUyMGZhY2FkZSUyMFByaXNtYXRpYyUyMGxpZ2h0aW5nfGVufDB8MHx8fDE3NTQyMjAyMzB8MA&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "atmospheric_processor": [
@@ -1939,7 +1939,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Environmental technology"
       ],
       "promptEnhancement": "with the environmental innovation of Cornwall's Eden Project, featuring massive geodesic structures, advanced climate control systems, atmospheric processing technology, and sustainable environmental management",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1548278651-843b1d7431a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxFZGVuJTIwUHJvamVjdCUyMEdlb2Rlc2ljJTIwRW52aXJvbm1lbnRhbCUyMEdlb2Rlc2ljJTIwZG9tZXMlMjBDbGltYXRlJTIwY29udHJvbHxlbnwwfDB8fHwxNzU0MjIwMjMxfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "eden-project-biomes",
@@ -1954,7 +1954,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Climate regulation systems"
       ],
       "promptEnhancement": "inspired by Eden Project's geodesic biomes, featuring controlled atmospheric environments, climate regulation systems, geodesic dome structures, and spaces that create diverse atmospheric conditions for different ecosystems",
-      "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1547627113-548fae8e0ea8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxFZGVuJTIwUHJvamVjdCUyMEJpb21lcyUyMEdlb2Rlc2ljJTIwQXRtb3NwaGVyaWMlMjBHZW9kZXNpYyUyMGRvbWUlMjBzdHJ1Y3R1cmVzJTIwQ29udHJvbGxlZCUyMGF0bW9zcGhlcmljJTIwZW52aXJvbm1lbnRzfGVufDB8MHx8fDE3NTQyMjAyMzN8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "mars-desert-research",
@@ -1969,7 +1969,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Isolation chamber systems"
       ],
       "promptEnhancement": "with Mars Desert Research Station's simulation approach, featuring Mars atmospheric conditions, environmental control systems, isolation chambers, and spaces designed for extreme atmospheric research and simulation",
-      "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1563753463871-3bebda0ed52d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYXJzJTIwRGVzZXJ0JTIwUmVzZWFyY2glMjBTdGF0aW9uJTIwTWFycyUyMFNpbXVsYXRpb24lMjBNYXJzJTIwYXRtb3NwaGVyaWMlMjBzaW11bGF0aW9uJTIwRW52aXJvbm1lbnRhbCUyMGNvbmRpdGlvbiUyMGNvbnRyb2x8ZW58MHwwfHx8MTc1NDIyMDIzNHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "biosphere-2-arizona",
@@ -1984,7 +1984,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Self-sustaining environment"
       ],
       "promptEnhancement": "inspired by Biosphere 2's closed ecosystem design, featuring complete atmospheric control, multiple biome simulation, self-sustaining environmental systems, and spaces that create entirely controlled atmospheric worlds",
-      "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1584974292709-5c2f0619971b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCaW9zcGhlcmUlMjAyJTIwQ2xvc2VkJTIwRWNvc3lzdGVtJTIwQ2xvc2VkJTIwZWNvbG9naWNhbCUyMHN5c3RlbSUyMENvbXBsZXRlJTIwYXRtb3NwaGVyaWMlMjBjb250cm9sfGVufDB8MHx8fDE3NTQyMjAyMzV8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "atmospheric-research-hawaii",
@@ -1999,7 +1999,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Analysis laboratories"
       ],
       "promptEnhancement": "with Mauna Loa Observatory's monitoring approach, featuring high-altitude atmospheric processing, air analysis systems, monitoring laboratories, and spaces designed for advanced atmospheric research and data collection",
-      "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1707058665464-c11b94b7ecd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYXVuYSUyMExvYSUyME9ic2VydmF0b3J5JTIwSGlnaC1BbHRpdHVkZSUyME1vbml0b3JpbmclMjBIaWdoLWFsdGl0dWRlJTIwbG9jYXRpb24lMjBBdG1vc3BoZXJpYyUyMG1vbml0b3Jpbmd8ZW58MHwwfHx8MTc1NDIyMDIzN3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "climeworks-iceland",
@@ -2014,7 +2014,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Renewable energy integration"
       ],
       "promptEnhancement": "inspired by Climeworks' carbon capture technology, featuring direct air capture systems, industrial atmospheric processing, carbon sequestration facilities, and spaces that actively clean and process atmospheric gases",
-      "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1468787737698-f5c03f0570dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDbGltZXdvcmtzJTIwRGlyZWN0JTIwQWlyJTIwQ2FwdHVyZSUyMENhcmJvbiUyMENhcHR1cmUlMjBJbmR1c3RyaWFsJTIwRGlyZWN0JTIwYWlyJTIwY2FwdHVyZSUyMHRlY2hub2xvZ3klMjBDYXJib24lMjBwcm9jZXNzaW5nJTIwc3lzdGVtc3xlbnwwfDB8fHwxNzU0MjIwMjM4fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "atmospheric-river-lab",
@@ -2029,7 +2029,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Storm simulation chambers"
       ],
       "promptEnhancement": "with Atmospheric River Lab's weather modification approach, featuring storm simulation systems, atmospheric river processing, weather control technologies, and spaces designed for large-scale atmospheric manipulation",
-      "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1491719182006-d45e32a558bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBdG1vc3BoZXJpYyUyMFJpdmVyJTIwUmVzZWFyY2glMjBMYWIlMjBXZWF0aGVyJTIwTW9kaWZpY2F0aW9uJTIwV2VhdGhlciUyMG1vZGlmaWNhdGlvbiUyMHN5c3RlbXMlMjBBdG1vc3BoZXJpYyUyMHJpdmVyJTIwcHJvY2Vzc2luZ3xlbnwwfDB8fHwxNzU0MjIwMjQwfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "stratospheric-platform",
@@ -2044,7 +2044,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Research capabilities"
       ],
       "promptEnhancement": "inspired by stratospheric processing platforms, featuring high-altitude atmospheric intervention, stratospheric processing systems, aerial research platforms, and spaces that operate at the edge of the atmosphere",
-      "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1588896601526-94baad6b1ed9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTdHJhdG9zcGhlcmljJTIwUHJvY2Vzc2luZyUyMFBsYXRmb3JtJTIwU3RyYXRvc3BoZXJpYyUyMFBsYXRmb3JtJTIwSGlnaC1hbHRpdHVkZSUyMHBsYXRmb3JtJTIwU3RyYXRvc3BoZXJpYyUyMHByb2Nlc3Npbmd8ZW58MHwwfHx8MTc1NDIyMDI0MXww&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "temporal_archive": [
@@ -2061,7 +2061,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Preservation technology"
       ],
       "promptEnhancement": "inspired by the Svalbard Seed Vault's preservation architecture, featuring underground storage chambers, advanced climate control, quantum storage systems, and technology designed for eternal preservation",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/photo-1637844528679-f91e0b15f3e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxTdmFsYmFyZCUyMEdsb2JhbCUyMFNlZWQlMjBWYXVsdCUyMFByZXNlcnZhdGlvbiUyMEFyY2hpdGVjdHVyZSUyMFVuZGVyZ3JvdW5kJTIwY2hhbWJlcnMlMjBDbGltYXRlJTIwY29udHJvbHxlbnwwfDB8fHwxNzU0MjIwMjQzfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "temporal_archive_2",
@@ -2076,7 +2076,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Mediterranean integration"
       ],
       "promptEnhancement": "circular library architecture, granite stone facade, slanted geometric roof, Mediterranean coastal setting, knowledge preservation, ancient-modern fusion",
-      "imageUrl": "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1590161784236-ad51873a931e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMaWJyYXJ5JTIwb2YlMjBBbGV4YW5kcmlhJTIwJTI4QmlibGlvdGhlY2ElMjBBbGV4YW5kcmluYSUyOSUyMENvbnRlbXBvcmFyeSUyMEVneXB0aWFuJTIwUmV2aXZhbCUyMENpcmN1bGFyJTIwZGlzYyUyMGRlc2lnbiUyMEdyYW5pdGUlMjBmYWNhZGV8ZW58MHwwfHx8MTc1NDIyMDI0NHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "temporal_archive_3",
@@ -2091,7 +2091,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Security systems"
       ],
       "promptEnhancement": "renaissance stone architecture, vaulted archive corridors, ecclesiastical design, secure document storage, papal  preservation, religious architectural elements",
-      "imageUrl": "https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1574466632180-a397c7319763?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxWYXRpY2FuJTIwU2VjcmV0JTIwQXJjaGl2ZXMlMjBSZW5haXNzYW5jZSUyMEVjY2xlc2lhc3RpY2FsJTIwVmF1bHRlZCUyMGNlaWxpbmdzJTIwU3RvbmUlMjBjb3JyaWRvcnN8ZW58MHwwfHx8MTc1NDIyMDI0NXww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "temporal_archive_4",
@@ -2106,7 +2106,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Data center integration"
       ],
       "promptEnhancement": "underground limestone caves, industrial storage architecture, natural rock formations, secure data preservation, converted mine facility, subterranean design",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1652128656690-5122e64eb2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxJcm9uJTIwTW91bnRhaW4lMjBVbmRlcmdyb3VuZCUyMFN0b3JhZ2UlMjBJbmR1c3RyaWFsJTIwVW5kZXJncm91bmQlMjBOYXR1cmFsJTIwbGltZXN0b25lJTIwY2F2ZXMlMjBDbGltYXRlJTIwc3RhYmlsaXR5fGVufDB8MHx8fDE3NTQyMjAyNDd8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "temporal_archive_5",
@@ -2121,7 +2121,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Automated retrieval"
       ],
       "promptEnhancement": "underground library extension, contemporary preservation architecture, natural lighting integration, automated storage systems, oxford collegiate setting, subterranean design",
-      "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1460643724600-11954f4f63dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCb2RsZWlhbiUyMExpYnJhcnklMjBXZXN0b24lMjBCdWlsZGluZyUyMENvbnRlbXBvcmFyeSUyMFVuZGVyZ3JvdW5kJTIwVW5kZXJncm91bmQlMjBjb25zdHJ1Y3Rpb24lMjBOYXR1cmFsJTIwbGlnaHRpbmclMjBzeXN0ZW1zfGVufDB8MHx8fDE3NTQyMjAyNDl8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "temporal_archive_6",
@@ -2136,7 +2136,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Self-contained systems"
       ],
       "promptEnhancement": "military bunker architecture, reinforced concrete brutalism, blast-resistant design, underground command center, mountain integration, fortress-like structure",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1708283508253-337621680a84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDaGV5ZW5uZSUyME1vdW50YWluJTIwQ29tcGxleCUyME1pbGl0YXJ5JTIwQnJ1dGFsaXNtJTIwUmVpbmZvcmNlZCUyMGNvbmNyZXRlJTIwQmxhc3QtcmVzaXN0YW50JTIwZGVzaWdufGVufDB8MHx8fDE3NTQyMjAyNTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "temporal_archive_7",
@@ -2151,7 +2151,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Industrial heritage"
       ],
       "promptEnhancement": "converted coal mine architecture, industrial heritage preservation, permafrost storage conditions, digital archive facility, arctic industrial design, adaptive reuse",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1529909373889-f1a832e7d513?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBcmN0aWMlMjBXb3JsZCUyMEFyY2hpdmUlMjBBZGFwdGl2ZSUyMEluZHVzdHJpYWwlMjBDb252ZXJ0ZWQlMjBtaW5lJTIwc2hhZnRzJTIwUGVybWFmcm9zdCUyMHN0b3JhZ2V8ZW58MHwwfHx8MTc1NDIyMDI1MXww&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "symbiotic_habitat": [
@@ -2168,7 +2168,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Sustainable design"
       ],
       "promptEnhancement": "with the living architecture of Milan's Bosco Verticale, featuring vertical forest integration, symbiotic ecosystems, bio-responsive materials, and spaces where nature and architecture coexist harmoniously",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      "imageUrl": "https://images.unsplash.com/33/91vrBzqgSveXxB03xgrG_patterns.jpg?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCb3NjbyUyMFZlcnRpY2FsZSUyMExpdmluZyUyMEFyY2hpdGVjdHVyZSUyMFZlcnRpY2FsJTIwZ2FyZGVucyUyMExpdmluZyUyMGVjb3N5c3RlbXN8ZW58MHwwfHx8MTc1NDIyMDI1M3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "symbiotic_2",
@@ -2183,7 +2183,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Integrated habitats"
       ],
       "promptEnhancement": "living roof, ecosystem integration, sustainable museum design, natural ventilation, biodiversity showcase",
-      "imageUrl": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1493925016752-9ac38daba701?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDYWxpZm9ybmlhJTIwQWNhZGVteSUyMG9mJTIwU2NpZW5jZXMlMjBCaW8tSW50ZWdyYXRlZCUyME11c2V1bSUyMExpdmluZyUyMHJvb2YlMjBlY29zeXN0ZW0lMjBOYXR1cmFsJTIwdmVudGlsYXRpb258ZW58MHwwfHx8MTc1NDIyMDI1NHww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "symbiotic_3",
@@ -2198,7 +2198,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Community integration"
       ],
       "promptEnhancement": "clay brick construction, natural cooling, passive design, community architecture, local materials",
-      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1643813567927-4b79efd4b2d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxHYW5kbyUyMFNjaG9vbCUyMExpYnJhcnklMjBWZXJuYWN1bGFyJTIwU3VzdGFpbmFibGUlMjBOYXR1cmFsJTIwY29vbGluZyUyMHN5c3RlbXMlMjBMb2NhbCUyMG1hdGVyaWFsc3xlbnwwfDB8fHwxNzU0MjIwMjU2fDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "symbiotic_4",
@@ -2213,7 +2213,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Community spaces"
       ],
       "promptEnhancement": "sky gardens, vertical village, tropical architecture, mixed-use design, community integration",
-      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1513131592585-050a5cb8ac44?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxLYW1wdW5nJTIwQWRtaXJhbHR5JTIwVHJvcGljYWwlMjBWZXJ0aWNhbCUyMFZpbGxhZ2UlMjBTa3klMjBnYXJkZW5zJTIwTWl4ZWQtdXNlJTIwaW50ZWdyYXRpb258ZW58MHwwfHx8MTc1NDIyMDI1N3ww&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "symbiotic_5",
@@ -2228,7 +2228,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Green corridors"
       ],
       "promptEnhancement": "eco-district, closed-loop systems, sustainable community, green infrastructure, circular design",
-      "imageUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1445196763951-a8d6533cfc22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxIYW1tYXJieSUyMFNqJUMzJUI2c3RhZCUyMEVjby1EaXN0cmljdCUyMFBsYW5uaW5nJTIwQ2xvc2VkLWxvb3AlMjBzeXN0ZW1zJTIwV2FzdGUtdG8tZW5lcmd5fGVufDB8MHx8fDE3NTQyMjAyNTh8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "symbiotic_6",
@@ -2243,7 +2243,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Community gardens"
       ],
       "promptEnhancement": "pyramid architecture, central courtyard, stepped terraces, community gardens, natural light",
-      "imageUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1698380879393-87f90be9af38?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCamFya2UlMjBJbmdlbHMlMjBWSUElMjA1NyUyMFdlc3QlMjBDb250ZW1wb3JhcnklMjBTeW1iaW90aWMlMjBDZW50cmFsJTIwY291cnR5YXJkJTIwU3RlcHBlZCUyMHRlcnJhY2VzfGVufDB8MHx8fDE3NTQyMjAyNjB8MA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "symbiotic_7",
@@ -2258,7 +2258,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Public accessibility"
       ],
       "promptEnhancement": "terraced gardens, urban mountain, step gardens, integrated landscape, public green space",
-      "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1494262123042-e2d2d997fcb4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBY3JvcyUyMEZ1a3Vva2ElMjBUZXJyYWNlZCUyMEVjb3N5c3RlbSUyMFRlcnJhY2VkJTIwZ2FyZGVucyUyMFVyYmFuJTIwbW91bnRhaW58ZW58MHwwfHx8MTc1NDIyMDI2MXww&ixlib=rb-4.1.0&q=80&w=1080"
     }
   ],
   "climbing": [
@@ -2275,7 +2275,7 @@ export const FAMOUS_LOCATIONS: Record<string, FamousLocation[]> = {
         "Community spaces"
       ],
       "promptEnhancement": "Industrial warehouse aesthetic with exposed brick, steel beams, and modular climbing wall systems",
-      "imageUrl": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop"
+      "imageUrl": "https://images.unsplash.com/photo-1532279978316-c52202e84d66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxCcm9va2x5biUyMEJvdWxkZXJzJTIwSW5kdXN0cmlhbCUyMENvbnZlcnNpb24lMjBFeHBvc2VkJTIwYnJpY2slMjB3YWxscyUyMEhpZ2glMjBjZWlsaW5nc3xlbnwwfDB8fHwxNzU0MjIwMjYzfDA&ixlib=rb-4.1.0&q=80&w=1080"
     },
     {
       "id": "climbing-2",
