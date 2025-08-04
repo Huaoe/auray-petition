@@ -44,9 +44,9 @@ const TransformationsPage = () => {
         </div> */}
         
       {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
+      <section className="relative sm:py-4 md:py-20 sm:px-1 md:px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10"></div>
-        <div className="relative max-w-7xl mx-auto">
+        <div className="relative md:max-w-7xl md:mx-auto">
           {/* Navigation Back */}
           <div className="mb-8">
             <Link href="/" className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors">
@@ -127,7 +127,7 @@ const TransformationsPage = () => {
             <div className="space-y-4">
               <Button 
                 size="lg"
-                className="text-lg px-10 py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl transform hover:scale-105 transition-all duration-200"
+                className="md:text-lg md:px-10 md:py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl transform hover:scale-105 transition-all duration-200"
                 onClick={() => {
                   document.getElementById('transformation-studio')?.scrollIntoView({ 
                     behavior: 'smooth' 
@@ -146,7 +146,7 @@ const TransformationsPage = () => {
       </section>
 
       {/* Studio de Transformation */}
-      <section id="transformation-studio" className="py-16 px-4">
+      <section id="transformation-studio" className="py-16 md:px-4">
         <div className="max-w-7xl mx-auto">
           <ChurchTransformation />
         </div>

@@ -188,7 +188,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
 
   return (
     <>
-      <Card>
+      <Card >
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div>
             <CardTitle>Personnalisez votre prompt</CardTitle>
@@ -223,7 +223,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
           }`}
         >
           <div
-            className={`p-6 ${state.isPromptEditorCollapsed ? "hidden" : "block"}`}
+            className={`md:p-6 sm:p-1 ${state.isPromptEditorCollapsed ? "hidden" : "block"}`}
           >
             <Textarea
               value={state.customPrompt}

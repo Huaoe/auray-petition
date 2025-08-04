@@ -66,31 +66,72 @@ export const VirtualCreditsDisplay = () => {
 
   return (
     <Card className={`${!canTransform ? 'border-red-200 bg-red-50' : 'border-green-200 bg-green-50'}`}>
-      <CardContent className="flex items-center justify-between p-4">
-        <div className="flex items-center gap-2">
-          <Wallet className="h-4 w-4" />
-          <span className="font-medium">Crédits restants sur l'app</span>
-        </div>
-        
-        <Progress
-          value={progressPercentage}
-          className="h-2 w-28 mx-4"
-        />
-        
-        <div className="text-sm font-medium flex items-center">
-          il ne reste que {(availableCredits || 0).toFixed(2)}
-          <img
-            src="/icons/stability-ai.webp"
-            alt="Stability AI"
-            className="w-4 h-4 mx-1 inline-block"
+      <CardContent className="p-4">
+        {/* Desktop layout */}
+        <div className="hidden md:flex md:items-center md:justify-between">
+          <div className="flex items-center gap-2">
+            <Wallet className="h-4 w-4" />
+            <span className="font-medium">Crédits restants sur l'app</span>
+          </div>
+          
+          <Progress
+            value={progressPercentage}
+            className="h-2 w-28 mx-4"
           />
-          sur notre compte ! please help us{' ->'}
+          
+          <div className="text-sm font-medium flex items-center">
+            il ne reste que {(availableCredits || 0).toFixed(2)}
+            <img
+              src="/icons/stability-ai.webp"
+              alt="Stability AI"
+              className="w-4 h-4 mx-1 inline-block"
+            />
+            sur notre compte ! please help us{' ->'}
+          </div>
+          
+          <Button onClick={handleDonate} size="sm" className="gap-1 ml-2">
+            <Coffee className="h-3 w-3" />
+            Recharger
+          </Button>
         </div>
-        
-        <Button onClick={handleDonate} size="sm" className="gap-1 ml-2">
-          <Coffee className="h-3 w-3" />
-          Recharger
-        </Button>
+
+        {/* Mobile layout */}
+        <div className="flex flex-col md:hidden">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <Wallet className="h-4 w-4" />
+              <span className="font-medium">Crédits restants sur l'app</span>
+            </div>
+          </div>
+          
+          <div className="flex items-center justify-between mb-3">
+            <div className="text-sm font-medium flex items-center">
+              il ne reste que {(availableCredits || 0).toFixed(2)}
+            </div>
+            
+            <Progress
+              value={progressPercentage}
+              className="h-2 w-16 mx-2"
+            />
+            
+            <div className="flex items-center">
+              <img
+                src="/icons/stability-ai.webp"
+                alt="Stability AI"
+                className="w-5 h-5 mr-1"
+              />
+              <span className="text-xs">sur notre compte</span>
+            </div>
+          </div>
+          
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-600">please help us →</span>
+            <Button onClick={handleDonate} size="sm" className="gap-1">
+              <Coffee className="h-3 w-3" />
+              Recharger
+            </Button>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
