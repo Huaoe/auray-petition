@@ -14,7 +14,7 @@ const Header = () => {
   const navLinks = (
     <>
       <a
-        href="#petition"
+        href="/#petition"
         className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
         onClick={() => setIsMenuOpen(false)}
       >

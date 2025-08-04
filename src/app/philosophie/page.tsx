@@ -1,3 +1,4 @@
+import Header from '@/components/Header'
 import { type Metadata } from 'next'
 import Link from 'next/link'
 
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 const PhilosophiePage = () => {
-  return (
+  return (<><Header/>
     <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 py-16 sm:py-24">
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="text-center mb-12">
@@ -103,6 +104,7 @@ const PhilosophiePage = () => {
 
       </div>
     </div>
+    </>
   )
 }
 

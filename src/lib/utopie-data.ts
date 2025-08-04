@@ -584,19 +584,22 @@ export const utopieIdeas: UtopieIdea[] = [
               "name": "Centres d'Éducation Environnementale",
               "location": "Nantes",
               "description": "Ancienne église transformée en espace écologique urbain, accueillant un jardin partagé, des ateliers de permaculture et une grainothèque ouverte à tous les habitants.",
-              "link": "https://www.nantesmetropole.fr/actualites/eglise-verte-saint-vincent"
+              "link": "https://www.nantesmetropole.fr/actualites/eglise-verte-saint-vincent",
+              "imageUrl": "https://images.unsplash.com/photo-1529579047235-3efe3b7c0655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDZW50cmVzJTIwZCUyNyVDMyU4OWR1Y2F0aW9uJTIwRW52aXJvbm5lbWVudGFsZSUyME5hbnRlcyUyMEFuY2llbm5lJTIwJUMzJUE5Z2xpc2UlMjB0cmFuc2Zvcm0lQzMlQTllJTIwZW4lMjBlc3BhY2V8ZW58MHwwfHx8MTc1NDIzNzIyM3ww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "La Recyclerie Sainte-Anne",
               "location": "Rennes",
               "description": "Église désacralisée transformée en centre de recyclage créatif, proposant des ateliers de réparation, des espaces de troc et une matériauthèque pour encourager la réutilisation.",
-              "link": "https://www.larecyclerie-rennes.fr"
+              "link": "https://www.larecyclerie-rennes.fr",
+              "imageUrl": "https://images.unsplash.com/photo-1575470568895-7096f4ffbbee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMYSUyMFJlY3ljbGVyaWUlMjBTYWludGUtQW5uZSUyMFJlbm5lcyUyMCVDMyU4OWdsaXNlJTIwZCVDMyVBOXNhY3JhbGlzJUMzJUE5ZSUyMHRyYW5zZm9ybSVDMyVBOWUlMjBlbiUyMGNlbnRyZXxlbnwwfDB8fHwxNzU0MjM3MjI1fDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Centres d'Éducation Environnementale",
               "location": "Nantes",
               "description": "Ancienne église transformée en espace écologique urbain, accueillant un jardin partagé, des ateliers de permaculture et une grainothèque ouverte à tous les habitants.",
-              "link": "https://www.nantesmetropole.fr/actualites/eglise-verte-saint-vincent"
+              "link": "https://www.nantesmetropole.fr/actualites/eglise-verte-saint-vincent",
+              "imageUrl": "https://images.unsplash.com/photo-1529579047235-3efe3b7c0655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDZW50cmVzJTIwZCUyNyVDMyU4OWR1Y2F0aW9uJTIwRW52aXJvbm5lbWVudGFsZSUyME5hbnRlcyUyMEFuY2llbm5lJTIwJUMzJUE5Z2xpc2UlMjB0cmFuc2Zvcm0lQzMlQTllJTIwZW4lMjBlc3BhY2V8ZW58MHwwfHx8MTc1NDIzNzIyNnww&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ]
         },
@@ -608,19 +611,22 @@ export const utopieIdeas: UtopieIdea[] = [
               "name": "Centres d'Éducation Environnementale",
               "location": "Nantes",
               "description": "Ancienne église transformée en espace écologique urbain, accueillant un jardin partagé, des ateliers de permaculture et une grainothèque ouverte à tous les habitants.",
-              "link": "https://www.nantesmetropole.fr/actualites/eglise-verte-saint-vincent"
+              "link": "https://www.nantesmetropole.fr/actualites/eglise-verte-saint-vincent",
+              "imageUrl": "https://images.unsplash.com/photo-1529579047235-3efe3b7c0655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDZW50cmVzJTIwZCUyNyVDMyU4OWR1Y2F0aW9uJTIwRW52aXJvbm5lbWVudGFsZSUyME5hbnRlcyUyMEFuY2llbm5lJTIwJUMzJUE5Z2xpc2UlMjB0cmFuc2Zvcm0lQzMlQTllJTIwZW4lMjBlc3BhY2V8ZW58MHwwfHx8MTc1NDIzNzIyN3ww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "La Recyclerie Sainte-Anne",
               "location": "Rennes",
               "description": "Église désacralisée transformée en centre de recyclage créatif, proposant des ateliers de réparation, des espaces de troc et une matériauthèque pour encourager la réutilisation.",
-              "link": "https://www.larecyclerie-rennes.fr"
+              "link": "https://www.larecyclerie-rennes.fr",
+              "imageUrl": "https://images.unsplash.com/photo-1575470568895-7096f4ffbbee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMYSUyMFJlY3ljbGVyaWUlMjBTYWludGUtQW5uZSUyMFJlbm5lcyUyMCVDMyU4OWdsaXNlJTIwZCVDMyVBOXNhY3JhbGlzJUMzJUE5ZSUyMHRyYW5zZm9ybSVDMyVBOWUlMjBlbiUyMGNlbnRyZXxlbnwwfDB8fHwxNzU0MjM3MjI4fDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Centres d'Éducation Environnementale",
               "location": "Nantes",
               "description": "Ancienne église transformée en espace écologique urbain, accueillant un jardin partagé, des ateliers de permaculture et une grainothèque ouverte à tous les habitants.",
-              "link": "https://www.nantesmetropole.fr/actualites/eglise-verte-saint-vincent"
+              "link": "https://www.nantesmetropole.fr/actualites/eglise-verte-saint-vincent",
+              "imageUrl": "https://images.unsplash.com/photo-1529579047235-3efe3b7c0655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDZW50cmVzJTIwZCUyNyVDMyU4OWR1Y2F0aW9uJTIwRW52aXJvbm5lbWVudGFsZSUyME5hbnRlcyUyMEFuY2llbm5lJTIwJUMzJUE5Z2xpc2UlMjB0cmFuc2Zvcm0lQzMlQTllJTIwZW4lMjBlc3BhY2V8ZW58MHwwfHx8MTc1NDIzNzIyOXww&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ]
         }
@@ -650,18 +656,21 @@ export const utopieIdeas: UtopieIdea[] = [
               "name": "Église Saint-Martin des Aspres",
               "location": "Orne",
               "description": "Première mairie-église de France (1959). Désaffectation cultuelle pour transformer l'édifice en salle de mairie et salle polyvalente accueillant près de 100 personnes.",
-              "link": "https://patrimoine.blog.lepelerin.com"
+              "link": "https://patrimoine.blog.lepelerin.com",
+              "imageUrl": "https://images.unsplash.com/photo-1663321231228-2625873fbdcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHwlQzMlODlnbGlzZSUyMFNhaW50LU1hcnRpbiUyMGRlcyUyMEFzcHJlcyUyME9ybmUlMjBQcmVtaSVDMyVBOHJlJTIwbWFpcmllLSVDMyVBOWdsaXNlJTIwZGUlMjBGcmFuY2UlMjAlMjgxOTU5JTI5LnxlbnwwfDB8fHwxNzU0MjM3MjMxfDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Ancien Presbytère Mairie",
               "location": "Normandie",
-              "description": "Presbytères du XIXe siècle reconvertis pour héberger services municipaux et accueil citoyen."
+              "description": "Presbytères du XIXe siècle reconvertis pour héberger services municipaux et accueil citoyen.",
+              "imageUrl": "https://images.unsplash.com/photo-1515256696008-9a1e43561987?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBbmNpZW4lMjBQcmVzYnl0JUMzJUE4cmUlMjBNYWlyaWUlMjBOb3JtYW5kaWUlMjBQcmVzYnl0JUMzJUE4cmVzJTIwZHUlMjBYSVhlJTIwc2klQzMlQThjbGUlMjByZWNvbnZlcnRpc3xlbnwwfDB8fHwxNzU0MjM3MjMyfDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Chapelle Sainte-Lucie",
               "location": "Bordeaux",
               "description": "Chapelle désacralisée transformée en maison France Services, offrant un point unique d'accès aux démarches administratives, ateliers numériques et accompagnement social dans un cadre patrimonial valorisé.",
-              "link": "https://www.france-services.gouv.fr"
+              "link": "https://www.france-services.gouv.fr",
+              "imageUrl": "https://images.unsplash.com/photo-1578668189974-f7525881ae9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDaGFwZWxsZSUyMFNhaW50ZS1MdWNpZSUyMEJvcmRlYXV4JTIwQ2hhcGVsbGUlMjBkJUMzJUE5c2FjcmFsaXMlQzMlQTllJTIwdHJhbnNmb3JtJUMzJUE5ZSUyMGVuJTIwbWFpc29ufGVufDB8MHx8fDE3NTQyMzcyMzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ],
           "links": [
@@ -680,18 +689,21 @@ export const utopieIdeas: UtopieIdea[] = [
               "name": "Église Saint-Louis Tourcoing",
               "location": "Nord",
               "description": "Reconversion en lieu culturel associatif mitoyen du centre social Boilly. Accueil de 300 enfants pour goûter de Noël annuel, animations pédagogiques et socioculturelles.",
-              "link": "https://www.banquedesterritoires.fr"
+              "link": "https://www.banquedesterritoires.fr",
+              "imageUrl": "https://images.unsplash.com/photo-1529579047235-3efe3b7c0655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHwlQzMlODlnbGlzZSUyMFNhaW50LUxvdWlzJTIwVG91cmNvaW5nJTIwTm9yZCUyMFJlY29udmVyc2lvbiUyMGVuJTIwbGlldSUyMGN1bHR1cmVsJTIwYXNzb2NpYXRpZnxlbnwwfDB8fHwxNzU0MjM3MjM1fDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Centres Communaux d'Action Sociale",
               "location": "France",
-              "description": "Antennes CCAS implantées dans d'anciens bâtiments religieux pour services sociaux de proximité."
+              "description": "Antennes CCAS implantées dans d'anciens bâtiments religieux pour services sociaux de proximité.",
+              "imageUrl": "https://images.unsplash.com/photo-1544291277-7a7577ab2c7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDZW50cmVzJTIwQ29tbXVuYXV4JTIwZCUyN0FjdGlvbiUyMFNvY2lhbGUlMjBGcmFuY2UlMjBBbnRlbm5lcyUyMENDQVMlMjBpbXBsYW50JUMzJUE5ZXMlMjBkYW5zJTIwZCUyN2FuY2llbnN8ZW58MHwwfHx8MTc1NDIzNzIzN3ww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Maison Citoyenne Saint-Paul",
               "location": "Marseille",
               "description": "Ancienne église réhabilitée en espace citoyen, proposant des permanences d'élus, des ateliers de médiation, et des rencontres participatives pour renforcer la démocratie locale.",
-              "link": "https://www.marseille.fr/vie-citoyenne/maison-citoyenne-saint-paul"
+              "link": "https://www.marseille.fr/vie-citoyenne/maison-citoyenne-saint-paul",
+              "imageUrl": "https://images.unsplash.com/photo-1590161784236-ad51873a931e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYWlzb24lMjBDaXRveWVubmUlMjBTYWludC1QYXVsJTIwTWFyc2VpbGxlJTIwQW5jaWVubmUlMjAlQzMlQTlnbGlzZSUyMHIlQzMlQTloYWJpbGl0JUMzJUE5ZSUyMGVuJTIwZXNwYWNlfGVufDB8MHx8fDE3NTQyMzcyMzh8MA&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ],
           "links": [
@@ -709,25 +721,29 @@ export const utopieIdeas: UtopieIdea[] = [
             {
               "name": "Maisons de Services au Public",
               "location": "Territoires ruraux",
-              "description": "Guichets uniques dans anciens presbytères : CAF, Pôle Emploi, assurance maladie, retraite. Accompagnement personnalisé aux démarches en ligne."
+              "description": "Guichets uniques dans anciens presbytères : CAF, Pôle Emploi, assurance maladie, retraite. Accompagnement personnalisé aux démarches en ligne.",
+              "imageUrl": "https://images.unsplash.com/photo-1542622546-e7f9cf80c060?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYWlzb25zJTIwZGUlMjBTZXJ2aWNlcyUyMGF1JTIwUHVibGljJTIwVGVycml0b2lyZXMlMjBydXJhdXglMjBHdWljaGV0cyUyMHVuaXF1ZXMlMjBkYW5zJTIwYW5jaWVucyUyMHByZXNieXQlQzMlQThyZXN8ZW58MHwwfHx8MTc1NDIzNzIzOXww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Maison France Services Église Saint-Pierre",
               "location": "Laval",
               "description": "Ancienne église réhabilitée en guichet unique de services administratifs : CAF, CPAM, Pôle Emploi, accompagnement numérique et ateliers d'inclusion digitale.",
-              "link": "https://www.france-services.gouv.fr/maison-france-services-laval"
+              "link": "https://www.france-services.gouv.fr/maison-france-services-laval",
+              "imageUrl": "https://images.unsplash.com/photo-1529579047235-3efe3b7c0655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYWlzb24lMjBGcmFuY2UlMjBTZXJ2aWNlcyUyMCVDMyU4OWdsaXNlJTIwU2FpbnQtUGllcnJlJTIwTGF2YWwlMjBBbmNpZW5uZSUyMCVDMyVBOWdsaXNlJTIwciVDMyVBOWhhYmlsaXQlQzMlQTllJTIwZW4lMjBndWljaGV0fGVufDB8MHx8fDE3NTQyMzcyNDF8MA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Espace Numérique Citoyen Saint-Joseph",
               "location": "Dijon",
               "description": "Église désacralisée transformée en centre d'accès public à internet, proposant des formations à l'informatique et des permanences d'aide aux démarches en ligne.",
-              "link": "https://www.dijon.fr/espaces-numeriques-citoyens"
+              "link": "https://www.dijon.fr/espaces-numeriques-citoyens",
+              "imageUrl": "https://images.unsplash.com/photo-1529579047235-3efe3b7c0655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxFc3BhY2UlMjBOdW0lQzMlQTlyaXF1ZSUyMENpdG95ZW4lMjBTYWludC1Kb3NlcGglMjBEaWpvbiUyMCVDMyU4OWdsaXNlJTIwZCVDMyVBOXNhY3JhbGlzJUMzJUE5ZSUyMHRyYW5zZm9ybSVDMyVBOWUlMjBlbiUyMGNlbnRyZXxlbnwwfDB8fHwxNzU0MjM3MjQyfDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Maison des Services Publics Sainte-Marie",
               "location": "Chartres",
               "description": "Ancienne chapelle aménagée pour regrouper les services publics locaux, un espace d'accueil citoyen, et un pôle d'accompagnement social, dans un cadre patrimonial rénové.",
-              "link": "https://www.chartres.fr/maison-des-services-publics"
+              "link": "https://www.chartres.fr/maison-des-services-publics",
+              "imageUrl": "https://images.unsplash.com/photo-1706980294246-923f91459539?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYWlzb24lMjBkZXMlMjBTZXJ2aWNlcyUyMFB1YmxpY3MlMjBTYWludGUtTWFyaWUlMjBDaGFydHJlcyUyMEFuY2llbm5lJTIwY2hhcGVsbGUlMjBhbSVDMyVBOW5hZyVDMyVBOWUlMjBwb3VyJTIwcmVncm91cGVyfGVufDB8MHx8fDE3NTQyMzcyNDR8MA&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ],
           "links": [
@@ -745,31 +761,36 @@ export const utopieIdeas: UtopieIdea[] = [
             {
               "name": "Conseils de Quartier",
               "location": "Villes moyennes",
-              "description": "Réunions publiques, consultations citoyennes, budgets participatifs dans anciens lieux de culte réhabilités."
+              "description": "Réunions publiques, consultations citoyennes, budgets participatifs dans anciens lieux de culte réhabilités.",
+              "imageUrl": "https://images.unsplash.com/photo-1499631507243-7290571550ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDb25zZWlscyUyMGRlJTIwUXVhcnRpZXIlMjBWaWxsZXMlMjBtb3llbm5lcyUyMFIlQzMlQTl1bmlvbnMlMjBwdWJsaXF1ZXMlMkMlMjBjb25zdWx0YXRpb25zJTIwY2l0b3llbm5lcyUyQyUyMGJ1ZGdldHN8ZW58MHwwfHx8MTc1NDIzNzI0NXww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Agora Citoyenne Saint-Pierre",
               "location": "Toulouse",
               "description": "Ancienne église transformée en espace de débats, de consultations citoyennes et d'ateliers de co-construction des politiques locales. Lieu de rencontre entre citoyens, élus et associations.",
-              "link": "https://www.toulouse.fr/participation-citoyenne/agora-saint-pierre"
+              "link": "https://www.toulouse.fr/participation-citoyenne/agora-saint-pierre",
+              "imageUrl": "https://images.unsplash.com/photo-1578170755207-88d9dfb7b4ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBZ29yYSUyMENpdG95ZW5uZSUyMFNhaW50LVBpZXJyZSUyMFRvdWxvdXNlJTIwQW5jaWVubmUlMjAlQzMlQTlnbGlzZSUyMHRyYW5zZm9ybSVDMyVBOWUlMjBlbiUyMGVzcGFjZXxlbnwwfDB8fHwxNzU0MjM3MjQ3fDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Agora Citoyenne Saint-Pierre",
               "location": "Toulouse",
               "description": "Ancienne église transformée en espace de débats, de consultations citoyennes et d'ateliers de co-construction des politiques locales. Lieu de rencontre entre citoyens, élus et associations.",
-              "link": "https://www.toulouse.fr/participation-citoyenne/agora-saint-pierre"
+              "link": "https://www.toulouse.fr/participation-citoyenne/agora-saint-pierre",
+              "imageUrl": "https://images.unsplash.com/photo-1578170755207-88d9dfb7b4ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBZ29yYSUyMENpdG95ZW5uZSUyMFNhaW50LVBpZXJyZSUyMFRvdWxvdXNlJTIwQW5jaWVubmUlMjAlQzMlQTlnbGlzZSUyMHRyYW5zZm9ybSVDMyVBOWUlMjBlbiUyMGVzcGFjZXxlbnwwfDB8fHwxNzU0MjM3MjQ4fDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Maison du Dialogue - Saint-Nicolas",
               "location": "Nantes",
               "description": "Chapelle désacralisée accueillant des assemblées tirées au sort, des forums publics et des conférences sur la démocratie participative. Programme régulier d'événements citoyens.",
-              "link": "https://www.nantes.fr/maison-du-dialogue-saint-nicolas"
+              "link": "https://www.nantes.fr/maison-du-dialogue-saint-nicolas",
+              "imageUrl": "https://images.unsplash.com/photo-1495844311468-59f49389020a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYWlzb24lMjBkdSUyMERpYWxvZ3VlJTIwLSUyMFNhaW50LU5pY29sYXMlMjBOYW50ZXMlMjBDaGFwZWxsZSUyMGQlQzMlQTlzYWNyYWxpcyVDMyVBOWUlMjBhY2N1ZWlsbGFudCUyMGRlcyUyMGFzc2VtYmwlQzMlQTllc3xlbnwwfDB8fHwxNzU0MjM3MjQ5fDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Forum Populaire Saint-Paul",
               "location": "Lyon",
               "description": "Lieu symbolique dédié aux consultations publiques, jurys citoyens et ateliers participatifs, facilitant le dialogue entre les habitants et les institutions autour de grands projets urbains.",
-              "link": "https://www.lyon.fr/forum-populaire-saint-paul"
+              "link": "https://www.lyon.fr/forum-populaire-saint-paul",
+              "imageUrl": "https://images.unsplash.com/photo-1650370052079-6a7138124e1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGb3J1bSUyMFBvcHVsYWlyZSUyMFNhaW50LVBhdWwlMjBMeW9uJTIwTGlldSUyMHN5bWJvbGlxdWUlMjBkJUMzJUE5ZGklQzMlQTklMjBhdXglMjBjb25zdWx0YXRpb25zfGVufDB8MHx8fDE3NTQyMzcyNTF8MA&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ],
           "links": [
@@ -798,19 +819,22 @@ export const utopieIdeas: UtopieIdea[] = [
               "name": "Université Populaire de Saint-Jacques",
               "location": "Nantes",
               "description": "Ancienne église devenue lieu d'éducation populaire, accueillant des conférences citoyennes, ateliers de philosophie et cours ouverts à tous les âges.",
-              "link": "https://www.universite-populaire-nantes.fr"
+              "link": "https://www.universite-populaire-nantes.fr",
+              "imageUrl": "https://images.unsplash.com/photo-1476279173650-f721ff79505b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxVbml2ZXJzaXQlQzMlQTklMjBQb3B1bGFpcmUlMjBkZSUyMFNhaW50LUphY3F1ZXMlMjBOYW50ZXMlMjBBbmNpZW5uZSUyMCVDMyVBOWdsaXNlJTIwZGV2ZW51ZSUyMGxpZXUlMjBkJTI3JUMzJUE5ZHVjYXRpb258ZW58MHwwfHx8MTc1NDIzNzI1Mnww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Maison du Savoir Sainte-Croix",
               "location": "Montpellier",
               "description": "Chapelle désaffectée transformée en centre de formation continue, proposant des programmes d'alphabétisation, des ateliers numériques et des débats publics hebdomadaires.",
-              "link": "https://www.montpellier.fr/maison-du-savoir-sainte-croix"
+              "link": "https://www.montpellier.fr/maison-du-savoir-sainte-croix",
+              "imageUrl": "https://images.unsplash.com/photo-1578668189974-f7525881ae9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYWlzb24lMjBkdSUyMFNhdm9pciUyMFNhaW50ZS1Dcm9peCUyME1vbnRwZWxsaWVyJTIwQ2hhcGVsbGUlMjBkJUMzJUE5c2FmZmVjdCVDMyVBOWUlMjB0cmFuc2Zvcm0lQzMlQTllJTIwZW4lMjBjZW50cmV8ZW58MHwwfHx8MTc1NDIzNzI1NHww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Agora des Savoirs Saint-Paul",
               "location": "Lyon",
               "description": "Lieu patrimonial dédié à la transmission des savoirs, avec université inter-âges, débats citoyens et cycles de conférences en accès libre.",
-              "link": "https://www.lyon.fr/agora-des-savoirs-saint-paul"
+              "link": "https://www.lyon.fr/agora-des-savoirs-saint-paul",
+              "imageUrl": "https://images.unsplash.com/photo-1598537691062-09437f9db6b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBZ29yYSUyMGRlcyUyMFNhdm9pcnMlMjBTYWludC1QYXVsJTIwTHlvbiUyMExpZXUlMjBwYXRyaW1vbmlhbCUyMGQlQzMlQTlkaSVDMyVBOSUyMCVDMyVBMCUyMGxhfGVufDB8MHx8fDE3NTQyMzcyNTV8MA&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ]
         },
@@ -822,19 +846,22 @@ export const utopieIdeas: UtopieIdea[] = [
               "name": "Maison des Formations Saint-Paul",
               "location": "Lyon",
               "description": "Ancienne église transformée en centre de formation continue, proposant des ateliers de développement personnel, des formations professionnelles et des stages d'accompagnement.",
-              "link": "https://www.lyon.fr/maison-des-formations-saint-paul"
+              "link": "https://www.lyon.fr/maison-des-formations-saint-paul",
+              "imageUrl": "https://images.unsplash.com/photo-1578668189974-f7525881ae9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYWlzb24lMjBkZXMlMjBGb3JtYXRpb25zJTIwU2FpbnQtUGF1bCUyMEx5b24lMjBBbmNpZW5uZSUyMCVDMyVBOWdsaXNlJTIwdHJhbnNmb3JtJUMzJUE5ZSUyMGVuJTIwY2VudHJlfGVufDB8MHx8fDE3NTQyMzcyNTd8MA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Centre de Formation Continue Sainte-Croix",
               "location": "Montpellier",
               "description": "Chapelle désaffectée transformée en centre de formation continue, proposant des programmes d'alphabétisation, des ateliers numériques et des débats publics hebdomadaires.",
-              "link": "https://www.montpellier.fr/centre-de-formation-continue-sainte-croix"
+              "link": "https://www.montpellier.fr/centre-de-formation-continue-sainte-croix",
+              "imageUrl": "https://images.unsplash.com/photo-1578668189974-f7525881ae9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDZW50cmUlMjBkZSUyMEZvcm1hdGlvbiUyMENvbnRpbnVlJTIwU2FpbnRlLUNyb2l4JTIwTW9udHBlbGxpZXIlMjBDaGFwZWxsZSUyMGQlQzMlQTlzYWZmZWN0JUMzJUE5ZSUyMHRyYW5zZm9ybSVDMyVBOWUlMjBlbiUyMGNlbnRyZXxlbnwwfDB8fHwxNzU0MjM3MjU4fDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Agora des Formations Saint-Paul",
               "location": "Lyon",
               "description": "Lieu patrimonial dédié à la transmission des savoirs, avec université inter-âges, débats citoyens et cycles de conférences en accès libre.",
-              "link": "https://www.lyon.fr/agora-des-formations-saint-paul"
+              "link": "https://www.lyon.fr/agora-des-formations-saint-paul",
+              "imageUrl": "https://images.unsplash.com/photo-1650370052079-6a7138124e1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBZ29yYSUyMGRlcyUyMEZvcm1hdGlvbnMlMjBTYWludC1QYXVsJTIwTHlvbiUyMExpZXUlMjBwYXRyaW1vbmlhbCUyMGQlQzMlQTlkaSVDMyVBOSUyMCVDMyVBMCUyMGxhfGVufDB8MHx8fDE3NTQyMzcyNjB8MA&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ]
         },
@@ -846,19 +873,22 @@ export const utopieIdeas: UtopieIdea[] = [
               "name": "École Démocratique Saint-Hubert",
               "location": "Lille",
               "description": "Église transformée en école démocratique offrant un environnement d’apprentissage libre, collaboratif et inclusif pour enfants et adolescents.",
-              "link": "https://www.lille.fr/ecole-democratique-saint-hubert"
+              "link": "https://www.lille.fr/ecole-democratique-saint-hubert",
+              "imageUrl": "https://images.unsplash.com/photo-1476279173650-f721ff79505b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHwlQzMlODljb2xlJTIwRCVDMyVBOW1vY3JhdGlxdWUlMjBTYWludC1IdWJlcnQlMjBMaWxsZSUyMCVDMyU4OWdsaXNlJTIwdHJhbnNmb3JtJUMzJUE5ZSUyMGVuJTIwJUMzJUE5Y29sZSUyMGQlQzMlQTltb2NyYXRpcXVlfGVufDB8MHx8fDE3NTQyMzcyNjF8MA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Ateliers Montessori Sainte-Anne",
               "location": "Nantes",
               "description": "Chapelle réaménagée en centre d’activités Montessori, favorisant autonomie, créativité et éducation sensorielle dès le plus jeune âge.",
-              "link": "https://www.nantes.fr/ateliers-montessori-sainte-anne"
+              "link": "https://www.nantes.fr/ateliers-montessori-sainte-anne",
+              "imageUrl": "https://images.unsplash.com/photo-1578668189974-f7525881ae9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBdGVsaWVycyUyME1vbnRlc3NvcmklMjBTYWludGUtQW5uZSUyME5hbnRlcyUyMENoYXBlbGxlJTIwciVDMyVBOWFtJUMzJUE5bmFnJUMzJUE5ZSUyMGVuJTIwY2VudHJlJTIwZCVFMiU4MCU5OWFjdGl2aXQlQzMlQTlzfGVufDB8MHx8fDE3NTQyMzcyNjN8MA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "École des Apprentissages Libres Saint-Martin",
               "location": "Paris",
               "description": "Ancienne église devenue école alternative basée sur la pédagogie par projets, l’éducation civique et l’ouverture sur le quartier.",
-              "link": "https://www.paris.fr/ecole-apprentissages-libres-saint-martin"
+              "link": "https://www.paris.fr/ecole-apprentissages-libres-saint-martin",
+              "imageUrl": "https://images.unsplash.com/photo-1529578947605-f01b05b5cfac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHwlQzMlODljb2xlJTIwZGVzJTIwQXBwcmVudGlzc2FnZXMlMjBMaWJyZXMlMjBTYWludC1NYXJ0aW4lMjBQYXJpcyUyMEFuY2llbm5lJTIwJUMzJUE5Z2xpc2UlMjBkZXZlbnVlJTIwJUMzJUE5Y29sZSUyMGFsdGVybmF0aXZlfGVufDB8MHx8fDE3NTQyMzcyNjR8MA&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ]
         }
@@ -880,19 +910,22 @@ export const utopieIdeas: UtopieIdea[] = [
               "name": "Le Temple du Spectacle Saint-Gildas",
               "location": "Auray",
               "description": "Ancienne église transformée en salle de concerts et théâtre, proposant une programmation éclectique mêlant musiques actuelles, arts vivants et événements associatifs.",
-              "link": "https://www.auray.fr/temple-du-spectacle-saint-gildas"
+              "link": "https://www.auray.fr/temple-du-spectacle-saint-gildas",
+              "imageUrl": "https://images.unsplash.com/photo-1650531235745-e2336e5c7952?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMZSUyMFRlbXBsZSUyMGR1JTIwU3BlY3RhY2xlJTIwU2FpbnQtR2lsZGFzJTIwQXVyYXklMjBBbmNpZW5uZSUyMCVDMyVBOWdsaXNlJTIwdHJhbnNmb3JtJUMzJUE5ZSUyMGVuJTIwc2FsbGV8ZW58MHwwfHx8MTc1NDIzNzI2NXww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Chapelle des Arts Vivants",
               "location": "Lille",
               "description": "Chapelle désacralisée reconvertie en scène dédiée à la danse contemporaine, aux arts de la rue et aux résidences d'artistes.",
-              "link": "https://www.lille.fr/chapelle-des-arts-vivants"
+              "link": "https://www.lille.fr/chapelle-des-arts-vivants",
+              "imageUrl": "https://images.unsplash.com/photo-1610719224724-1de97882c0d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDaGFwZWxsZSUyMGRlcyUyMEFydHMlMjBWaXZhbnRzJTIwTGlsbGUlMjBDaGFwZWxsZSUyMGQlQzMlQTlzYWNyYWxpcyVDMyVBOWUlMjByZWNvbnZlcnRpZSUyMGVuJTIwc2MlQzMlQThuZXxlbnwwfDB8fHwxNzU0MjM3MjY3fDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Auditorium Sainte-Anne",
               "location": "Rennes",
               "description": "Église rénovée accueillant des concerts classiques, des conférences et des projections cinématographiques dans un cadre patrimonial valorisé.",
-              "link": "https://www.rennes.fr/auditorium-sainte-anne"
+              "link": "https://www.rennes.fr/auditorium-sainte-anne",
+              "imageUrl": "https://images.unsplash.com/photo-1578668189974-f7525881ae9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBdWRpdG9yaXVtJTIwU2FpbnRlLUFubmUlMjBSZW5uZXMlMjAlQzMlODlnbGlzZSUyMHIlQzMlQTlub3YlQzMlQTllJTIwYWNjdWVpbGxhbnQlMjBkZXMlMjBjb25jZXJ0c3xlbnwwfDB8fHwxNzU0MjM3MjY5fDA&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ]
         },
@@ -904,25 +937,29 @@ export const utopieIdeas: UtopieIdea[] = [
               "name": "Église Sainte-Anne",
               "location": "Rennes",
               "description": "Église rénovée accueillant des concerts classiques, des conférences et des projections cinématographiques dans un cadre patrimonial valorisé.",
-              "link": "https://www.rennes.fr/auditorium-sainte-anne"
+              "link": "https://www.rennes.fr/auditorium-sainte-anne",
+              "imageUrl": "https://images.unsplash.com/photo-1578170755207-88d9dfb7b4ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHwlQzMlODlnbGlzZSUyMFNhaW50ZS1Bbm5lJTIwUmVubmVzJTIwJUMzJTg5Z2xpc2UlMjByJUMzJUE5bm92JUMzJUE5ZSUyMGFjY3VlaWxsYW50JTIwZGVzJTIwY29uY2VydHN8ZW58MHwwfHx8MTc1NDIzNzI3MHww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "La Nef des Événements",
               "location": "Bordeaux",
               "description": "Ancienne nef réaménagée en espace modulable pour congrès, salons professionnels, lancements de produits et soirées thématiques.",
-              "link": "https://www.bordeaux.fr/nef-des-evenements"
+              "link": "https://www.bordeaux.fr/nef-des-evenements",
+              "imageUrl": "https://images.unsplash.com/photo-1577553310773-3b0410c58343?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxMYSUyME5lZiUyMGRlcyUyMCVDMyU4OXYlQzMlQTluZW1lbnRzJTIwQm9yZGVhdXglMjBBbmNpZW5uZSUyMG5lZiUyMHIlQzMlQTlhbSVDMyVBOW5hZyVDMyVBOWUlMjBlbiUyMGVzcGFjZXxlbnwwfDB8fHwxNzU0MjM3MjcyfDA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Chapelle Saint-Joseph Réceptions",
               "location": "Toulouse",
               "description": "Chapelle du XIXe siècle transformée en salle de réception, accueillant mariages laïques, banquets familiaux et cocktails d’entreprise dans un cadre patrimonial préservé.",
-              "link": "https://www.toulouse.fr/chapelle-saint-joseph-receptions"
+              "link": "https://www.toulouse.fr/chapelle-saint-joseph-receptions",
+              "imageUrl": "https://images.unsplash.com/photo-1598537691062-09437f9db6b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxDaGFwZWxsZSUyMFNhaW50LUpvc2VwaCUyMFIlQzMlQTljZXB0aW9ucyUyMFRvdWxvdXNlJTIwQ2hhcGVsbGUlMjBkdSUyMFhJWGUlMjBzaSVDMyVBOGNsZSUyMHRyYW5zZm9ybSVDMyVBOWV8ZW58MHwwfHx8MTc1NDIzNzI3M3ww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Abbaye des Célébrations",
               "location": "Dijon",
               "description": "Ancienne abbaye reconvertie en espace événementiel adapté aux galas, remises de prix, expositions et séminaires, offrant une atmosphère unique et historique.",
-              "link": "https://www.dijon.fr/abbaye-des-celebrations"
+              "link": "https://www.dijon.fr/abbaye-des-celebrations",
+              "imageUrl": "https://images.unsplash.com/photo-1706980294246-923f91459539?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxBYmJheWUlMjBkZXMlMjBDJUMzJUE5bCVDMyVBOWJyYXRpb25zJTIwRGlqb24lMjBBbmNpZW5uZSUyMGFiYmF5ZSUyMHJlY29udmVydGllJTIwZW4lMjBlc3BhY2V8ZW58MHwwfHx8MTc1NDIzNzI3NXww&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ]
         },
@@ -934,19 +971,22 @@ export const utopieIdeas: UtopieIdea[] = [
               "name": "Festival Lumières dans la Nef",
               "location": "Strasbourg",
               "description": "Ancienne église transformée en lieu de festival annuel mêlant installations lumineuses, spectacles vivants et expositions interactives pour toute la famille.",
-              "link": "https://www.strasbourg.eu/festival-lumieres-nef"
+              "link": "https://www.strasbourg.eu/festival-lumieres-nef",
+              "imageUrl": "https://images.unsplash.com/photo-1541867016723-48e946327f8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGZXN0aXZhbCUyMEx1bWklQzMlQThyZXMlMjBkYW5zJTIwbGElMjBOZWYlMjBTdHJhc2JvdXJnJTIwQW5jaWVubmUlMjAlQzMlQTlnbGlzZSUyMHRyYW5zZm9ybSVDMyVBOWUlMjBlbiUyMGxpZXV8ZW58MHwwfHx8MTc1NDIzNzI3Nnww&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Marché Artisanal Sainte-Claire",
               "location": "Grenoble",
               "description": "Chapelle désaffectée accueillant un marché mensuel de créateurs locaux, ateliers participatifs et animations pour petits et grands.",
-              "link": "https://www.grenoble.fr/marche-artisanal-sainte-claire"
+              "link": "https://www.grenoble.fr/marche-artisanal-sainte-claire",
+              "imageUrl": "https://images.unsplash.com/photo-1625641636704-cd1cafe83bda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxNYXJjaCVDMyVBOSUyMEFydGlzYW5hbCUyMFNhaW50ZS1DbGFpcmUlMjBHcmVub2JsZSUyMENoYXBlbGxlJTIwZCVDMyVBOXNhZmZlY3QlQzMlQTllJTIwYWNjdWVpbGxhbnQlMjB1biUyMG1hcmNoJUMzJUE5fGVufDB8MHx8fDE3NTQyMzcyNzh8MA&ixlib=rb-4.1.0&q=80&w=1080"
             },
             {
               "name": "Fête de Quartier Saint-Joseph",
               "location": "Toulouse",
               "description": "Église réhabilitée en espace polyvalent pour fêtes de quartier, bals populaires, rencontres associatives et repas communautaires.",
-              "link": "https://www.toulouse.fr/fete-quartier-saint-joseph"
+              "link": "https://www.toulouse.fr/fete-quartier-saint-joseph",
+              "imageUrl": "https://images.unsplash.com/photo-1464341056811-c45d9a5e1c3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODY3Mzd8MHwxfHNlYXJjaHwxfHxGJUMzJUFBdGUlMjBkZSUyMFF1YXJ0aWVyJTIwU2FpbnQtSm9zZXBoJTIwVG91bG91c2UlMjAlQzMlODlnbGlzZSUyMHIlQzMlQTloYWJpbGl0JUMzJUE5ZSUyMGVuJTIwZXNwYWNlJTIwcG9seXZhbGVudHxlbnwwfDB8fHwxNzU0MjM3Mjc5fDA&ixlib=rb-4.1.0&q=80&w=1080"
             }
           ]
         }
