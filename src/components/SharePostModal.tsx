@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -61,6 +62,7 @@ export function SharePostModal({
   imageDescription,
   transformationId
 }: SharePostModalProps) {
+  const router = useRouter();
   console.log("imageUrl : ",imageUrl)
   // Initialize all state hooks first
   const [postText, setPostText] = useState("");
@@ -368,22 +370,23 @@ export function SharePostModal({
 
       // Create a transformation page URL if we have an image
       let transformationUrl = "";
-      if (imageUrl) {
-        if (transformationId) {
-          // Use the transformationId prop directly if available
-          transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${transformationId}`;
-        } else if (imageUrl) {
-          // Fallback: try to extract from image URL
-          const urlParts = imageUrl.split("/");
-          const imageId = urlParts[urlParts.length - 1].split(".")[0];
-          transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${imageId}`;
-        }
+      if (transformationId) {
+        // Use the transformationId prop directly if available
+        transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${transformationId}`;
+      } else if (imageUrl) {
+        // Fallback: try to extract from image URL
+        const urlParts = imageUrl.split("/");
+        const imageId = urlParts[urlParts.length - 1].split(".")[0];
+        transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${imageId}`;
       }
 
       // Add the transformation URL to the post text if available
       const finalPostText = transformationUrl
-        ? `${transformationUrl}\n${postText}`
+        ? `${postText}\n\n${transformationUrl}`
         : postText;
+        
+      console.log("Publishing with transformation URL:", transformationUrl);
+      console.log("Final post text:", finalPostText);
 
       // Publish to each selected platform
       for (const platform of selectedPlatforms) {
@@ -399,7 +402,7 @@ export function SharePostModal({
             body: JSON.stringify({
               platform,
               text: finalPostText,
-              // Don't include imageUrl - we're using a link instead
+              imageUrl: imageUrl, // Include imageUrl for platforms that support image uploads
             }),
           });
 
@@ -443,11 +446,25 @@ export function SharePostModal({
         });
       }
 
-      // Auto-close after 3 seconds if all succeeded
-      if (successCount === totalCount) {
+      // Get transformation ID for redirect
+      let redirectTransformationId = transformationId;
+      if (!redirectTransformationId && imageUrl) {
+        // Extract from image URL if not provided directly
+        const urlParts = imageUrl.split("/");
+        redirectTransformationId = urlParts[urlParts.length - 1].split(".")[0];
+      }
+
+      // Redirect to transformation page after 2 seconds if all succeeded
+      if (successCount === totalCount && redirectTransformationId) {
         setTimeout(() => {
           handleClose();
-        }, 3000);
+          router.push(`/transformation/${redirectTransformationId}`);
+        }, 2000);
+      } else if (successCount === totalCount) {
+        // If no transformation ID available, just close the modal
+        setTimeout(() => {
+          handleClose();
+        }, 2000);
       }
     } catch (error) {
       setMessage({
@@ -472,24 +489,24 @@ export function SharePostModal({
     try {
       // Create a transformation page URL if we have an image
       let transformationUrl = "";
-      if (imageUrl) {
-        if (transformationId) {
-          // Use the transformationId prop directly if available
-          transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${transformationId}`;
-        } else if (imageUrl) {
-          // Fallback: try to extract from image URL
-          const urlParts = imageUrl.split("/");
-          const imageId = urlParts[urlParts.length - 1].split(".")[0];
-          transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${imageId}`;
-        }
+      if (transformationId) {
+        // Use the transformationId prop directly if available
+        transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${transformationId}`;
+      } else if (imageUrl) {
+        // Fallback: try to extract from image URL
+        const urlParts = imageUrl.split("/");
+        const imageId = urlParts[urlParts.length - 1].split(".")[0];
+        transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${imageId}`;
       }
 
-      // Prepare share data
+      // Prepare share data with the transformation URL included in the text
       const shareData = {
         title: 'Transformation d\'église',
-        text: postText,
+        text: transformationUrl ? `${postText}\n\n${transformationUrl}` : postText,
         url: transformationUrl || window.location.href,
       };
+      
+      console.log("Native sharing with data:", shareData);
 
       await navigator.share(shareData);
       
@@ -498,10 +515,21 @@ export function SharePostModal({
         text: "Contenu partagé avec succès!",
       });
       
-      // Auto-close after 3 seconds
+      // Get transformation ID for redirect
+      let redirectTransformationId = transformationId;
+      if (!redirectTransformationId && imageUrl) {
+        // Extract from image URL if not provided directly
+        const urlParts = imageUrl.split("/");
+        redirectTransformationId = urlParts[urlParts.length - 1].split(".")[0];
+      }
+
+      // Redirect to transformation page after 2 seconds
       setTimeout(() => {
         handleClose();
-      }, 3000);
+        if (redirectTransformationId) {
+          router.push(`/transformation/${redirectTransformationId}`);
+        }
+      }, 2000);
     } catch (error) {
       console.error("Error sharing:", error);
       // User probably canceled the share

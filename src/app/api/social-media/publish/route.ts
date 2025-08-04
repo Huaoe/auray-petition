@@ -7,84 +7,12 @@ import { getOrCreateUserIdServer } from '@/lib/user-session';
 // Platform-specific publishing functions with modern APIs
 async function publishToTwitter(accessToken: string, text: string, imageUrl?: string) {
   try {
-    let mediaId: string | undefined;
-    
-    // Upload image if provided using v2 API
-    if (imageUrl) {
-      // First, download the image
-      const imageResponse = await fetch(imageUrl);
-      if (!imageResponse.ok) {
-        throw new Error('Failed to fetch image');
-      }
-      
-      const imageBuffer = await imageResponse.arrayBuffer();
-      const imageBlob = new Blob([imageBuffer]);
-      
-      // Initialize upload
-      const initResponse = await fetch('https://upload.twitter.com/1.1/media/upload.json', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        },
-        body: new URLSearchParams({
-          command: 'INIT',
-          total_bytes: imageBlob.size.toString(),
-          media_type: 'image/jpeg',
-          media_category: 'tweet_image'
-        })
-      });
-
-      if (!initResponse.ok) {
-        console.error('Twitter media init failed:', await initResponse.text());
-        throw new Error('Failed to initialize media upload');
-      }
-
-      const initData = await initResponse.json();
-      mediaId = initData.media_id_string;
-
-      // Upload the image
-      const formData = new FormData();
-      formData.append('command', 'APPEND');
-      formData.append('media_id', mediaId);
-      formData.append('segment_index', '0');
-      formData.append('media', imageBlob);
-
-      const appendResponse = await fetch('https://upload.twitter.com/1.1/media/upload.json', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        },
-        body: formData
-      });
-
-      if (!appendResponse.ok) {
-        console.error('Twitter media append failed:', await appendResponse.text());
-        throw new Error('Failed to upload media');
-      }
-
-      // Finalize upload
-      const finalizeResponse = await fetch('https://upload.twitter.com/1.1/media/upload.json', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        },
-        body: new URLSearchParams({
-          command: 'FINALIZE',
-          media_id: mediaId
-        })
-      });
-
-      if (!finalizeResponse.ok) {
-        console.error('Twitter media finalize failed:', await finalizeResponse.text());
-        throw new Error('Failed to finalize media upload');
-      }
-    }
+    // For Twitter, we don't upload the image directly
+    // Instead, we rely on the transformation URL being included in the text
+    // which is already handled in the SharePostModal component
 
     // Create tweet using v2 API
-    const tweetData: any = { text };
-    if (mediaId) {
-      tweetData.media = { media_ids: [mediaId] };
-    }
+    const tweetData = { text };
 
     // Add diagnostic logs
     console.log('[DEBUG] Twitter API request details:', {
@@ -110,16 +38,16 @@ async function publishToTwitter(accessToken: string, text: string, imageUrl?: st
       return { success: true, postId: responseData.data.id };
     } else {
       console.error('Twitter post failed:', responseData);
-      return { 
-        success: false, 
-        error: responseData.detail || responseData.errors?.[0]?.message || 'Failed to post to Twitter' 
+      return {
+        success: false,
+        error: responseData.detail || responseData.errors?.[0]?.message || 'Failed to post to Twitter'
       };
     }
   } catch (error) {
     console.error('Twitter API error:', error);
-    return { 
-      success: false, 
-      error: error instanceof Error ? error.message : 'Twitter API error' 
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Twitter API error'
     };
   }
 }
@@ -238,7 +166,106 @@ async function publishToInstagram(accessToken: string, instagramAccountId: strin
 
 async function publishToLinkedIn(accessToken: string, personUrn: string, text: string, imageUrl?: string) {
   try {
-    const postData: any = {
+    // If no image URL is provided, post text only
+    if (!imageUrl) {
+      const postData = {
+        author: personUrn,
+        lifecycleState: 'PUBLISHED',
+        specificContent: {
+          'com.linkedin.ugc.ShareContent': {
+            shareCommentary: {
+              text: text,
+            },
+            shareMediaCategory: 'NONE',
+          },
+        },
+        visibility: {
+          'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC',
+        },
+      };
+
+      const response = await fetch('https://api.linkedin.com/v2/ugcPosts', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+          'X-Restli-Protocol-Version': '2.0.0',
+        },
+        body: JSON.stringify(postData),
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        return { success: true, postId: responseData.id };
+      } else {
+        console.error('LinkedIn post failed:', responseData);
+        return {
+          success: false,
+          error: responseData.message || 'Failed to post to LinkedIn'
+        };
+      }
+    }
+
+    // If image URL is provided, implement the multi-step image upload process
+    // Step 1: Download the image
+    const imageResponse = await fetch(imageUrl);
+    if (!imageResponse.ok) {
+      throw new Error('Failed to fetch image');
+    }
+    
+    const imageBuffer = await imageResponse.arrayBuffer();
+    const imageBlob = new Blob([imageBuffer]);
+
+    // Step 2: Register upload
+    const registerUploadResponse = await fetch('https://api.linkedin.com/v2/assets?action=registerUpload', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+        'X-Restli-Protocol-Version': '2.0.0',
+      },
+      body: JSON.stringify({
+        registerUploadRequest: {
+          recipes: ['urn:li:digitalmediaRecipe:feedshare-image'],
+          owner: personUrn,
+          serviceRelationships: [
+            {
+              relationshipType: 'OWNER',
+              identifier: 'urn:li:userGeneratedContent',
+            },
+          ],
+        },
+      }),
+    });
+
+    if (!registerUploadResponse.ok) {
+      const errorData = await registerUploadResponse.json();
+      console.error('LinkedIn register upload failed:', errorData);
+      throw new Error('Failed to register upload with LinkedIn');
+    }
+
+    const uploadData = await registerUploadResponse.json();
+    const uploadUrl = uploadData.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest'].uploadUrl;
+    const assetId = uploadData.value.asset;
+
+    // Step 3: Upload the image
+    const uploadImageResponse = await fetch(uploadUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'image/jpeg',
+      },
+      body: imageBlob,
+    });
+
+    if (!uploadImageResponse.ok) {
+      console.error('LinkedIn image upload failed:', await uploadImageResponse.text());
+      throw new Error('Failed to upload image to LinkedIn');
+    }
+
+    // Step 4: Create a share with the uploaded image
+    const postData = {
       author: personUrn,
       lifecycleState: 'PUBLISHED',
       specificContent: {
@@ -246,16 +273,22 @@ async function publishToLinkedIn(accessToken: string, personUrn: string, text: s
           shareCommentary: {
             text: text,
           },
-          shareMediaCategory: 'NONE',
+          shareMediaCategory: 'IMAGE',
+          media: [
+            {
+              status: 'READY',
+              description: {
+                text: 'Image',
+              },
+              media: assetId,
+            },
+          ],
         },
       },
       visibility: {
         'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC',
       },
     };
-
-    // LinkedIn image upload is complex, for now we'll post text only
-    // In production, implement the multi-step image upload process
 
     const response = await fetch('https://api.linkedin.com/v2/ugcPosts', {
       method: 'POST',
@@ -272,17 +305,17 @@ async function publishToLinkedIn(accessToken: string, personUrn: string, text: s
     if (response.ok) {
       return { success: true, postId: responseData.id };
     } else {
-      console.error('LinkedIn post failed:', responseData);
-      return { 
-        success: false, 
-        error: responseData.message || 'Failed to post to LinkedIn' 
+      console.error('LinkedIn post with image failed:', responseData);
+      return {
+        success: false,
+        error: responseData.message || 'Failed to post to LinkedIn with image'
       };
     }
   } catch (error) {
     console.error('LinkedIn API error:', error);
-    return { 
-      success: false, 
-      error: error instanceof Error ? error.message : 'LinkedIn API error' 
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'LinkedIn API error'
     };
   }
 }
