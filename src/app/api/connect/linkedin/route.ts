@@ -5,6 +5,8 @@ import { generateState } from '@/lib/auth-utils';
 export async function GET(request: NextRequest) {
   try {
     const linkedinClientId = process.env.LINKEDIN_CLIENT_ID;
+    const { searchParams } = new URL(request.url);
+    const returnUrl = searchParams.get('returnUrl') || '/share-post';
 
     if (!linkedinClientId) {
       console.error('LinkedIn Client ID not configured');
@@ -24,13 +26,22 @@ export async function GET(request: NextRequest) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
     });
+    
+    // Store returnUrl in the state or as a separate cookie
+    cookieStore.set('linkedin_return_url', returnUrl, {
+      path: '/',
+      maxAge: 60 * 15, // 15 minutes
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
 
     // LinkedIn OAuth parameters - Updated scopes for v2 API
+    // Removed 'openid' scope as it's not authorized for the application
     const params = new URLSearchParams({
       response_type: 'code',
       client_id: linkedinClientId,
       redirect_uri: `${process.env.NEXT_PUBLIC_SITE_URL}/api/connect/linkedin/callback`,
-      scope: 'openid profile w_member_social',
+      scope: 'profile w_member_social openid email',
       state: state,
     });
 

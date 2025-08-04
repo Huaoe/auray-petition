@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { OAUTH_CONFIGS } from '@/lib/social-media-oauth';
-import { storeSocialMediaCredential } from '@/lib/socialMediaStorage';
+import { storeSocialMediaCredential, initializeSocialMediaSheet } from '@/lib/socialMediaStorage';
 import { SocialMediaPlatform } from '@/lib/types';
+import { cookies } from 'next/headers';
 
 interface RouteContext {
   params: {
@@ -133,20 +134,46 @@ export async function GET(
         break;
 
       case 'linkedin':
-        const linkedinUserResponse = await fetch('https://api.linkedin.com/v2/userinfo', {
-          headers: {
-            'Authorization': `Bearer ${tokenData.access_token}`,
-          },
-        });
-        if (linkedinUserResponse.ok) {
+        // Use v2/userinfo endpoint (requires openid scope)
+        const linkedinUserResponse = await fetch(
+          'https://api.linkedin.com/v2/userinfo',
+          {
+            headers: {
+              'Authorization': `Bearer ${tokenData.access_token}`,
+            },
+          }
+        );
+        
+        if (!linkedinUserResponse.ok) {
+          const errorText = await linkedinUserResponse.text();
+          console.error("Failed to fetch LinkedIn user info:", {
+            status: linkedinUserResponse.status,
+            statusText: linkedinUserResponse.statusText,
+            error: errorText
+          });
+        } else {
           const linkedinData = await linkedinUserResponse.json();
+          console.log("LinkedIn userinfo data received:", linkedinData);
+          
+          // Extract user info from userinfo endpoint response
+          // The userinfo endpoint returns data in OpenID Connect format
+          let userName = linkedinData.name || "LinkedIn User";
+          
           userInfo = {
-            username: linkedinData.name,
-            userId_platform: linkedinData.sub,
+            username: userName,
+            userId_platform: linkedinData.sub, // OpenID Connect uses 'sub' for the user ID
           };
+          
+          console.log("LinkedIn user info extracted:", {
+            name: userName,
+            id: linkedinData.sub,
+          });
         }
         break;
     }
+
+    // Initialize social media sheet if needed
+    await initializeSocialMediaSheet();
 
     // Store credentials
     const credential = {
@@ -154,7 +181,7 @@ export async function GET(
       platform,
       accessToken: tokenData.access_token,
       refreshToken: tokenData.refresh_token,
-      tokenExpiry: tokenData.expires_in 
+      tokenExpiry: tokenData.expires_in
         ? new Date(Date.now() + tokenData.expires_in * 1000).toISOString()
         : undefined,
       username: userInfo.username,
@@ -164,6 +191,28 @@ export async function GET(
 
     const result = await storeSocialMediaCredential(credential);
 
+    // For LinkedIn, check if there's a return URL in the cookies
+    if (platform === 'linkedin') {
+      const cookieStore = await cookies();
+      const returnUrlCookie = cookieStore.get("linkedin_return_url");
+      
+      if (returnUrlCookie?.value) {
+        const returnUrl = returnUrlCookie.value;
+        cookieStore.delete("linkedin_return_url");
+        
+        if (result.success) {
+          return NextResponse.redirect(
+            `${process.env.NEXT_PUBLIC_APP_URL}${returnUrl}?success=connected&platform=${platform}`
+          );
+        } else {
+          return NextResponse.redirect(
+            `${process.env.NEXT_PUBLIC_APP_URL}${returnUrl}?error=storage_failed`
+          );
+        }
+      }
+    }
+
+    // Default redirect for other platforms
     if (result.success) {
       return NextResponse.redirect(
         `${process.env.NEXT_PUBLIC_APP_URL}/settings/social?success=connected&platform=${platform}`
