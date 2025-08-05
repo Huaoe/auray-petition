@@ -63,7 +63,8 @@ export function SharePostModal({
   transformationId
 }: SharePostModalProps) {
   const router = useRouter();
-  console.log("imageUrl : ",imageUrl)
+  console.log("imageUrl:", imageUrl);
+  console.log("transformationId:", transformationId);
   // Initialize all state hooks first
   const [postText, setPostText] = useState("");
   const [selectedPromptIndex, setSelectedPromptIndex] = useState<number | null>(
@@ -370,14 +371,20 @@ export function SharePostModal({
 
       // Create a transformation page URL if we have an image
       let transformationUrl = "";
+      // Use window.location.origin as fallback if NEXT_PUBLIC_SITE_URL is not set
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ||
+                     (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000');
+      
+      console.log("Base URL for publishing:", baseUrl);
+      
       if (transformationId) {
         // Use the transformationId prop directly if available
-        transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${transformationId}`;
+        transformationUrl = `${baseUrl}/transformation/${transformationId}`;
       } else if (imageUrl) {
         // Fallback: try to extract from image URL
         const urlParts = imageUrl.split("/");
         const imageId = urlParts[urlParts.length - 1].split(".")[0];
-        transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${imageId}`;
+        transformationUrl = `${baseUrl}/transformation/${imageId}`;
       }
 
       // Add the transformation URL to the post text if available
@@ -454,13 +461,13 @@ export function SharePostModal({
         redirectTransformationId = urlParts[urlParts.length - 1].split(".")[0];
       }
 
-      // Redirect to transformation page after 2 seconds if all succeeded
-      if (successCount === totalCount && redirectTransformationId) {
+      // Always redirect to transformation page after 2 seconds if we have a transformation ID
+      if (redirectTransformationId) {
         setTimeout(() => {
           handleClose();
           router.push(`/transformation/${redirectTransformationId}`);
         }, 2000);
-      } else if (successCount === totalCount) {
+      } else {
         // If no transformation ID available, just close the modal
         setTimeout(() => {
           handleClose();
@@ -489,14 +496,20 @@ export function SharePostModal({
     try {
       // Create a transformation page URL if we have an image
       let transformationUrl = "";
+      // Use window.location.origin as fallback if NEXT_PUBLIC_SITE_URL is not set
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ||
+                     (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000');
+      
+      console.log("Base URL for transformation:", baseUrl);
+      
       if (transformationId) {
         // Use the transformationId prop directly if available
-        transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${transformationId}`;
+        transformationUrl = `${baseUrl}/transformation/${transformationId}`;
       } else if (imageUrl) {
         // Fallback: try to extract from image URL
         const urlParts = imageUrl.split("/");
         const imageId = urlParts[urlParts.length - 1].split(".")[0];
-        transformationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/transformation/${imageId}`;
+        transformationUrl = `${baseUrl}/transformation/${imageId}`;
       }
 
       // Prepare share data with the transformation URL included in the text

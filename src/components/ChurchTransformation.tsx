@@ -444,6 +444,7 @@ const ChurchTransformation: React.FC = () => {
             }
             imageUrl={state.generatedImage}
             imageDescription={`Découvrez cette transformation révolutionnaire de l'église Saint-Gildas d'Auray en ${state.selectedTransformation.name} ! ${state.selectedTransformation.description}`}
+            transformationId={state.generatedImage ? state.generatedImage.split('/').pop()?.split('.')[0] : undefined}
           />
         )}
     </div>
