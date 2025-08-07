@@ -126,15 +126,6 @@ export default function TransformationPage({
                     </div>
                   </div>
                 </div>
-
-                <div className="prose max-w-none">
-                  <h3 className="text-lg font-medium">Description</h3>
-                  <p>
-                    {transformation?.description ||
-                      "Aucune description disponible."}
-                  </p>
-                </div>
-
                 {transformation?.comments &&
                   transformation.comments.length > 0 && (
                     <div className="mt-6">

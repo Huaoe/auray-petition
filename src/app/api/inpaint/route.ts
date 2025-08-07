@@ -136,10 +136,10 @@ async function generateWithStabilityInpainting(
     const formData = new FormData();
     
     // Image de base (PNG format for better compatibility)
-    formData.append("image", new Blob([baseImageBuffer], { type: "image/png" }));
+    formData.append("image", new Blob([new Uint8Array(baseImageBuffer)], { type: "image/png" }));
     
     // Masque d'inpainting (PNG format, black=preserve, white=change)
-    formData.append("mask", new Blob([maskImageBuffer], { type: "image/png" }));
+    formData.append("mask", new Blob([new Uint8Array(maskImageBuffer)], { type: "image/png" }));
 
     // Prompt avec méthode HD-Painter
     const hdPainterPrompt = `[HD-Painter:${method}] ${prompt}`;
@@ -299,17 +299,12 @@ export async function POST(request: NextRequest) {
     const resizedBaseImage = await resizeImageForInpainting(baseImageBuffer, resolution as keyof typeof HD_PAINTER_CONFIG.resolutions);
     const resizedMaskImage = await resizeImageForInpainting(maskImageBuffer, resolution as keyof typeof HD_PAINTER_CONFIG.resolutions, "mask");
 
-    // Vérification et ajout de l'exigence obligatoire "happy people"
-    const enhancedPrompt = prompt.toLowerCase().includes("happy") && prompt.toLowerCase().includes("people")
-      ? prompt
-      : `${prompt}, happy people`;
-
-
+    // Use the original prompt directly - frontend already adds people requirements
     // Génération avec HD-Painter
     const tempImageUrl = await generateWithStabilityInpainting(
       resizedBaseImage,
       resizedMaskImage,
-      enhancedPrompt,
+      prompt,
       method,
       negativePrompt
     );

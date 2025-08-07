@@ -289,9 +289,6 @@ const ChurchTransformation: React.FC = () => {
       // Combine the mandatory requirement with the base prompt and custom prompt
       const fullPrompt =
         mandatoryPeopleRequirement +
-        " " +
-        basePrompt +
-        " " +
         state.customPrompt;
 
       const response = await fetch("/api/inpaint", {

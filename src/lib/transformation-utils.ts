@@ -38,6 +38,7 @@ export const getTransformationById = async (id: string): Promise<TransformationD
       id,
       transformationType,
       // Use the correct Google Cloud Storage URL format
+      // Use the correct Google Cloud Storage URL format
       imageUrl: `https://storage.googleapis.com/auray-church-transformations/transformations/${id}`,
       description: `${transformationType.name} - ${transformationType.description}`,
       createdAt: new Date().toISOString(),
@@ -61,6 +62,73 @@ export const getTransformationById = async (id: string): Promise<TransformationD
   } catch (error) {
     console.error('Error fetching transformation:', error);
     return null;
+  }
+};
+
+/**
+ * Get multiple transformations with pagination
+ */
+export const getTransformations = async (page: number = 1, limit: number = 10): Promise<{
+  transformations: TransformationData[];
+  totalCount: number;
+  hasMore: boolean;
+}> => {
+  try {
+    // In a real app, this would fetch from a database with pagination
+    // For now, we'll generate mock data
+    
+    // Generate a deterministic set of transformations based on page and limit
+    const transformations: TransformationData[] = [];
+    const totalCount = 100; // Mock total count
+    
+    const startIndex = (page - 1) * limit;
+    const endIndex = Math.min(startIndex + limit, totalCount);
+    
+    for (let i = startIndex; i < endIndex; i++) {
+      const transformationTypeIndex = i % TRANSFORMATION_TYPES.length;
+      const transformationType = TRANSFORMATION_TYPES[transformationTypeIndex];
+      
+      // Create a unique ID for each transformation
+      const id = `${transformationType.id}-${i}`;
+      
+      transformations.push({
+        id,
+        transformationType,
+        // Use the correct Google Cloud Storage URL format
+        imageUrl: `https://storage.googleapis.com/auray-church-transformations/transformations/${id}`,
+        description: `${transformationType.name} - ${transformationType.description}`,
+        createdAt: new Date(Date.now() - i * 3600000).toISOString(), // Each one is 1 hour older
+        likes: Math.floor(Math.random() * 100),
+        shares: Math.floor(Math.random() * 50),
+        comments: [
+          {
+            id: '1',
+            author: 'Marie Dupont',
+            text: 'Cette transformation est magnifique ! J\'adore comment l\'espace a été repensé.',
+            date: new Date(Date.now() - 86400000 * 2).toISOString() // 2 days ago
+          },
+          {
+            id: '2',
+            author: 'Jean Martin',
+            text: 'Très belle vision pour notre église. J\'espère que ce projet pourra se réaliser !',
+            date: new Date(Date.now() - 86400000).toISOString() // 1 day ago
+          }
+        ]
+      });
+    }
+    
+    return {
+      transformations,
+      totalCount,
+      hasMore: endIndex < totalCount
+    };
+  } catch (error) {
+    console.error('Error fetching transformations:', error);
+    return {
+      transformations: [],
+      totalCount: 0,
+      hasMore: false
+    };
   }
 };
 

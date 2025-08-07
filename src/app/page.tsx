@@ -145,41 +145,58 @@ const HomePage = () => {
           </div>
 
           {/* Notre Demande Cards */}
-          <div className="mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 text-center mb-6">
-              Notre Demande
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-2xl">🌙</span>
+          <div className="mb-12 relative">
+            {/* Decorative elements */}
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-blue-500 h-1 w-32 rounded-full"></div>
+            
+            {/* Main container with gradient background */}
+            <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 rounded-2xl shadow-lg p-8 border border-blue-100">
+              <h3 className="text-3xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-green-700 to-blue-700">
+                Notre Demande
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Card 1 */}
+                <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-blue-400">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto transform hover:rotate-12 transition-transform">
+                    <span className="text-3xl">🌙</span>
+                  </div>
+                  <h4 className="font-bold text-gray-900 mb-2 text-center text-xl">
+                    Limitation nocturne
+                  </h4>
+                  <p className="text-gray-600 text-center font-medium">(22h-9h)</p>
                 </div>
-                <h4 className="font-bold text-gray-900 mb-2">
-                  Limitation nocturne
-                </h4>
-                <p className="text-gray-600">(22h-9h)</p>
-              </div>
 
-              <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-2xl">🔊</span>
+                {/* Card 2 */}
+                <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-orange-400">
+                  <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 mx-auto transform hover:rotate-12 transition-transform">
+                    <span className="text-3xl">🔊</span>
+                  </div>
+                  <h4 className="font-bold text-gray-900 mb-2 text-center text-xl">
+                    Réduction de l'intensité sonore et la durée des sonneries
+                  </h4>
+                  <p className="text-gray-600 text-center font-medium">à 2 minutes</p>
                 </div>
-                <h4 className="font-bold text-gray-900 mb-2">
-                  Réduction de l'intensité sonore et la durée des sonneries
-                </h4>
-                <p className="text-gray-600">à 2 minutes</p>
-              </div>
 
-              <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-2xl">🤝</span>
+                {/* Card 3 */}
+                <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-green-400">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 mx-auto transform hover:rotate-12 transition-transform">
+                    <span className="text-3xl">🤝</span>
+                  </div>
+                  <h4 className="font-bold text-gray-900 mb-2 text-center text-xl">
+                    Dialogue municipalité/citoyens
+                  </h4>
+                  <p className="text-gray-600 text-center font-medium">
+                    Concertation et solutions équilibrées
+                  </p>
                 </div>
-                <h4 className="font-bold text-gray-900 mb-2">
-                  Dialogue municipalité/citoyens
-                </h4>
-                <p className="text-gray-600">
-                  Concertation et solutions équilibrées
-                </p>
+              </div>
+              
+              {/* Bottom decorative element */}
+              <div className="mt-8 text-center">
+                <span className="inline-block px-4 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-100">
+                  respectable
+                </span>
               </div>
             </div>
           </div>

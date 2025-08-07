@@ -8,6 +8,7 @@ import { Badge, badgeVariants } from '@/components/ui/badge';
 import Header from '@/components/Header';
 import ChurchTransformation from '@/components/ChurchTransformation';
 import { StabilityBalance } from '@/components/StabilityBalance';
+import TransformationGallery from '@/components/TransformationGallery';
 
 interface TransformationStats {
   totalGenerations: number;
@@ -145,10 +146,39 @@ const TransformationsPage = () => {
         </div>
       </section>
 
+
       {/* Studio de Transformation */}
       <section id="transformation-studio" className="py-16 md:px-4">
         <div className="max-w-7xl mx-auto">
           <ChurchTransformation />
+        </div>
+      </section>
+      {/* Transformation Gallery Section */}
+      <section id="gallery" className="py-16 md:px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Galerie des Transformations
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Découvrez toutes les transformations générées par notre communauté.
+            </p>
+            <div className="mt-6">
+              <Link
+                href="/gallery"
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+              >
+                <Sparkles className="h-5 w-5 mr-2" />
+                Voir la Galerie Complète
+              </Link>
+            </div>
+          </div>
+          
+          <div className="text-center py-8">
+            <p className="text-lg text-gray-700">
+              Visitez notre <Link href="/gallery" className="text-blue-600 hover:text-blue-800 font-medium">galerie complète</Link> pour explorer toutes les transformations.
+            </p>
+          </div>
         </div>
       </section>
 
