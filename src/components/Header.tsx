@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Sparkles, Menu, X } from 'lucide-react';
+import { Bell, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 const Header = () => {
@@ -18,39 +18,21 @@ const Header = () => {
         className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
         onClick={() => setIsMenuOpen(false)}
       >
-        Signer
+        Signer la Pétition
       </a>
       <Link
         href="/contexte"
         className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
         onClick={() => setIsMenuOpen(false)}
       >
-        Contexte
+        Le Problème
       </Link>
       <Link
-        href="/vision"
+        href="/mentions-legales"
         className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
         onClick={() => setIsMenuOpen(false)}
       >
-        Notre Vision
-      </Link>
-      <Link
-        href="/philosophie"
-        className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
-        onClick={() => setIsMenuOpen(false)}
-      >
-        Philosophie
-      </Link>
-      <Link
-        href="/transformations"
-        className="relative text-purple-600 hover:text-purple-700 transition-colors font-medium flex items-center py-2 md:py-0"
-        onClick={() => setIsMenuOpen(false)}
-      >
-        <Sparkles className="h-4 w-4 mr-1" />
-        Transformations IA
-        <span className="absolute -top-1 -right-4 md:top-auto md:right-auto md:relative md:-top-5 md:-right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-2 py-1 rounded-full font-bold">
-          NEW
-        </span>
+        Mentions Légales
       </Link>
     </>
   );
@@ -59,8 +41,9 @@ const Header = () => {
     <header className="bg-white shadow-sm border-b sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <Link href="/" className="text-xl font-bold text-green-700">
-            Pétition Citoyenne
+          <Link href="/" className="flex items-center text-xl font-bold text-green-700">
+            <Bell className="h-6 w-6 mr-2" />
+            Cloches d'Auray
           </Link>
           {/* Desktop Navigation */}
           <nav className="hidden md:flex md:space-x-6 text-sm">

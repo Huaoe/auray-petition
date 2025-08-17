@@ -3,15 +3,6 @@ import { addSignature, getPetitionStats, checkEmailExists } from '@/lib/googleSh
 import { validateEmail, validatePostalCode } from '@/lib/utils';
 import { checkRateLimit } from '@/lib/rate-limiter';
 import { analytics } from '@/lib/analytics';
-import {
-  createCoupon,
-  createSmartCoupon,
-  storeEnhancedCoupon,
-  validateReferralCode,
-  recordReferral,
-  awardReferralBonus,
-  type SignatureEngagementData
-} from '@/lib/coupon-system';
 
 // Fonction pour valider le token reCAPTCHA
 async function validateRecaptcha(token: string): Promise<boolean> {
@@ -83,128 +74,97 @@ export async function POST(request: NextRequest) {
     const { limited, message } = checkRateLimit(ipAddress);
     if (limited) {
       analytics.error('rate_limit_exceeded', ipAddress);
-      return NextResponse.json({ error: message }, { status: 429 });
+      return NextResponse.json(
+        { error: message },
+        { status: 429 }
+      );
     }
   }
 
   try {
     const body = await request.json();
-    
-    // Validation des données - nouvelle structure
-    const {
-      firstName,
-      lastName,
-      email,
-      city,
-      postalCode,
-      comment,
-      rgpdConsent,
+    const { 
+      firstName, 
+      lastName, 
+      email, 
+      city, 
+      postalCode, 
+      comment, 
+      rgpdConsent, 
       newsletterConsent,
-      referralCode,
+      recaptchaToken,
       timestamp,
-      userAgent,
-      recaptchaToken
+      userAgent
     } = body;
-    
-    // Validation reCAPTCHA obligatoire
-    if (!recaptchaToken) {
-      analytics.error('recaptcha_missing', 'Token de sécurité manquant');
+
+    // Validation des champs obligatoires
+    if (!firstName || !lastName || !email || !city || !postalCode) {
+      analytics.error('missing_required_fields', 'signature_form');
       return NextResponse.json(
-        { error: 'Token de sécurité manquant' },
+        { error: 'Tous les champs obligatoires doivent être remplis' },
+        { status: 400 }
+      );
+    }
+
+    // Validation du consentement RGPD
+    if (!rgpdConsent) {
+      analytics.error('rgpd_consent_required', 'signature_form');
+      return NextResponse.json(
+        { error: 'Le consentement RGPD est obligatoire' },
+        { status: 400 }
+      );
+    }
+
+    // Validation de l'email
+    if (!validateEmail(email)) {
+      analytics.error('invalid_email', email);
+      return NextResponse.json(
+        { error: 'Format d\'email invalide' },
+        { status: 400 }
+      );
+    }
+
+    // Validation du code postal
+    if (!validatePostalCode(postalCode)) {
+      analytics.error('invalid_postal_code', postalCode);
+      return NextResponse.json(
+        { error: 'Format de code postal invalide' },
+        { status: 400 }
+      );
+    }
+
+    // Validation reCAPTCHA
+    if (!recaptchaToken) {
+      analytics.error('missing_recaptcha', 'signature_form');
+      return NextResponse.json(
+        { error: 'Token reCAPTCHA manquant' },
         { status: 400 }
       );
     }
 
     const isRecaptchaValid = await validateRecaptcha(recaptchaToken);
     if (!isRecaptchaValid) {
-      analytics.signatureSent(false);
+      analytics.error('invalid_recaptcha', 'signature_form');
       return NextResponse.json(
-        { error: 'Échec de la vérification anti-spam. Veuillez réessayer.' },
-        { status: 400 }
-      );
-    }
-    
-    // Vérifications de longueur et de contenu
-    if (firstName?.trim().length > 50 || lastName?.trim().length > 50 || city?.trim().length > 50) {
-      analytics.error('validation_error', 'Champs > 50 caractères');
-      return NextResponse.json(
-        { error: 'Les champs nom, prénom et ville ne peuvent pas dépasser 50 caractères.' },
+        { error: 'Validation reCAPTCHA échouée' },
         { status: 400 }
       );
     }
 
-    if (comment?.trim().length > 500) {
-      analytics.error('validation_error', 'Commentaire > 500 caractères');
+    // Vérifier si l'email existe déjà
+    const emailExists = await checkEmailExists(email.trim().toLowerCase());
+    if (emailExists) {
+      analytics.error('duplicate_email', email);
       return NextResponse.json(
-        { error: 'Le commentaire ne peut pas dépasser 500 caractères.' },
-        { status: 400 }
-      );
-    }
-
-    // Vérifications obligatoires
-    if (!firstName?.trim() || !lastName?.trim() || !email?.trim() || !city?.trim() || !postalCode?.trim()) {
-      analytics.error('validation_error', 'Champs obligatoires manquants');
-      return NextResponse.json(
-        { error: 'Tous les champs obligatoires doivent être renseignés' },
-        { status: 400 }
+        {
+          error: 'Cette adresse email a déjà été utilisée pour signer la pétition.',
+          details: 'Si vous pensez qu\'il s\'agit d\'une erreur, veuillez nous contacter.'
+        },
+        { status: 409 }
       );
     }
     
-    if (!rgpdConsent) {
-      analytics.error('validation_error', 'Consentement RGPD manquant');
-      return NextResponse.json(
-        { error: 'Le consentement RGPD est obligatoire pour signer la pétition' },
-        { status: 400 }
-      );
-    }
-    
-    // Validation format email
-    if (!validateEmail(email)) {
-      analytics.error('validation_error', 'Format email invalide');
-      return NextResponse.json(
-        { error: 'Format d\'email invalide' },
-        { status: 400 }
-      );
-    }
-    
-    // Validation code postal français
-    if (!validatePostalCode(postalCode)) {
-      analytics.error('validation_error', 'Code postal invalide');
-      return NextResponse.json(
-        { error: 'Code postal invalide (format français requis)' },
-        { status: 400 }
-      );
-    }
-    
-    // Validation du code de parrainage si fourni
-    let referralValidation = null;
-    if (referralCode?.trim()) {
-      referralValidation = validateReferralCode(referralCode.trim(), email.trim().toLowerCase());
-      if (!referralValidation.valid) {
-        analytics.error('referral_validation_error', referralValidation.error || 'Code de parrainage invalide');
-        return NextResponse.json(
-          { error: referralValidation.error || 'Code de parrainage invalide' },
-          { status: 400 }
-        );
-      }
-    }
-    
-    // Vérification des doublons d'email (uniquement en production)
-    if (process.env.NODE_ENV === 'production') {
-      const duplicateCheck = await checkEmailExists(email.trim().toLowerCase());
-      if (duplicateCheck.exists) {
-        analytics.error('duplicate_email', `Email déjà utilisé: ${email}`);
-        return NextResponse.json(
-          {
-            error: 'Cette adresse email a déjà été utilisée pour signer la pétition.',
-            details: 'Si vous pensez qu\'il s\'agit d\'une erreur, veuillez nous contacter.'
-          },
-          { status: 409 } // Conflict status code
-        );
-      }
-    }
-    
-    // Préparer la signature avec la nouvelle structure
+    // Préparer la signature
     const signature = {
       firstName: firstName.trim(),
       lastName: lastName.trim(),
@@ -214,7 +174,7 @@ export async function POST(request: NextRequest) {
       comment: comment?.trim() || '',
       rgpdConsent: Boolean(rgpdConsent),
       newsletterConsent: Boolean(newsletterConsent),
-      referralCode: referralCode?.trim() || '',
+      referralCode: '', // Vide pour la version pétition simple
       ipAddress,
       userAgent: userAgent || 'unknown',
       timestamp: timestamp || new Date().toISOString()
@@ -234,57 +194,15 @@ export async function POST(request: NextRequest) {
     // Récupérer les nouvelles statistiques après ajout
     const updatedStats = await getPetitionStats();
     
-    // Enregistrer le parrainage si un code valide a été utilisé
-    if (referralValidation && referralValidation.valid && referralCode?.trim()) {
-      const trimmedReferralCode = referralCode.trim();
-      const trimmedEmail = email.trim().toLowerCase();
-      
-      // Enregistrer le parrainage
-      recordReferral(trimmedReferralCode, trimmedEmail);
-      
-      // Attribuer le bonus au parrain
-      if (referralValidation.referrer) {
-        awardReferralBonus(referralValidation.referrer, trimmedEmail);
-        
-        // Tracking analytics détaillé
-        analytics.referral.codeUsed(trimmedReferralCode, referralValidation.referrer, trimmedEmail);
-        analytics.referral.bonusAwarded(referralValidation.referrer, 1);
-        analytics.referral.conversionCompleted(trimmedReferralCode, referralValidation.referrer, 1);
-        
-        console.log(`Parrainage réussi: ${referralValidation.referrer} -> ${trimmedEmail} (code: ${trimmedReferralCode})`);
-      }
-    }
-    
-    // GÉNÉRER UN COUPON INTELLIGENT AVEC SUPPORT DES PARRAINAGES
-    const engagementData: SignatureEngagementData = {
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      email: email.trim().toLowerCase(),
-      city: city.trim(),
-      postalCode: postalCode.trim(),
-      comment: comment?.trim(),
-      newsletterConsent: Boolean(newsletterConsent),
-      hasSocialShare: false, // Sera mis à jour si l'utilisateur partage
-      socialShares: 0,
-      referrals: 0,
-      referralCode: referralCode?.trim()
-    };
-    
-    const aiCoupon = createSmartCoupon(email.trim().toLowerCase(), engagementData);
-    storeEnhancedCoupon(aiCoupon);
-    
-    console.log(`Coupon IA généré pour ${email}: ${aiCoupon.code} (${aiCoupon.totalGenerations} générations, niveau ${aiCoupon.level})`);
-    
     analytics.signatureSent(true);
-    // Réponse de succès avec statistiques mises à jour + coupon IA
+    
+    // Réponse de succès simple
     return NextResponse.json(
       {
         success: true,
         message: 'Signature enregistrée avec succès',
         statistics: updatedStats,
-        timestamp: new Date().toISOString(),
-        // Nouveau: Retourner l'objet coupon complet
-        aiCoupon: aiCoupon
+        timestamp: new Date().toISOString()
       },
       { status: 201 }
     );

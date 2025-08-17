@@ -43,18 +43,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { analytics } from "@/lib/analytics";
-import {
-  createSmartCoupon,
-  storeEnhancedCoupon,
-  calculateEngagementScore,
-  getEngagementLevel,
-  getEngagementLevelDetails,
-  validateReferralCode,
-  recordReferral,
-  type CouponData,
-  type EnhancedCouponData,
-  type SignatureEngagementData,
-} from "@/lib/coupon-system";
+
 import Link from "next/link";
 import {
   Form,
