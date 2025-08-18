@@ -119,9 +119,10 @@ export const checkEmailExists = async (email: string): Promise<{ exists: boolean
     const sheets = await getGoogleSheetsClient();
     
     // Récupérer toutes les signatures pour vérifier les doublons
+    const range = formatSheetRange(SHEET_NAME, 'A:L');
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: `'${SHEET_NAME}'!A:L`,
+      range: range,
     });
 
     const rows = response.data.values || [];

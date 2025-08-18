@@ -152,8 +152,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Vérifier si l'email existe déjà
-    const emailExists = await checkEmailExists(email.trim().toLowerCase());
-    if (emailExists) {
+    console.log('🔍 Vérification email:', email.trim().toLowerCase());
+    const emailCheck = await checkEmailExists(email.trim().toLowerCase());
+    console.log('📊 Résultat vérification:', emailCheck);
+    if (emailCheck.exists) {
       analytics.error('duplicate_email', email);
       return NextResponse.json(
         {

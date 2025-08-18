@@ -40,6 +40,7 @@ import {
   Users,
   Shield,
   Sparkles,
+  Share2,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { analytics } from "@/lib/analytics";
@@ -434,90 +435,36 @@ export const SignatureForm = ({
                 Votre signature a été enregistrée avec succès.
               </p>
 
-              <div className="flex items-center justify-center gap-2 my-2">
-                <Link href="/transformations">
-                  <Button
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center gap-2 animate-pulse-glow"
-                    size="lg"
-                  >
-                    <Sparkles className="h-5 w-5" />
-                    Accéder au module IA
-                  </Button>
-                </Link>
-              </div>
-
-              {generatedCoupon && (
-                <div className="mt-4 text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200 rounded-lg">
-                  {/* Affichage du niveau d'engagement pour les coupons avancés */}
-                  {"referralBonuses" in generatedCoupon && (
-                    <div className="mb-3 flex items-center justify-center gap-2">
-                      <span className="text-2xl">
-                        {generatedCoupon.level === "BASIC" && "🌱"}
-                        {generatedCoupon.level === "ENGAGED" && "💙"}
-                        {generatedCoupon.level === "PASSIONATE" && "💜"}
-                        {generatedCoupon.level === "CHAMPION" && "👑"}
-                      </span>
-                      <div className="text-center">
-                        <p className="font-bold text-blue-800">
-                          Niveau {generatedCoupon.level}
-                        </p>
-                        <p className="text-xs text-gray-600">
-                          Score d'engagement: {generatedCoupon.engagement.score}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  <p className="font-semibold text-blue-800">
-                    🎉 Votre coupon pour {generatedCoupon.totalGenerations}{" "}
-                    générations IA gratuites :
-                  </p>
-                  <div className="flex items-center justify-center gap-2 my-2">
-                    <code className="text-lg font-bold bg-blue-100 text-blue-900 px-3 py-1 rounded">
-                      {generatedCoupon.code}
-                    </code>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        navigator.clipboard.writeText(generatedCoupon.code);
-                        toast({
-                          title: "Copié !",
-                          description:
-                            "Le code du coupon a été copié dans le presse-papiers.",
-                        });
-                      }}
-                    >
-                      Copier
-                    </Button>
-                  </div>
-
-                  {/* Détails d'engagement pour les coupons avancés */}
-                  {"referralBonuses" in generatedCoupon && (
-                    <div className="mt-3 text-xs text-gray-600">
-                      <p>
-                        📝 Commentaire:{" "}
-                        {generatedCoupon.engagement.details.comment ? "✓" : "✗"}{" "}
-                        | 📧 Newsletter:{" "}
-                        {generatedCoupon.engagement.details.newsletter
-                          ? "✓"
-                          : "✗"}{" "}
-                        | 🎁 Bonus parrainage: +
-                        {generatedCoupon.referralBonuses} | 🌟 Score:{" "}
-                        {generatedCoupon.engagement.score}
-                      </p>
-                    </div>
-                  )}
-
-                  <p className="text-xs text-blue-700 mt-2">
-                    Utilisez ce code dans le module de transformation IA.
-                  </p>
-                </div>
-              )}
-
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
                 <Button onClick={handleResetForm} variant="outline">
                   Signer à nouveau
+                </Button>
+                <Button
+                  onClick={() => {
+                    const shareText = "J'ai signé la pétition pour réguler les sonneries de cloches à Auray ! Rejoignez-moi pour une coexistence respectueuse. 🔔🏠";
+                    const shareUrl = window.location.origin;
+                    
+                    if (navigator.share) {
+                      navigator.share({
+                        title: "Pétition Auray - Régulation des Cloches",
+                        text: shareText,
+                        url: shareUrl,
+                      });
+                    } else {
+                      // Fallback: copier dans le presse-papiers
+                      const textToCopy = `${shareText} ${shareUrl}`;
+                      navigator.clipboard.writeText(textToCopy).then(() => {
+                        toast({
+                          title: "Lien copié !",
+                          description: "Le lien de partage a été copié dans le presse-papiers.",
+                        });
+                      });
+                    }
+                  }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                >
+                  <Share2 className="h-4 w-4 mr-2" />
+                  Partager
                 </Button>
               </div>
             </motion.div>

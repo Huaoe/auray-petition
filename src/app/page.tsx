@@ -150,12 +150,12 @@ const HomePage = () => {
             {/* Statistiques principales */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100">
-                <div className="text-4xl font-bold text-red-600 mb-2">56%</div>
+                <div className="text-4xl font-bold text-green-600 mb-2">56%</div>
                 <p className="text-lg font-semibold text-gray-800 mb-1">Non-croyants/Athées</p>
                 <p className="text-sm text-gray-500">Eurobaromètre 2024</p>
               </div>
               <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100">
-                <div className="text-4xl font-bold text-green-600 mb-2">29%</div>
+                <div className="text-4xl font-bold text-purple-600 mb-2">29%</div>
                 <p className="text-lg font-semibold text-gray-800 mb-1">Catholiques</p>
                 <p className="text-lg font-semibold text-red-600">dont 1,5% messe hebdomadaire</p>
               </div>
@@ -174,12 +174,12 @@ const HomePage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-3">
                   <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium text-gray-700">🔴 Non-croyants/Athées</span>
-                    <span className="font-bold text-red-600">56%</span>
+                    <span className="font-medium text-gray-700">🟢 Non-croyants/Athées</span>
+                    <span className="font-bold text-green-600">56%</span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                     <span className="font-medium text-gray-700">✝️ Catholiques</span>
-                    <span className="font-bold text-green-600">29%</span>
+                    <span className="font-bold text-purple-600">29%</span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                     <span className="font-medium text-gray-700">☪️ Musulmans</span>
@@ -197,7 +197,7 @@ const HomePage = () => {
                   </div>
                   <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                     <span className="font-medium text-gray-700">🕉️ Autres religions</span>
-                    <span className="font-bold text-orange-600">2,3%</span>
+                    <span className="font-bold text-indigo-600">2,3%</span>
                   </div>
                 </div>
               </div>
@@ -249,12 +249,12 @@ const HomePage = () => {
                   <span>Respect de la tradition religieuse</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✓</span>
-                  <span>Horaires raisonnables : 9h-22h</span>
+                  <span className="text-green-500 mr-2 font-bold">✓</span>
+                  <span>Horaires raisonnables : <strong>9h-21h</strong></span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✓</span>
-                  <span>Durée réduite : maximum 2 minutes</span>
+                  <span className="text-green-500 mr-2 font-bold">✓</span>
+                  <span>Durée réduite : <strong>maximum 2 minutes</strong></span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
@@ -275,12 +275,12 @@ const HomePage = () => {
                   La Loi de 1905 : Un Cadre Centenaire
                 </h4>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  La loi de séparation des Églises et de l'État, adoptée il y a
-                  plus de 118 ans, établit la liberté de conscience tout en
+                  La loi de séparation des Églises et de l'État, <strong>adoptée il y a
+                  plus de 118 ans</strong>, établit la liberté de conscience tout en
                   garantissant le libre exercice des cultes.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  <strong>Cependant</strong>, les réalités urbaines,
+                  Cependant, les réalités urbaines,
                   démographiques et sociales de 2025 nécessitent une adaptation
                   respectueuse de ces principes.
                 </p>
@@ -290,7 +290,7 @@ const HomePage = () => {
                   Modernisation Respectueuse
                 </h4>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Avec 51% de Français sans religion déclarée et une diversité
+                  Avec 56% de Français sans religion déclarée et une diversité
                   croissante, l'espace public doit concilier toutes les
                   sensibilités.
                 </p>
