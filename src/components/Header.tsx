@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Bell, Menu, X } from 'lucide-react';
+import { Bell, Menu, X, QrCode } from 'lucide-react';
 import { useState } from 'react';
 
 const Header = () => {
@@ -20,6 +20,15 @@ const Header = () => {
       >
         Signer la Pétition
       </a>
+      
+      <Link
+        href="/carte-visite"
+        className="text-gray-600 hover:text-green-700 transition-colors flex items-center gap-1 py-2 md:py-0"
+        onClick={() => setIsMenuOpen(false)}
+      >
+        <QrCode className="w-4 h-4" />
+        Cartes QR
+      </Link>
      
       <Link
         href="/mentions-legales"

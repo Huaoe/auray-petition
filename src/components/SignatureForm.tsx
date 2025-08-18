@@ -9,15 +9,6 @@ import dynamic from "next/dynamic";
 import type ReaptchaProps from "reaptcha";
 import type { ForwardedRef } from "react";
 
-// FIX: Dynamically import ReCAPTCHA with SSR disabled to prevent build errors
-// FIX: Explicitly resolve the default export to fix dynamic import type error
-// FIX: Cast the dynamic component to a type that accepts a ref
-// const Reaptcha = dynamic(
-//   () => import('reaptcha').then((mod) => mod.default as any), // Cast to any to bypass intermediate type checks
-//   {
-//     ssr: false,
-//   },
-// ) as React.ComponentType<ReaptchaProps & { ref: ForwardedRef<any> }>;
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -143,9 +134,6 @@ export const SignatureForm = ({
     "idle" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [generatedCoupon, setGeneratedCoupon] = useState<
-    CouponData | EnhancedCouponData | null
-  >(null);
   const recaptchaRef = useRef(null);
 
   const form = useForm<SignatureFormData>({
@@ -180,7 +168,6 @@ export const SignatureForm = ({
     setIsSubmitting(false);
     setSubmitStatus("idle");
     setErrorMessage("");
-    setGeneratedCoupon(null);
     setReferralValidation(null);
   };
 
@@ -191,19 +178,6 @@ export const SignatureForm = ({
       return;
     }
 
-    const validation = validateReferralCode(value, form.getValues("email"));
-    if (validation.valid) {
-      setReferralValidation({
-        isValid: true,
-        message: `Code valide - Parrain: ${validation.referrer}`,
-        referrer: validation.referrer,
-      });
-    } else {
-      setReferralValidation({
-        isValid: false,
-        message: validation.error || "Code invalide",
-      });
-    }
   };
 
   const handleApiSubmit = async (
@@ -237,54 +211,7 @@ export const SignatureForm = ({
       analytics.signatureSent(true);
 
       setSubmitStatus("success");
-
-      // Créer un coupon intelligent basé sur l'engagement
-      if (result.aiCoupon) {
-        // Préparer les données d'engagement
-        const engagementData: SignatureEngagementData = {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          city: data.city,
-          postalCode: data.postalCode,
-          comment: data.comment,
-          newsletterConsent: data.newsletterConsent,
-          hasSocialShare: false, // Sera mis à jour si l'utilisateur partage
-          socialShares: 0, // TODO: Intégrer le tracking des partages
-          referrals: 0, // TODO: Intégrer le système de parrainage
-          referralCode: data.referralCode,
-        };
-
-        // Créer le coupon intelligent
-        const smartCoupon = createSmartCoupon(data.email, engagementData);
-
-        // Stocker le coupon avancé
-        storeEnhancedCoupon(smartCoupon);
-        setGeneratedCoupon(smartCoupon);
-
-        // Log des détails d'engagement (dev uniquement)
-        if (process.env.NODE_ENV === "development") {
-          console.log("🎯 Coupon intelligent créé:", {
-            score: smartCoupon.engagement.score,
-            level: smartCoupon.level,
-            generations: smartCoupon.totalGenerations,
-            referralBonuses: smartCoupon.referralBonuses,
-          });
-        }
-      }
-
-      // Réinitialiser le formulaire après succès
       reset();
-
-      // Callback de succès si fourni
-      if (onSuccess) {
-        onSuccess(result);
-      }
-
-      // Mettre à jour le compteur si callback fourni
-      if (onSignatureCount && result.statistics?.totalSignatures) {
-        onSignatureCount(result.statistics.totalSignatures);
-      }
     } catch (error) {
       // Erreur - Analytics
       analytics.signatureSent(false);

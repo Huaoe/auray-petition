@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import SignatureForm from "@/components/SignatureForm";
-import { Clock, Users, MapPin } from "lucide-react";
+import { Clock, Users, MapPin, QrCode, Share2, Printer } from "lucide-react";
 import Header from "@/components/Header";
 import { RealTimeSignatureCounter } from "@/components/RealTimeSignatureCounter";
 import { AnimatedGradient } from "@/components/ui/animated-gradient";
+import Link from "next/link";
 
 interface Statistics {
   totalSignatures: number;
@@ -451,6 +452,63 @@ const HomePage = () => {
           </div>
 
           <SignatureForm onSuccess={handleSignatureSuccess} />
+        </div>
+      </section>
+
+      {/* QR Business Card Section */}
+      <section className="py-16 px-4 bg-gradient-to-r from-purple-600 to-blue-600">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="flex justify-center mb-6">
+            <div className="bg-white/20 backdrop-blur-sm rounded-full p-4">
+              <QrCode className="w-12 h-12 text-white" />
+            </div>
+          </div>
+          
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Mobilisez votre entourage !
+          </h2>
+          <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
+            Créez des cartes de visite avec QR code pour partager facilement la pétition 
+            avec vos amis, famille et collègues.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+              <QrCode className="w-8 h-8 text-white mx-auto mb-3" />
+              <h3 className="font-semibold text-white mb-2">Générez</h3>
+              <p className="text-purple-100 text-sm">
+                Créez vos cartes personnalisées avec QR code
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+              <Printer className="w-8 h-8 text-white mx-auto mb-3" />
+              <h3 className="font-semibold text-white mb-2">Imprimez</h3>
+              <p className="text-purple-100 text-sm">
+                8 cartes par feuille A4, prêtes à découper
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+              <Share2 className="w-8 h-8 text-white mx-auto mb-3" />
+              <h3 className="font-semibold text-white mb-2">Partagez</h3>
+              <p className="text-purple-100 text-sm">
+                Distribuez et multipliez l'impact de votre signature
+              </p>
+            </div>
+          </div>
+          
+          <Link
+            href="/carte-visite"
+            className="inline-flex items-center gap-3 bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-purple-50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <QrCode className="w-6 h-6" />
+            Créer mes cartes QR
+          </Link>
+          
+          <p className="text-purple-200 text-sm mt-4">
+            Gratuit • Impression facile • Impact maximum
+          </p>
         </div>
       </section>
 
