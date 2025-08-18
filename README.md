@@ -3,7 +3,7 @@
 > **Plateforme digitale révolutionnaire** pour une meilleure cohabitation entre tradition et tranquillité publique
 
 <div align="center" style="margin: 1.5em 0;">
- <img src="./public/vercelProdQR.png" alt="prodQR" title="for mobile instant openning"/>
+ <img src="./public/L6CvFd.svg" alt="prodQR" title="for mobile instant openning"/>
 </div>
 <div align="center" style="margin: 1.5em 0;">
   <a href="https://auray-petition.vercel.app/" target="_blank" rel="noopener noreferrer">
