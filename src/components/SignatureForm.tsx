@@ -662,47 +662,6 @@ export const SignatureForm = ({
                   )}
                 />
 
-                {/* Code de parrainage */}
-                <FormField
-                  control={control}
-                  name="referralCode"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Code de parrainage (optionnel)</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Entrez un code de parrainage"
-                          maxLength={6}
-                          {...field}
-                          onChange={(e) => {
-                            const value = e.target.value.toUpperCase();
-                            field.onChange(value);
-                            handleReferralCodeChange(value);
-                          }}
-                          onFocus={() => handleFieldFocus("referralCode")}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                      {referralValidation && (
-                        <div
-                          className={`text-xs mt-1 ${
-                            referralValidation.isValid
-                              ? "text-green-600"
-                              : "text-red-600"
-                          }`}
-                        >
-                          {referralValidation.isValid ? "✓" : "✗"}{" "}
-                          {referralValidation.message}
-                        </div>
-                      )}
-                      <div className="text-xs text-gray-500 mt-1">
-                        Si quelqu'un vous a partagé un code, saisissez-le ici
-                        pour obtenir des bonus
-                      </div>
-                    </FormItem>
-                  )}
-                />
-
                 {/* Checkboxes RGPD et Newsletter */}
                 <div className="flex flex-col gap-4">
                   <FormField

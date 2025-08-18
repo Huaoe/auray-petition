@@ -20,13 +20,7 @@ const Header = () => {
       >
         Signer la Pétition
       </a>
-      <Link
-        href="/contexte"
-        className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
-        onClick={() => setIsMenuOpen(false)}
-      >
-        Le Problème
-      </Link>
+     
       <Link
         href="/mentions-legales"
         className="text-gray-600 hover:text-green-700 transition-colors block py-2 md:py-0"
@@ -42,7 +36,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center text-xl font-bold text-green-700">
-            <Bell className="h-6 w-6 mr-2" />
+            <img src="/icons/logo.png" alt="Logo" className="h-8 w-8" />
             Cloches d'Auray
           </Link>
           {/* Desktop Navigation */}

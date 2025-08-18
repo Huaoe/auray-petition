@@ -22,13 +22,15 @@ export const RealTimeSignatureCounter = ({
   initialStats = { totalSignatures: 0, daysActive: 1, approvalRate: 0 },
   updateInterval = 30000, // 30 seconds
   showTrend = true,
-  compact = false
+  compact = false,
 }: RealTimeSignatureCounterProps) => {
   const [stats, setStats] = useState<Statistics>(initialStats);
-  const [previousCount, setPreviousCount] = useState(initialStats.totalSignatures);
+  const [previousCount, setPreviousCount] = useState(
+    initialStats.totalSignatures
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
-  const [trend, setTrend] = useState<'up' | 'down' | 'stable'>('stable');
+  const [trend, setTrend] = useState<"up" | "down" | "stable">("stable");
 
   // Function to fetch latest statistics
   const fetchStats = async () => {
@@ -46,14 +48,14 @@ export const RealTimeSignatureCounter = ({
         const data = await response.json();
         if (data.success && data.statistics) {
           const newStats = data.statistics;
-          
+
           // Calculate trend
           if (newStats.totalSignatures > stats.totalSignatures) {
-            setTrend('up');
+            setTrend("up");
           } else if (newStats.totalSignatures < stats.totalSignatures) {
-            setTrend('down');
+            setTrend("down");
           } else {
-            setTrend('stable');
+            setTrend("stable");
           }
 
           setPreviousCount(stats.totalSignatures);
@@ -82,8 +84,10 @@ export const RealTimeSignatureCounter = ({
   // Calculate time since last update
   const getTimeSinceUpdate = () => {
     const now = new Date();
-    const diffInSeconds = Math.floor((now.getTime() - lastUpdate.getTime()) / 1000);
-    
+    const diffInSeconds = Math.floor(
+      (now.getTime() - lastUpdate.getTime()) / 1000
+    );
+
     if (diffInSeconds < 60) {
       return `${diffInSeconds}s`;
     } else if (diffInSeconds < 3600) {
@@ -101,7 +105,7 @@ export const RealTimeSignatureCounter = ({
           <AnimatedCounter value={stats.totalSignatures} duration={1000} />
         </span>
         <span className="text-sm text-green-600">signatures</span>
-        {showTrend && trend === 'up' && (
+        {showTrend && trend === "up" && (
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -125,22 +129,24 @@ export const RealTimeSignatureCounter = ({
             <Users className="h-5 w-5 text-green-600" />
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900">Signatures en temps réel</h3>
+            <h3 className="font-semibold text-gray-900">
+              Signatures en temps réel
+            </h3>
             <p className="text-sm text-gray-500">Mise à jour automatique</p>
           </div>
         </div>
-        
-        {/* Status indicator */}
-        <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${
-            isLoading ? 'bg-yellow-400 animate-pulse' : 'bg-green-400'
-          }`} />
-          <span className="text-xs text-gray-500">
-            {isLoading ? 'Mise à jour...' : `Il y a ${getTimeSinceUpdate()}`}
-          </span>
-        </div>
       </div>
-
+      {/* Status indicator */}
+      <div className="flex items-center gap-2">
+        <div
+          className={`w-2 h-2 rounded-full ${
+            isLoading ? "bg-yellow-400 animate-pulse" : "bg-green-400"
+          }`}
+        />
+        <span className="text-xs text-gray-500">
+          {isLoading ? "Mise à jour..." : `Il y a ${getTimeSinceUpdate()}`}
+        </span>
+      </div>
       {/* Main counter */}
       <div className="text-center mb-4">
         <div className="text-4xl font-bold text-green-700 mb-2">
@@ -149,7 +155,7 @@ export const RealTimeSignatureCounter = ({
         <div className="text-sm text-gray-600 font-medium">
           Total des signatures
         </div>
-        
+
         {/* Trend indicator */}
         {showTrend && (
           <motion.div
@@ -157,15 +163,16 @@ export const RealTimeSignatureCounter = ({
             animate={{ opacity: 1, y: 0 }}
             className="mt-2 flex items-center justify-center gap-1"
           >
-            {trend === 'up' && (
+            {trend === "up" && (
               <>
                 <TrendingUp className="h-4 w-4 text-green-500" />
                 <span className="text-sm text-green-600 font-medium">
-                  +{stats.totalSignatures - previousCount} depuis la dernière mise à jour
+                  +{stats.totalSignatures - previousCount} depuis la dernière
+                  mise à jour
                 </span>
               </>
             )}
-            {trend === 'stable' && (
+            {trend === "stable" && (
               <span className="text-sm text-gray-500">
                 Aucune nouvelle signature
               </span>
@@ -194,7 +201,9 @@ export const RealTimeSignatureCounter = ({
       <div className="mt-4 pt-3 border-t border-gray-100">
         <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
           <Clock className="h-3 w-3" />
-          <span>Actualisation automatique toutes les {updateInterval / 1000}s</span>
+          <span>
+            Actualisation automatique toutes les {updateInterval / 1000}s
+          </span>
         </div>
       </div>
     </div>

@@ -5,9 +5,18 @@ const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SHEET_SIGN_ID;
 const SHEET_NAME = process.env.SIGNATURE_SHEET_NAME || 'Signatures Pétition Auray';
 
 // Helper function to properly format sheet name for Google Sheets API
-const formatSheetRange = (range: string): string => {
-  // Try using just the range without sheet name for the default sheet
-  return range;
+const formatSheetRange = (sheetName: string, range: string): string => {
+  // If sheet name contains spaces or special characters, we need to escape it properly
+  // For Google Sheets API, we can either:
+  // 1. Use the sheet name in single quotes if it has spaces
+  // 2. Or just use the range without sheet name if it's the first/default sheet
+  
+  // Try without sheet name first (works for the first sheet)
+  if (sheetName === 'Signatures Pétition Auray' || sheetName.includes(' ')) {
+    return range; // Just use A:L without sheet name
+  }
+  
+  return `'${sheetName}'!${range}`;
 };
 
 // Interface pour une signature
@@ -162,9 +171,10 @@ export const getPetitionStats = async (): Promise<PetitionStats> => {
     const sheets = await getGoogleSheetsClient();
     
     // Récupérer toutes les signatures - fix the range format
+    const range = formatSheetRange(SHEET_NAME, 'A:L');
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: formatSheetRange('A:L'),
+      range: range,
     });
 
     const rows = response.data.values || [];
@@ -207,9 +217,10 @@ export const initializeSheet = async (): Promise<{ success: boolean; message?: s
       ['Prénom', 'Nom', 'Email', 'Ville', 'Code Postal', 'Commentaire', 'RGPD', 'Newsletter', 'Code Parrainage', 'Datetime', 'IP', 'User Agent']
     ];
 
+    const range = formatSheetRange(SHEET_NAME, 'A1:L1');
     await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
-      range: formatSheetRange('A1:L1'),
+      range: range,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: headers,
