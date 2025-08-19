@@ -28,9 +28,9 @@ const BusinessCardPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
       <Header />
-
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container  p-0 m-0 sm:mx-auto  sm:px-4 sm:py-8 sm:max-w-4xl">
         {/* Header */}
+fezfez 
         <div className="flex items-center gap-4 mb-8">
           <Link
             href="/"

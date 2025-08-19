@@ -191,12 +191,7 @@ export default function RootLayout({
                 2025 Collectif Citoyen Alréen. Tous droits réservés.
               </p>
               <nav className="mt-4 flex flex-wrap justify-center gap-4 md:mt-0">
-                <Link
-                  href="/contexte"
-                  className="text-sm text-gray-600 hover:text-blue-600 hover:underline dark:text-gray-400 dark:hover:text-blue-500"
-                >
-                  Le Contexte
-                </Link>
+
                 <Link
                   href="/mentions-legales"
                   className="text-sm text-gray-600 hover:text-blue-600 hover:underline dark:text-gray-400 dark:hover:text-blue-500"
@@ -208,12 +203,6 @@ export default function RootLayout({
                   className="text-sm text-gray-600 hover:text-blue-600 hover:underline dark:text-gray-400 dark:hover:text-blue-500"
                 >
                   Politique de Confidentialité
-                </Link>
-                <Link
-                  href="/terms-of-service"
-                  className="text-sm text-gray-600 hover:text-blue-600 hover:underline dark:text-gray-400 dark:hover:text-blue-500"
-                >
-                  Conditions d&apos;Utilisation
                 </Link>
               </nav>
             </div>
