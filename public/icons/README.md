@@ -38,7 +38,7 @@ og-image.png (1200x630)     - Image Open Graph
 ### **Option 1: PWA Asset Generator (Automatique)**
 ```bash
 yarn global add pwa-asset-generator
-pwa-asset-generator logo.png icons/ --background="#003b46" --theme-color="#003b46"
+pwa-asset-generator logo.png icons/ 
 ```
 
 ### **Option 2: Figma/Canva (Manuel)**

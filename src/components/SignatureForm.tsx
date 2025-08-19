@@ -827,8 +827,7 @@ export const SignatureForm = ({
                 </Button>
 
                 <p className="text-xs text-gray-500 text-center">
-                  En signant, vous rejoignez le mouvement pour une régulation
-                  raisonnée des sonneries de cloches à Auray.
+                  En signant, vous rejoignez le mouvement pour la sécularisation des églises surnuméraires et l'application stricte de la laïcité républicaine.
                 </p>
               </motion.form>
             </Form>

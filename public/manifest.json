@@ -1,16 +1,16 @@
 {
-  "name": "Pétition Numérique Auray - Régulation Sonneries de Cloches",
-  "short_name": "Pétition Auray",
-  "description": "Signez la pétition citoyenne pour une régulation raisonnée des sonneries de l'Église Saint-Gildas. Pour un équilibre entre tradition religieuse et tranquillité publique.",
+  "name": "Pétition Laïcité - Sécularisation des Églises Surnuméraires",
+  "short_name": "Laïcité & Sécularisation",
+  "description": "Signez la pétition citoyenne pour la sécularisation des églises surnuméraires. Transformons ces édifices vides en espaces publics utiles pour une République vraiment laïque.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#003b46",
-  "theme_color": "#003b46",
+  "background_color": "#1e40af",
+  "theme_color": "#1e40af",
   "lang": "fr",
   "orientation": "portrait-primary",
   "categories": ["government", "social", "lifestyle"],
   "scope": "/",
-  "id": "auray-petition-app",
+  "id": "secularization-petition-app",
   "dir": "ltr",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "prefer_related_applications": false,
@@ -61,7 +61,7 @@
   "related_applications": [
     {
       "platform": "web",
-      "url": "https://auray-petition.vercel.app/"
+      "url": "https://secularization-petition.vercel.app/"
     }
   ],
 

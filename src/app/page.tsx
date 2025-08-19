@@ -122,13 +122,22 @@ const HomePage = () => {
           {/* Hero Card */}
           <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 text-center">
             <div className="max-w-3xl mx-auto">
+              {/* Logo */}
+              <div className="mb-8">
+                <div className="relative inline-block">
+                  <img
+                    src="/icons/logo.png"
+                    alt="Logo Pétition Laïcité"
+                    className="w-24 h-24 mx-auto rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border-4 border-blue-100"
+                  />
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full opacity-20 blur-sm"></div>
+                </div>
+              </div>
               <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                Pour une Régulation des Sonneries de Cloches à Auray
+                Pour la Sécularisation des Églises Surnuméraires
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                Ensemble, trouvons un équilibre respectueux entre tradition
-                religieuse et qualité de vie. Votre signature compte pour ouvrir
-                le dialogue.
+                40 000+ églises vides financées par nos impôts. Transformons-les en espaces publics utiles : bibliothèques, centres culturels, logements sociaux. Votre signature compte pour une République vraiment laïque.
               </p>
 
               <button
@@ -137,7 +146,7 @@ const HomePage = () => {
                     .getElementById("petition")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="bg-green-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-green-800 transition-colors"
+                className="bg-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-800 transition-colors"
               >
                 Signer la Pétition Maintenant
               </button>
@@ -150,44 +159,44 @@ const HomePage = () => {
             <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-blue-500 h-1 w-32 rounded-full"></div>
             
             {/* Main container with gradient background */}
-            <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 rounded-2xl shadow-lg p-8 border border-blue-100">
-              <h3 className="text-3xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-green-700 to-blue-700">
-                Notre Demande
+            <div className="bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-2xl shadow-lg p-8 border border-blue-100">
+              <h3 className="text-3xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-700">
+                Nos Revendications
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Card 1 */}
                 <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-blue-400">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto transform hover:rotate-12 transition-transform">
-                    <span className="text-3xl">🌙</span>
+                    <span className="text-3xl">🏢</span>
                   </div>
                   <h4 className="font-bold text-gray-900 mb-2 text-center text-xl">
-                    Limitation nocturne
+                    Transformation en espaces publics
                   </h4>
-                  <p className="text-gray-600 text-center font-medium">(22h-9h)</p>
+                  <p className="text-gray-600 text-center font-medium">Bibliothèques, centres culturels</p>
                 </div>
 
                 {/* Card 2 */}
                 <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-orange-400">
-                  <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 mx-auto transform hover:rotate-12 transition-transform">
-                    <span className="text-3xl">🔊</span>
+                  <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center mb-4 mx-auto transform hover:rotate-12 transition-transform">
+                    <span className="text-2xl">2M€</span>
                   </div>
                   <h4 className="font-bold text-gray-900 mb-2 text-center text-xl">
-                    Réduction de l'intensité sonore et la durée des sonneries
+                    Arrêt du financement public
                   </h4>
-                  <p className="text-gray-600 text-center font-medium">à 2 minutes</p>
+                  <p className="text-gray-600 text-center font-medium">2 milliards d'économies annuelles</p>
                 </div>
 
                 {/* Card 3 */}
-                <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-green-400">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 mx-auto transform hover:rotate-12 transition-transform">
-                    <span className="text-3xl">🤝</span>
+                <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-purple-400">
+                  <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto transform hover:rotate-12 transition-transform">
+                    <span className="text-3xl">⚖️</span>
                   </div>
                   <h4 className="font-bold text-gray-900 mb-2 text-center text-xl">
-                    Dialogue municipalité/citoyens
+                    Application stricte de la laïcité
                   </h4>
                   <p className="text-gray-600 text-center font-medium">
-                    Concertation et solutions équilibrées
+                    Séparation Église-État effective
                   </p>
                 </div>
               </div>
@@ -195,7 +204,7 @@ const HomePage = () => {
               {/* Bottom decorative element */}
               <div className="mt-8 text-center">
                 <span className="inline-block px-4 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-100">
-                  respectable
+                  Égalité - Liberté - Laïcité
                 </span>
               </div>
             </div>
@@ -216,28 +225,28 @@ const HomePage = () => {
             className="bg-white rounded-2xl shadow-lg lg:p-8 mb-8"
           >
             <div className="text-center mb-8">
-              <h3 className="text-3xl font-bold rounded-full  text-gray-900 mb-4 flex items-center justify-center gap-3">
+              <div className="mb-4">
                 <img
-                  src="/icons/icons/manifest-icon-192.maskable.png"
-                  alt="Icône pétition"
-                  className="w-32 h-32 rounded-full animate-pulse-glow hover:animate-vibrate transition-all duration-300 cursor-pointer ml-12"
+                  src="/icons/logo.png"
+                  alt="Logo Pétition Laïcité"
+                  className="w-16 h-16 mx-auto rounded-full shadow-md hover:shadow-lg transition-shadow duration-300"
                 />
+              </div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">
                 Signez la Pétition
               </h3>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Votre signature sera transmise au conseil municipal d'Auray et
-                aux autorités compétentes. Ensemble, ouvrons le dialogue pour
-                une solution équilibrée.
+                Votre signature sera transmise aux députés, sénateurs et maires de France. Ensemble, exigeons l'application stricte de la laïcité et la transformation des églises vides en espaces publics utiles.
               </p>
             </div>
 
             <div className="grid lg:grid-cols-4 lg:gap-8">
               {/* Confidentialité Card */}
               <div className="lg:col-span-1">
-                <div className="bg-green-50 rounded-xl p-6 border border-green-100 h-full">
+                <div className="bg-blue-50 rounded-xl p-6 border border-blue-100 h-full">
                   <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                      <span className="text-green-600 text-lg">🔒</span>
+                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                      <span className="text-blue-600 text-lg">🔒</span>
                     </div>
                     <h4 className="ml-3 text-lg font-semibold text-gray-900">
                       Confidentialité

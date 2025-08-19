@@ -17,27 +17,29 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://auray-petition.vercel.app"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://secularization-petition.vercel.app"
   ),
-  title: "Auray Pétition - Régulation des Sonneries de Cloches",
-  description: `Signez la pétition citoyenne pour une régulation raisonnée des sonneries de l'Église Saint-Gildas. Un équilibre entre tradition religieuse et tranquillité publique.`,
+  title: "Pétition Laïcité - Pour une Sécularisation des Églises Surnuméraires",
+  description: `Signez la pétition citoyenne pour la sécularisation des églises surnuméraires. Transformons ces édifices vides en espaces publics utiles : bibliothèques, centres culturels, logements sociaux.`,
   keywords: [
-    "Auray",
+    "laïcité",
+    "sécularisation",
     "pétition",
-    "cloches",
-    "sonneries",
-    "église",
-    "Saint-Gildas",
-    "Alréens",
+    "églises",
+    "patrimoine",
+    "transformation",
+    "espaces publics",
+    "République",
+    "citoyens",
   ],
   authors: [
-    { name: "Citoyens Alréens", url: "mailto:auray.petition@gmail.com" },
+    { name: "Mouvement Laïque Citoyen", url: "mailto:contact@secularisation-petition.org" },
   ],
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Pétition Auray",
+    title: "Sécularisation",
     startupImage: [
       {
         url: "/icons/icons/apple-splash-2048-2732.jpg",
@@ -160,6 +162,10 @@ export default function RootLayout({
           sizes="180x180"
           href="/apple-touch-icon.png"
         />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" href="/favicon.ico" />
         {/* Google Analytics 4 */}
         {GA_TRACKING_ID && (
