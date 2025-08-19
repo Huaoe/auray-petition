@@ -164,7 +164,7 @@ const QRBusinessCard: React.FC<QRBusinessCardProps> = ({
     <div className="bg-white rounded-lg shadow-lg p-0 sm:p-6 border border-gray-200">
       <div className="flex items-center gap-3mb-6">
         <QrCode className="w-6 h-6 text-green-600" />
-        <h3 className="text-xl font-bold text-gray-900">Carte de Visite QR</h3>
+        <h3 className="text-xl font-bold text-gray-900 m-4">Carte de Visite QR</h3>
       </div>
 
       {/* Preview Card */}
@@ -173,7 +173,7 @@ const QRBusinessCard: React.FC<QRBusinessCardProps> = ({
       </div>
 
       {/* Controls */}
-      <div className="flex flex-wrap gap-3 justify-center">
+      <div className="flex flex-wrap gap-3 justify-center mb-6">
         <button
           onClick={handlePrint}
           disabled={isGenerating || !qrCodeDataUrl}
