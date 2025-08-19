@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 
 // Configuration Google Sheets
 const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SHEET_SIGN_ID;
-const SHEET_NAME = process.env.SIGNATURE_SHEET_NAME || 'Signatures Pétition Auray';
+const SHEET_NAME = process.env.SIGNATURE_SHEET_NAME || 'Signatures Pétition Secularisation';
 
 // Helper function to properly format sheet name for Google Sheets API
 const formatSheetRange = (range: string): string => {
