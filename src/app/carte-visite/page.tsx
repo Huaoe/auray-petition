@@ -30,7 +30,6 @@ const BusinessCardPage = () => {
       <Header />
       <div className="container  p-0 m-0 sm:mx-auto  sm:px-4 sm:py-8 sm:max-w-4xl">
         {/* Header */}
-fezfez 
         <div className="flex items-center gap-4 mb-8">
           <Link
             href="/"
