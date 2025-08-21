@@ -45,7 +45,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center text-xl font-bold text-green-700">
-            <img src="/icons/logo.png" alt="Logo" className="h-8 w-8 ml-4" />
+            <img src="/icons/logo.png" alt="Logo" className="h-8 w-8 m-4" />
             Cloches d'Auray
           </Link>
           {/* Desktop Navigation */}
