@@ -1,7 +1,7 @@
 // Auto-generated Service Worker - DO NOT EDIT MANUALLY
-// Generated at: 2025-08-21T11:44:53.055Z
+// Generated at: 2025-08-21T15:43:47.023Z
 const APP_VERSION = "1.0.0";
-const BUILD_TIMESTAMP = 1755776693055;
+const BUILD_TIMESTAMP = 1755791027023;
 const CACHE_NAME = `auray-petition-v${APP_VERSION}-${BUILD_TIMESTAMP}`;
 
 // Cache strategies
