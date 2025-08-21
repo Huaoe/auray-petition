@@ -4,6 +4,7 @@ import Link from "next/link";
 import Script from "next/script";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+import AppUpdateNotification from "@/components/AppUpdateNotification";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -190,6 +191,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="relative z-0 flex min-h-screen flex-col bg-background">
           <Analytics />
+          <AppUpdateNotification />
           <main className="flex-grow">{children}</main>
           <footer className="w-full border-t border-gray-200 bg-gray-50 py-6 dark:border-gray-700 dark:bg-gray-900">
             <div className="container mx-auto flex flex-col items-center justify-between px-4 text-center md:flex-row">
@@ -224,20 +226,48 @@ export default function RootLayout({
               </nav>
             </div>
           </footer>
-          {/* Only register service worker in production */}
+          {/* Enhanced service worker registration */}
           {process.env.NODE_ENV === 'production' && (
             <script
               dangerouslySetInnerHTML={{
                 __html: `
                   if ('serviceWorker' in navigator) {
                     window.addEventListener('load', () => {
-                      navigator.serviceWorker.register('/sw.js')
+                      navigator.serviceWorker.register('/sw.js', {
+                        updateViaCache: 'none'
+                      })
                         .then((registration) => {
                           console.log('🚀 PWA: Service Worker registered successfully:', registration.scope);
+                          
+                          // Check for updates immediately
+                          registration.update();
+                          
+                          // Set up periodic update checks
+                          setInterval(() => {
+                            registration.update();
+                          }, 60000); // Check every minute
+                          
+                          // Listen for waiting service worker
+                          registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            if (newWorker) {
+                              newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                  console.log('🔄 New service worker available');
+                                }
+                              });
+                            }
+                          });
                         })
                         .catch((error) => {
                           console.log('❌ PWA: Service Worker registration failed:', error);
                         });
+                    });
+                    
+                    // Handle service worker updates
+                    navigator.serviceWorker.addEventListener('controllerchange', () => {
+                      console.log('🔄 Service Worker controller changed - reloading page');
+                      window.location.reload();
                     });
                   }
                 `,

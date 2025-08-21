@@ -1,8 +1,16 @@
-// Auto-generated Service Worker - DO NOT EDIT MANUALLY
-// Generated at: 2025-08-21T11:44:53.055Z
-const APP_VERSION = "1.0.0";
-const BUILD_TIMESTAMP = 1755776693055;
-const CACHE_NAME = `auray-petition-v${APP_VERSION}-${BUILD_TIMESTAMP}`;
+const fs = require('fs');
+const path = require('path');
+
+const generateServiceWorker = () => {
+  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  const version = packageJson.version;
+  const buildTimestamp = Date.now();
+
+  const swTemplate = `// Auto-generated Service Worker - DO NOT EDIT MANUALLY
+// Generated at: ${new Date().toISOString()}
+const APP_VERSION = "${version}";
+const BUILD_TIMESTAMP = ${buildTimestamp};
+const CACHE_NAME = \`auray-petition-v\${APP_VERSION}-\${BUILD_TIMESTAMP}\`;
 
 // Cache strategies
 const CACHE_STRATEGIES = {
@@ -132,7 +140,7 @@ self.addEventListener("fetch", (event) => {
   if (
     STATIC_ASSETS.includes(url.pathname) ||
     url.pathname.startsWith("/icons/") ||
-    url.pathname.match(/\.(js|css|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2)$/)
+    url.pathname.match(/\\.(js|css|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2)$/)
   ) {
     event.respondWith(cacheFirstStrategy(request));
     return;
@@ -251,5 +259,17 @@ self.addEventListener("notificationclick", (event) => {
 });
 
 console.log(
-  `🎯 Service Worker Auray Pétition v${APP_VERSION}: Prêt à révolutionner la démocratie !`
+  \`🎯 Service Worker Auray Pétition v\${APP_VERSION}: Prêt à révolutionner la démocratie !\`
 );
+`;
+
+  fs.writeFileSync(path.join('public', 'sw.js'), swTemplate);
+  console.log(`✅ Service Worker generated with version ${version} and timestamp ${buildTimestamp}`);
+};
+
+// Run if called directly
+if (require.main === module) {
+  generateServiceWorker();
+}
+
+module.exports = { generateServiceWorker };

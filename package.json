@@ -12,6 +12,7 @@
   },
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider next dev",
+    "prebuild": "node scripts/generate-sw.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -21,8 +22,9 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "test:sheets": "node scripts/test-google-sheets.js",
-    "debug:env": "node -e \"console.log('ENV Check:', {sheets: !!process.env.GOOGLE_SHEETS_SHEET_ID, openai: !!process.env.OPENAI_API_KEY})\"",
-    "generate:favicon": "node scripts/generate-favicon.js"
+    "debug:env": "node -e \"console.log('ENV Check:', {sheets: !!process.env.GOOGLE_SHEETS_SHEET_ID, recaptcha: !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY})\"",
+    "generate:favicon": "node scripts/generate-favicon.js",
+    "generate:sw": "node scripts/generate-sw.js"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.17.0",
