@@ -76,7 +76,7 @@ const BusinessCardPage = () => {
                   </ul>
                 </div>
                 <p>
-                  <strong>Le paradoxe :</strong> Une minorité de <span className="font-bold text-red-700">1,5% de pratiquants</span> 
+                  <strong>Le paradoxe :</strong> Une minorité de <span className="font-bold text-red-700">1,5% de pratiquants </span> 
                   impose ses horaires à 100% des riverains, dont 56% de non-croyants.
                 </p>
                 <p>

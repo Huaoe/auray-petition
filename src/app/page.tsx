@@ -530,7 +530,7 @@ const HomePage = () => {
           {/* Buy me a coffee button */}
           <div className="mb-6">
             <a
-              href="https://www.buymeacoffee.com/auray-petition"
+              href="https://www.buymeacoffee.com/huaoe"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
