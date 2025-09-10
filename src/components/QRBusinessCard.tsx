@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import QRCode from "qrcode";
-import { Download, Printer, Share2, QrCode } from "lucide-react";
+import { Printer, Share2, QrCode } from "lucide-react";
 
 interface QRBusinessCardProps {
   url?: string;
@@ -23,7 +22,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
   className = "",
   title = "auray-petition.vercel.app",
   description = "Régulation des sonneries de cloches",
-  qrCodeUrl = "/icons/L6CvFd.svg"
+  qrCodeUrl = "/icons/qr-code.svg"
 }) => (
   <div
     className={`bg-white border-2 border-gray-200 rounded-lg p-3 shadow-sm relative overflow-hidden ${className}`}
@@ -101,7 +100,7 @@ const QRBusinessCard: React.FC<QRBusinessCardProps> = ({
   cardsPerSheet = 6,
 }) => {
   const [qrCodeDataUrl, setQrCodeDataUrl] =
-    useState<string>("/icons/L6CvFd.svg");
+    useState<string>("/icons/qr-code.svg");
   const [isGenerating, setIsGenerating] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [currentUrl, setCurrentUrl] = useState<string>(url || "");
@@ -119,7 +118,7 @@ const QRBusinessCard: React.FC<QRBusinessCardProps> = ({
 
   // Use existing QR code image instead of generating
   useEffect(() => {
-    setQrCodeDataUrl("/icons/L6CvFd.svg");
+    setQrCodeDataUrl("/icons/qr-code.svg");
   }, []);
 
   // Use the exported BusinessCard component
